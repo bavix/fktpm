@@ -43,7 +43,8 @@
                                 <span>паспорт серия <strong>{{ $passport_serial }}</strong> № <strong>{{ $passport_number }}</strong></span>
                             </div>
                             <div class="row">
-                                <span>дата выдачи: <strong>{{ $passport_date }}</strong></span>
+                                @php($carbon = \Laravelrus\LocalizedCarbon\LocalizedCarbon::createFromFormat('Y-m-d', $passport_date))
+                                <span>дата выдачи: <strong>{{ $carbon->format('d.m.Y') }}</strong></span>
                             </div>
                             <div class="row">
                                 <span>кем выдан: <strong>{{ $passport_from }}</strong></span>
