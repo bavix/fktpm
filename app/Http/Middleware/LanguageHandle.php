@@ -3,7 +3,6 @@
 namespace App\Http\Middleware;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Session;
 
 class LanguageHandle
 {
@@ -17,12 +16,9 @@ class LanguageHandle
 
     public function handle(Request $request, \Closure $next)
     {
-        if (!Session::has('locale'))
-        {
-            Session::put('locale', $request->getPreferredLanguage($this->languages));
-        }
+        $locale = bx_cookie('locale', $request->getPreferredLanguage($this->languages));
 
-        app()->setLocale(Session::get('locale'));
+        app()->setLocale($locale);
 
         return $next($request);
     }
