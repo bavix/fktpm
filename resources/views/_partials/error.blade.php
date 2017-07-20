@@ -12,7 +12,7 @@
 
     <style>
         html, body {height: 100%;width: 100%}
-        #be-right-back {height: 200px;width: 260px}
+        #be-right-back {width: 260px}
         a.bavix:hover[href] {filter: contrast(150%)}
     </style>
 </head>
