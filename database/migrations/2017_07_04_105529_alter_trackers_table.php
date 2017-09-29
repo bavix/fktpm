@@ -17,7 +17,7 @@ class AlterTrackersTable extends Migration
             $table->string('route')
                 ->after('referer');
 
-            $table->json('parameters')
+            $table->mediumText('parameters')
                 ->after('route');
         });
     }

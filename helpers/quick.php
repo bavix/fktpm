@@ -217,6 +217,8 @@ if (!function_exists('asset2'))
             {
                 $path .= '?' . filemtime($root . $path);
             }
+
+            return '/' . ltrim($path, '/');
         }
 
         return asset($path, $secure);
