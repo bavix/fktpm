@@ -12,6 +12,15 @@ class HttpsProtocol
     {
         $request::setTrustedProxies([$request->getClientIp()]);
 
+        $port = $request->secure() ? 443 : 80;
+
+        $request->server->set('HTTP_PORT', $port);
+        $request->server->set('SERVER_PORT', $port);
+        $request->server->set('HTTP_X_FORWARDED_PORT', $port);
+
+        $request->headers->set('port', [$port]);
+        $request->headers->set('x-forwarded-port', [$port]);
+
 //        if (!$request->secure())
 //        {
 //            return redirect()->secure($request->getRequestUri());
