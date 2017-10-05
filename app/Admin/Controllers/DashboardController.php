@@ -4,13 +4,13 @@ namespace App\Admin\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Album;
-use App\Models\Category;
 use App\Models\Feedback;
 use App\Models\Post;
 use App\Models\Page;
 use App\Models\Poll;
 use App\Models\Statement;
 use App\Facades\Admin;
+use Encore\Admin\Controllers\Dashboard;
 use Encore\Admin\Layout\Content;
 use Encore\Admin\Layout\Row;
 use Encore\Admin\Widgets\InfoBox;
@@ -40,6 +40,12 @@ class DashboardController extends Controller
 
                 $row->column(2, new InfoBox('Альбомы', 'picture-o', 'green', '/cp/albums', Album::query()->count()));
 
+            });
+
+            $content->row(function (Row $row) {
+//                $row->column(3, Dashboard::dependencies());
+                $row->column(3, Dashboard::environment());
+//                $row->column(3, Dashboard::extensions());
             });
 
         });

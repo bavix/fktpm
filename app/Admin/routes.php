@@ -3,13 +3,13 @@
 use Illuminate\Routing\Router;
 use Encore\Admin\Facades\Admin;
 
-Admin::registerHelpersRoutes();
+Admin::registerAuthRoutes();
 
 // dashboard
 Route::group([
-    'prefix'     => config('admin.prefix'),
-    //    'namespace'     => Admin::controllerNamespace(),
-    'middleware' => ['web', 'admin'],
+    'prefix'        => config('admin.route.prefix'),
+    'namespace'     => config('admin.route.namespace'),
+    'middleware'    => config('admin.route.middleware'),
 ], function (Router $router)
 {
 

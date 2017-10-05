@@ -3,18 +3,8 @@
 namespace App\Admin\Controllers;
 
 use App\Admin\Extensions\BtnPrint;
-use App\Http\Controllers\Controller;
-use App\Models\Category;
 use App\Models\Feedback;
-use App\Models\Post;
-use App\Models\Statement;
-use App\Models\Type;
-use Encore\Admin\Controllers\ModelForm;
 use App\Facades\Admin;
-use Encore\Admin\Layout\Content;
-use Encore\Admin\Layout\Row;
-use Encore\Admin\Widgets\Box;
-use Encore\Admin\Widgets\Table;
 use App\Accessor\Form;
 use Encore\Admin\Grid;
 use Illuminate\Http\Request;
@@ -22,8 +12,8 @@ use Illuminate\Http\Request;
 class FeedbackController extends AdminController
 {
 
-    protected $title = 'Обратная связь';
-    protected $model = Feedback::class;
+    public $title = 'Обратная связь';
+    public $model = Feedback::class;
 
     protected function doc(Request $request, $id)
     {

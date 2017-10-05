@@ -14,7 +14,7 @@
     <title>{{ $fullTitle }}</title>
 
     <!-- Styles -->
-    <link href="{{ asset2('packages/admin/lightGallery/css/lightgallery.min.css') }}" rel="stylesheet"/>
+    <link href="{{ asset2('vendor/laravel-admin/lightGallery/css/lightgallery.min.css') }}" rel="stylesheet"/>
     <link href="{{ asset2('node_modules/bootstrap/dist/css/bootstrap.min.css')  }}" rel="stylesheet"/>
     <link href="{{ asset2('css/' . bxCfg('bx.style') . '.css')  }}" rel="stylesheet"/>
 
@@ -94,7 +94,8 @@
             </div>
         </div>
     </div>
-    <nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse bx-z-index">
+    <!-- navbar navbar-toggleable-md navbar-inverse bg-inverse  -->
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark bx-z-index">
         <div class="container">
 
             <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
@@ -184,7 +185,7 @@
 
                 @if (!empty($item->files) && $item->files->count())
                     <div class="card">
-                        <div class="card-block">
+                        <div class="card-body">
                             <h5 class="card-title">
                                 {{ __('blocks.documents') }}
                                 <span class="badge badge-default float-right">{{ $item->files->count() }}</span>
@@ -206,7 +207,7 @@
                 @endif
 
                 <div class="card">
-                    <div class="card-block">
+                    <div class="card-body">
 
                         <div class="row visually-special mx-auto">
                             <a href="{{ route('visually', [], false) }}" data-val="visually-impaired" data-sel="0"
@@ -267,7 +268,7 @@
 
                 @if (empty($query) && $qrModel)
                     <div class="card no-visually">
-                        <div class="card-block">
+                        <div class="card-body">
                             <h5 class="card-title">{{ __('blocks.pageShare') }}</h5>
 
                             <p>
@@ -281,7 +282,7 @@
                                     value="{{ $qrModel->shorter() }}"/>
 
                                 <span class="input-group-btn">
-                                    <button class="clipboard btn btn-secondary"
+                                    <button class="clipboard btn btn-outline-secondary"
                                             data-clipboard-target="#shorter"
                                             data-toggle="tooltip"
                                             data-placement="bottom"
@@ -313,7 +314,7 @@
 
                 @if (!empty($polls) && $polls->count())
                     <div class="card">
-                        <div class="card-block">
+                        <div class="card-body">
                             <h5 class="card-title">
                                 {{ __('blocks.polls') }}
                                 <span class="badge badge-default float-right">{{ $polls->count() }}</span>
@@ -332,7 +333,7 @@
 
                 @if (!empty($pages) && $pages->count())
                     <div class="card">
-                        <div class="card-block">
+                        <div class="card-body">
                             <h5 class="card-title">
                                 {{ __('blocks.pages') }}
                                 <span class="badge badge-default float-right">{{ $pages->count() }}</span>
@@ -351,7 +352,7 @@
 
                 @if (!empty($links) && $links->count())
                     <div class="card">
-                        <div class="card-block">
+                        <div class="card-body">
                             <h5 class="card-title">
                                 {{ __('blocks.links') }}
                                 <span class="badge badge-default float-right">{{ $links->count() }}</span>
@@ -369,7 +370,7 @@
                 @endif
 
                 <div class="card">
-                    <div class="card-block">
+                    <div class="card-body">
                         <h5 class="card-title">{{ __('blocks.counters') }}</h5>
 
                         <div class="card-text">
@@ -527,13 +528,13 @@
 
 <!-- Scripts -->
 <script src="{{ asset2('node_modules/jquery/dist/jquery.min.js') }}"></script>
-<script src="{{ asset2('node_modules/tether/dist/js/tether.min.js') }}"></script>
+<script src="{{ asset2('node_modules/popper.js/dist/umd/popper.min.js') }}"></script>
 <script src="{{ asset2('node_modules/bootstrap/dist/js/bootstrap.min.js') }}"></script>
 <script src="{{ asset2('node_modules/clipboard/dist/clipboard.min.js') }}"></script>
-<script src="{{ asset2('packages/admin/lightGallery/js/lightgallery.min.js') }}"></script>
-<script src="{{ asset2('packages/admin/lightGallery/plugins/lg-fullscreen.min.js') }}"></script>
-<script src="{{ asset2('packages/admin/lightGallery/plugins/lg-thumbnail.min.js') }}"></script>
-<script src="{{ asset2('packages/admin/lightGallery/plugins/lg-zoom.min.js') }}"></script>
+<script src="{{ asset2('vendor/laravel-admin/lightGallery/js/lightgallery.min.js') }}"></script>
+<script src="{{ asset2('vendor/laravel-admin/lightGallery/plugins/lg-fullscreen.min.js') }}"></script>
+<script src="{{ asset2('vendor/laravel-admin/lightGallery/plugins/lg-thumbnail.min.js') }}"></script>
+<script src="{{ asset2('vendor/laravel-admin/lightGallery/plugins/lg-zoom.min.js') }}"></script>
 <script src="{{ asset2('node_modules/sweetalert2/dist/sweetalert2.min.js') }}"></script>
 <!-- Include a polyfill for ES6 Promises (optional) for IE11, UC Browser and Android browser support -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>

@@ -26,7 +26,7 @@ class Trash extends Controller
 
         $item = $model::query()->findOrFail($itemId);
 
-        return ['result' => (bool)$item->gallery()->detach($imageId)];
+        return ['result' => (bool)$item->images()->detach($imageId)];
     }
 
 }

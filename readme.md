@@ -18,16 +18,16 @@ composer upd
 ./artisan db:seed
 
 # elsaticsearch
-./artisan scout:import "App\Models\AlbumModel"
-./artisan scout:import "App\Models\PageModel"
-./artisan scout:import "App\Models\PollModel"
-./artisan scout:import "App\Models\NewModel"
+./artisan scout:import "App\Models\Album"
+./artisan scout:import "App\Models\Page"
+./artisan scout:import "App\Models\Poll"
+./artisan scout:import "App\Models\Post"
 
 # mysql
-./artisan scout:mysql-index "App\Models\AlbumModel"
-./artisan scout:mysql-index "App\Models\PageModel"
-./artisan scout:mysql-index "App\Models\PollModel"
-./artisan scout:mysql-index "App\Models\NewModel"
+./artisan scout:mysql-index "App\Models\Album"
+./artisan scout:mysql-index "App\Models\Page"
+./artisan scout:mysql-index "App\Models\Poll"
+./artisan scout:mysql-index "App\Models\Post"
 
 cd public
 npm i

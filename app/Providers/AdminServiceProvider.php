@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-class AdminServiceProvider extends \Encore\Admin\Providers\AdminServiceProvider
+class AdminServiceProvider extends \Encore\Admin\AdminServiceProvider
 {
 
     /**

@@ -7,10 +7,10 @@ use App\Models\Page;
 class PageController extends PostController
 {
 
-    protected $category = false;
-    protected $title    = 'Страницы';
-    protected $model    = Page::class;
+    public $category = false;
+    public $title    = 'Страницы';
+    public $model    = Page::class;
 
-    protected $mainPage = true;
+    public $mainPage = true;
 
 }

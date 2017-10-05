@@ -15,7 +15,7 @@
 
                     <a class="pull-right" href="#"
                        data-id="{{ $_document->id }}"
-                       data-model="{{  \get_class($_document->pivot->parent) }}">
+                       data-model="{{  \get_class($_document->pivot->pivotParent) }}">
                         <i class="fa fa-trash"></i>
                         <span>удалить</span>
                     </a>
@@ -38,7 +38,7 @@
                 url: '{{ route('doc.trash', [], false) }}'
                 , data: {
                     model: $button.data('model')
-                    , itemId: '{{ $_document->pivot->parent->id }}'
+                    , itemId: '{{ $_document->pivot->pivotParent->id }}'
                     , documentId: $button.data('id')
                     , _token: '{{ csrf_token() }}'
                 }

@@ -3,7 +3,6 @@
 namespace App\Admin\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Models\Album;
 use Encore\Admin\Controllers\ModelForm;
 use App\Facades\Admin;
 use App\Accessor\Form;
@@ -15,8 +14,8 @@ abstract class AdminController extends Controller
 
     use ModelForm;
 
-    protected $title;
-    protected $model;
+    public $title;
+    public $model;
 
     /**
      * Index interface.

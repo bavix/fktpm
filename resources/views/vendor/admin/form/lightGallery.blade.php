@@ -13,8 +13,8 @@
                     data-token="{{ csrf_token() }}"
                     data-url="{{ route('lg.trash', [], false) }}"
                     data-src="/upload/{{ $_picture->src }}"
-                    data-model="{{ \get_class($_picture->pivot->parent) }}"
-                    data-item="{{ $_picture->pivot->parent->id }}"
+                    data-model="{{ \get_class($_picture->pivot->pivotParent) }}"
+                    data-item="{{ $_picture->pivot->pivotParent->id }}"
                     data-image="{{ $_picture->id }}">
 
                     <a href="#">
