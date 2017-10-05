@@ -20,13 +20,11 @@ class DashboardController extends Controller
 
     public function index()
     {
-        return Admin::content(function (Content $content)
-        {
+        return Admin::content(function (Content $content) {
 
             $content->header('Приборная панель');
 
-            $content->row(function (Row $row)
-            {
+            $content->row(function (Row $row) {
 
                 $row->column(2, new InfoBox('Подача заявлений', 'users', 'aqua', '/cp/statements', Statement::query()->count()));
 
@@ -43,9 +41,18 @@ class DashboardController extends Controller
             });
 
             $content->row(function (Row $row) {
-//                $row->column(3, Dashboard::dependencies());
-                $row->column(3, Dashboard::environment());
-//                $row->column(3, Dashboard::extensions());
+
+                if (env('APP_DEBUG'))
+                {
+                    $row->column(4, Dashboard::dependencies());
+                    $row->column(4, Dashboard::environment());
+                    $row->column(4, Dashboard::extensions());
+                }
+                else
+                {
+                    $row->column(4, Dashboard::environment());
+                }
+
             });
 
         });
