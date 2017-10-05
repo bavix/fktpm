@@ -18,7 +18,7 @@
                         </div>
                     @endif
 
-                    <div class="card-block">
+                    <div class="card-body">
 
                         <a href="{{ $item->url() }}" title="{{ $item->title }}">
                             <h3 class="card-title">{{ $item->title }}</h3>
