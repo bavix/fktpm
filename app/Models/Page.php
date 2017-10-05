@@ -14,6 +14,23 @@ class Page extends Album
     protected $table = 'pages';
     protected $route = 'page.view';
 
+    public function setDocumentsAttribute($documents)
+    {
+        if (is_array($documents))
+        {
+            foreach ($documents as $path)
+            {
+                $model        = new Document();
+                $model->title = \basename($path);
+                $model->src   = $path;
+                $model->save();
+
+                $this->id or $this->save();
+                $this->files()->save($model);
+            }
+        }
+    }
+
     public function setContentAttribute($content)
     {
         $config = \HTMLPurifier_Config::createDefault();
