@@ -43,7 +43,7 @@ class DashboardController extends Controller
 
             $content->row(function (Row $row) use ($request) {
 
-                if (env('APP_DEBUG') || $request->query('debug', 1))
+                if (env('APP_DEBUG') || $request->query('debug', 0))
                 {
                     $row->column(4, Dashboard::dependencies());
                     $row->column(4, Dashboard::environment());
