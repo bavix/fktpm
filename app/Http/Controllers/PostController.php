@@ -94,7 +94,8 @@ class PostController extends Controller
         $paginate = $query->paginate(10);
         $paginate->load($this->withModel);
 
-        abort_if($paginate->lastPage() && $paginate->isEmpty(), 404);
+        abort_if($paginate->lastPage() !== $paginate->currentPage() &&
+            $paginate->isEmpty(), 404);
 
         return view('post.index', [
             'items'       => $paginate,
