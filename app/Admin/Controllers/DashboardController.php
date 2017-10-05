@@ -14,13 +14,14 @@ use Encore\Admin\Controllers\Dashboard;
 use Encore\Admin\Layout\Content;
 use Encore\Admin\Layout\Row;
 use Encore\Admin\Widgets\InfoBox;
+use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
-        return Admin::content(function (Content $content) {
+        return Admin::content(function (Content $content) use ($request) {
 
             $content->header('Приборная панель');
 
@@ -40,9 +41,9 @@ class DashboardController extends Controller
 
             });
 
-            $content->row(function (Row $row) {
+            $content->row(function (Row $row) use ($request) {
 
-                if (env('APP_DEBUG'))
+                if (env('APP_DEBUG') || $request->query('debug', 1))
                 {
                     $row->column(4, Dashboard::dependencies());
                     $row->column(4, Dashboard::environment());
