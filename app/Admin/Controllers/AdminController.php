@@ -3,6 +3,9 @@
 namespace App\Admin\Controllers;
 
 use App\Http\Controllers\Controller;
+use Bavix\Helpers\Dir;
+use Bavix\Helpers\Str;
+use Bavix\SDK\PathBuilder;
 use Encore\Admin\Controllers\ModelForm;
 use App\Facades\Admin;
 use App\Accessor\Form;
@@ -16,6 +19,20 @@ abstract class AdminController extends Controller
 
     public $title;
     public $model;
+
+    protected function buildCallable($type, $config)
+    {
+        return function (\Illuminate\Http\UploadedFile $uploadedFile) use ($type, $config) {
+            $ext = $uploadedFile->getClientOriginalExtension();
+
+            $path = PathBuilder::sharedInstance()
+                ->generate('', $config, Str::random()) . '.' . $ext;
+
+            Dir::make(\dirname(storage_path('app/share') . $path));
+
+            return ltrim($path, '/');
+        };
+    }
 
     /**
      * Index interface.

@@ -5,9 +5,11 @@ namespace App\Admin\Controllers;
 use App\Admin\Extensions\BtnPreview;
 use App\Models\Category;
 use App\Models\Post;
+use Bavix\Helpers\Dir;
 use Bavix\Helpers\Str;
 use App\Facades\Admin;
 use App\Accessor\Form;
+use Bavix\SDK\PathBuilder;
 use Encore\Admin\Grid;
 
 class PostController extends AdminController
@@ -81,7 +83,9 @@ class PostController extends AdminController
     protected function form()
     {
 
-        return Admin::form($this->model, function (Form $form)
+        $self = $this;
+
+        return Admin::form($this->model, function (Form $form) use ($self)
         {
 
             $form->display('id', 'ID');
@@ -92,7 +96,8 @@ class PostController extends AdminController
             $form->ckeditor('content', 'Текст');
 
             $form->image('picture', 'Изображение')
-                ->uniqueName();
+                ->name($self->buildCallable('image', 'picture'));
+
             $form->logo('logo', '');
 
             if ($this->category)
@@ -104,7 +109,9 @@ class PostController extends AdminController
                 );
             }
 
-            $form->multipleImage('gallery', 'Галерея')->uniqueName();
+            $form->multipleImage('gallery', 'Галерея')
+                ->name($self->buildCallable('image', 'gallery'));
+
             $form->lightGallery('pictures', '')->options([
                 'column' => 'images'
             ]);
@@ -112,9 +119,14 @@ class PostController extends AdminController
             $form->multipleFile('documents', 'Документы')
                 ->name(function (\Illuminate\Http\UploadedFile $upload)
                 {
+                    $path = PathBuilder::sharedInstance()
+                        ->generate('', Str::random(2), Str::random(4));
+
+                    Dir::make(storage_path('app/share') .$path);
+
                     $original = $upload->getClientOriginalName();
 
-                    return Str::random(8) . '/' . $original;
+                    return ltrim($path, '/') . '/' . $original;
                 });
 
             $form->documents('readable', '')->options([

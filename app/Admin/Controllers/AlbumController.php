@@ -52,7 +52,9 @@ class AlbumController extends AdminController
     protected function form()
     {
 
-        return Admin::form($this->model, function (Form $form)
+        $self = $this;
+
+        return Admin::form($this->model, function (Form $form) use ($self)
         {
 
             $form->display('id', 'ID');
@@ -61,10 +63,14 @@ class AlbumController extends AdminController
 
             $form->textarea('description', 'Описание')->rows(3);
 
-            $form->image('picture', 'Изображение')->uniqueName();
+            $form->image('picture', 'Изображение')
+                ->name($self->buildCallable('image', 'picture'));
+
             $form->logo('logo', '');
 
-            $form->multipleImage('gallery', 'Галерея')->uniqueName();
+            $form->multipleImage('gallery', 'Галерея')
+                ->name($self->buildCallable('image', 'gallery'));
+
             $form->lightGallery('pictures', '')->options([
                 'column' => 'images'
             ]);
