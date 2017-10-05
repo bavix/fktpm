@@ -16,16 +16,16 @@ class LightGallery extends Field
      * @var array
      */
     public static $css = [
-        '/packages/admin/lightGallery/css/lightgallery.min.css',
-        '/packages/css/color.css'
+        '/vendor/laravel-admin/lightGallery/css/lightgallery.min.css',
+        '/vendor/css/color.css'
     ];
 
     /**
      * @var array
      */
     public static $js = [
-        '/packages/admin/lightGallery/js/lightgallery.min.js',
-        '/packages/admin/lightGallery/plugins/js-trash.js',
+        '/vendor/laravel-admin/lightGallery/js/lightgallery.min.js',
+        '/vendor/laravel-admin/lightGallery/plugins/js-trash.js',
     ];
 
     /**

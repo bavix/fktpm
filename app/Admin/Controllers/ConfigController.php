@@ -2,22 +2,16 @@
 
 namespace App\Admin\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Models\Config;
-use Encore\Admin\Controllers\ModelForm;
 use App\Facades\Admin;
-use Encore\Admin\Layout\Content;
-use Encore\Admin\Layout\Row;
-use Encore\Admin\Widgets\Box;
-use Encore\Admin\Widgets\Table;
 use App\Accessor\Form;
 use Encore\Admin\Grid;
 
 class ConfigController extends AdminController
 {
 
-    protected $title = 'Конфигурации';
-    protected $model = Config::class;
+    public $title = 'Конфигурации';
+    public $model = Config::class;
 
     /**
      * Make a grid builder.

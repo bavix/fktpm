@@ -2,27 +2,18 @@
 
 namespace App\Admin\Controllers;
 
-use App\Http\Controllers\Controller;
-use App\Models\Category;
-use App\Models\Post;
 use App\Models\Poll;
 use App\Models\Question;
-use Encore\Admin\Controllers\ModelForm;
 use App\Facades\Admin;
 use Encore\Admin\Form\NestedForm;
-use Encore\Admin\Layout\Content;
-use Encore\Admin\Layout\Row;
-use Encore\Admin\Widgets\Box;
-use Encore\Admin\Widgets\Table;
 use App\Accessor\Form;
 use Encore\Admin\Grid;
-use Illuminate\Http\Request;
 
 class QuestionController extends AdminController
 {
 
-    protected $title = 'Вопросы';
-    protected $model = Question::class;
+    public $title = 'Вопросы';
+    public $model = Question::class;
 
     /**
      * Make a grid builder.

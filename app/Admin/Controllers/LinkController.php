@@ -2,24 +2,16 @@
 
 namespace App\Admin\Controllers;
 
-use App\Http\Controllers\Controller;
-use App\Models\Category;
-use App\Models\Post;
 use App\Models\Link;
-use Encore\Admin\Controllers\ModelForm;
 use App\Facades\Admin;
-use Encore\Admin\Layout\Content;
-use Encore\Admin\Layout\Row;
-use Encore\Admin\Widgets\Box;
-use Encore\Admin\Widgets\Table;
 use App\Accessor\Form;
 use Encore\Admin\Grid;
 
 class LinkController extends AdminController
 {
 
-    protected $title = 'Ссылки';
-    protected $model = Link::class;
+    public $title = 'Ссылки';
+    public $model = Link::class;
 
     /**
      * Make a grid builder.

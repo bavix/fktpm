@@ -2,23 +2,18 @@
 
 namespace App\Admin\Controllers;
 
-use App\Admin\Extensions\LG\Trash;
-use App\Http\Controllers\Controller;
-use App\Models\Album;
 use App\Models\Tracker;
 use Bavix\Helpers\JSON;
-use Encore\Admin\Controllers\ModelForm;
 use App\Facades\Admin;
 use App\Accessor\Form;
 use Encore\Admin\Grid;
-use Encore\Admin\Layout\Content;
 use Laravelrus\LocalizedCarbon\LocalizedCarbon;
 
 class TrackerController extends AdminController
 {
 
-    protected $title = 'Трекер';
-    protected $model = Tracker::class;
+    public $title = 'Трекер';
+    public $model = Tracker::class;
 
     /**
      * Make a grid builder.

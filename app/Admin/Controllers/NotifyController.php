@@ -2,23 +2,16 @@
 
 namespace App\Admin\Controllers;
 
-use App\Http\Controllers\Controller;
-use App\Models\Config;
 use App\Models\Notify;
-use Encore\Admin\Controllers\ModelForm;
 use App\Facades\Admin;
-use Encore\Admin\Layout\Content;
-use Encore\Admin\Layout\Row;
-use Encore\Admin\Widgets\Box;
-use Encore\Admin\Widgets\Table;
 use App\Accessor\Form;
 use Encore\Admin\Grid;
 
 class NotifyController extends AdminController
 {
 
-    protected $title = 'Уведомления';
-    protected $model = Notify::class;
+    public $title = 'Уведомления';
+    public $model = Notify::class;
 
     /**
      * Make a grid builder.

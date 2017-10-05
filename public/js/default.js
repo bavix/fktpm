@@ -58,11 +58,9 @@ $(function () {
             _ = $field.val();
             if (!_ || _.trim().length === 0) {
                 checked = false;
-                $field.removeClass('form-control-success').addClass('form-control-danger');
-                $field.parent('div').removeClass('has-success').addClass('has-danger');
+                $field.removeClass('is-valid').addClass('is-invalid');
             } else {
-                $field.removeClass('form-control-danger').addClass('form-control-success');
-                $field.parent('div').removeClass('has-danger').addClass('has-success');
+                $field.removeClass('is-invalid').addClass('is-valid');
             }
         });
 
@@ -92,8 +90,7 @@ $(function () {
                     if (response.result) {
                         swal('Successful', 'Форма отправлена успешно!', 'success');
                         $personal.prop('checked', false);
-                        $form.find('.form-control-success').removeClass('form-control-success');
-                        $form.find('.has-success').removeClass('has-success');
+                        $form.find('.is-valid').removeClass('is-valid');
                         $form.trigger('reset');
 
                         personal = false;
@@ -258,7 +255,7 @@ $(function () {
 
         if (!validator) {
             var $field = $(this.query);
-            $field.addClass('form-control-danger').parent('div').addClass('has-danger');
+            $field.addClass('is-invalid');
         }
 
         return validator;

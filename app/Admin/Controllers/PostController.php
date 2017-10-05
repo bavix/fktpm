@@ -3,25 +3,21 @@
 namespace App\Admin\Controllers;
 
 use App\Admin\Extensions\BtnPreview;
-use App\Admin\Extensions\LG\Trash;
-use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Post;
 use Bavix\Helpers\Str;
-use Encore\Admin\Controllers\ModelForm;
 use App\Facades\Admin;
 use App\Accessor\Form;
 use Encore\Admin\Grid;
-use Encore\Admin\Layout\Content;
 
 class PostController extends AdminController
 {
 
-    protected $category = true;
-    protected $title    = 'Посты';
-    protected $model    = Post::class;
+    public $category = true;
+    public $title    = 'Посты';
+    public $model    = Post::class;
 
-    protected $mainPage = false;
+    public $mainPage = false;
 
     /**
      * Make a grid builder.
@@ -30,7 +26,9 @@ class PostController extends AdminController
      */
     protected function grid()
     {
-        return Admin::grid($this->model, function (Grid $grid)
+        $self = $this;
+
+        return Admin::grid($this->model, function (Grid $grid) use ($self)
         {
 
             $grid->id('ID')->sortable();
@@ -38,7 +36,7 @@ class PostController extends AdminController
             $grid->column('title', 'Название')->sortable();
             $grid->column('description', 'Описание');
 
-            if ($this->category)
+            if ($self->category)
             {
                 $grid->column('category.title', 'Категория')->sortable();
             }
@@ -48,15 +46,13 @@ class PostController extends AdminController
                 return $data ? 'Включена' : 'Выключена';
             })->sortable();
 
-            if ($this->mainPage)
+            if ($self->mainPage)
             {
                 $grid->column('main_page', 'Главная страница')->display(function ($data)
                 {
                     return $data ? 'Включена' : 'Выключена';
                 })->sortable();
             }
-
-            $self = $this;
 
             $grid->actions(function (Grid\Displayers\Actions $actions) use ($self)
             {

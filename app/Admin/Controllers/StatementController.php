@@ -3,17 +3,9 @@
 namespace App\Admin\Controllers;
 
 use App\Admin\Extensions\BtnPrint;
-use App\Http\Controllers\Controller;
-use App\Models\Category;
-use App\Models\Post;
 use App\Models\Statement;
 use App\Models\Type;
-use Encore\Admin\Controllers\ModelForm;
 use App\Facades\Admin;
-use Encore\Admin\Layout\Content;
-use Encore\Admin\Layout\Row;
-use Encore\Admin\Widgets\Box;
-use Encore\Admin\Widgets\Table;
 use App\Accessor\Form;
 use Encore\Admin\Grid;
 use Illuminate\Http\Request;
@@ -21,8 +13,8 @@ use Illuminate\Http\Request;
 class StatementController extends AdminController
 {
 
-    protected $title = 'Подача заявлений';
-    protected $model = Statement::class;
+    public $title = 'Подача заявлений';
+    public $model = Statement::class;
 
     protected function doc(Request $request, $id)
     {

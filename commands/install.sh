@@ -10,8 +10,9 @@ chmod 777 storage/framework/sessions
 chmod 777 storage/framework/views
 chmod 777 public/upload -R
 composer upd
+./artisan key:generate
 ./artisan admin:install
 ./artisan migrate
 ./artisan db:seed
 cd public
-npm i
+yarn install

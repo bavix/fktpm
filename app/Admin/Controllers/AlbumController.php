@@ -3,20 +3,16 @@
 namespace App\Admin\Controllers;
 
 use App\Admin\Extensions\BtnPreview;
-use App\Admin\Extensions\LG\Trash;
-use App\Http\Controllers\Controller;
 use App\Models\Album;
-use Encore\Admin\Controllers\ModelForm;
 use App\Facades\Admin;
 use App\Accessor\Form;
 use Encore\Admin\Grid;
-use Encore\Admin\Layout\Content;
 
 class AlbumController extends AdminController
 {
 
-    protected $title = 'Альбом';
-    protected $model = Album::class;
+    public $title = 'Альбом';
+    public $model = Album::class;
 
     /**
      * Make a grid builder.

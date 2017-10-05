@@ -16,8 +16,8 @@ class CKEditor extends Field
      * @var array
      */
     public static $js = [
-        '/packages/admin/ckeditor/ckeditor.js',
-        '/packages/admin/ckeditor/adapters/jquery.js'
+        '/vendor/laravel-admin/ckeditor/ckeditor.js',
+        '/vendor/laravel-admin/ckeditor/adapters/jquery.js'
     ];
 
     /**

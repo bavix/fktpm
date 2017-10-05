@@ -3,9 +3,10 @@
   "version": "1.0.0",
   "author": "Babichev Maxim",
   "dependencies": {
-    "bootstrap": "4.0.0-alpha.6",
+    "bootstrap": "^4.0.0-beta",
     "clipboard": "^1.7.1",
     "jquery": "^3.2.1",
+    "popper.js": "^1.12.5",
     "sweetalert2": "^6.6.4"
   }
 }
