@@ -25,9 +25,6 @@ Route::group([
     // trackers
     $router->resource('/trackers', \App\Admin\Controllers\TrackerController::class);
 
-    // configs
-    $router->resource('/-config', \App\Admin\Controllers\ConfigController::class);
-
     // questions
     $router->resource('/questions', \App\Admin\Controllers\QuestionController::class);
 
