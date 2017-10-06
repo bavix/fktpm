@@ -22,6 +22,7 @@ class CounterController extends AdminController
     {
         return Admin::grid($this->model, function (Grid $grid)
         {
+            $grid->model()->orderBy('id', 'DESC');
 
             $grid->id('ID')->sortable();
 

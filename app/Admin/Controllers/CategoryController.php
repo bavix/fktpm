@@ -19,6 +19,7 @@ class CategoryController extends AdminController
     {
         return Admin::grid(Category::class, function (Grid $grid)
         {
+            $grid->model()->orderBy('id', 'DESC');
 
             $grid->id('ID')->sortable();
 
