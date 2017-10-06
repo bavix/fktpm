@@ -11,7 +11,7 @@ class LanguageHandle
 
     public function __construct()
     {
-        $this->languages = bxCfg('bx.languages', ['en', 'ru']);
+        $this->languages = config('bx.languages', ['en', 'ru']);
     }
 
     public function handle(Request $request, \Closure $next)

@@ -23,9 +23,8 @@ class Image extends Model
         'fullHD'
     ];
 
-    public function doBackground()
+    protected function gearman($name, $data)
     {
-
         if (class_exists(\GearmanClient::class))
         {
             try
@@ -36,13 +35,17 @@ class Image extends Model
                     config('gearman.port')
                 );
 
-                $client->doBackground('resize', serialize($this));
+                $client->doBackground($name, $data);
             }
             catch (\Throwable $throwable)
             {
             }
         }
+    }
 
+    public function doBackground()
+    {
+        $this->gearman('resize', serialize($this));
     }
 
     /**
@@ -50,24 +53,7 @@ class Image extends Model
      */
     protected function optimize($path)
     {
-
-        if (class_exists(\GearmanClient::class))
-        {
-            try
-            {
-                $client = new \GearmanClient();
-                $client->addServer(
-                    config('gearman.host'),
-                    config('gearman.port')
-                );
-
-                $client->doBackground('optimize', $path);
-            }
-            catch (\Throwable $throwable)
-            {
-            }
-        }
-
+        $this->gearman('optimize', $path);
     }
 
     /**

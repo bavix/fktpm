@@ -13,25 +13,25 @@
                     <ul class="list-unstyled" itemscope itemtype="http://schema.org/Organization">
                         <li class="space">
                             <address>
-                                <span itemprop="name">{{ bxCfg('app.name') }}</span>,
+                                <span itemprop="name">{{ config('app.name') }}</span>,
                                 <div itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
-                                    <span itemprop="streetAddress">{{ bxCfg('bx.street') }}</span>,
+                                    <span itemprop="streetAddress">{{ config('bx.street') }}</span>,
                                     <span itemprop="addressLocality">
-                                                {{ bxCfg('bx.city') }},
-                                        {{ bxCfg('bx.region') }}</span>,
-                                    <span itemprop="postalCode">{{ bxCfg('bx.index') }}</span>
+                                                {{ config('bx.city') }},
+                                        {{ config('bx.region') }}</span>,
+                                    <span itemprop="postalCode">{{ config('bx.index') }}</span>
                                 </div>
                             </address>
                         </li>
                         <li>
                             Телефон: <span itemprop="telephone">
-                                <a href="tel:{{ phone(bxCfg('bx.phone')) }}"
-                                   title="Телефон">{{ bxCfg('bx.phone') }}
+                                <a href="tel:{{ phone(config('bx.phone')) }}"
+                                   title="Телефон">{{ config('bx.phone') }}
                                 </a>
                             </span><br/>
                             Электронная почта: <span itemprop="email">
-                                <a href="mailto:{{ bxCfg('bx.email') }}"
-                                   title="Электронная почта">{{ bxCfg('bx.email') }}
+                                <a href="mailto:{{ config('bx.email') }}"
+                                   title="Электронная почта">{{ config('bx.email') }}
                                 </a>
                             </span>
                         </li>
@@ -52,10 +52,10 @@
             });
 
             ymaps.geocode(
-                '{{ bxCfg('bx.street') }}, ' +
-                '{{ bxCfg('bx.city') }}, ' +
-                '{{ bxCfg('bx.region') }}, ' +
-                '{{ bxCfg('bx.index') }}', {
+                '{{ config('bx.street') }}, ' +
+                '{{ config('bx.city') }}, ' +
+                '{{ config('bx.region') }}, ' +
+                '{{ config('bx.index') }}', {
 
                 results: 1
 
@@ -72,7 +72,7 @@
 
                 // Создает метку в центре Москвы
                 var placemark = new ymaps.Placemark(coords,  {
-                    balloonContent: '{{ bxCfg('app.name') }}'
+                    balloonContent: '{{ config('app.name') }}'
                 }, {
                     preset: 'islands#governmentCircleIcon',
                     iconColor: '#3d6277',

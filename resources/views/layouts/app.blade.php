@@ -6,7 +6,7 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    @php($fullTitle = bxCfg('app.name'))
+    @php($fullTitle = config('app.name'))
     @if(isset($title))
         @php($fullTitle = $title . ' / ' . $fullTitle)
     @endif
@@ -16,7 +16,7 @@
     <!-- Styles -->
     <link href="{{ asset2('vendor/laravel-admin/lightGallery/css/lightgallery.min.css') }}" rel="stylesheet"/>
     <link href="{{ asset2('node_modules/bootstrap/dist/css/bootstrap.min.css')  }}" rel="stylesheet"/>
-    <link href="{{ asset2('css/' . bxCfg('bx.style') . '.css')  }}" rel="stylesheet"/>
+    <link href="{{ asset2('css/' . config('bx.style') . '.css')  }}" rel="stylesheet"/>
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" rel="stylesheet"/>
     <link rel="stylesheet" type="text/css" href="{{ asset2('node_modules/sweetalert2/dist/sweetalert2.min.css') }}"/>
@@ -53,7 +53,7 @@
         <meta name="twitter:image:src" content="{{ $qrModel->qr() }}"/>
     @endif
 
-    <meta name="twitter:site" content="{{ bxCfg('app.name') }}"/>
+    <meta name="twitter:site" content="{{ config('app.name') }}"/>
     <meta name="twitter:title" content="{{ $fullTitle }}"/>
     <meta name="twitter:description" content="{{ $description ?? '' }}"/>
     <meta name="twitter:domain" content="{{ request()->getHost() }}"/>
@@ -77,17 +77,17 @@
             <div class="row">
                 <div class="col-md-3">
                     <div class="text-center">
-                        <a href="{{ route('home') }}" title="{{ bxCfg('app.name') }}">
-                            <img class="visually if-grayscale" style="max-width: 100%" height="128px" src="{{ bxCfg('logo') }}"
-                             title="{{ bxCfg('app.name') }}"
-                             alt="{{ bxCfg('app.name') }}"/>
+                        <a href="{{ route('home') }}" title="{{ config('app.name') }}">
+                            <img class="visually if-grayscale" style="max-width: 100%" height="128px" src="{{ logo() }}"
+                             title="{{ config('app.name') }}"
+                             alt="{{ config('app.name') }}"/>
                         </a>
                     </div>
                 </div>
                 <div class="col-md-9 hidden-sm">
                     <div class="d-flex bd-highlight" style="height: 100%">
                         <span class="align-self-center">
-                            {{ bxCfg('bx.description', __('bavix.description')) }}
+                            {{ config('bx.description', __('bavix.description')) }}
                         </span>
                     </div>
                 </div>
@@ -106,7 +106,7 @@
 
             <a class="navbar-brand" href="{{ route('home') }}">
                 <img class="visually" src="data:image/png;base64,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"
-                     title="{{ bxCfg('app.name') }}" alt="{{ bxCfg('app.name') }}"/>
+                     title="{{ config('app.name') }}" alt="{{ config('app.name') }}"/>
             </a>
 
             <div class="collapse navbar-collapse" id="navbarDefault">
@@ -470,32 +470,32 @@
                                         <span itemprop="name">
                                             <a href="{{ route('contact', [], false) }}"
                                                title="Наш адрес">
-                                                {{ bxCfg('app.name') }}</a></span>,
+                                                {{ config('app.name') }}</a></span>,
 
                                         <div itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
                                             <a href="{{ route('contact', [], false) }}"
                                                title="Наш адрес">
-                                                <span itemprop="streetAddress">{{ bxCfg('bx.street') }}</span>,
+                                                <span itemprop="streetAddress">{{ config('bx.street') }}</span>,
                                                 <span itemprop="addressLocality">
-                                                    {{ bxCfg('bx.city') }},
-                                                    {{ bxCfg('bx.region') }}</span>,
-                                                <span itemprop="postalCode">{{ bxCfg('bx.index') }}</span>
+                                                    {{ config('bx.city') }},
+                                                    {{ config('bx.region') }}</span>,
+                                                <span itemprop="postalCode">{{ config('bx.index') }}</span>
                                             </a>
                                         </div>
                                     </address>
                                     <div>
-                                        <span>Зарегистрирован в Роскомнадзоре: {{ bxCfg('bx.rkn.number') }}</span>
+                                        <span>Зарегистрирован в Роскомнадзоре: {{ config('bx.rkn.number') }}</span>
                                     </div>
                                 </li>
                                 <li>
                                     Телефон: <span itemprop="telephone">
-                                        <a href="tel:{{ phone(bxCfg('bx.phone')) }}"
-                                           title="Телефон">{{ bxCfg('bx.phone') }}
+                                        <a href="tel:{{ phone(config('bx.phone')) }}"
+                                           title="Телефон">{{ config('bx.phone') }}
                                         </a>
                                     </span><br/>
                                     Электронная почта: <span itemprop="email">
-                                        <a href="mailto:{{ bxCfg('bx.email') }}"
-                                           title="Электронная почта">{{ bxCfg('bx.email') }}
+                                        <a href="mailto:{{ config('bx.email') }}"
+                                           title="Электронная почта">{{ config('bx.email') }}
                                         </a>
                                     </span>
                                 </li>

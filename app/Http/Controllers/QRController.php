@@ -35,7 +35,7 @@ class QRController extends Controller
     public static function hex()
     {
         return config(
-            'bx.css.' . bxCfg('bx.style') . '.default',
+            'bx.css.' . config('bx.style') . '.default',
             config('bx.css.sot.default')
         );
     }

@@ -244,12 +244,17 @@ if (!function_exists('notifies'))
     }
 }
 
-if (!function_exists('bxCfg'))
+if (!function_exists('logo'))
 {
-    function bxCfg($name, $default = null)
+    function logo()
     {
-        $cfg = [\App\Models\Config::class, 'getValue'];
+        $logo = \Encore\Admin\Auth\Database\Administrator::query()->first()->avatar;
 
-        return $cfg($name, config($name, $default));
+        if ($logo)
+        {
+            return $logo;
+        }
+
+        return 'https://via.placeholder.com/255x128';
     }
 }

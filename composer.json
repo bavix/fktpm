@@ -13,6 +13,7 @@
         "encore/laravel-admin": "^1.5",
         "ezyang/htmlpurifier": "^4.9",
         "intervention/image": "^2.3",
+        "laravel-admin-ext/config": "^1.0",
         "laravel-admin-ext/helpers": "^1.0",
         "laravel-admin-ext/media-manager": "^1.0",
         "laravel/framework": "^5.5",
