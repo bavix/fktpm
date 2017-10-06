@@ -122,8 +122,6 @@ class PostController extends AdminController
                     $path = PathBuilder::sharedInstance()
                         ->generate('', Str::random(2), Str::random(4));
 
-                    Dir::make(storage_path('app/share') .$path);
-
                     $original = $upload->getClientOriginalName();
 
                     return ltrim($path, '/') . '/' . $original;

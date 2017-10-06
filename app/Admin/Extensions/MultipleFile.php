@@ -4,7 +4,7 @@ namespace App\Admin\Extensions;
 
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
-class MultipleFile extends \Encore\Admin\Form\Field\MultipleImage
+class MultipleFile extends \Encore\Admin\Form\Field\MultipleFile
 {
 
     /**
