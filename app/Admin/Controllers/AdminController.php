@@ -28,7 +28,7 @@ abstract class AdminController extends Controller
             $path = PathBuilder::sharedInstance()
                 ->generate('', $config, Str::random()) . '.' . $ext;
 
-            Dir::make(\dirname(storage_path('app/share') . $path));
+            Dir::make(\dirname(storage_path('app/share') . '/' . $type . '/' . $path));
 
             return ltrim($path, '/');
         };

@@ -19,10 +19,12 @@
  *
  */
 
-Encore\Admin\Form::forget(['map', 'editor']);
+Encore\Admin\Form::forget(['map', 'editor', 'multipleImage', 'multipleFile']);
 
 // extends
 \Encore\Admin\Form::extend('ckeditor', \App\Admin\Extensions\Form\CKEditor::class);
 \Encore\Admin\Form::extend('lightGallery', \App\Admin\Extensions\Form\LightGallery::class);
 \Encore\Admin\Form::extend('documents', \App\Admin\Extensions\Form\Documents::class);
 \Encore\Admin\Form::extend('logo', \App\Admin\Extensions\Form\Logo::class);
+\Encore\Admin\Form::extend('multipleFile', \App\Admin\Extensions\MultipleFile::class);
+\Encore\Admin\Form::extend('multipleImage', \App\Admin\Extensions\MultipleImage::class);
