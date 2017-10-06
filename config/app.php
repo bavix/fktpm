@@ -198,6 +198,8 @@ return [
         ScoutEngines\Elasticsearch\ElasticsearchProvider::class,
         Yab\MySQLScout\Providers\MySQLScoutServiceProvider::class,
 
+        // config
+        Encore\Admin\Config\ConfigServiceProvider::class,
     ],
 
     /*
