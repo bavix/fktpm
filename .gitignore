@@ -13,3 +13,5 @@ npm-debug.log
 web
 composer.lock
 yarn.lock
+public/robots.txt
+web/robots.txt
