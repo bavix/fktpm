@@ -24,6 +24,7 @@
     <!-- Scripts -->
     <script>window.Laravel = {!! json_encode(['csrfToken' => csrf_token()]) !!};</script>
 
+    <link rel="icon" type="image/ico" href="/favicons/favicon.ico"/>
     <link rel="apple-touch-icon" sizes="57x57" href="/favicons/apple-icon-57x57.png"/>
     <link rel="apple-touch-icon" sizes="60x60" href="/favicons/apple-icon-60x60.png"/>
     <link rel="apple-touch-icon" sizes="72x72" href="/favicons/apple-icon-72x72.png"/>
