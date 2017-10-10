@@ -30,7 +30,7 @@ return [
     'css' => [
         // sot (sut) station of y...
         'default' => [
-            'default' => '#3d6277'
+            'default' => '##29951e' // nice '#3d6277'
         ],
 
         'pool' => [
