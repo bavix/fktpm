@@ -2,8 +2,7 @@
 
 namespace App\Models;
 
-use Bavix\Helpers\Str;
-use Illuminate\Database\Eloquent\Model;
+use App\Helpers\Diff;
 
 class Page extends Album
 {
@@ -39,10 +38,12 @@ class Page extends Album
         $config->set('HTML.Trusted', true);
         $config->set('Attr.AllowedRel', ['nofollow']);
 
-        $data = (new \HTMLPurifier($config))->purify($content);
-        $data = str_replace('<table>', '<table class="table table-responsive">', $data);
+        $new = (new \HTMLPurifier($config))->purify($content);
+        $new = str_replace('<table>', '<table class="table table-responsive">', $new);
 
-        $this->attributes['content'] = $data;
+        Rev::makeRev($this, $new);
+
+        $this->attributes['content'] = $new;
     }
 
     public function files()
