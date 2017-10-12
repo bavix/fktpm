@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Helpers\Diff;
+use Bavix\Diff\Differ;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 
@@ -15,11 +15,13 @@ class Rev extends Model
     {
         $old = $model->getAttribute($column);
 
-        if ($model->id && $old && \function_exists('xdiff_string_rabdiff'))
+        if ($model->id && $old)
         {
+            $diff = new Differ();
+
             // revs
             $rev           = new static();
-            $rev->patch    = Diff::diff($newData, $old);
+            $rev->patch    = $diff->diff($newData, $old);
             $rev->name     = $model->getTable();
             $rev->column   = $column;
             $rev->item_id  = $model->id;
@@ -34,7 +36,7 @@ class Rev extends Model
         return static::query()
             ->where('name', $model->getTable())
             ->where('item_id', $model->id)
-            ->where('content', $column)
+            ->where('column', $column)
             ->orderBy('created_at', 'DESC')
             ->get();
     }
