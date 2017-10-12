@@ -31,6 +31,12 @@ class Rev extends Model
         }
     }
 
+    /**
+     * @param Model  $model
+     * @param string $column
+     *
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
     public static function fromModel(Model $model, $column = 'content')
     {
         return static::query()
@@ -38,6 +44,7 @@ class Rev extends Model
             ->where('item_id', $model->id)
             ->where('column', $column)
             ->orderBy('created_at', 'DESC')
+            ->limit(10)
             ->get();
     }
 

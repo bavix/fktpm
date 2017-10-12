@@ -5,7 +5,6 @@ namespace App\Admin\Controllers;
 use App\Admin\Extensions\BtnPreview;
 use App\Models\Category;
 use App\Models\Post;
-use Bavix\Helpers\Dir;
 use Bavix\Helpers\Str;
 use App\Facades\Admin;
 use App\Accessor\Form;
@@ -84,62 +83,66 @@ class PostController extends AdminController
     protected function form()
     {
 
-        $self = $this;
-
-        return Admin::form($this->model, function (Form $form) use ($self)
+        return Admin::form($this->model, function (Form $form)
         {
 
-            $form->display('id', 'ID');
+            $form->tab('Редактировать', function (Form $form) {
 
-            $form->text('title', 'Заголовок');
+                $form->display('id', 'ID');
 
-            $form->textarea('description', 'Описание')->rows(3);
-            $form->ckeditor('content', 'Текст');
+                $form->text('title', 'Заголовок');
 
-            $form->image('picture', 'Изображение')
-                ->name($self->buildCallable('image', 'picture'));
+                $form->textarea('description', 'Описание')->rows(3);
+                $form->ckeditor('content', 'Текст');
 
-            $form->logo('logo', '');
+                $form->image('picture', 'Изображение')
+                    ->name($this->buildCallable('image', 'picture'));
 
-            if ($this->category)
-            {
-                $form->select('category_id', 'Категория')->options(
-                    Category::all('id', 'title')
-                        ->pluck('title', 'id')
-                        ->all()
-                );
-            }
+                $form->logo('logo', '');
 
-            $form->multipleImage('gallery', 'Галерея')
-                ->name($self->buildCallable('image', 'gallery'));
-
-            $form->lightGallery('pictures', '')->options([
-                'column' => 'images'
-            ]);
-
-            $form->multipleFile('documents', 'Документы')
-                ->name(function (\Illuminate\Http\UploadedFile $upload)
+                if ($this->category)
                 {
-                    $path = PathBuilder::sharedInstance()
-                        ->generate('', Str::random(2), Str::random(4));
+                    $form->select('category_id', 'Категория')->options(
+                        Category::all('id', 'title')
+                            ->pluck('title', 'id')
+                            ->all()
+                    );
+                }
 
-                    $original = $upload->getClientOriginalName();
+                $form->multipleImage('gallery', 'Галерея')
+                    ->name($this->buildCallable('image', 'gallery'));
 
-                    return ltrim($path, '/') . '/' . $original;
-                });
+                $form->lightGallery('pictures', '')->options([
+                    'column' => 'images'
+                ]);
 
-            $form->documents('readable', '')->options([
-                'column' => 'files'
-            ]);
+                $form->multipleFile('documents', 'Документы')
+                    ->name(function (\Illuminate\Http\UploadedFile $upload)
+                    {
+                        $path = PathBuilder::sharedInstance()
+                            ->generate('', Str::random(2), Str::random(4));
 
-            if ($this->mainPage)
-            {
-                $form->switch('main_page', 'Главная Страница');
-            }
+                        $original = $upload->getClientOriginalName();
 
-            $form->switch('active', 'Видимость');
+                        return ltrim($path, '/') . '/' . $original;
+                    });
 
-            $form->ignore(['created_at', 'updated_at']);
+                $form->documents('readable', '')->options([
+                    'column' => 'files'
+                ]);
+
+                if ($this->mainPage)
+                {
+                    $form->switch('main_page', 'Главная Страница');
+                }
+
+                $form->switch('active', 'Видимость');
+
+                $form->ignore(['created_at', 'updated_at']);
+
+            });
+
+            $this->revsBuilder($form);
 
         });
 
