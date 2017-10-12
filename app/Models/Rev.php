@@ -15,7 +15,7 @@ class Rev extends Model
     {
         $old = $model->getAttribute($column);
 
-        if ($model->id && $old)
+        if ($model->id && $old && $old !== $newData)
         {
             $diff = new Differ();
 
