@@ -60,7 +60,7 @@ if (!function_exists('bx_cookie'))
         {
             foreach ($data as $i => $value)
             {
-                $data[$i] = bx_decrypt( $value );
+                $data[$i] = bx_decrypt($value);
             }
 
             return $data;
@@ -261,5 +261,16 @@ if (!function_exists('logo'))
         }
 
         return 'https://via.placeholder.com/255x128';
+    }
+}
+
+if (!function_exists('diffForHumans'))
+{
+    function diffForHumans($date)
+    {
+        $carbon = \Laravelrus\LocalizedCarbon\LocalizedCarbon::createFromFormat('Y-m-d H:i:s', $date);
+        $local  = \Laravelrus\LocalizedCarbon\LocalizedCarbon::instance($carbon);
+
+        return $local->diffForHumans();
     }
 }

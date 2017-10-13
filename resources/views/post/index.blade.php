@@ -36,6 +36,10 @@
                             <p class="card-text">{{ $item->description }}</p>
                         @endif
 
+                        <span class="float-right badge badge-dark">
+                            <small>Добавлено: {{ \diffForHumans($item->created_at) }}</small>
+                        </span>
+
                         <a href="{{ $item->url() }}" title="{{ $item->title }}" class="card-link">Подробнее »</a>
                     </div>
 
