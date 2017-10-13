@@ -26,7 +26,7 @@ Route::paginate('/posts', 'PostController@index')
 Route::paginate('/posts/search/{query?}', 'PostController@search')
     ->name('post.search');
 
-Route::get('/post/category/{id}-{title}', 'PostController@index')
+Route::paginate('/post/category/{id}-{title}', 'PostController@index')
     ->name('post.category');
 
 Route::get('/post/draft/{id}-{title}.html', 'PostController@draft')
