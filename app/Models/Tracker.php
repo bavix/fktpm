@@ -17,10 +17,10 @@ class Tracker extends Model
     protected static $_host;
     protected static $_online;
 
-    public static function visits()
+    public static function visits($canonicalUrl = null)
     {
         return static::query()
-            ->where('url', request()->getPathInfo())
+            ->where('url', $canonicalUrl ?: request()->getPathInfo())
             ->count();
     }
 

@@ -27,12 +27,14 @@
 
                     <hr class="if-visually" />
 
-                    <span class="if-visually float-right badge badge-default">
-                        <small>Просмотров: {{ \App\Models\Tracker::visits() }}</small>
+                    <span class="if-visually float-right badge badge-secondary">
+                        <small>Просмотров: {{ \App\Models\Tracker::visits($canonicalUrl ?? null) }}</small>
                     </span>
 
                     <span class="if-visually float-left badge badge-primary">
-                        <small>Обновлено: {{ \diffForHumans($item->updated_at) }}</small>
+                        <small>
+                            Обновлено: <time datetime="{{ $item->updated_at }}">{{ \diffForHumans($item->updated_at) }}</time>
+                        </small>
                     </span>
                 </div>
 

@@ -213,7 +213,7 @@
                         <div class="card-body">
                             <h5 class="card-title">
                                 {{ __('blocks.documents') }}
-                                <span class="badge badge-default float-right">{{ $item->files->count() }}</span>
+                                <span class="badge badge-secondary float-right">{{ $item->files->count() }}</span>
                             </h5>
 
                             <ul class="menu nav bd-sidenav">
@@ -342,7 +342,7 @@
                         <div class="card-body">
                             <h5 class="card-title">
                                 {{ __('blocks.polls') }}
-                                <span class="badge badge-default float-right">{{ $polls->count() }}</span>
+                                <span class="badge badge-secondary float-right">{{ $polls->count() }}</span>
                             </h5>
 
                             <ul class="menu nav bd-sidenav">
@@ -361,7 +361,7 @@
                         <div class="card-body">
                             <h5 class="card-title">
                                 {{ __('blocks.pages') }}
-                                <span class="badge badge-default float-right">{{ $pages->count() }}</span>
+                                <span class="badge badge-secondary float-right">{{ $pages->count() }}</span>
                             </h5>
 
                             <ul class="menu nav bd-sidenav">
@@ -380,7 +380,7 @@
                         <div class="card-body">
                             <h5 class="card-title">
                                 {{ __('blocks.links') }}
-                                <span class="badge badge-default float-right">{{ $links->count() }}</span>
+                                <span class="badge badge-secondary float-right">{{ $links->count() }}</span>
                             </h5>
 
                             <ul class="menu nav bd-sidenav">
