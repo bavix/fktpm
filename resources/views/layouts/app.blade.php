@@ -47,6 +47,9 @@
     @endif
 
     <!-- seo -->
+    @if (isset($item, $item->updated_at))
+        <meta http-equiv="last-modified" content="{{ $item->updated_at }}" />
+    @endif
     <link rel="canonical" href="{{ $canonicalUrl }}" />
     @if (isset($items) && $items instanceof Illuminate\Pagination\LengthAwarePaginator)
         @php($currentRoute = request()->route())
