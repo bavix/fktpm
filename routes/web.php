@@ -23,7 +23,7 @@ Route::domain($url)->group(function () {
 Route::paginate('/posts', 'PostController@index')
     ->name('post');
 
-Route::paginate('/post/search/{query?}', 'PostController@search')
+Route::paginate('/posts/search/{query?}', 'PostController@search')
     ->name('post.search');
 
 Route::get('/post/category/{id}-{title}', 'PostController@index')
@@ -39,7 +39,7 @@ Route::get('/post/{id}-{title}.html', 'PostController@view')
 Route::paginate('/pages', 'PageController@index')
     ->name('page');
 
-Route::paginate('/page/search/{query?}', 'PageController@search')
+Route::paginate('/pages/search/{query?}', 'PageController@search')
     ->name('page.search');
 
 Route::get('/page/draft/{id}-{title}.html', 'PageController@draft')
@@ -52,7 +52,7 @@ Route::get('/page/{id}-{title}.html', 'PageController@view')
 Route::paginate('/polls', 'PollController@index')
     ->name('poll');
 
-Route::paginate('/poll/search/{query?}', 'PollController@search')
+Route::paginate('/polls/search/{query?}', 'PollController@search')
     ->name('poll.search');
 
 Route::get('/poll/draft/{id}-{title}.html', 'PollController@draft')
@@ -68,7 +68,7 @@ Route::post('/poll/{id}-{title}.html', 'PollController@view')
 Route::paginate('/albums', 'AlbumController@index')
     ->name('album');
 
-Route::paginate('/album/search/{query?}', 'AlbumController@search')
+Route::paginate('/albums/search/{query?}', 'AlbumController@search')
     ->name('album.search');
 
 Route::get('/album/draft/{id}-{title}.html', 'AlbumController@draft')

@@ -40,13 +40,37 @@
     <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png"/>
     <link rel="manifest" href="/favicons/manifest.json">
 
+    @php($currentUrl = request()->url())
+
+    @if (isset($item) && method_exists($item, 'url'))
+        @php($currentUrl = $item->url())
+    @endif
+
+    <!-- seo -->
+    <link rel="canonical" href="{{ $currentUrl }}" />
+    @if (isset($items) && $items instanceof Illuminate\Pagination\LengthAwarePaginator)
+        @php($currentRoute = request()->route())
+        @php($reqAttr = $currentRoute->parameters())
+
+        @php($reqAttr['pageQuery'] = 'page/' . ($items->currentPage() - 1))
+        @if ($items->currentPage() > 1)
+            <link rel="prev" href="{{ route($currentRoute->getName(), $reqAttr) }}" />
+        @endif
+
+        @php($reqAttr['pageQuery'] = 'page/' . ($items->currentPage() + 1))
+        @if ($items->currentPage() < $items->lastPage())
+            <link rel="next" href="{{ route($currentRoute->getName(), $reqAttr) }}" />
+        @endif
+    @endif
+    <!-- /seo -->
+
     <meta name="msapplication-TileColor" content="#ffffff"/>
     <meta name="msapplication-TileImage" content="/favicons/ms-icon-144x144.png"/>
     <meta name="theme-color" content="#ffffff"/>
 
     <meta property="og:title" content="{{ $fullTitle }}"/>
     <meta property="og:description" content="{{ $description ?? '' }}"/>
-    <meta property="og:url" content= "{{ request()->url() }}"/>
+    <meta property="og:url" content= "{{ $currentUrl }}"/>
     <meta property="og:type" content="website"/>
     @php($qrModel = empty($hasError) ? qrModel() : null)
     @if($qrModel)
