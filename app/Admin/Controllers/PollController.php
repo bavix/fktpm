@@ -28,6 +28,9 @@ class PollController extends AdminController
 
             $grid->column('title', 'Заголовок')->sortable();
 
+            $grid->column('created_at', 'Дата создания')->sortable();
+            $grid->column('updated_at', 'Дата обновления')->sortable();
+
             $grid->exporter(new \App\Accessor\CsvExporter());
 
         });

@@ -56,6 +56,9 @@ class PostController extends AdminController
                 })->sortable();
             }
 
+            $grid->column('created_at', 'Дата создания')->sortable();
+            $grid->column('updated_at', 'Дата обновления')->sortable();
+
             $grid->actions(function (Grid\Displayers\Actions $actions) use ($self)
             {
 
