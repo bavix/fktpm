@@ -85,7 +85,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
     <script>
         var chart = new Chart(document.getElementById('chart').getContext('2d'), {
-            type: 'line'
+            type: 'line' // 'bar'
             , data: {
                 labels: {!! $chartLabels !!}
                 , datasets: [{
@@ -93,11 +93,21 @@
                     , backgroundColor: 'rgba(255, 206, 86, 0.5)'
                     , borderColor: 'rgb(61, 98, 119)'
                     , data: {!! $chartDataCurrent !!}
+
+                    , pointRadius: 4
+                    , pointHoverRadius: 6
+                    , pointHitRadius: 30
+                    , pointBorderWidth: 2
                 }, {
                     label: "Прошлый месяц"
                     , backgroundColor: 'rgba(54, 162, 235, 0.5)'
                     , borderColor: 'rgb(61, 98, 119)'
                     , data: {!! $chartDataLast !!}
+
+                    , pointRadius: 4
+                    , pointHoverRadius: 6
+                    , pointHitRadius: 30
+                    , pointBorderWidth: 2
                 }]
             }
         });
