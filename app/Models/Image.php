@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Bavix\Gearman\Client;
 use Bavix\Helpers\Dir;
 use Illuminate\Database\Eloquent\Model;
 use ImageOptimizer\OptimizerFactory;
@@ -29,7 +30,7 @@ class Image extends Model
         {
             try
             {
-                $client = new \GearmanClient();
+                $client = new Client();
                 $client->addServer(
                     config('gearman.host'),
                     config('gearman.port')

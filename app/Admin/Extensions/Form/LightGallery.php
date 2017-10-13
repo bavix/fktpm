@@ -16,7 +16,7 @@ class LightGallery extends Field
      * @var array
      */
     public static $css = [
-        '/vendor/laravel-admin/lightGallery/css/lightgallery.min.css',
+        '/vendor/lightGallery/css/lightgallery.min.css',
         '/vendor/css/color.css'
     ];
 
@@ -24,8 +24,8 @@ class LightGallery extends Field
      * @var array
      */
     public static $js = [
-        '/vendor/laravel-admin/lightGallery/js/lightgallery.min.js',
-        '/vendor/laravel-admin/lightGallery/plugins/js-trash.js',
+        '/vendor/lightGallery/js/lightgallery.min.js',
+        '/vendor/lightGallery/plugins/js-trash.js',
     ];
 
     /**

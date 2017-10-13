@@ -14,7 +14,7 @@
     <title>{{ $fullTitle }}</title>
 
     <!-- Styles -->
-    <link href="{{ asset2('vendor/laravel-admin/lightGallery/css/lightgallery.min.css') }}" rel="stylesheet"/>
+    <link href="{{ asset2('vendor/lightGallery/css/lightgallery.min.css') }}" rel="stylesheet"/>
     <link href="{{ asset2('node_modules/bootstrap/dist/css/bootstrap.min.css')  }}" rel="stylesheet"/>
     <link href="{{ asset2('css/' . config('bx.style') . '.css')  }}" rel="stylesheet"/>
 
@@ -532,10 +532,10 @@
 <script src="{{ asset2('node_modules/popper.js/dist/umd/popper.min.js') }}"></script>
 <script src="{{ asset2('node_modules/bootstrap/dist/js/bootstrap.min.js') }}"></script>
 <script src="{{ asset2('node_modules/clipboard/dist/clipboard.min.js') }}"></script>
-<script src="{{ asset2('vendor/laravel-admin/lightGallery/js/lightgallery.min.js') }}"></script>
-<script src="{{ asset2('vendor/laravel-admin/lightGallery/plugins/lg-fullscreen.min.js') }}"></script>
-<script src="{{ asset2('vendor/laravel-admin/lightGallery/plugins/lg-thumbnail.min.js') }}"></script>
-<script src="{{ asset2('vendor/laravel-admin/lightGallery/plugins/lg-zoom.min.js') }}"></script>
+<script src="{{ asset2('vendor/lightGallery/js/lightgallery.min.js') }}"></script>
+<script src="{{ asset2('vendor/lightGallery/plugins/lg-fullscreen.min.js') }}"></script>
+<script src="{{ asset2('vendor/lightGallery/plugins/lg-thumbnail.min.js') }}"></script>
+<script src="{{ asset2('vendor/lightGallery/plugins/lg-zoom.min.js') }}"></script>
 <script src="{{ asset2('node_modules/sweetalert2/dist/sweetalert2.min.js') }}"></script>
 <!-- Include a polyfill for ES6 Promises (optional) for IE11, UC Browser and Android browser support -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>

@@ -3,9 +3,8 @@
 namespace App\Console\Commands;
 
 use App\Models\Image;
-use Bavix\Helpers\JSON;
+use Bavix\Gearman\Worker;
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Mail;
 use ImageOptimizer\OptimizerFactory;
 
 class GearmanCommand extends Command
@@ -25,14 +24,6 @@ class GearmanCommand extends Command
     protected $description = 'Gearman Image Cropper';
 
     /**
-     * GearmanCommand constructor.
-     */
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
-    /**
      * Execute the console command.
      *
      * @return mixed
@@ -44,7 +35,7 @@ class GearmanCommand extends Command
         $factory   = new OptimizerFactory();
         $optimizer = $factory->get();
 
-        $worker = new \GearmanWorker();
+        $worker = new Worker();
         $worker->addServer(
             config('gearman.host'),
             config('gearman.port')
@@ -81,6 +72,7 @@ class GearmanCommand extends Command
 
         while ($worker->work())
         {
+            continue;
         }
 
         return;

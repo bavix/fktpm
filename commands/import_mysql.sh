@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 cd ..
-./artisan scout:mysql-index "App\Models\AlbumModel"
-./artisan scout:mysql-index "App\Models\PageModel"
-./artisan scout:mysql-index "App\Models\PollModel"
-./artisan scout:mysql-index "App\Models\PostModel"
+./artisan scout:mysql-index "App\Models\Album"
+./artisan scout:mysql-index "App\Models\Page"
+./artisan scout:mysql-index "App\Models\Poll"
+./artisan scout:mysql-index "App\Models\Post"

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 cd ..
-./artisan scout:import "App\Models\AlbumModel"
-./artisan scout:import "App\Models\PageModel"
-./artisan scout:import "App\Models\PollModel"
-./artisan scout:import "App\Models\PostModel"
+./artisan scout:import "App\Models\Album"
+./artisan scout:import "App\Models\Page"
+./artisan scout:import "App\Models\Poll"
+./artisan scout:import "App\Models\Post"
