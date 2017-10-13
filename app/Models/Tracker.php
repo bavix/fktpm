@@ -39,46 +39,19 @@ class Tracker extends Model
         return $save;
     }
 
-    public static function graphHost()
+    public static function graphHost($interval = 0)
     {
         return static::query()
             ->select(
                 DB::raw('sum(1) `res`'),
-                DB::raw('DATE_FORMAT(`fdate`, "%m.%Y") `month`')
-            )
-            ->from(
-                DB::raw('(' . static::query()
-                        ->select(
-                            'ip',
-                            DB::raw('DATE_FORMAT(`created_at`, "%Y-%m-01") `fdate`')
-                        )
-                        ->where(
-                            DB::raw('DATE(created_at)'),
-                            '>',
-                            DB::raw('DATE_SUB(CURDATE(), INTERVAL 6 MONTH)')
-                        )
-                        ->groupBy('fdate', 'ip')
-                        ->toSql() . ') a')
-            )
-            ->groupBy('month')
-            ->orderBy('month', 'asc')
-            ->get();
-    }
-
-    public static function graphHit()
-    {
-        return static::query()
-            ->select(
-                DB::raw('sum(1) `res`'),
-                DB::raw('DATE_FORMAT(`created_at`, "%m.%Y") `month`')
+                DB::raw('DATE_FORMAT(`created_at`, "%d.%m.%Y") `day`')
             )
             ->where(
-                DB::raw('DATE(created_at)'),
-                '>',
-                DB::raw('DATE_SUB(CURDATE(), INTERVAL 6 MONTH)')
+                DB::raw('EXTRACT(YEAR_MONTH FROM `created_at`)'),
+                DB::raw('EXTRACT(YEAR_MONTH FROM DATE_SUB(CURDATE(), INTERVAL ' . $interval . ' MONTH))')
             )
-            ->groupBy('month')
-            ->orderBy('month', 'asc')
+            ->groupBy('day', 'ip')
+            ->orderBy('day')
             ->get();
     }
 
@@ -188,7 +161,7 @@ class Tracker extends Model
                 ->where(
                     'created_at',
                     '>',
-                    DB::raw('DATE_SUB(NOW(), INTERVAL 15 MINUTE)')
+                    DB::raw('DATE_SUB(NOW(), INTERVAL 5 MINUTE)')
                 )
                 ->get()
                 ->count();

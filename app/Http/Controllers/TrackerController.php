@@ -19,10 +19,10 @@ class TrackerController extends Controller
 
     public function statistics()
     {
-        $graphHost = Tracker::graphHost()->pluck('res', 'month')
+        $graphCurrent = Tracker::graphHost()->pluck('res', 'day')
             ->toArray();
 
-        $graphHit = Tracker::graphHit()->pluck('res', 'month')
+        $graphLast = Tracker::graphHost(1)->pluck('res', 'day')
             ->toArray();
 
         return $this->render('tracker.statistics', [
@@ -31,9 +31,9 @@ class TrackerController extends Controller
 
             'description' => 'На данной странице содержится вся статистика сайта',
 
-            'chartLabels'   => JSON::encode(array_keys($graphHost)),
-            'chartDataHost' => JSON::encode(array_values($graphHost)),
-            'chartDataHit'  => JSON::encode(array_values($graphHit)),
+            'chartLabels'      => JSON::encode(\range(1, 31)),
+            'chartDataCurrent' => JSON::encode(array_values($graphCurrent)),
+            'chartDataLast'    => JSON::encode(array_values($graphLast)),
 
             'newCount' => Post::query()
                 ->where('active', 1)
@@ -68,29 +68,25 @@ class TrackerController extends Controller
          */
         $img = Image::canvas(88, 31, QRController::hex());
 
-        $img->text('hosts: ' . Tracker::hostAllCount(), 2, 9, function (Font $font)
-        {
+        $img->text('hosts: ' . Tracker::hostAllCount(), 2, 9, function (Font $font) {
             $font->file(config('tracker.font'));
             $font->size(9);
             $font->color('#fff');
         });
 
-        $img->text('hits: ' . Tracker::hitAllCount(), 2, 19, function (Font $font)
-        {
+        $img->text('hits: ' . Tracker::hitAllCount(), 2, 19, function (Font $font) {
             $font->file(config('tracker.font'));
             $font->size(9);
             $font->color('#fff');
         });
 
-        $img->text('online: ' . Tracker::onlineCount(), 2, 28, function (Font $font)
-        {
+        $img->text('online: ' . Tracker::onlineCount(), 2, 28, function (Font $font) {
             $font->file(config('tracker.font'));
             $font->size(9);
             $font->color('#fff');
         });
 
-        $img->text('bavix.ru', 49, 28, function (Font $font)
-        {
+        $img->text('bavix.ru', 49, 28, function (Font $font) {
             $font->file(config('tracker.font'));
             $font->size(9);
             $font->color('#ccc');

@@ -89,15 +89,15 @@
             , data: {
                 labels: {!! $chartLabels !!}
                 , datasets: [{
-                    label: "Хостов"
+                    label: "Текущий месяц"
                     , backgroundColor: 'rgba(255, 206, 86, 0.5)'
                     , borderColor: 'rgb(61, 98, 119)'
-                    , data: {!! $chartDataHost !!}
+                    , data: {!! $chartDataCurrent !!}
                 }, {
-                    label: "Хитов"
+                    label: "Прошлый месяц"
                     , backgroundColor: 'rgba(54, 162, 235, 0.5)'
                     , borderColor: 'rgb(61, 98, 119)'
-                    , data: {!! $chartDataHit !!}
+                    , data: {!! $chartDataLast !!}
                 }]
             }
         });
