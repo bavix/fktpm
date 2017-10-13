@@ -44,13 +44,24 @@ class Tracker extends Model
         return static::query()
             ->select(
                 DB::raw('sum(1) `res`'),
-                DB::raw('DATE_FORMAT(`created_at`, "%d.%m.%Y") `day`')
+                'r1.day'
             )
-            ->where(
-                DB::raw('EXTRACT(YEAR_MONTH FROM `created_at`)'),
-                DB::raw('EXTRACT(YEAR_MONTH FROM DATE_SUB(CURDATE(), INTERVAL ' . $interval . ' MONTH))')
+            ->from(
+                DB::raw('(' .
+                    static::query()
+                        ->select(
+                            'ip',
+                            DB::raw('DATE_FORMAT(`created_at`, "%d.%m.%Y") `day`')
+                        )
+                        ->where(
+                            DB::raw('EXTRACT(YEAR_MONTH FROM `created_at`)'),
+                            DB::raw('EXTRACT(YEAR_MONTH FROM DATE_SUB(CURDATE(), INTERVAL ' . $interval . ' MONTH))')
+                        )
+                        ->groupBy('ip', 'day')
+                        ->toSql() . ') r1'
+                )
             )
-            ->groupBy('day', 'ip')
+            ->groupBy('day')
             ->orderBy('day')
             ->get();
     }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Post;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -18,7 +19,7 @@ class PostController extends Controller
     protected $description = 'blocks.listPosts';
 
     protected $mainPage = false;
-    protected $draft  = false;
+    protected $draft    = false;
 
     protected $query;
 
@@ -57,8 +58,8 @@ class PostController extends Controller
     public function index(Request $request, $id = null)
     {
 
-        $name  = $request->route()->getName();
-        $model = $this->model;
+        $name        = $request->route()->getName();
+        $model       = $this->model;
         $this->title = __($this->title);
 
         /**
@@ -116,8 +117,8 @@ class PostController extends Controller
     /**
      * Show the application dashboard.
      *
-     * @param Request $request
-     * @param int     $id
+     * @param Request   $request
+     * @param int|Model $id
      *
      * @return \Illuminate\Http\Response
      */
@@ -131,7 +132,7 @@ class PostController extends Controller
             $model->where('active', 1);
         }
 
-        $model = $model->find($id);
+        $model = \is_object($id) ? $id : $model->find($id);
 
         \abort_if(!$model, 404);
 
