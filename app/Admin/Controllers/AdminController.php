@@ -36,7 +36,7 @@ abstract class AdminController extends Controller
         $model = $class::query()->find($id);
         $query  = Rev::fromModel($model);
         $count = $query->count();
-        $revs  = $query->limit(15)->get();
+        $revs  = $query->limit(30)->get();
 
         if ($count)
         {
