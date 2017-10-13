@@ -34,17 +34,19 @@ abstract class AdminController extends Controller
 
         $class = $this->model;
         $model = $class::query()->find($id);
-        $revs  = Rev::fromModel($model);
+        $query  = Rev::fromModel($model);
+        $count = $query->count();
+        $revs  = $query->limit(15)->get();
 
-        if ($revs->count())
+        if ($count)
         {
-            $form->tab('Revs', function (Form $form) use ($revs, $model) {
+            $form->tab('Revs', function (Form $form) use ($revs, $count, $model) {
                 $content = $model->content;
                 $differ  = new Differ();
 
                 foreach ($revs as $key => $rev)
                 {
-                    $ver = $revs->count() - $key;
+                    $ver = $count - $key;
 
                     /**
                      * @var $ckeditor CKEditor

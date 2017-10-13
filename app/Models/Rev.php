@@ -35,7 +35,7 @@ class Rev extends Model
      * @param Model  $model
      * @param string $column
      *
-     * @return \Illuminate\Database\Eloquent\Collection
+     * @return \Illuminate\Database\Eloquent\Builder
      */
     public static function fromModel(Model $model, $column = 'content')
     {
@@ -43,9 +43,7 @@ class Rev extends Model
             ->where('name', $model->getTable())
             ->where('item_id', $model->id)
             ->where('column', $column)
-            ->orderBy('created_at', 'DESC')
-            ->limit(10)
-            ->get();
+            ->orderBy('created_at', 'DESC');
     }
 
 }
