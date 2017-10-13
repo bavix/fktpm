@@ -62,7 +62,6 @@
             <link rel="next" href="{{ route($currentRoute->getName(), $reqAttr) }}" />
         @endif
     @endif
-    <!-- /seo -->
 
     <meta name="msapplication-TileColor" content="#ffffff"/>
     <meta name="msapplication-TileImage" content="/favicons/ms-icon-144x144.png"/>
@@ -88,6 +87,7 @@
     @if(!empty($title))
         <meta name="keywords" content="{{ keywords($title) }}"/>
     @endif
+    <!-- /seo -->
 
 </head>
 @php($visually = visually() ? 'visually-impaired' : '')

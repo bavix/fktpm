@@ -36,7 +36,7 @@
                             <p class="card-text">{{ $item->description }}</p>
                         @endif
 
-                        <a href="{{ $item->url() }}" class="card-link">Подробнее »</a>
+                        <a href="{{ $item->url() }}" title="{{ $item->title }}" class="card-link">Подробнее »</a>
                     </div>
 
                 </article>

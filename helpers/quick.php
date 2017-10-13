@@ -186,7 +186,12 @@ if (!function_exists('phone'))
             $string = '7' . $string;
         }
 
-        return '+' . $string;
+        if ($string{0} === '7')
+        {
+            return '+' . $string;
+        }
+
+        return $string;
     }
 }
 
