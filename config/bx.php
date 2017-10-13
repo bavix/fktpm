@@ -6,7 +6,7 @@ return [
     'notify' => true,
 
     // module auth is enable
-    'auth' => 1,
+    'auth' => false,
 
     // стиль
     'style'       => 'default',
