@@ -40,14 +40,14 @@
     <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png"/>
     <link rel="manifest" href="/favicons/manifest.json">
 
-    @php($currentUrl = request()->url())
+    @php($canonicalUrl = request()->url())
 
     @if (isset($item) && method_exists($item, 'url'))
-        @php($currentUrl = $item->url())
+        @php($canonicalUrl = $item->url())
     @endif
 
     <!-- seo -->
-    <link rel="canonical" href="{{ $currentUrl }}" />
+    <link rel="canonical" href="{{ $canonicalUrl }}" />
     @if (isset($items) && $items instanceof Illuminate\Pagination\LengthAwarePaginator)
         @php($currentRoute = request()->route())
         @php($reqAttr = $currentRoute->parameters())
@@ -70,7 +70,7 @@
 
     <meta property="og:title" content="{{ $fullTitle }}"/>
     <meta property="og:description" content="{{ $description ?? '' }}"/>
-    <meta property="og:url" content= "{{ $currentUrl }}"/>
+    <meta property="og:url" content= "{{ $canonicalUrl }}"/>
     <meta property="og:type" content="website"/>
     @php($qrModel = empty($hasError) ? qrModel() : null)
     @if($qrModel)

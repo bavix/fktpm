@@ -77,12 +77,6 @@ class PostController extends Controller
             $query->where('category_id', $id);
 
             $this->title = $category->title . ' / ' . $this->title;
-
-            if ($request->url() !== $category->url())
-            {
-                // seo
-                return redirect($category->url(), 301);
-            }
         }
 
         if ($this->mainPage)
@@ -140,12 +134,6 @@ class PostController extends Controller
         $model = $model->find($id);
 
         \abort_if(!$model, 404);
-
-        if (!$this->draft && $request->getPathInfo() !== '/' && $request->url() !== $model->url())
-        {
-            // seo
-            return redirect($model->url(), 301);
-        }
 
         $category = '';
 

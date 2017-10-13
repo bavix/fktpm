@@ -31,12 +31,6 @@ class PollController extends AlbumController
 
         \abort_if(!$model, 404);
 
-        if ($request->url() !== $model->url())
-        {
-            // seo
-            return redirect($model->url(), 301);
-        }
-
         $count  = $model->questions()->count();
         $result = $request->cookie('poll_' . $id);
 
