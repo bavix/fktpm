@@ -11,6 +11,22 @@ var font = 'f' + $script.data('font');
  */
 $(function () {
 
+    $.fn.select2.defaults.set( "theme", "bootstrap" );
+
+    $('select#types').select2({
+        templateResult: function (data) {
+            if (typeof data.element !== "undefined") {
+                var desc = $(data.element).data('desc');
+
+                if (desc !== undefined) {
+                    return $('<span>' + data.text + '</span><br/><small>' + desc + '</small>');
+                }
+            }
+
+            return data.text;
+        }
+    });
+
     var $poll = $('#poll');
     var $polls = $poll.data('count');
 

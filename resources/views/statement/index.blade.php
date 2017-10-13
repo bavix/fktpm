@@ -165,7 +165,7 @@
                     <select required class="form-control" id="types" name="type_id">
                         <option disabled selected>Выберете кружок</option>
                         @foreach($types as $type)
-                            <option value="{{ $type->id }}">{{ $type->title }}</option>
+                            <option value="{{ $type->id }}" data-desc="{{ $type->description }}">{{ $type->title }}</option>
                         @endforeach
                     </select>
                 </div>

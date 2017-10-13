@@ -544,8 +544,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.sticky/1.0.4/jquery.sticky.min.js"></script>
 
 <!-- select 2 -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+<link href="{{ asset2('node_modules/select2/dist/css/select2.min.css') }}" rel="stylesheet" />
+<link href="{{ asset2('node_modules/select2-bootstrap-theme/dist/select2-bootstrap.min.css') }}" rel="stylesheet" />
+<script src="{{ asset2('node_modules/select2/dist/js/select2.min.js') }}'"></script>
 
 <script src="{{ asset2('js/default.js') }}"
         data-color="{{ visuallyColor() }}"

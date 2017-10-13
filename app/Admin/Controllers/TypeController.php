@@ -27,6 +27,7 @@ class TypeController extends AdminController
             $grid->id('ID')->sortable();
 
             $grid->column('title', 'Название')->sortable();
+            $grid->column('description', 'Описание');
 
             $grid->exporter(new \App\Accessor\CsvExporter());
 
@@ -47,6 +48,8 @@ class TypeController extends AdminController
             $form->display('id', 'ID');
 
             $form->text('title', 'Заголовок');
+
+            $form->textarea('description', 'Описание');
 
             $form->switch('active', 'Видимость');
 
