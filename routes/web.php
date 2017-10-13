@@ -127,12 +127,6 @@ Route::get('/s/{hash}', 'ShorterController@index')
 Route::get('/contact.html', 'ContactController@index')
     ->name('contact');
 
-if (env('APP_DEBUG'))
-{
-    Route::get('/debug', 'DebugController@index')
-        ->name('debug');
-}
-
 if (config('bx.auth'))
 {
     Auth::routes();

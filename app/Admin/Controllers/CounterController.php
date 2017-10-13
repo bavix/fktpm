@@ -3,8 +3,8 @@
 namespace App\Admin\Controllers;
 
 use App\Models\Counter;
-use App\Facades\Admin;
-use App\Accessor\Form;
+use Encore\Admin\Facades\Admin;
+use Encore\Admin\Form;
 use Encore\Admin\Grid;
 
 class CounterController extends AdminController
@@ -20,16 +20,14 @@ class CounterController extends AdminController
      */
     protected function grid()
     {
-        return Admin::grid($this->model, function (Grid $grid)
-        {
+        return Admin::grid($this->model, function (Grid $grid) {
             $grid->model()->orderBy('id', 'DESC');
 
             $grid->id('ID')->sortable();
 
             $grid->column('title', 'Название')->sortable();
 
-            $grid->column('active', 'Видимость')->display(function ($data)
-            {
+            $grid->column('active', 'Видимость')->display(function ($data) {
                 return $data ? 'Включена' : 'Выключена';
             })->sortable();
 
@@ -49,8 +47,7 @@ class CounterController extends AdminController
     protected function form()
     {
 
-        return Admin::form($this->model, function (Form $form)
-        {
+        return Admin::form($this->model, function (Form $form) {
 
             $form->display('id', 'ID');
 

@@ -4,9 +4,9 @@ namespace App\Admin\Controllers;
 
 use App\Models\Poll;
 use App\Models\Question;
-use App\Facades\Admin;
+use Encore\Admin\Facades\Admin;
 use Encore\Admin\Form\NestedForm;
-use App\Accessor\Form;
+use Encore\Admin\Form;
 use Encore\Admin\Grid;
 
 class QuestionController extends AdminController
@@ -22,8 +22,7 @@ class QuestionController extends AdminController
      */
     protected function grid()
     {
-        return Admin::grid($this->model, function (Grid $grid)
-        {
+        return Admin::grid($this->model, function (Grid $grid) {
             $grid->model()->orderBy('id', 'DESC');
 
             $grid->id('ID')->sortable();
@@ -47,8 +46,7 @@ class QuestionController extends AdminController
     protected function form()
     {
 
-        return Admin::form($this->model, function (Form $form)
-        {
+        return Admin::form($this->model, function (Form $form) {
 
             $form->display('id', 'ID');
 
@@ -62,8 +60,7 @@ class QuestionController extends AdminController
             $form->text('question', 'Вопрос');
             $form->number('count', 'Всего ответов');
 
-            $form->hasMany('answers', 'Ответы', function (NestedForm $form)
-            {
+            $form->hasMany('answers', 'Ответы', function (NestedForm $form) {
                 $form->text('answer', 'Ответ');
                 $form->number('count', 'Ответили');
             });

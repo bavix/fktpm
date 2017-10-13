@@ -99,8 +99,7 @@ class Image extends Model
                     $_height = $image->height() <= $height ? $image->height() : $height;
                 }
 
-                $image->resize($_width, $_height, function ($constraint)
-                {
+                $image->resize($_width, $_height, function ($constraint) {
                     $constraint->aspectRatio();
                 });
 

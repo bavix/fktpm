@@ -4,8 +4,8 @@ namespace App\Admin\Controllers;
 
 use App\Models\Tracker;
 use Bavix\Helpers\JSON;
-use App\Facades\Admin;
-use App\Accessor\Form;
+use Encore\Admin\Facades\Admin;
+use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Laravelrus\LocalizedCarbon\LocalizedCarbon;
 
@@ -22,34 +22,29 @@ class TrackerController extends AdminController
      */
     protected function grid()
     {
-        return Admin::grid($this->model, function (Grid $grid)
-        {
+        return Admin::grid($this->model, function (Grid $grid) {
             $grid->model()->orderBy('id', 'DESC');
 
             $grid->id('ID')->sortable();
 
             $grid->column('ip', 'IP адрес')
-                ->display(function ($ip)
-                {
+                ->display(function ($ip) {
                     return '<span class="badge bg-green">' . $ip . '</span>';
                 })
                 ->sortable();
 
             $grid->column('url', 'Куда')
-                ->display(function ($url)
-                {
+                ->display(function ($url) {
                     return '<span class="badge bg-blue">' . $url . '</span>';
                 });
 
             $grid->column('parameters', 'Параметры')
-                ->display(function ($json)
-                {
+                ->display(function ($json) {
                     return JSON::decode($json);
                 });
 
             $grid->column('created_at', 'Время визита')
-                ->display(function ($dateTime)
-                {
+                ->display(function ($dateTime) {
                     $carbon = LocalizedCarbon::createFromFormat('Y-m-d H:i:s', $dateTime);
                     $local  = LocalizedCarbon::instance($carbon);
 
@@ -69,8 +64,7 @@ class TrackerController extends AdminController
     protected function form()
     {
 
-        return Admin::form($this->model, function (Form $form)
-        {
+        return Admin::form($this->model, function (Form $form) {
 
             $form->display('id', 'ID');
 

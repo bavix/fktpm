@@ -6,8 +6,8 @@ use App\Admin\Extensions\BtnPreview;
 use App\Models\Category;
 use App\Models\Post;
 use Bavix\Helpers\Str;
-use App\Facades\Admin;
-use App\Accessor\Form;
+use Encore\Admin\Facades\Admin;
+use Encore\Admin\Form;
 use Bavix\SDK\PathBuilder;
 use Encore\Admin\Grid;
 
@@ -29,8 +29,7 @@ class PostController extends AdminController
     {
         $self = $this;
 
-        return Admin::grid($this->model, function (Grid $grid) use ($self)
-        {
+        return Admin::grid($this->model, function (Grid $grid) use ($self) {
             $grid->model()->orderBy('id', 'DESC');
 
             $grid->id('ID')->sortable();
@@ -43,15 +42,13 @@ class PostController extends AdminController
                 $grid->column('category.title', 'Категория')->sortable();
             }
 
-            $grid->column('active', 'Видимость')->display(function ($data)
-            {
+            $grid->column('active', 'Видимость')->display(function ($data) {
                 return $data ? 'Включена' : 'Выключена';
             })->sortable();
 
             if ($self->mainPage)
             {
-                $grid->column('main_page', 'Главная страница')->display(function ($data)
-                {
+                $grid->column('main_page', 'Главная страница')->display(function ($data) {
                     return $data ? 'Включена' : 'Выключена';
                 })->sortable();
             }
@@ -59,8 +56,7 @@ class PostController extends AdminController
             $grid->column('created_at', 'Дата создания')->sortable();
             $grid->column('updated_at', 'Дата обновления')->sortable();
 
-            $grid->actions(function (Grid\Displayers\Actions $actions) use ($self)
-            {
+            $grid->actions(function (Grid\Displayers\Actions $actions) use ($self) {
 
                 if ($self->category)
                 {
@@ -86,8 +82,7 @@ class PostController extends AdminController
     protected function form()
     {
 
-        return Admin::form($this->model, function (Form $form)
-        {
+        return Admin::form($this->model, function (Form $form) {
 
             $form->tab('Редактировать', function (Form $form) {
 
@@ -120,8 +115,7 @@ class PostController extends AdminController
                 ]);
 
                 $form->multipleFile('documents', 'Документы')
-                    ->name(function (\Illuminate\Http\UploadedFile $upload)
-                    {
+                    ->name(function (\Illuminate\Http\UploadedFile $upload) {
                         $path = PathBuilder::sharedInstance()
                             ->generate('', Str::random(2), Str::random(4));
 

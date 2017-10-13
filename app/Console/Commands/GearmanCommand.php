@@ -41,8 +41,7 @@ class GearmanCommand extends Command
             config('gearman.port')
         );
 
-        $worker->addFunction('resize', function (\GearmanJob $job) use ($console)
-        {
+        $worker->addFunction('resize', function (\GearmanJob $job) use ($console) {
             /**
              * @var Image $model
              */
@@ -57,8 +56,7 @@ class GearmanCommand extends Command
             }
         });
 
-        $worker->addFunction('optimize', function (\GearmanJob $job) use ($console, $optimizer)
-        {
+        $worker->addFunction('optimize', function (\GearmanJob $job) use ($console, $optimizer) {
 
             if (class_exists(OptimizerFactory::class))
             {

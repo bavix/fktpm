@@ -10,8 +10,8 @@ use Bavix\Helpers\Dir;
 use Bavix\Helpers\Str;
 use Bavix\SDK\PathBuilder;
 use Encore\Admin\Controllers\ModelForm;
-use App\Facades\Admin;
-use App\Accessor\Form;
+use Encore\Admin\Facades\Admin;
+use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Layout\Content;
 
@@ -34,7 +34,7 @@ abstract class AdminController extends Controller
 
         $class = $this->model;
         $model = $class::query()->find($id);
-        $query  = Rev::fromModel($model);
+        $query = Rev::fromModel($model);
         $count = $query->count();
         $revs  = $query->limit(30)->get();
 

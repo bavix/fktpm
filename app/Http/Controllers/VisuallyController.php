@@ -72,7 +72,7 @@ class VisuallyController extends Controller
         $this->color($request, null);
 
         return $this->data($request, [
-            'visually' => !\visually(),
+            'visually'      => !\visually(),
             'visuallyImage' => \visually() ? false : \visuallyImage(),
         ]);
     }

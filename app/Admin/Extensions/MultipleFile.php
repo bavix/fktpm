@@ -16,7 +16,7 @@ class MultipleFile extends \Encore\Admin\Form\Field\MultipleFile
      */
     protected function prepareForeach(UploadedFile $file = null)
     {
-        $self = clone $this;
+        $self       = clone $this;
         $self->name = $self->getStoreName($file);
 
         return tap($self->upload($file), function () use ($self) {

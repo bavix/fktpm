@@ -4,8 +4,8 @@ namespace App\Admin\Controllers;
 
 use App\Admin\Extensions\BtnPreview;
 use App\Models\Album;
-use App\Facades\Admin;
-use App\Accessor\Form;
+use Encore\Admin\Facades\Admin;
+use Encore\Admin\Form;
 use Encore\Admin\Grid;
 
 class AlbumController extends AdminController
@@ -21,8 +21,7 @@ class AlbumController extends AdminController
      */
     protected function grid()
     {
-        return Admin::grid($this->model, function (Grid $grid)
-        {
+        return Admin::grid($this->model, function (Grid $grid) {
             $grid->model()->orderBy('id', 'DESC');
 
             $grid->id('ID')->sortable();
@@ -30,16 +29,14 @@ class AlbumController extends AdminController
             $grid->column('title', 'Название')->sortable();
             $grid->column('description', 'Описание');
 
-            $grid->column('active', 'Видимость')->display(function ($data)
-            {
+            $grid->column('active', 'Видимость')->display(function ($data) {
                 return $data ? 'Включена' : 'Выключена';
             })->sortable();
 
             $grid->column('created_at', 'Дата создания')->sortable();
             $grid->column('updated_at', 'Дата обновления')->sortable();
 
-            $grid->actions(function (Grid\Displayers\Actions $actions)
-            {
+            $grid->actions(function (Grid\Displayers\Actions $actions) {
                 $actions->append(new BtnPreview($actions->getKey(), 'album.draft'));
             });
 
@@ -58,8 +55,7 @@ class AlbumController extends AdminController
 
         $self = $this;
 
-        return Admin::form($this->model, function (Form $form) use ($self)
-        {
+        return Admin::form($this->model, function (Form $form) use ($self) {
 
             $form->display('id', 'ID');
 

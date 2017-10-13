@@ -5,8 +5,8 @@ namespace App\Admin\Controllers;
 use App\Admin\Extensions\BtnPrint;
 use App\Models\Statement;
 use App\Models\Type;
-use App\Facades\Admin;
-use App\Accessor\Form;
+use Encore\Admin\Facades\Admin;
+use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Illuminate\Http\Request;
 
@@ -28,8 +28,7 @@ class StatementController extends AdminController
      */
     protected function grid()
     {
-        return Admin::grid($this->model, function (Grid $grid)
-        {
+        return Admin::grid($this->model, function (Grid $grid) {
             $grid->model()->orderBy('id', 'DESC');
 
             $grid->id('ID')->sortable();
@@ -43,8 +42,7 @@ class StatementController extends AdminController
 
             $grid->exporter(new \App\Accessor\CsvExporter());
 
-            $grid->actions(function (Grid\Displayers\Actions $actions)
-            {
+            $grid->actions(function (Grid\Displayers\Actions $actions) {
                 $actions->append(new BtnPrint($actions->getKey(), 'statement.doc'));
             });
 
@@ -59,8 +57,7 @@ class StatementController extends AdminController
     protected function form()
     {
 
-        return Admin::form($this->model, function (Form $form)
-        {
+        return Admin::form($this->model, function (Form $form) {
 
             $form->display('id', 'ID');
 

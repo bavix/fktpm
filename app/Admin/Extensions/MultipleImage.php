@@ -15,7 +15,7 @@ class MultipleImage extends \Encore\Admin\Form\Field\MultipleImage
      */
     protected function prepareForeach(UploadedFile $image = null)
     {
-        $self = clone $this;
+        $self       = clone $this;
         $self->name = $self->getStoreName($image);
 
         $self->callInterventionMethods($image->getRealPath());

@@ -9,7 +9,7 @@ use App\Models\Post;
 use App\Models\Page;
 use App\Models\Poll;
 use App\Models\Statement;
-use App\Facades\Admin;
+use Encore\Admin\Facades\Admin;
 use Encore\Admin\Controllers\Dashboard;
 use Encore\Admin\Layout\Content;
 use Encore\Admin\Layout\Row;
