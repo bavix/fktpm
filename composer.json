@@ -14,7 +14,7 @@
     "bavix/diff": "^1.0",
     "bavix/sdk": "^1.0",
     "davejamesmiller/laravel-breadcrumbs": "^3.0",
-    "doctrine/dbal": "^2.6",
+    "doctrine/dbal": "^2.5",
     "encore/laravel-admin": "^1.5",
     "ezyang/htmlpurifier": "^4.9",
     "fideloper/proxy": "~3.3",
