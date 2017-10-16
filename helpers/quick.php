@@ -100,11 +100,11 @@ if (!function_exists('visuallyFont'))
 {
 
     /**
-     * @return bool
+     * @return int
      */
     function visuallyFont()
     {
-        return bx_cookie(__FUNCTION__, 20);
+        return (int)bx_cookie(__FUNCTION__, 20);
     }
 
 }
@@ -113,7 +113,7 @@ if (!function_exists('visuallyColor'))
 {
 
     /**
-     * @return bool
+     * @return string
      */
     function visuallyColor()
     {
@@ -126,13 +126,13 @@ if (!function_exists('visuallyFontString'))
 {
 
     /**
+     * @param int $type
+     *
      * @return bool
      */
     function visuallyFontString($type)
     {
-        $data = visuallyFont();
-
-        return (int)$data === $type ? 'active' : '';
+        return visuallyFont() === $type ? 'active' : '';
     }
 
 }
@@ -145,9 +145,7 @@ if (!function_exists('visuallyColorString'))
      */
     function visuallyColorString($type)
     {
-        $data = visuallyColor();
-
-        return $data === $type ? 'active' : '';
+        return visuallyColor() === $type ? 'active' : '';
     }
 
 }
@@ -277,7 +275,8 @@ if (!function_exists('onOff'))
 {
     function onOff($value)
     {
-        if ($value) {
+        if ($value)
+        {
             return '<span class="label label-primary">вкл.</span>';
         }
 
