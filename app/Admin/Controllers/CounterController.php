@@ -2,6 +2,7 @@
 
 namespace App\Admin\Controllers;
 
+use Bavix\Helpers\Closure;
 use App\Models\Counter;
 use Encore\Admin\Facades\Admin;
 use Encore\Admin\Form;
@@ -28,7 +29,7 @@ class CounterController extends AdminController
             $grid->column('title', 'Название')->sortable();
 
             $grid->column('active', 'Видимость')
-                ->display(\Closure::fromCallable('onOff'))
+                ->display(Closure::fromCallable('onOff'))
                 ->sortable();
 
             $grid->column('created_at', 'Дата создания')->sortable();

@@ -2,6 +2,7 @@
 
 namespace App\Admin\Controllers;
 
+use Bavix\Helpers\Closure;
 use App\Admin\Extensions\BtnPreview;
 use App\Models\Category;
 use App\Models\Post;
@@ -43,13 +44,13 @@ class PostController extends AdminController
             }
 
             $grid->column('active', 'Видимость')
-                ->display(\Closure::fromCallable('onOff'))
+                ->display(Closure::fromCallable('onOff'))
                 ->sortable();
 
             if ($self->mainPage)
             {
                 $grid->column('main_page', 'Главная страница')
-                    ->display(\Closure::fromCallable('onOff'))
+                    ->display(Closure::fromCallable('onOff'))
                     ->sortable();
             }
 

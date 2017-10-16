@@ -2,6 +2,7 @@
 
 namespace App\Admin\Controllers;
 
+use Bavix\Helpers\Closure;
 use App\Models\Notify;
 use Encore\Admin\Facades\Admin;
 use Encore\Admin\Form;
@@ -39,7 +40,7 @@ class NotifyController extends AdminController
                 ->sortable();
 
             $grid->column('active', 'Видимость')
-                ->display(\Closure::fromCallable('onOff'))
+                ->display(Closure::fromCallable('onOff'))
                 ->sortable();
 
             $grid->column('created_at', 'Дата создания')->sortable();

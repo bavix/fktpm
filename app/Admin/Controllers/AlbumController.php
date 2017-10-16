@@ -2,6 +2,7 @@
 
 namespace App\Admin\Controllers;
 
+use Bavix\Helpers\Closure;
 use App\Admin\Extensions\BtnPreview;
 use App\Models\Album;
 use Encore\Admin\Facades\Admin;
@@ -30,7 +31,7 @@ class AlbumController extends AdminController
             $grid->column('description', 'Описание');
 
             $grid->column('active', 'Видимость')
-                ->display(\Closure::fromCallable('onOff'))
+                ->display(Closure::fromCallable('onOff'))
                 ->sortable();
 
             $grid->column('created_at', 'Дата создания')->sortable();

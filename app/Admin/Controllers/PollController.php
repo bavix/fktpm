@@ -2,6 +2,7 @@
 
 namespace App\Admin\Controllers;
 
+use Bavix\Helpers\Closure;
 use App\Models\Poll;
 use Encore\Admin\Facades\Admin;
 use Encore\Admin\Form;
@@ -28,7 +29,7 @@ class PollController extends AdminController
             $grid->column('title', 'Заголовок')->sortable();
 
             $grid->column('active', 'Видимость')
-                ->display(\Closure::fromCallable('onOff'))
+                ->display(Closure::fromCallable('onOff'))
                 ->sortable();
 
             $grid->column('created_at', 'Дата создания')->sortable();

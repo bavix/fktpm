@@ -2,6 +2,7 @@
 
 namespace App\Admin\Controllers;
 
+use Bavix\Helpers\Closure;
 use App\Models\Type;
 use Encore\Admin\Facades\Admin;
 use Encore\Admin\Form;
@@ -29,7 +30,7 @@ class TypeController extends AdminController
             $grid->column('description', 'Описание');
 
             $grid->column('active', 'Видимость')
-                ->display(\Closure::fromCallable('onOff'))
+                ->display(Closure::fromCallable('onOff'))
                 ->sortable();
 
             $grid->column('created_at', 'Дата создания')->sortable();
