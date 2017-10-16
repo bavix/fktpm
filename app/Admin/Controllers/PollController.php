@@ -27,6 +27,10 @@ class PollController extends AdminController
 
             $grid->column('title', 'Заголовок')->sortable();
 
+            $grid->column('active', 'Видимость')
+                ->display(\Closure::fromCallable('onOff'))
+                ->sortable();
+
             $grid->column('created_at', 'Дата создания')->sortable();
             $grid->column('updated_at', 'Дата обновления')->sortable();
 

@@ -42,15 +42,15 @@ class PostController extends AdminController
                 $grid->column('category.title', 'Категория')->sortable();
             }
 
-            $grid->column('active', 'Видимость')->display(function ($data) {
-                return $data ? 'Включена' : 'Выключена';
-            })->sortable();
+            $grid->column('active', 'Видимость')
+                ->display(\Closure::fromCallable('onOff'))
+                ->sortable();
 
             if ($self->mainPage)
             {
-                $grid->column('main_page', 'Главная страница')->display(function ($data) {
-                    return $data ? 'Включена' : 'Выключена';
-                })->sortable();
+                $grid->column('main_page', 'Главная страница')
+                    ->display(\Closure::fromCallable('onOff'))
+                    ->sortable();
             }
 
             $grid->column('created_at', 'Дата создания')->sortable();

@@ -272,3 +272,15 @@ if (!function_exists('diffForHumans'))
         return $local->diffForHumans();
     }
 }
+
+if (!function_exists('onOff'))
+{
+    function onOff($value)
+    {
+        if ($value) {
+            return '<span class="label label-primary">вкл.</span>';
+        }
+
+        return '<span class="label label-default">выкл.</span>';
+    }
+}

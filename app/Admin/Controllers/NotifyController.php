@@ -38,9 +38,9 @@ class NotifyController extends AdminController
                 })
                 ->sortable();
 
-            $grid->column('active', 'Видимость')->display(function ($data) {
-                return $data ? 'Включена' : 'Выключена';
-            })->sortable();
+            $grid->column('active', 'Видимость')
+                ->display(\Closure::fromCallable('onOff'))
+                ->sortable();
 
             $grid->column('created_at', 'Дата создания')->sortable();
             $grid->column('updated_at', 'Дата обновления')->sortable();
