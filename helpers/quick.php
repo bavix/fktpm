@@ -197,16 +197,14 @@ if (!function_exists('phone'))
 
 if (!function_exists('qrModel'))
 {
-    function qrModel()
+    function qrModel($canonicalUrl)
     {
         if (!request()->route())
         {
             return false;
         }
 
-        $url = request()->url();
-
-        return \App\Models\Qr::findByUrl($url);
+        return \App\Models\Qr::findByUrl($canonicalUrl);
     }
 }
 

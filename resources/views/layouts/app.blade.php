@@ -74,7 +74,7 @@
     <meta property="og:description" content="{{ $description ?? '' }}"/>
     <meta property="og:url" content= "{{ $canonicalUrl }}"/>
     <meta property="og:type" content="website"/>
-    @php($qrModel = empty($hasError) ? qrModel() : null)
+    @php($qrModel = empty($hasError) ? qrModel($canonicalUrl) : null)
     @if($qrModel)
         <meta property="og:image" content="{{ $qrModel->qr() }}"/>
         <meta name="twitter:image:src" content="{{ $qrModel->qr() }}"/>
