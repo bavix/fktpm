@@ -102,6 +102,9 @@ iPad 3
   background-color: #55acee;
   border-color: #55acee; }
 
+.select2-results__options .select2-results__option span {
+  font-weight: 700; }
+
 .grayscale, html body.visually-impaired .if-grayscale, html body.visually-impaired #map, html body.visually-impaired img:not(.visually), html body.visually-impaired svg:not(.visually), html body.visually-impaired canvas:not(.visually), html body.visually-impaired .card-img-top:not(.visually) {
   -webkit-filter: grayscale(100%);
   filter: grayscale(100%); }
