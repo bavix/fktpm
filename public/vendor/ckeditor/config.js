@@ -26,6 +26,8 @@ CKEDITOR.editorConfig = function( config ) {
 		{ name: 'about' }
 	];
 
+    config.extraAllowedContent = 'iframe[*]';
+
 	// config.extraPlugins = 'bxembed';
 	config.extraPlugins = 'youtube';
 
