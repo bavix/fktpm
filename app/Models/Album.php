@@ -4,12 +4,14 @@ namespace App\Models;
 
 use Bavix\Helpers\JSON;
 use Bavix\Helpers\Str;
+use Conner\Tagging\Taggable;
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Scout\Searchable;
 
 class Album extends Model
 {
 
+    use Taggable;
     use Searchable;
 
     protected $table = 'albums';

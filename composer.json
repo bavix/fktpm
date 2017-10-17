@@ -25,6 +25,7 @@
     "laravel/framework": "5.5.*",
     "laravel/tinker": "~1.0",
     "laravelrus/localized-carbon": "dev-master",
+    "rtconner/laravel-tagging": "^2.2",
     "simplesoftwareio/simple-qrcode": "~1",
     "spatie/laravel-paginateroute": "^2.5",
     "yab/laravel-scout-mysql-driver": "^2.0"
