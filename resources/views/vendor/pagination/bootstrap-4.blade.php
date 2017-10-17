@@ -9,7 +9,7 @@
         @if ($paginator->onFirstPage())
             <li class="page-item disabled"><span class="page-link">&laquo;</span></li>
         @else
-            <li class="page-item"><a class="page-link" href="{{ route($routeName, array_merge($attributes, ['pageQuery' => 'page/' . $paginator->perPage()]))  }}" rel="prev">&laquo;</a></li>
+            <li class="page-item"><a class="page-link" href="{{ route($routeName, array_merge($attributes, ['pageQuery' => 'page/' . ($paginator->currentPage() - 1)]))  }}" rel="prev">&laquo;</a></li>
         @endif
 
         {{-- Pagination Elements --}}

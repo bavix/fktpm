@@ -27,6 +27,7 @@ class PollController extends AdminController
             $grid->id('ID')->sortable();
 
             $grid->column('title', 'Заголовок')->sortable();
+            $grid->column('description', 'Описание');
 
             $grid->column('active', 'Видимость')
                 ->display(Closure::fromCallable('onOff'))
@@ -53,6 +54,7 @@ class PollController extends AdminController
             $form->display('id', 'ID');
 
             $form->text('title', 'Заголовок');
+            $form->textarea('description', 'Описание')->rows(3);
             $form->ckeditor('content', 'Текст');
 
             $form->switch('active', 'Видимость');

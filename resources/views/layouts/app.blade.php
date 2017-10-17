@@ -263,12 +263,10 @@
                         </div>
 
                         <div class="row visually-font visually-selected mx-auto">
-                            <a href="{{ route('visually.font', [20], false) }}" data-val="f20"
-                               class="col-md-4 f20 {{ visuallyFontString(20) }}">A</a>
-                            <a href="{{ route('visually.font', [24], false) }}" data-val="f24"
-                               class="col-md-4 f24 {{ visuallyFontString(24) }}">A</a>
-                            <a href="{{ route('visually.font', [27], false) }}" data-val="f27"
-                               class="col-md-4 f27 {{ visuallyFontString(27) }}">A</a>
+                            @foreach([20, 24, 27] as $size)
+                                <a href="{{ route('visually.font', [$size], false) }}" data-val="f{{ $size }}"
+                                   class="col-md-4 f{{ $size }} {{ visuallyFontString($size) }}">A</a>
+                            @endforeach
                         </div>
 
                         <div class="row visually-color visually-selected mx-auto">

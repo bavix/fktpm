@@ -1,6 +1,7 @@
 @import "media"
 @import "social"
 @import "select2"
+@import "pagination"
 
 .grayscale
   -webkit-filter: grayscale(100%) /* Safari 6.0 - 9.0 */
@@ -187,7 +188,7 @@ html
       .bg-border
         @extend .bg-white-black-border
 
-      .clr-global
+      .clr-global, .text-muted
         @extend .clr-white-black
 
       .clr-global2
@@ -217,7 +218,7 @@ html
       .bg-border
         @extend .bg-black-white-border
 
-      .clr-global
+      .clr-global, .text-muted
         @extend .clr-black-white
 
       .clr-global2
@@ -250,7 +251,7 @@ html
       .bg-border
         @extend .bg-dark-blue-blue-border
 
-      .clr-global
+      .clr-global, .text-muted
         @extend .clr-dark-blue-blue
 
       .clr-global2
@@ -283,7 +284,7 @@ html
       .bg-border
         @extend .bg-brown-beige-border
 
-      .clr-global
+      .clr-global, .text-muted
         @extend .clr-brown-beige
 
       .clr-global2
@@ -316,7 +317,7 @@ html
       .bg-border
         @extend .bg-green-dark-brown-border
 
-      .clr-global
+      .clr-global, .text-muted
         @extend .clr-green-dark-brown
 
       .clr-global2
@@ -456,8 +457,8 @@ html
 
       article
         .card-img-top img
-          border-top-left-radius: 0
-          border-top-right-radius: 0
+          //border-top-left-radius: 0
+          //border-top-right-radius: 0
 
     a, a:hover, a:focus, a:visited, a:active, .card-text, p
       @extend .clr-global
@@ -577,18 +578,18 @@ html
 
         word-wrap: break-word
 
-        .card-img-top img
-          max-height: 450px
-          display: block
-          margin-right: auto
-          margin-left: auto
-          border-top-left-radius: .25rem
-          border-top-right-radius: .25rem
+        //.card-img-top img
+        //  max-height: 450px
+        //  display: block
+        //  margin-right: auto
+        //  margin-left: auto
+        //  border-top-left-radius: .25rem
+        //  border-top-right-radius: .25rem
 
         margin-bottom: 1rem
 
         img
-          max-width: 100%
+          //max-width: 100%
 
         .pagination
           padding-top: 1rem

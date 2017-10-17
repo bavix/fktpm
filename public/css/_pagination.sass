@@ -1,0 +1,86 @@
+.pagination
+  .page-item .page-link
+    border: 0
+    border-radius: 30px !important
+    transition: all .3s
+    padding: 0px 11px
+    margin: 0 3px
+    min-width: 30px
+    text-align: center
+    height: 30px
+    line-height: 30px
+    color: #2c2c2c
+    cursor: pointer
+    font-size: 14px
+    text-transform: uppercase
+    background: transparent
+    &:hover, &:focus
+      color: #2c2c2c
+      background-color: rgba(222, 222, 222, 0.3)
+      border: none
+  .arrow-margin-left
+    position: absolute
+  .arrow-margin-right
+    position: absolute
+    right: 0
+  .arrow-margin-left
+    left: 0
+  .page-item
+    &.active > .page-link
+      color: #E3E3E3
+      box-shadow: 0px 5px 25px 0px rgba(0, 0, 0, 0.2)
+      background-color: #888
+      border-color: #888
+      color: #FFFFFF
+      &:focus, &:hover
+        background-color: #888
+        border-color: #888
+        color: #FFFFFF
+    &.disabled > .page-link
+      opacity: .5
+      background-color: rgba(255, 255, 255, 0.2)
+      color: #FFFFFF
+  &.pagination-info .page-item.active > .page-link
+    background-color: #2CA8FF
+    border-color: #2CA8FF
+    &:focus, &:hover
+      background-color: #2CA8FF
+      border-color: #2CA8FF
+  &.pagination-success .page-item.active > .page-link
+    background-color: #18ce0f
+    border-color: #18ce0f
+    &:focus, &:hover
+      background-color: #18ce0f
+      border-color: #18ce0f
+  &.pagination-primary .page-item.active > .page-link
+    background-color: #f96332
+    border-color: #f96332
+    &:focus, &:hover
+      background-color: #f96332
+      border-color: #f96332
+  &.pagination-warning .page-item.active > .page-link
+    background-color: #FFB236
+    border-color: #FFB236
+    &:focus, &:hover
+      background-color: #FFB236
+      border-color: #FFB236
+  &.pagination-danger .page-item.active > .page-link
+    background-color: #FF3636
+    border-color: #FF3636
+    &:focus, &:hover
+      background-color: #FF3636
+      border-color: #FF3636
+  &.pagination-neutral .page-item
+    > .page-link
+      color: #FFFFFF
+      &:focus, &:hover
+        background-color: rgba(255, 255, 255, 0.2)
+        color: #FFFFFF
+    &.active > .page-link
+      background-color: #FFFFFF
+      border-color: #FFFFFF
+      color: #f96332
+      &:focus, &:hover
+        background-color: #FFFFFF
+        border-color: #FFFFFF
+        color: #f96332
