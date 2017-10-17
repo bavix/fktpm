@@ -24,7 +24,7 @@ class PageController extends AlbumController
 
         abort_if(!$model, 404);
 
-        return $this->view($request, $model->id);
+        return $this->view($request, $model);
     }
 
 }

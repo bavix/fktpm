@@ -51,9 +51,11 @@ class StatementController extends Controller
             $data[$key] = trim($value);
         }
 
+        // parent information
         $item->parent_name = $data['parent_name'];
         $item->phone       = $data['phone'];
 
+        // passport information
         $item->passport_serial = $data['passport_serial'];
         $item->passport_number = $data['passport_number'];
         $item->passport_from   = $data['passport_from'];
@@ -62,11 +64,13 @@ class StatementController extends Controller
 
         $item->passport_division = $data['passport_division'];
 
+        // address information
         $item->registration_address = $data['registration_address'];
         $item->residential_address  = isset($data['auto_address']) ?
             $data['registration_address'] :
             $data['residential_address'];
 
+        // children information
         $item->children_name       = $data['children_name'];
         $item->children_doc_type   = $data['children_doc_type'];
         $item->children_doc_serial = $data['children_doc_serial'];
@@ -74,6 +78,7 @@ class StatementController extends Controller
         $item->children_school     = $data['children_school'];
         $item->children_сlass      = $data['children_сlass'];
 
+        // type information
         $item->type_id = $data['type_id'];
 
         return ['result' => $item->save()];

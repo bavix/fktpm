@@ -23,15 +23,15 @@ class Controller extends BaseController
     protected $cookies = [];
 
     /**
-     * @param string $view
+     * @param string $mixed
      * @param array  $data
      * @param array  $merge
      *
      * @return \Illuminate\Http\Response
      */
-    public function render($view, $data = [], $merge = [])
+    public function render($mixed, $data = [], $merge = [])
     {
-        $view = view($view, $data, $merge);
+        $view = view($mixed, $data, $merge);
 
         $response = new \Illuminate\Http\Response($view);
 
@@ -73,22 +73,23 @@ class Controller extends BaseController
             'links' => Link::query()
                 ->where('active', 1)
                 ->orderBy('id', 'desc')
-//                ->limit(5)
+                ->limit(\config('limits.link', 25))
                 ->get(),
 
             'pages' => Page::query()
                 ->where('active', 1)
                 ->where('main_page', 0)
                 ->orderBy('id', 'desc')
-                ->limit(5)
+                ->limit(\config('limits.page', 5))
                 ->get(),
 
             'polls' => Poll::query()
                 ->where('active', 1)
                 ->orderBy('id', 'desc')
-                ->limit(5)
+                ->limit(\config('limits.poll', 5))
                 ->get(),
 
+            // analytics & metriks
             'counters' => Counter::query()
                 ->where('active', 1)
                 ->get()

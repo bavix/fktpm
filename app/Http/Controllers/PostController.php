@@ -85,7 +85,7 @@ class PostController extends Controller
             $query->where('main_page', 0);
         }
 
-        $paginate = $query->paginate(10);
+        $paginate = $query->paginate(config('limits.paginate', 10));
         $paginate->load($this->withModel);
 
         abort_if($paginate->lastPage() !== $paginate->currentPage() &&
@@ -135,6 +135,14 @@ class PostController extends Controller
         $model = \is_object($id) ? $id : $model->find($id);
 
         \abort_if(!$model, 404);
+
+        // if main page, disable *.view
+        \abort_if(
+            $this->mainPage &&
+            $model->main_page &&
+            $request->route()->getName() !== 'home',
+            404
+        );
 
         $category = '';
 
