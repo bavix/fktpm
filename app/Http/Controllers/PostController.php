@@ -136,6 +136,15 @@ class PostController extends Controller
 
         \abort_if(!$model, 404);
 
+        // if main page, disable *.view
+        \abort_if(
+            !$this->draft &&
+            $this->mainPage &&
+            $model->main_page &&
+            $request->route()->getName() !== 'home',
+            404
+        );
+
         $category = '';
 
         if (method_exists($model, 'category'))

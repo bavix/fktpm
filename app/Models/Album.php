@@ -72,6 +72,11 @@ class Album extends Model
      */
     public function url()
     {
+        if (isset($this->main_page) && $this->main_page)
+        {
+            return route('home');
+        }
+
         return route($this->route, [
             'id'    => $this->id,
             'title' => Str::friendlyUrl($this->title),
