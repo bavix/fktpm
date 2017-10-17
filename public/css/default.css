@@ -87,11 +87,14 @@ iPad 3
   /* Styles */
   main.container {
     width: 100%; } }
-.btn[data-vk] img, .btn[data-facebook] img, .btn[data-twitter] img {
+.btn[data-vk] img, .btn[data-ok] img, .btn[data-facebook] img, .btn[data-twitter] img {
   height: 40px; }
 .btn[data-vk] {
   background-color: #587ea3;
   border-color: #587ea3; }
+.btn[data-ok] {
+  background-color: #f58220;
+  border-color: #f58220; }
 .btn[data-facebook] {
   background-color: #3b5998;
   border-color: #3b5998; }

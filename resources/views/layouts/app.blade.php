@@ -327,6 +327,9 @@
                                     <a class="btn if-grayscale" href="#" title="Вконтакте" data-vk>
                                         <img title="VK" alt="VK" src="/svg/socials/vk.svg"/>
                                     </a>
+                                    <a class="btn if-grayscale" href="#" title="Одноклассники" data-ok>
+                                        <img title="OK" alt="OK" src="/svg/socials/ok.svg"/>
+                                    </a>
                                     <a class="btn if-grayscale" href="#" title="Facebook" data-facebook>
                                         <img title="Facebook" alt="Facebook" src="/svg/socials/facebook.svg"/>
                                     </a>

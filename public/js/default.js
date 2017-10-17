@@ -187,6 +187,14 @@ $(function () {
         var url = $('#shorter').val();
         var img = $('#qr-image').attr('src');
 
+        this.ok = function () {
+            var _url  = 'http://www.odnoklassniki.ru/dk?st.cmd=addShare&st.s=1';
+            _url += '&st.comments=' + encodeURIComponent(desc);
+            _url += '&st._surl='    + encodeURIComponent(url);
+
+            self.popup(_url);
+        };
+
         this.vk = function() {
             var _url  = 'http://vk.com/share.php?';
             _url += 'url='          + encodeURIComponent(url);
@@ -226,6 +234,7 @@ $(function () {
     })();
 
     $('[data-vk]').click(Share.vk);
+    $('[data-ok]').click(Share.ok);
     $('[data-facebook]').click(Share.facebook);
     $('[data-twitter]').click(Share.twitter);
 
