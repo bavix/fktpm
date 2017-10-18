@@ -38,6 +38,14 @@
                             <p class="card-text">{{ $item->description }}</p>
                         @endif
 
+                        @if(method_exists($item, 'tagged'))
+                            <div class="card-text">
+                                @foreach ($item->tags as $tag)
+                                    <span class="badge badge-pill badge-dark">{{ $tag->name }}</span>
+                                @endforeach
+                            </div>
+                        @endif
+
                         <div class="card-text">
                             <small class="text-muted">
                                 Добавлено

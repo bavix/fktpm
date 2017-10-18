@@ -154,14 +154,28 @@ if (!function_exists('keywords'))
 {
     /**
      * @param string $content
+     * @param \Illuminate\Database\Eloquent\Model $model
      *
      * @return string
      */
-    function keywords($content)
+    function keywords($content, \Illuminate\Database\Eloquent\Model $model = null)
     {
         $trim  = trim($content);
         $data  = preg_replace('~[^а-яё\w\\/]+~ui', ',', $trim);
         $mixed = explode(',', $data);
+
+        if ($model && \method_exists($model, 'tagged'))
+        {
+            foreach ($model->tags as $tag)
+            {
+                $mixed[] = $tag->name;
+            }
+        }
+
+        $mixed = \Bavix\Helpers\Arr::filter($mixed, function ($str) {
+            return strlen($str) > 1;
+        });
+
         $data  = array_unique($mixed);
 
         return implode(', ', $data);

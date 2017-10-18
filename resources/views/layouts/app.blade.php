@@ -88,7 +88,7 @@
     <meta name="description" content="{{ $description ?? '' }}"/>
 
     @if(!empty($title))
-        <meta name="keywords" content="{{ keywords($title) }}"/>
+        <meta name="keywords" content="{{ keywords($title, $item ?? null) }}"/>
     @endif
     <!-- /seo -->
 
