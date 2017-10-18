@@ -199,6 +199,9 @@ return [
 
         // config
         Encore\Admin\Config\ConfigServiceProvider::class,
+
+        // tagging
+        Conner\Tagging\Providers\TaggingServiceProvider::class,
     ],
 
     /*

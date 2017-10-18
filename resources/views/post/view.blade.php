@@ -7,6 +7,11 @@
 
                 <div class="panel-heading">
                     <h1>{{ $item->title }}</h1>
+                    @if(method_exists($item, 'tagged'))
+                        @foreach ($item->tags as $tag)
+                            <span class="badge badge-pill badge-dark">{{ $tag->name }}</span>
+                        @endforeach
+                    @endif
                 </div>
 
                 <div class="panel-body">
