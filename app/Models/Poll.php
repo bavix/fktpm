@@ -19,6 +19,12 @@ class Poll extends Model
     protected $table = 'polls';
     protected $route = 'poll.view';
 
+    public function setMultipleTagAttribute($tags)
+    {
+        $this->id or $this->save();
+        $this->tag($tags);
+    }
+
     /**
      * Получить имя индекса для модели.
      *

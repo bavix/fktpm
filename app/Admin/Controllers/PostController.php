@@ -94,11 +94,6 @@ class PostController extends AdminController
                 $form->textarea('description', 'Описание')->rows(3);
                 $form->ckeditor('content', 'Текст');
 
-                $form->image('picture', 'Изображение')
-                    ->name($this->buildCallable('image', 'picture'));
-
-                $form->logo('logo', '');
-
                 if ($this->category)
                 {
                     $form->select('category_id', 'Категория')->options(
@@ -107,6 +102,13 @@ class PostController extends AdminController
                             ->all()
                     );
                 }
+
+                $this->tagsBuilder($form);
+
+                $form->image('picture', 'Изображение')
+                    ->name($this->buildCallable('image', 'picture'));
+
+                $form->logo('logo', '');
 
                 $form->multipleImage('gallery', 'Галерея')
                     ->name($this->buildCallable('image', 'gallery'));

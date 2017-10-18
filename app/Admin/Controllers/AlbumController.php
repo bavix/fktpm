@@ -64,6 +64,8 @@ class AlbumController extends AdminController
 
             $form->textarea('description', 'Описание')->rows(3);
 
+            $this->tagsBuilder($form);
+
             $form->image('picture', 'Изображение')
                 ->name($self->buildCallable('image', 'picture'));
 

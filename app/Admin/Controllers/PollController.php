@@ -57,6 +57,8 @@ class PollController extends AdminController
             $form->textarea('description', 'Описание')->rows(3);
             $form->ckeditor('content', 'Текст');
 
+            $this->tagsBuilder($form);
+
             $form->switch('active', 'Видимость');
 
             $form->ignore(['created_at', 'updated_at']);

@@ -6,7 +6,6 @@ use App\Admin\Extensions\Form\CKEditor;
 use App\Http\Controllers\Controller;
 use App\Models\Rev;
 use Bavix\Diff\Differ;
-use Bavix\Helpers\Dir;
 use Bavix\Helpers\Str;
 use Bavix\SDK\PathBuilder;
 use Encore\Admin\Controllers\ModelForm;
@@ -23,17 +22,43 @@ abstract class AdminController extends Controller
     public $title;
     public $model;
 
+    private $_model;
+
+    protected function getModel(Form $form)
+    {
+        if (!$this->_model)
+        {
+            $id = (int)basename($form->builder()->getAction());
+
+            if (!$id)
+            {
+                return null;
+            }
+
+            $class        = $this->model;
+            $this->_model = $class::query()->find($id);
+        }
+
+        return $this->_model;
+    }
+
+    protected function tagsBuilder(Form $form)
+    {
+        $model = $this->getModel($form);
+        $tags  = $model ? $model->tags->pluck('name', 'name')->all() : [];
+
+        $form->multipleSelect('multiple_tag', 'Теги')
+            ->options($tags)
+            ->tags();
+    }
+
     protected function revsBuilder(Form $form)
     {
-        $id = (int)basename($form->builder()->getAction());
-
-        if (!$id)
+        if (null === ($model = $this->getModel($form)))
         {
             return;
         }
 
-        $class = $this->model;
-        $model = $class::query()->find($id);
         $query = Rev::fromModel($model);
         $count = $query->count();
         $revs  = $query->limit(30)->get();

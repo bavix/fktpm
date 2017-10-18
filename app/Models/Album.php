@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Bavix\Helpers\JSON;
+use Bavix\Helpers\PregMatch;
 use Bavix\Helpers\Str;
 use Conner\Tagging\Taggable;
 use Illuminate\Database\Eloquent\Model;
@@ -25,6 +26,12 @@ class Album extends Model
     public function searchableAs()
     {
         return $this->table . '_index';
+    }
+
+    public function setMultipleTagAttribute($tags)
+    {
+        $this->id or $this->save();
+        $this->tag($tags);
     }
 
     public function setPictureAttribute($picture, $toModel = true)

@@ -28,6 +28,19 @@
                             </div>
                         @endif
 
+                        @if(method_exists($item, 'tagged'))
+                            <div class="card-text">
+                                <small class="text-muted">
+                                    Теги:
+                                    @foreach ($item->tags as $tag)
+                                        <a href="#{{ $tag->slug }}"
+                                           title="{{ $tag->name }}">
+                                            {{ $tag->name }}</a>@if (!$loop->last),@endif
+                                    @endforeach
+                                </small>
+                            </div>
+                        @endif
+
                         <h3 class="card-title">
                             <a href="{{ $item->url() }}" title="{{ $item->title }}">
                                 {{ $item->title }}
@@ -36,14 +49,6 @@
 
                         @if (isset($item->description))
                             <p class="card-text">{{ $item->description }}</p>
-                        @endif
-
-                        @if(method_exists($item, 'tagged'))
-                            <div class="card-text">
-                                @foreach ($item->tags as $tag)
-                                    <span class="badge badge-pill badge-dark">{{ $tag->name }}</span>
-                                @endforeach
-                            </div>
                         @endif
 
                         <div class="card-text">

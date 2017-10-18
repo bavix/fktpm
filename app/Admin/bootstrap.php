@@ -19,7 +19,14 @@
  *
  */
 
-Encore\Admin\Form::forget(['map', 'editor', 'multipleImage', 'multipleFile']);
+Encore\Admin\Form::forget([
+    'map',
+    'editor',
+    'multipleImage',
+    'multipleFile',
+    'select',
+    'multipleSelect',
+]);
 
 // extends
 \Encore\Admin\Form::extend('ckeditor', \App\Admin\Extensions\Form\CKEditor::class);
@@ -28,3 +35,7 @@ Encore\Admin\Form::forget(['map', 'editor', 'multipleImage', 'multipleFile']);
 \Encore\Admin\Form::extend('logo', \App\Admin\Extensions\Form\Logo::class);
 \Encore\Admin\Form::extend('multipleFile', \App\Admin\Extensions\MultipleFile::class);
 \Encore\Admin\Form::extend('multipleImage', \App\Admin\Extensions\MultipleImage::class);
+
+// select
+\Encore\Admin\Form::extend('select', \App\Admin\Extensions\Select::class);
+\Encore\Admin\Form::extend('multipleSelect', \App\Admin\Extensions\MultipleSelect::class);
