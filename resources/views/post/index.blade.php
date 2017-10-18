@@ -29,16 +29,19 @@
                         @endif
 
                         @if(method_exists($item, 'tagged'))
-                            <div class="card-text">
-                                <small class="text-muted">
-                                    Теги:
-                                    @foreach ($item->tags as $tag)
-                                        <a href="#{{ $tag->slug }}"
-                                           title="{{ $tag->name }}">
-                                            {{ $tag->name }}</a>@if (!$loop->last),@endif
-                                    @endforeach
-                                </small>
-                            </div>
+                            @php($tags = $item->tags)
+                            @if (count($tags))
+                                <div class="card-text">
+                                    <small class="text-muted">
+                                        Теги:
+                                        @foreach ($tags as $tag)
+                                            <a href="#{{ $tag->slug }}"
+                                               title="{{ $tag->name }}">
+                                                {{ $tag->name }}</a>@if (!$loop->last),@endif
+                                        @endforeach
+                                    </small>
+                                </div>
+                            @endif
                         @endif
 
                         <h3 class="card-title">
