@@ -1,9 +1,11 @@
 /* @site    https://bavix.ru/ */
 /* @author  rez1dent3 */
-/* @version 1.3 */
+/* @version 1.4 */
 /* Smartphones (portrait and landscape) ----------- */
 @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
-  /* Styles */ }
+  /* Styles */
+  .btn[data-vk] img, .btn[data-ok] img, .btn[data-facebook] img, .btn[data-twitter] img {
+    height: 30px !important; } }
 /* Smartphones (landscape) ----------- */
 @media only screen and (min-width: 321px) {
   /* Styles */ }
@@ -11,7 +13,13 @@
 @media only screen and (max-width: 320px) {
   /* Styles */
   main.container {
-    width: 100%; } }
+    width: 100%; }
+
+  .btn[data-vk] img, .btn[data-ok] img, .btn[data-facebook] img, .btn[data-twitter] img {
+    height: 20px !important; } }
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+  .btn[data-vk] img, .btn[data-ok] img, .btn[data-facebook] img, .btn[data-twitter] img {
+    height: 31px !important; } }
 /* iPads (portrait and landscape) ----------- */
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
   /* Styles */ }
