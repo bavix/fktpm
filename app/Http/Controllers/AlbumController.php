@@ -9,7 +9,7 @@ class AlbumController extends PostController
 {
 
     protected $model       = Album::class;
-    protected $withModel   = ['image'];
+    protected $withModel   = ['image', 'tagged'];
     protected $isCategory  = false;
     protected $route       = 'album';
     protected $title       = 'blocks.albums';

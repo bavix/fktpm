@@ -10,7 +10,7 @@ class PollController extends AlbumController
 {
 
     protected $model       = Poll::class;
-    protected $withModel   = [];
+    protected $withModel   = ['tagged'];
     protected $route       = 'poll';
     protected $title       = 'blocks.polls';
     protected $description = 'blocks.listPolls';
