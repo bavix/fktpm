@@ -22,7 +22,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset2('node_modules/sweetalert2/dist/sweetalert2.min.css') }}"/>
 
     <!-- Scripts -->
-    <script>window.Laravel = {!! json_encode(['csrfToken' => csrf_token()]) !!};</script>
+    <script>window.Laravel = @json(['csrfToken' => csrf_token()])</script>
 
     <link rel="icon" type="image/ico" href="/favicons/favicon.ico"/>
     <link rel="apple-touch-icon" sizes="57x57" href="/favicons/apple-icon-57x57.png"/>
