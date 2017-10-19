@@ -105,9 +105,11 @@ class PostController extends Controller
 
         if (!is_array($sort))
         {
-            $sort = ['id' => 'desc'];
+            $sort = [
+                config('sort.column', 'id') => config('sort.direction', 'desc')
+            ];
         }
-        
+
         foreach ($sort as $column => $direction)
         {
             $query->orderBy($column, $direction);
