@@ -101,14 +101,16 @@ class PostController extends Controller
             $query->where('main_page', 0);
         }
 
-        $sort = $request->query('sort', ['id' => 'desc']);
+        $sort = $request->query('sort');
 
-        if (is_array($sort))
+        if (!is_array($sort))
         {
-            foreach ($sort as $column => $direction)
-            {
-                $query->orderBy($column, $direction);
-            }
+            $sort = ['id' => 'desc'];
+        }
+        
+        foreach ($sort as $column => $direction)
+        {
+            $query->orderBy($column, $direction);
         }
 
         $paginate = $query->paginate(config('limits.paginate', 10));
