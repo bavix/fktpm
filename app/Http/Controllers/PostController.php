@@ -118,21 +118,29 @@ class PostController extends Controller
         $paginate = $query->paginate(config('limits.paginate', 10));
         $paginate->load($this->withModel);
 
-        abort_if($paginate->lastPage() !== $paginate->currentPage() &&
-            $paginate->isEmpty(), 404);
+        $empty = $paginate->isEmpty();
 
-        return view('post.index', [
-            'items'       => $paginate,
-            'title'       => $this->title,
-            'description' => __($this->description),
-            // todo
-            'message'     => __('blocks.empty', [
-                'name' => __($this->title)
-            ]),
-            'searchBar'   => true,
-            'selfRoute'   => $this->route,
-            'query'       => $this->query
-        ], $this->mergeData());
+        abort_if($paginate->lastPage() !== $paginate->currentPage() &&
+            $empty, 404);
+
+        $view = view(
+            'post.index',
+            [
+                'hasError'    => $empty,
+                'items'       => $paginate,
+                'title'       => $this->title,
+                'description' => __($this->description),
+                'message'     => __('blocks.empty', [
+                    'name' => __($this->title)
+                ]),
+                'searchBar'   => true,
+                'selfRoute'   => $this->route,
+                'query'       => $this->query
+            ],
+            $this->mergeData()
+        );
+
+        return response($view, $empty ? 404 : 200);
     }
 
     public function draft(Request $request, $id)
