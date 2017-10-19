@@ -7,11 +7,19 @@
 
                 <div class="panel-heading">
                     <h1>{{ $item->title }}</h1>
+
                     @if(method_exists($item, 'tagged'))
-                        @foreach ($item->tags as $tag)
-                            <span class="badge badge-pill badge-dark">{{ $tag->name }}</span>
-                        @endforeach
+                        @php($tags = $item->tags)
+                        @if (count($tags))
+                            <small class="text-muted">
+                                @foreach ($tags as $tag)
+                                    <a class="bx-tag" href="{{ $item->routeTag($tag->slug) }}"
+                                       title="{{ $tag->name }}">{{ $tag->name }}</a>
+                                @endforeach
+                            </small>
+                        @endif
                     @endif
+
                 </div>
 
                 <div class="panel-body">

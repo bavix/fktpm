@@ -153,30 +153,34 @@ if (!function_exists('visuallyColorString'))
 if (!function_exists('keywords'))
 {
     /**
-     * @param string $content
+     * @param string                              $content
      * @param \Illuminate\Database\Eloquent\Model $model
      *
      * @return string
      */
     function keywords($content, \Illuminate\Database\Eloquent\Model $model = null)
     {
-        $trim  = trim($content);
-        $data  = preg_replace('~[^а-яё\w\\/]+~ui', ',', $trim);
-        $mixed = explode(',', $data);
-
         if ($model && \method_exists($model, 'tagged'))
         {
+            $mixed = [];
+
             foreach ($model->tags as $tag)
             {
                 $mixed[] = $tag->name;
             }
         }
+        else
+        {
+            $trim  = trim($content);
+            $data  = preg_replace('~[^а-яё\w\\/]+~ui', ',', $trim);
+            $mixed = explode(',', $data);
 
-        $mixed = \Bavix\Helpers\Arr::filter($mixed, function ($str) {
-            return strlen($str) > 1;
-        });
+            $mixed = \Bavix\Helpers\Arr::filter($mixed, function ($str) {
+                return strlen($str) > 1;
+            });
+        }
 
-        $data  = array_unique($mixed);
+        $data = array_unique($mixed);
 
         return implode(', ', $data);
     }

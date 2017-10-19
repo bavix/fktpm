@@ -10,7 +10,7 @@ return [
     'pages'      => 'Pages',
     'albums'     => 'Albums',
     'polls'      => 'Polls',
-    'tag'        => 'Tags',
+    'tag'        => 'Search in the tag',
     'statement'  => 'Statement',
     'statistics' => 'Statistics',
     'feedback'   => 'Feedback',
