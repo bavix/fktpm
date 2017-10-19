@@ -76,7 +76,6 @@ class PostController extends Controller
             $model::search($this->query) :
             $model::query();
 
-        $query->orderBy('id', 'desc');
         $query->where('active', 1);
 
         if ($this->tag)
@@ -100,6 +99,16 @@ class PostController extends Controller
         if ($this->mainPage)
         {
             $query->where('main_page', 0);
+        }
+
+        $sort = $request->query('sort', ['id' => 'desc']);
+
+        if (is_array($sort))
+        {
+            foreach ($sort as $column => $direction)
+            {
+                $query->orderBy($column, $direction);
+            }
         }
 
         $paginate = $query->paginate(config('limits.paginate', 10));
