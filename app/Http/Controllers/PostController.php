@@ -20,6 +20,7 @@ class PostController extends Controller
 
     protected $mainPage = false;
     protected $draft    = false;
+    protected $tag      = false;
 
     protected $query;
 
@@ -47,6 +48,12 @@ class PostController extends Controller
         return $this->index($request);
     }
 
+    public function tag(Request $request, $tag)
+    {
+        $this->tag = $tag;
+        return $this->index($request);
+    }
+
     /**
      * Show the application dashboard.
      *
@@ -65,10 +72,20 @@ class PostController extends Controller
         /**
          * @var \Illuminate\Database\Eloquent\Builder $query
          */
-        $query = $model::search($this->query);
+        $query = $this->query ?
+            $model::search($this->query) :
+            $model::query();
 
         $query->orderBy('id', 'desc');
         $query->where('active', 1);
+
+        if ($this->tag)
+        {
+            $slug = $this->tag;
+            $query->whereHas('tagged', function (\Illuminate\Database\Eloquent\Builder $query) use ($slug) {
+                $query->where('tag_slug', $slug);
+            });
+        }
 
         if ($this->isCategory && $name === $this->route . '.category' && is_numeric($id))
         {

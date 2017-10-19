@@ -331,6 +331,8 @@ html
       @extend .bg-global2
       @extend .clr-global2
       border-width: 5px
+      & + .input-group-btn .btn
+        border-width: 5px
 
     .alert-warning
       @extend .bg-global2
@@ -459,6 +461,9 @@ html
         .card-img-top img
           //border-top-left-radius: 0
           //border-top-right-radius: 0
+
+        .bx-tag
+          @extend .clr-global
 
     a, a:hover, a:focus, a:visited, a:active, .card-text, p
       @extend .clr-global
@@ -590,6 +595,11 @@ html
 
         img
           //max-width: 100%
+
+        .bx-tag
+          color: #868e96
+          &:before
+            content: '#'
 
         .pagination
           padding-top: 1rem

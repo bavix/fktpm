@@ -8,8 +8,9 @@ class Page extends Album
     /**
      * @var string
      */
-    protected $table = 'pages';
-    protected $route = 'page.view';
+    protected $table    = 'pages';
+    protected $route    = 'page.view';
+    protected $routeTag = 'page.tag';
 
     public function setDocumentsAttribute($documents)
     {

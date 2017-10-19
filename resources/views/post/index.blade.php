@@ -33,11 +33,9 @@
                             @if (count($tags))
                                 <div class="card-text">
                                     <small class="text-muted">
-                                        Теги:
                                         @foreach ($tags as $tag)
-                                            <a href="#{{ $tag->slug }}"
-                                               title="{{ $tag->name }}">
-                                                {{ $tag->name }}</a>@if (!$loop->last),@endif
+                                            <a class="bx-tag" href="{{ $item->routeTag($tag->slug) }}"
+                                               title="{{ $tag->name }}">{{ $tag->name }}</a>
                                         @endforeach
                                     </small>
                                 </div>

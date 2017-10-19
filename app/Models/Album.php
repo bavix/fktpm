@@ -15,8 +15,16 @@ class Album extends Model
     use Taggable;
     use Searchable;
 
-    protected $table = 'albums';
-    protected $route = 'album.view';
+    protected $table    = 'albums';
+    protected $route    = 'album.view';
+    protected $routeTag = 'album.tag';
+
+    public function routeTag($tag)
+    {
+        return route($this->routeTag, [
+            'tag' => $tag
+        ]);
+    }
 
     /**
      * Получить имя индекса для модели.

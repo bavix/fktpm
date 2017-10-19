@@ -26,6 +26,9 @@ Route::paginate('/posts', 'PostController@index')
 Route::paginate('/posts/search/{query?}', 'PostController@search')
     ->name('post.search');
 
+Route::paginate('/post/tag/{tag}', 'PostController@tag')
+    ->name('post.tag');
+
 Route::paginate('/post/category/{id}-{title}', 'PostController@index')
     ->name('post.category');
 
@@ -42,6 +45,9 @@ Route::paginate('/pages', 'PageController@index')
 Route::paginate('/pages/search/{query?}', 'PageController@search')
     ->name('page.search');
 
+Route::paginate('/page/tag/{tag}', 'PageController@tag')
+    ->name('page.tag');
+
 Route::get('/page/draft/{id}-{title}.html', 'PageController@draft')
     ->name('page.draft');
 
@@ -54,6 +60,9 @@ Route::paginate('/polls', 'PollController@index')
 
 Route::paginate('/polls/search/{query?}', 'PollController@search')
     ->name('poll.search');
+
+Route::paginate('/poll/tag/{tag}', 'PollController@tag')
+    ->name('poll.tag');
 
 Route::get('/poll/draft/{id}-{title}.html', 'PollController@draft')
     ->name('poll.draft');
@@ -70,6 +79,9 @@ Route::paginate('/albums', 'AlbumController@index')
 
 Route::paginate('/albums/search/{query?}', 'AlbumController@search')
     ->name('album.search');
+
+Route::paginate('/album/tag/{tag}', 'AlbumController@tag')
+    ->name('album.tag');
 
 Route::get('/album/draft/{id}-{title}.html', 'AlbumController@draft')
     ->name('album.draft');

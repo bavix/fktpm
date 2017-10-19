@@ -28,6 +28,14 @@ Breadcrumbs::register('post.search', function ($breadcrumbs) {
     $breadcrumbs->push(__('breadcrumbs.search'), route('post.search'));
 });
 
+Breadcrumbs::register('post.tag', function ($breadcrumbs) {
+    $breadcrumbs->parent('post');
+    $breadcrumbs->push(__('breadcrumbs.tag'), route(
+        'post.tag',
+        request()->route()->parameters()
+    ));
+});
+
 Breadcrumbs::register('post.category', function ($breadcrumbs, $id = null) {
     $breadcrumbs->parent('post');
 
@@ -68,6 +76,14 @@ Breadcrumbs::register('page.search', function ($breadcrumbs) {
     $breadcrumbs->push(__('breadcrumbs.search'), route('page.search'));
 });
 
+Breadcrumbs::register('page.tag', function ($breadcrumbs) {
+    $breadcrumbs->parent('page');
+    $breadcrumbs->push(__('breadcrumbs.tag'), route(
+        'page.tag',
+        request()->route()->parameters()
+    ));
+});
+
 Breadcrumbs::register('page.view', function ($breadcrumbs, $item) {
     $breadcrumbs->parent('page');
     $breadcrumbs->push($item->title, route('page.view', [
@@ -96,6 +112,14 @@ Breadcrumbs::register('album.search', function ($breadcrumbs) {
     $breadcrumbs->push(__('breadcrumbs.search'), route('album.search'));
 });
 
+Breadcrumbs::register('album.tag', function ($breadcrumbs) {
+    $breadcrumbs->parent('album');
+    $breadcrumbs->push(__('breadcrumbs.tag'), route(
+        'album.tag',
+        request()->route()->parameters()
+    ));
+});
+
 Breadcrumbs::register('album.view', function ($breadcrumbs, $item) {
     $breadcrumbs->parent('album');
     $breadcrumbs->push($item->title, route('album.view', [
@@ -122,6 +146,14 @@ Breadcrumbs::register('poll', function ($breadcrumbs) {
 Breadcrumbs::register('poll.search', function ($breadcrumbs) {
     $breadcrumbs->parent('poll');
     $breadcrumbs->push(__('breadcrumbs.search'), route('poll.search'));
+});
+
+Breadcrumbs::register('poll.tag', function ($breadcrumbs) {
+    $breadcrumbs->parent('poll');
+    $breadcrumbs->push(__('breadcrumbs.tag'), route(
+        'poll.tag',
+        request()->route()->parameters()
+    ));
 });
 
 Breadcrumbs::register('poll.view', function ($breadcrumbs, $item) {

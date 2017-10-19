@@ -16,8 +16,16 @@ class Poll extends Model
     /**
      * @var string
      */
-    protected $table = 'polls';
-    protected $route = 'poll.view';
+    protected $table    = 'polls';
+    protected $route    = 'poll.view';
+    protected $routeTag = 'poll.tag';
+
+    public function routeTag($tag)
+    {
+        return route($this->routeTag, [
+            'tag' => $tag
+        ]);
+    }
 
     public function setMultipleTagAttribute($tags)
     {
