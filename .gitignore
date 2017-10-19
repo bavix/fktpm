@@ -16,3 +16,5 @@ yarn.lock
 public/robots.txt
 www/robots.txt
 web/robots.txt
+public/sitemap.xml
+web/sitemap.xml

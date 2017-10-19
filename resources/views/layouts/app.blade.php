@@ -21,9 +21,6 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" rel="stylesheet"/>
     <link rel="stylesheet" type="text/css" href="{{ asset2('node_modules/sweetalert2/dist/sweetalert2.min.css') }}"/>
 
-    <!-- Scripts -->
-    <script>window.Laravel = @json(['csrfToken' => csrf_token()])</script>
-
     <link rel="icon" type="image/ico" href="/favicons/favicon.ico"/>
     <link rel="apple-touch-icon" sizes="57x57" href="/favicons/apple-icon-57x57.png"/>
     <link rel="apple-touch-icon" sizes="60x60" href="/favicons/apple-icon-60x60.png"/>
@@ -589,7 +586,7 @@
                     url: $(this).data('route'),
                     method: 'POST',
                     data: {
-                        _token: Laravel.csrfToken
+                        _token: $('meta[name="csrf-token"]').attr('content')
                     }
                 });
             });
