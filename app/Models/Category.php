@@ -2,24 +2,18 @@
 
 namespace App\Models;
 
-use Bavix\Helpers\Str;
 use Illuminate\Database\Eloquent\Model;
+use App\Helpers\ModelUrl;
 
 class Category extends Model
 {
+    use ModelUrl;
+
     protected $table = 'categories';
+    protected $route = 'post.category';
 
     public function posts()
     {
         return $this->hasMany(Post::class);
     }
-
-    public function url()
-    {
-        return route('post.category', [
-            'id'    => $this->id,
-            'title' => Str::friendlyUrl($this->title)
-        ]);
-    }
-
 }

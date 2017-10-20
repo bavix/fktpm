@@ -12,9 +12,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-         $this->call(AdminMenuTableSeeder::class);
-         $this->call(NotifyTableSeeder::class);
-         $this->call(LanguageTableSeeder::class);
     }
 
 }

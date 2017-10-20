@@ -60,41 +60,4 @@ class Controller extends BaseController
         $this->cookies[] = \cookie(...$arguments);
     }
 
-    /**
-     * @return array
-     */
-    public function mergeData()
-    {
-
-        Tracker::hit();
-
-        return [
-
-            'links' => Link::query()
-                ->where('active', 1)
-                ->orderBy('id', 'desc')
-                ->limit(\config('limits.link', 25))
-                ->get(),
-
-            'pages' => Page::query()
-                ->where('active', 1)
-                ->where('main_page', 0)
-                ->orderBy('id', 'desc')
-                ->limit(\config('limits.page', 5))
-                ->get(),
-
-            'polls' => Poll::query()
-                ->where('active', 1)
-                ->orderBy('id', 'desc')
-                ->limit(\config('limits.poll', 5))
-                ->get(),
-
-            // analytics & metriks
-            'counters' => Counter::query()
-                ->where('active', 1)
-                ->get()
-
-        ];
-    }
-
 }

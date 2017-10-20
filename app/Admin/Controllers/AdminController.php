@@ -52,37 +52,6 @@ abstract class AdminController extends Controller
             ->tags();
     }
 
-    protected function revsBuilder(Form $form)
-    {
-        if (null === ($model = $this->getModel($form)))
-        {
-            return;
-        }
-
-        $query = Rev::fromModel($model);
-        $count = $query->count();
-        $revs  = $query->limit(30)->get();
-
-        if ($count)
-        {
-            $form->tab('Revs', function (Form $form) use ($revs, $count, $model) {
-                $content = $model->content;
-                $differ  = new Differ();
-
-                foreach ($revs as $key => $rev)
-                {
-                    $ver = $count - $key;
-
-                    /**
-                     * @var $ckeditor CKEditor
-                     */
-                    $ckeditor = $form->ckeditor('rev' . $ver, 'Версия #' . $ver);
-                    $ckeditor->default($content = $differ->patch($content, $rev->patch));
-                }
-            });
-        }
-    }
-
     protected function buildCallable($type, $config)
     {
         return function (\Illuminate\Http\UploadedFile $uploadedFile) use ($type, $config) {

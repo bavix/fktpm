@@ -15,8 +15,6 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $middleware = [
-        Middleware\HttpsProtocol::class,
-        //        Middleware\LanguageHandle::class,
         \Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode::class,
         \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
         \App\Http\Middleware\TrimStrings::class,

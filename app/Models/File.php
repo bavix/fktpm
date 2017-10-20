@@ -2,12 +2,13 @@
 
 namespace App\Models;
 
+use Bavix\Helpers\Str;
 use Illuminate\Database\Eloquent\Model;
 
-class Image extends Model
+class File extends Model
 {
     /**
      * @var string
      */
-    protected $table = 'images';
+    protected $table = 'files';
 }

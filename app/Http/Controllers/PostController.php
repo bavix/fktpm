@@ -136,8 +136,7 @@ class PostController extends Controller
                 'searchBar'   => true,
                 'selfRoute'   => $this->route,
                 'query'       => $this->query
-            ],
-            $this->mergeData()
+            ]
         );
 
         return response($view, $empty ? 404 : 200);
@@ -194,7 +193,7 @@ class PostController extends Controller
             'item'        => $model,
             'title'       => $model->title . ' / ' . $category . __($this->title),
             'description' => $model->description ?? ''
-        ], $this->mergeData());
+        ]);
     }
 
 }

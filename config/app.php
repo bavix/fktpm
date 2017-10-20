@@ -182,9 +182,6 @@ return [
         // image
         Intervention\Image\ImageServiceProvider::class,
 
-        // qr
-        SimpleSoftwareIO\QrCode\QrCodeServiceProvider::class,
-
         // paginate
         Spatie\PaginateRoute\PaginateRouteServiceProvider::class,
 
@@ -194,7 +191,6 @@ return [
 
         // scout
         Laravel\Scout\ScoutServiceProvider::class,
-        ScoutEngines\Elasticsearch\ElasticsearchProvider::class,
         Yab\MySQLScout\Providers\MySQLScoutServiceProvider::class,
 
         // config
@@ -252,7 +248,6 @@ return [
         'View'          => Illuminate\Support\Facades\View::class,
 
         'Image'         => Intervention\Image\Facades\Image::class,
-        'QrCode'        => SimpleSoftwareIO\QrCode\Facades\QrCode::class,
         'PaginateRoute' => Spatie\PaginateRoute\PaginateRouteFacade::class,
 
         'LocalizedCarbon' => Laravelrus\LocalizedCarbon\LocalizedCarbon::class,

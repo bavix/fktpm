@@ -31,7 +31,7 @@ class SitemapCommand extends Command
      */
     public function handle()
     {
-        $rules = ['visually', 'cp', 'upload'];
+        $rules = ['cp', 'upload'];
         $path = public_path('sitemap.xml');
 
         SitemapGenerator::create(config('app.url'))
