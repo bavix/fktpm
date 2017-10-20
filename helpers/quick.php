@@ -22,18 +22,17 @@ if (!function_exists('active'))
 if (!function_exists('keywords'))
 {
     /**
-     * @param string                              $content
-     * @param \Illuminate\Database\Eloquent\Model $model
+     * @param string|\Illuminate\Database\Eloquent\Model $content
      *
      * @return string
      */
-    function keywords($content, \Illuminate\Database\Eloquent\Model $model = null)
+    function keywords($content = null)
     {
-        if ($model && \method_exists($model, 'tagged'))
+        if (is_object($content) && \method_exists($content, 'tagged'))
         {
             $mixed = [];
 
-            foreach ($model->tags as $tag)
+            foreach ($content->tags as $tag)
             {
                 $mixed[] = $tag->name;
             }

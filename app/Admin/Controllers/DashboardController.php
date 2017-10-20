@@ -4,7 +4,6 @@ namespace App\Admin\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Post;
-use App\Models\Page;
 use Encore\Admin\Facades\Admin;
 use Encore\Admin\Controllers\Dashboard;
 use Encore\Admin\Layout\Content;
@@ -17,7 +16,7 @@ class DashboardController extends Controller
 
     public function index(Request $request)
     {
-        return Admin::content(function (Content $content) use ($request) {
+        return Admin::content(function (Content $content) {
 
             $content->header('Приборная панель');
 
@@ -25,18 +24,11 @@ class DashboardController extends Controller
                 $row->column(2, new InfoBox('Посты', 'newspaper-o', 'yellow', '/cp/posts', Post::query()->count()));
             });
 
-            $content->row(function (Row $row) use ($request) {
+            $content->row(function (Row $row) {
 
-                if (env('APP_DEBUG') || $request->query('debug', 0))
-                {
-                    $row->column(4, Dashboard::dependencies());
-                    $row->column(4, Dashboard::environment());
-                    $row->column(4, Dashboard::extensions());
-                }
-                else
-                {
-                    $row->column(4, Dashboard::environment());
-                }
+                $row->column(4, Dashboard::dependencies());
+                $row->column(4, Dashboard::environment());
+                $row->column(4, Dashboard::extensions());
 
             });
 
