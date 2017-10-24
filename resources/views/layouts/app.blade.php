@@ -173,22 +173,12 @@
                     <div class="card-text row">
 
                         <nav class="nav flex-column">
-                            <a class="nav-link" href="#">
-                                <i class="fa fa-link text-gray-dark" aria-hidden="true"></i>
-                                <span>*КубГУ*</span>
-                            </a>
-                            <a class="nav-link" href="#">
-                                <i class="fa fa-link text-gray-dark" aria-hidden="true"></i>
-                                <span>Справочная КубГУ</span>
-                            </a>
-                            <a class="nav-link" href="#">
-                                <i class="fa fa-link text-gray-dark" aria-hidden="true"></i>
-                                <span>ПРОФКОМ КубГУ</span>
-                            </a>
-                            <a class="nav-link" href="#">
-                                <i class="fa fa-link text-gray-dark" aria-hidden="true"></i>
-                                <span>Деканат ФКТиПМ</span>
-                            </a>
+                            @foreach (\App\Models\Link::all() as $link)
+                                <a class="nav-link" href="{{ $link->url }}" title="{{ $link->title }}" rel="nofollow" target="_blank">
+                                    <i class="fa fa-link text-gray-dark" aria-hidden="true"></i>
+                                    <span>{{ $link->title }}</span>
+                                </a>
+                            @endforeach
                         </nav>
 
                         <div class="col-12">
