@@ -142,8 +142,6 @@ class PostController extends AdminController
 
             });
 
-            $this->revsBuilder($form);
-
         });
 
     }

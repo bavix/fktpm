@@ -18,3 +18,5 @@ www/robots.txt
 web/robots.txt
 public/sitemap.xml
 web/sitemap.xml
+.phpstorm.meta.php
+_ide_helper.php

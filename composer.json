@@ -18,25 +18,28 @@
     "ezyang/htmlpurifier": "^4.9",
     "fideloper/proxy": "~3.3",
     "intervention/image": "^2.3",
-    "laravel-admin-ext/backup": "^1.0",
     "laravel-admin-ext/config": "^1.0",
     "laravel-admin-ext/helpers": "^1.0",
+    "laravel-admin-ext/log-viewer": "^1.0",
     "laravel-admin-ext/media-manager": "^1.0",
+    "laravel-admin-ext/scheduling": "^1.0",
     "laravel/framework": "5.5.*",
     "laravel/tinker": "~1.0",
     "laravelrus/localized-carbon": "dev-master",
-    "rtconner/laravel-tagging": "^2.2",
+    "mgp25/instagram-php": "^3.1",
     "spatie/laravel-paginateroute": "^2.5",
     "spatie/laravel-sitemap": "^3.2",
+    "spatie/laravel-tags": "^2.0",
     "yab/laravel-scout-mysql-driver": "^2.0"
   },
   "require-dev": {
-    "ps/image-optimizer": "^1.1",
+    "barryvdh/laravel-ide-helper": "^2.4",
+    "bavix/gearman": "^1.0",
+    "filp/whoops": "~2.0",
     "fzaninotto/faker": "~1.4",
     "mockery/mockery": "0.9.*",
     "phpunit/phpunit": "~6.0",
-    "bavix/gearman": "^1.0",
-    "filp/whoops": "~2.0"
+    "ps/image-optimizer": "^1.1"
   },
   "autoload": {
     "classmap": [
@@ -67,6 +70,12 @@
     ],
     "post-create-project-cmd": [
       "@php artisan key:generate"
+    ],
+    "post-update-cmd": [
+      "Illuminate\\Foundation\\ComposerScripts::postUpdate",
+      "php artisan ide-helper:generate",
+      "php artisan ide-helper:meta",
+      "php artisan optimize"
     ],
     "post-autoload-dump": [
       "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",

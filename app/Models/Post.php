@@ -2,17 +2,16 @@
 
 namespace App\Models;
 
+use App\Helpers\HasTags;
 use App\Helpers\ModelUrl;
-use Bavix\Helpers\Str;
-use Conner\Tagging\Taggable;
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Scout\Searchable;
 
 class Post extends Model
 {
 
+    use HasTags;
     use ModelUrl;
-    use Taggable;
     use Searchable;
 
     /**
@@ -47,7 +46,7 @@ class Post extends Model
     public function setMultipleTagAttribute($tags)
     {
         $this->id or $this->save();
-        $this->tag($tags);
+        $this->syncTags($tags);
     }
 
     public function setPictureAttribute($picture, $toModel = true)
@@ -80,19 +79,6 @@ class Post extends Model
         }
     }
 
-    public function image()
-    {
-        return $this->belongsTo(Image::class);
-    }
-
-    public function images()
-    {
-        return $this->belongsToMany(
-            Image::class,
-            $this->getTable() . '_images'
-        );
-    }
-
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
@@ -119,6 +105,19 @@ class Post extends Model
                 $this->files()->save($model);
             }
         }
+    }
+
+    public function image()
+    {
+        return $this->belongsTo(Image::class);
+    }
+
+    public function images()
+    {
+        return $this->belongsToMany(
+            Image::class,
+            $this->getTable() . '_images'
+        );
     }
 
     public function files()

@@ -28,19 +28,19 @@
                             </div>
                         @endif
 
-                        @if(method_exists($item, 'tagged'))
-                            @php($tags = $item->tags)
-                            @if (count($tags))
-                                <div class="card-text">
-                                    <small class="text-muted">
-                                        @foreach ($tags as $tag)
-                                            <a class="bx-tag" href="{{ $item->routeTag($tag->slug) }}"
-                                               title="{{ $tag->name }}">{{ $tag->name }}</a>
-                                        @endforeach
-                                    </small>
-                                </div>
-                            @endif
-                        @endif
+                        {{--@if(method_exists($item, 'tagged'))--}}
+                            {{--@php($tags = $item->tags)--}}
+                            {{--@if (count($tags))--}}
+                                {{--<div class="card-text">--}}
+                                    {{--<small class="text-muted">--}}
+                                        {{--@foreach ($tags as $tag)--}}
+                                            {{--<a class="bx-tag" href="{{ $item->routeTag($tag->slug) }}"--}}
+                                               {{--title="{{ $tag->name }}">{{ $tag->name }}</a>--}}
+                                        {{--@endforeach--}}
+                                    {{--</small>--}}
+                                {{--</div>--}}
+                            {{--@endif--}}
+                        {{--@endif--}}
 
                         <h3 class="card-title">
                             <a href="{{ $item->url() }}" title="{{ $item->title }}">

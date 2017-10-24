@@ -2,12 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Config;
-use App\Models\Counter;
-use App\Models\Link;
-use App\Models\Page;
-use App\Models\Poll;
-use App\Models\Tracker;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;

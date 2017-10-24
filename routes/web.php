@@ -20,6 +20,3 @@ Route::get('/post/draft/{id}-{title}.html', 'PostController@draft')
 
 Route::get('/post/{id}-{title}.html', 'PostController@view')
     ->name('post.view');
-
-Route::get('/contact.html', 'ContactController@index')
-    ->name('contact');

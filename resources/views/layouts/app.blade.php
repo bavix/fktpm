@@ -4,9 +4,9 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
 
-    <meta http-equiv="x-dns-prefetch-control" content="on" />
-    <link rel="dns-prefetch" href="https://graph.instagram.com" />
-    <link rel="dns-prefetch" href="https://www.instagram.com" />
+    <meta http-equiv="x-dns-prefetch-control" content="on"/>
+    <link rel="dns-prefetch" href="https://graph.instagram.com"/>
+    <link rel="dns-prefetch" href="https://www.instagram.com"/>
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -23,7 +23,7 @@
 
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
           integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-    <link href="/css/app.css" rel="stylesheet" />
+    <link href="/css/app.css" rel="stylesheet"/>
 
     {{--<link rel="icon" type="image/ico" href="/favicons/favicon.ico"/>--}}
     {{--<link rel="apple-touch-icon" sizes="57x57" href="/favicons/apple-icon-57x57.png"/>--}}
@@ -51,29 +51,29 @@
         @php($canonicalUrl = $item->url())
     @endif
 
-    <!-- seo -->
+<!-- seo -->
     @if (isset($item, $item->updated_at))
-        <meta http-equiv="last-modified" content="{{ $item->updated_at }}" />
+        <meta http-equiv="last-modified" content="{{ $item->updated_at }}"/>
     @endif
-    <link rel="canonical" href="{{ $canonicalUrl }}" />
+    <link rel="canonical" href="{{ $canonicalUrl }}"/>
     @if (isset($items) && $items instanceof Illuminate\Pagination\LengthAwarePaginator)
         @php($currentRoute = request()->route())
         @php($reqAttr = $currentRoute->parameters())
 
         @php($reqAttr['pageQuery'] = 'page/' . ($items->currentPage() - 1))
         @if ($items->currentPage() > 1)
-            <link rel="prev" href="{{ route($currentRoute->getName(), $reqAttr) }}" />
+            <link rel="prev" href="{{ route($currentRoute->getName(), $reqAttr) }}"/>
         @endif
 
         @php($reqAttr['pageQuery'] = 'page/' . ($items->currentPage() + 1))
         @if ($items->currentPage() < $items->lastPage())
-            <link rel="next" href="{{ route($currentRoute->getName(), $reqAttr) }}" />
+            <link rel="next" href="{{ route($currentRoute->getName(), $reqAttr) }}"/>
         @endif
     @endif
 
     <meta property="og:title" content="{{ $fullTitle }}"/>
     <meta property="og:description" content="{{ $description ?? '' }}"/>
-    <meta property="og:url" content= "{{ $canonicalUrl }}"/>
+    <meta property="og:url" content="{{ $canonicalUrl }}"/>
     <meta property="og:type" content="website"/>
 
     {{--<meta property="og:image" content="{{ $qrModel->qr() }}"/>--}}
@@ -92,8 +92,8 @@
         <meta name="keywords" content="{{ keywords($item) }}"/>
     @elseif (!empty($title))
         <meta name="keywords" content="{{ keywords($title) }}"/>
-    @endif
-    <!-- /seo -->
+@endif
+<!-- /seo -->
 
 </head>
 <body>
@@ -244,411 +244,6 @@
                     </div>
                 </div>
             </div>
-            <div class="card" data-name="card">
-                <div class="card-body">
-                    <h4 class="card-title">
-                        <span class="badge badge-pill badge-primary float-right">5</span>
-                        <i class="fa fa-book text-danger" aria-hidden="true"></i>
-                        <span>6й-семестр</span>
-                    </h4>
-
-                    <div class="card-text row">
-
-                        <nav class="nav flex-column">
-                            <a class="nav-link" href="#">
-                                <span class="badge badge-secondary float-right">947.31 KB</span>
-                                <i class="fa fa-file-archive-o text-gray-dark" aria-hidden="true"></i>
-                                <span>MVC Example Администрирование локальных сетей</span>
-                            </a>
-                            <a class="nav-link" href="#">
-                                <span class="badge badge-secondary float-right">247.15 KB</span>
-                                <i class="fa fa-file-archive-o text-gray-dark" aria-hidden="true"></i>
-                                <span>Практика 1(Подколзин)</span>
-                            </a>
-                            <a class="nav-link" href="#">
-                                <span class="badge badge-secondary float-right">4.68 MB</span>
-                                <i class="fa fa-file-archive-o text-gray-dark" aria-hidden="true"></i>
-                                <span>Практика 2(Подколзин)</span>
-                            </a>
-                            <a class="nav-link" href="#">
-                                <span class="badge badge-secondary float-right">1.33 MB</span>
-                                <i class="fa fa-file-pdf-o text-gray-dark" aria-hidden="true"></i>
-                                <span>Самоучитель по html</span>
-                            </a>
-                            <a class="nav-link" href="#">
-                                <span class="badge badge-secondary float-right">3.02 MB</span>
-                                <i class="fa fa-file-pdf-o text-gray-dark" aria-hidden="true"></i>
-                                <span>Самоучитель по css</span>
-                            </a>
-                        </nav>
-
-                        <div class="col-12">
-                            <a href="#" class="btn btn-outline-success btn-block">Как добавить материал?</a>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-            <div class="card" data-name="card">
-                <div class="card-body">
-                    <h4 class="card-title">
-                        <span class="badge badge-pill badge-primary float-right">5</span>
-                        <i class="fa fa-book text-danger" aria-hidden="true"></i>
-                        <span>6й-семестр</span>
-                    </h4>
-
-                    <div class="card-text row">
-
-                        <nav class="nav flex-column">
-                            <a class="nav-link" href="#">
-                                <span class="badge badge-secondary float-right">947.31 KB</span>
-                                <i class="fa fa-file-archive-o text-gray-dark" aria-hidden="true"></i>
-                                <span>MVC Example Администрирование локальных сетей</span>
-                            </a>
-                            <a class="nav-link" href="#">
-                                <span class="badge badge-secondary float-right">247.15 KB</span>
-                                <i class="fa fa-file-archive-o text-gray-dark" aria-hidden="true"></i>
-                                <span>Практика 1(Подколзин)</span>
-                            </a>
-                            <a class="nav-link" href="#">
-                                <span class="badge badge-secondary float-right">4.68 MB</span>
-                                <i class="fa fa-file-archive-o text-gray-dark" aria-hidden="true"></i>
-                                <span>Практика 2(Подколзин)</span>
-                            </a>
-                            <a class="nav-link" href="#">
-                                <span class="badge badge-secondary float-right">1.33 MB</span>
-                                <i class="fa fa-file-pdf-o text-gray-dark" aria-hidden="true"></i>
-                                <span>Самоучитель по html</span>
-                            </a>
-                            <a class="nav-link" href="#">
-                                <span class="badge badge-secondary float-right">3.02 MB</span>
-                                <i class="fa fa-file-pdf-o text-gray-dark" aria-hidden="true"></i>
-                                <span>Самоучитель по css</span>
-                            </a>
-                        </nav>
-
-                        <div class="col-12">
-                            <a href="#" class="btn btn-outline-success btn-block">Как добавить материал?</a>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-            <div class="card" data-name="card">
-                <div class="card-body">
-                    <h4 class="card-title">
-                        <span class="badge badge-pill badge-primary float-right">5</span>
-                        <i class="fa fa-book text-danger" aria-hidden="true"></i>
-                        <span>6й-семестр</span>
-                    </h4>
-
-                    <div class="card-text row">
-
-                        <nav class="nav flex-column">
-                            <a class="nav-link" href="#">
-                                <span class="badge badge-secondary float-right">947.31 KB</span>
-                                <i class="fa fa-file-archive-o text-gray-dark" aria-hidden="true"></i>
-                                <span>MVC Example Администрирование локальных сетей</span>
-                            </a>
-                            <a class="nav-link" href="#">
-                                <span class="badge badge-secondary float-right">247.15 KB</span>
-                                <i class="fa fa-file-archive-o text-gray-dark" aria-hidden="true"></i>
-                                <span>Практика 1(Подколзин)</span>
-                            </a>
-                            <a class="nav-link" href="#">
-                                <span class="badge badge-secondary float-right">4.68 MB</span>
-                                <i class="fa fa-file-archive-o text-gray-dark" aria-hidden="true"></i>
-                                <span>Практика 2(Подколзин)</span>
-                            </a>
-                            <a class="nav-link" href="#">
-                                <span class="badge badge-secondary float-right">1.33 MB</span>
-                                <i class="fa fa-file-pdf-o text-gray-dark" aria-hidden="true"></i>
-                                <span>Самоучитель по html</span>
-                            </a>
-                            <a class="nav-link" href="#">
-                                <span class="badge badge-secondary float-right">3.02 MB</span>
-                                <i class="fa fa-file-pdf-o text-gray-dark" aria-hidden="true"></i>
-                                <span>Самоучитель по css</span>
-                            </a>
-                        </nav>
-
-                        <div class="col-12">
-                            <a href="#" class="btn btn-outline-success btn-block">Как добавить материал?</a>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-            <div class="card" data-name="card">
-                <div class="card-body">
-                    <h4 class="card-title">
-                        <span class="badge badge-pill badge-primary float-right">5</span>
-                        <i class="fa fa-book text-danger" aria-hidden="true"></i>
-                        <span>6й-семестр</span>
-                    </h4>
-
-                    <div class="card-text row">
-
-                        <nav class="nav flex-column">
-                            <a class="nav-link" href="#">
-                                <span class="badge badge-secondary float-right">947.31 KB</span>
-                                <i class="fa fa-file-archive-o text-gray-dark" aria-hidden="true"></i>
-                                <span>MVC Example Администрирование локальных сетей</span>
-                            </a>
-                            <a class="nav-link" href="#">
-                                <span class="badge badge-secondary float-right">247.15 KB</span>
-                                <i class="fa fa-file-archive-o text-gray-dark" aria-hidden="true"></i>
-                                <span>Практика 1(Подколзин)</span>
-                            </a>
-                            <a class="nav-link" href="#">
-                                <span class="badge badge-secondary float-right">4.68 MB</span>
-                                <i class="fa fa-file-archive-o text-gray-dark" aria-hidden="true"></i>
-                                <span>Практика 2(Подколзин)</span>
-                            </a>
-                            <a class="nav-link" href="#">
-                                <span class="badge badge-secondary float-right">1.33 MB</span>
-                                <i class="fa fa-file-pdf-o text-gray-dark" aria-hidden="true"></i>
-                                <span>Самоучитель по html</span>
-                            </a>
-                            <a class="nav-link" href="#">
-                                <span class="badge badge-secondary float-right">3.02 MB</span>
-                                <i class="fa fa-file-pdf-o text-gray-dark" aria-hidden="true"></i>
-                                <span>Самоучитель по css</span>
-                            </a>
-                        </nav>
-
-                        <div class="col-12">
-                            <a href="#" class="btn btn-outline-success btn-block">Как добавить материал?</a>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-            <div class="card" data-name="card">
-                <div class="card-body">
-                    <h4 class="card-title">
-                        <span class="badge badge-pill badge-primary float-right">5</span>
-                        <i class="fa fa-book text-danger" aria-hidden="true"></i>
-                        <span>6й-семестр</span>
-                    </h4>
-
-                    <div class="card-text row">
-
-                        <nav class="nav flex-column">
-                            <a class="nav-link" href="#">
-                                <span class="badge badge-secondary float-right">947.31 KB</span>
-                                <i class="fa fa-file-archive-o text-gray-dark" aria-hidden="true"></i>
-                                <span>MVC Example Администрирование локальных сетей</span>
-                            </a>
-                            <a class="nav-link" href="#">
-                                <span class="badge badge-secondary float-right">247.15 KB</span>
-                                <i class="fa fa-file-archive-o text-gray-dark" aria-hidden="true"></i>
-                                <span>Практика 1(Подколзин)</span>
-                            </a>
-                            <a class="nav-link" href="#">
-                                <span class="badge badge-secondary float-right">4.68 MB</span>
-                                <i class="fa fa-file-archive-o text-gray-dark" aria-hidden="true"></i>
-                                <span>Практика 2(Подколзин)</span>
-                            </a>
-                            <a class="nav-link" href="#">
-                                <span class="badge badge-secondary float-right">1.33 MB</span>
-                                <i class="fa fa-file-pdf-o text-gray-dark" aria-hidden="true"></i>
-                                <span>Самоучитель по html</span>
-                            </a>
-                            <a class="nav-link" href="#">
-                                <span class="badge badge-secondary float-right">3.02 MB</span>
-                                <i class="fa fa-file-pdf-o text-gray-dark" aria-hidden="true"></i>
-                                <span>Самоучитель по css</span>
-                            </a>
-                        </nav>
-
-                        <div class="col-12">
-                            <a href="#" class="btn btn-outline-success btn-block">Как добавить материал?</a>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-            <div class="card" data-name="card">
-                <div class="card-body">
-                    <h4 class="card-title">
-                        <span class="badge badge-pill badge-primary float-right">5</span>
-                        <i class="fa fa-book text-danger" aria-hidden="true"></i>
-                        <span>6й-семестр</span>
-                    </h4>
-
-                    <div class="card-text row">
-
-                        <nav class="nav flex-column">
-                            <a class="nav-link" href="#">
-                                <span class="badge badge-secondary float-right">947.31 KB</span>
-                                <i class="fa fa-file-archive-o text-gray-dark" aria-hidden="true"></i>
-                                <span>MVC Example Администрирование локальных сетей</span>
-                            </a>
-                            <a class="nav-link" href="#">
-                                <span class="badge badge-secondary float-right">247.15 KB</span>
-                                <i class="fa fa-file-archive-o text-gray-dark" aria-hidden="true"></i>
-                                <span>Практика 1(Подколзин)</span>
-                            </a>
-                            <a class="nav-link" href="#">
-                                <span class="badge badge-secondary float-right">4.68 MB</span>
-                                <i class="fa fa-file-archive-o text-gray-dark" aria-hidden="true"></i>
-                                <span>Практика 2(Подколзин)</span>
-                            </a>
-                            <a class="nav-link" href="#">
-                                <span class="badge badge-secondary float-right">1.33 MB</span>
-                                <i class="fa fa-file-pdf-o text-gray-dark" aria-hidden="true"></i>
-                                <span>Самоучитель по html</span>
-                            </a>
-                            <a class="nav-link" href="#">
-                                <span class="badge badge-secondary float-right">3.02 MB</span>
-                                <i class="fa fa-file-pdf-o text-gray-dark" aria-hidden="true"></i>
-                                <span>Самоучитель по css</span>
-                            </a>
-                        </nav>
-
-                        <div class="col-12">
-                            <a href="#" class="btn btn-outline-success btn-block">Как добавить материал?</a>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-            <div class="card" data-name="card">
-                <div class="card-body">
-                    <h4 class="card-title">
-                        <span class="badge badge-pill badge-primary float-right">5</span>
-                        <i class="fa fa-book text-danger" aria-hidden="true"></i>
-                        <span>6й-семестр</span>
-                    </h4>
-
-                    <div class="card-text row">
-
-                        <nav class="nav flex-column">
-                            <a class="nav-link" href="#">
-                                <span class="badge badge-secondary float-right">947.31 KB</span>
-                                <i class="fa fa-file-archive-o text-gray-dark" aria-hidden="true"></i>
-                                <span>MVC Example Администрирование локальных сетей</span>
-                            </a>
-                            <a class="nav-link" href="#">
-                                <span class="badge badge-secondary float-right">247.15 KB</span>
-                                <i class="fa fa-file-archive-o text-gray-dark" aria-hidden="true"></i>
-                                <span>Практика 1(Подколзин)</span>
-                            </a>
-                            <a class="nav-link" href="#">
-                                <span class="badge badge-secondary float-right">4.68 MB</span>
-                                <i class="fa fa-file-archive-o text-gray-dark" aria-hidden="true"></i>
-                                <span>Практика 2(Подколзин)</span>
-                            </a>
-                            <a class="nav-link" href="#">
-                                <span class="badge badge-secondary float-right">1.33 MB</span>
-                                <i class="fa fa-file-pdf-o text-gray-dark" aria-hidden="true"></i>
-                                <span>Самоучитель по html</span>
-                            </a>
-                            <a class="nav-link" href="#">
-                                <span class="badge badge-secondary float-right">3.02 MB</span>
-                                <i class="fa fa-file-pdf-o text-gray-dark" aria-hidden="true"></i>
-                                <span>Самоучитель по css</span>
-                            </a>
-                        </nav>
-
-                        <div class="col-12">
-                            <a href="#" class="btn btn-outline-success btn-block">Как добавить материал?</a>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-            <div class="card" data-name="card">
-                <div class="card-body">
-                    <h4 class="card-title">
-                        <span class="badge badge-pill badge-primary float-right">5</span>
-                        <i class="fa fa-book text-danger" aria-hidden="true"></i>
-                        <span>6й-семестр</span>
-                    </h4>
-
-                    <div class="card-text row">
-
-                        <nav class="nav flex-column">
-                            <a class="nav-link" href="#">
-                                <span class="badge badge-secondary float-right">947.31 KB</span>
-                                <i class="fa fa-file-archive-o text-gray-dark" aria-hidden="true"></i>
-                                <span>MVC Example Администрирование локальных сетей</span>
-                            </a>
-                            <a class="nav-link" href="#">
-                                <span class="badge badge-secondary float-right">247.15 KB</span>
-                                <i class="fa fa-file-archive-o text-gray-dark" aria-hidden="true"></i>
-                                <span>Практика 1(Подколзин)</span>
-                            </a>
-                            <a class="nav-link" href="#">
-                                <span class="badge badge-secondary float-right">4.68 MB</span>
-                                <i class="fa fa-file-archive-o text-gray-dark" aria-hidden="true"></i>
-                                <span>Практика 2(Подколзин)</span>
-                            </a>
-                            <a class="nav-link" href="#">
-                                <span class="badge badge-secondary float-right">1.33 MB</span>
-                                <i class="fa fa-file-pdf-o text-gray-dark" aria-hidden="true"></i>
-                                <span>Самоучитель по html</span>
-                            </a>
-                            <a class="nav-link" href="#">
-                                <span class="badge badge-secondary float-right">3.02 MB</span>
-                                <i class="fa fa-file-pdf-o text-gray-dark" aria-hidden="true"></i>
-                                <span>Самоучитель по css</span>
-                            </a>
-                        </nav>
-
-                        <div class="col-12">
-                            <a href="#" class="btn btn-outline-success btn-block">Как добавить материал?</a>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-            <div class="card" data-name="card">
-                <div class="card-body">
-                    <h4 class="card-title">
-                        <span class="badge badge-pill badge-primary float-right">5</span>
-                        <i class="fa fa-book text-danger" aria-hidden="true"></i>
-                        <span>6й-семестр</span>
-                    </h4>
-
-                    <div class="card-text row">
-
-                        <nav class="nav flex-column">
-                            <a class="nav-link" href="#">
-                                <span class="badge badge-secondary float-right">947.31 KB</span>
-                                <i class="fa fa-file-archive-o text-gray-dark" aria-hidden="true"></i>
-                                <span>MVC Example Администрирование локальных сетей</span>
-                            </a>
-                            <a class="nav-link" href="#">
-                                <span class="badge badge-secondary float-right">247.15 KB</span>
-                                <i class="fa fa-file-archive-o text-gray-dark" aria-hidden="true"></i>
-                                <span>Практика 1(Подколзин)</span>
-                            </a>
-                            <a class="nav-link" href="#">
-                                <span class="badge badge-secondary float-right">4.68 MB</span>
-                                <i class="fa fa-file-archive-o text-gray-dark" aria-hidden="true"></i>
-                                <span>Практика 2(Подколзин)</span>
-                            </a>
-                            <a class="nav-link" href="#">
-                                <span class="badge badge-secondary float-right">1.33 MB</span>
-                                <i class="fa fa-file-pdf-o text-gray-dark" aria-hidden="true"></i>
-                                <span>Самоучитель по html</span>
-                            </a>
-                            <a class="nav-link" href="#">
-                                <span class="badge badge-secondary float-right">3.02 MB</span>
-                                <i class="fa fa-file-pdf-o text-gray-dark" aria-hidden="true"></i>
-                                <span>Самоучитель по css</span>
-                            </a>
-                        </nav>
-
-                        <div class="col-12">
-                            <a href="#" class="btn btn-outline-success btn-block">Как добавить материал?</a>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
         </div>
 
         <div class="col-lg-8  order-lg-1">
@@ -656,15 +251,14 @@
             <div class="row" data-notify>
                 <div class="col-12">
                     <div class="alert alert-info">
-                        Используйте <code>#ФКТиПМ</code> в <a href="https://instagram.com/" target="_blank">instagram</a>!
+                        Используйте <code>#ФКТиПМ</code> в <a href="https://instagram.com/"
+                                                              target="_blank">instagram</a>!
                         И ваш пост будет, автоматически, добавлен в ленту событий, в течение трех часов.
                     </div>
                 </div>
             </div>
 
-            <div class="row" data-append>
-
-            </div>
+            @yield('content')
 
         </div>
 

@@ -12,7 +12,7 @@ class PostController extends Controller
 {
 
     protected $model       = Post::class;
-    protected $withModel   = ['image', 'category', 'tagged'];
+    protected $withModel   = ['image', 'category'];
     protected $isCategory  = true;
     protected $route       = 'post';
     protected $title       = 'blocks.posts';
