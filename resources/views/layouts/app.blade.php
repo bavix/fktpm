@@ -229,7 +229,7 @@
                                     </a>
                                     <span class="nav-link">
                                         @foreach($file->tags as $_tag)
-                                            <a href="/files/{{ $_tag->slug }}" class="badge badge-danger">
+                                            <a href="/files/{{ $_tag->slug }}" class="badge badge-primary">
                                                 <i class="fa fa-hashtag" aria-hidden="true"></i>{{ $_tag->name }}
                                             </a>
                                         @endforeach
