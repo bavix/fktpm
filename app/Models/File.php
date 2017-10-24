@@ -15,12 +15,4 @@ class File extends Model
      */
     protected $table = 'files';
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-     */
-    public function categories()
-    {
-        return $this->belongsToMany(Category::class, 'files_categories');
-    }
-
 }

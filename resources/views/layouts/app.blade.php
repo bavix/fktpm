@@ -160,80 +160,98 @@
                 </div>
             </form>
 
-            <div class="card" data-name="card">
-                <div class="card-body">
+            @php($links = \App\Models\Link::query()->where('active', 1)->get())
+            @if ($links->count())
 
-                    <h4 class="card-title">
-                                <span class="badge badge-pill badge-danger float-right">
-                                    socials
-                                </span>
-                        <i class="fa fa-vk text-primary" aria-hidden="true"></i>
-                    </h4>
+                <div class="card" data-name="card">
+                    <div class="card-body">
 
-                    <div class="card-text row">
+                        <span class="badge badge-pill badge-primary float-right">
+                            {{ $links->count() }}
+                        </span>
 
-                        <nav class="nav flex-column">
-                            @foreach (\App\Models\Link::all() as $link)
-                                <a class="nav-link" href="{{ $link->url }}" title="{{ $link->title }}" rel="nofollow" target="_blank">
-                                    <i class="fa fa-link text-gray-dark" aria-hidden="true"></i>
-                                    <span>{{ $link->title }}</span>
-                                </a>
-                            @endforeach
-                        </nav>
-
-                        <div class="col-12">
-                            <a href="#" class="btn btn-outline-success btn-block">Как добавить материал?</a>
+                        <div class="card-title">
+                            <h4>
+                                <i class="fa fa-comments-o text-danger" aria-hidden="true"></i>
+                                <span>Социальные сети</span>
+                            </h4>
                         </div>
 
+                        <div class="card-text row">
+
+                            <nav class="nav flex-column">
+                                @foreach ($links as $link)
+                                    <a class="nav-link" href="{{ $link->url }}" title="{{ $link->title }}" rel="nofollow" target="_blank">
+                                        <i class="fa fa-link text-gray-dark" aria-hidden="true"></i>
+                                        <span>{{ $link->title }}</span>
+                                    </a>
+                                @endforeach
+                            </nav>
+
+                            <div class="col-12">
+                                <a href="#" class="btn btn-outline-success btn-block">Как добавить материал?</a>
+                            </div>
+
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="card" data-name="card">
-                <div class="card-body">
-                    <h4 class="card-title">
-                        <span class="badge badge-pill badge-primary float-right">5</span>
-                        <i class="fa fa-book text-danger" aria-hidden="true"></i>
-                        <span>6й-семестр</span>
-                    </h4>
+            @endif
 
-                    <div class="card-text row">
+            @foreach (\App\Models\Tag::blocks() as $tag)
 
-                        <nav class="nav flex-column">
-                            <a class="nav-link" href="#">
-                                <span class="badge badge-secondary float-right">947.31 KB</span>
-                                <i class="fa fa-file-archive-o text-gray-dark" aria-hidden="true"></i>
-                                <span>MVC Example Администрирование локальных сетей</span>
-                            </a>
-                            <a class="nav-link" href="#">
-                                <span class="badge badge-secondary float-right">247.15 KB</span>
-                                <i class="fa fa-file-archive-o text-gray-dark" aria-hidden="true"></i>
-                                <span>Практика 1(Подколзин)</span>
-                            </a>
-                            <a class="nav-link" href="#">
-                                <span class="badge badge-secondary float-right">4.68 MB</span>
-                                <i class="fa fa-file-archive-o text-gray-dark" aria-hidden="true"></i>
-                                <span>Практика 2(Подколзин)</span>
-                            </a>
-                            <a class="nav-link" href="#">
-                                <span class="badge badge-secondary float-right">1.33 MB</span>
-                                <i class="fa fa-file-pdf-o text-gray-dark" aria-hidden="true"></i>
-                                <span>Самоучитель по html</span>
-                            </a>
-                            <a class="nav-link" href="#">
-                                <span class="badge badge-secondary float-right">3.02 MB</span>
-                                <i class="fa fa-file-pdf-o text-gray-dark" aria-hidden="true"></i>
-                                <span>Самоучитель по css</span>
-                            </a>
-                        </nav>
+                <div class="card" data-name="card">
+                    <div class="card-body">
+                        <div class="card-title">
+                            <span class="badge badge-pill badge-primary float-right">
+                                {{ $tag->files->count() }}
+                            </span>
 
-                        <div class="col-12">
-                            <a href="#" class="btn btn-outline-success btn-block">Как добавить материал?</a>
+                            <h4>
+                                <i class="fa fa-book text-danger" aria-hidden="true"></i>
+                                <span>{{ $tag->name }}</span>
+                            </h4>
                         </div>
 
+                        <div class="card-text row">
+
+                            <nav class="nav flex-column">
+
+                                @foreach ($tag->files as $file)
+
+                                    <!-- start item -->
+                                    <a class="nav-link" href="{{ $file->src }}">
+                                        <span class="badge badge-secondary float-right">
+                                            {{ \Bavix\Helpers\Str::fileSize($file->size) }}
+                                        </span>
+                                        <i class="fa fa-file-archive-o text-gray-dark" aria-hidden="true"></i>
+                                        <span>{{ $file->title }}</span>
+                                    </a>
+                                    <small class="nav-link">
+                                        @foreach($file->tags as $_tag)
+                                            <a href="/files/{{ $_tag->slug }}" class="badge badge-danger">
+                                                {{ $_tag->name }}
+                                            </a>
+                                        @endforeach
+                                    </small>
+                                    <!-- remove style -->
+                                    <div class="bx-space" style="padding-bottom: .6rem"></div>
+                                    <!-- end item -->
+
+                                @endforeach
+
+                            </nav>
+
+                            <div class="col-12">
+                                <a href="#" class="btn btn-outline-success btn-block">Как добавить материал?</a>
+                            </div>
+
+                        </div>
                     </div>
                 </div>
-            </div>
+
+            @endforeach
+
         </div>
 
         <div class="col-lg-8  order-lg-1">

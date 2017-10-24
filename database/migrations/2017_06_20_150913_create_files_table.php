@@ -18,6 +18,9 @@ class CreateFilesTable extends Migration
 
             $table->string('title');
             $table->string('src');
+            $table->string('type')->nullable();
+            $table->string('hash')->nullable();
+            $table->integer('size');
 
             $table->timestamp('created_at')
                 ->default(DB::raw('CURRENT_TIMESTAMP'));

@@ -21,12 +21,4 @@ class Category extends Model
         return $this->hasMany(Post::class);
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-     */
-    public function files()
-    {
-        return $this->belongsToMany(File::class, 'files_categories');
-    }
-
 }
