@@ -227,13 +227,13 @@
                                         <i class="fa fa-file-archive-o text-gray-dark" aria-hidden="true"></i>
                                         <span>{{ $file->title }}</span>
                                     </a>
-                                    <small class="nav-link">
+                                    <span class="nav-link">
                                         @foreach($file->tags as $_tag)
                                             <a href="/files/{{ $_tag->slug }}" class="badge badge-danger">
-                                                {{ $_tag->name }}
+                                                <i class="fa fa-hashtag" aria-hidden="true"></i>{{ $_tag->name }}
                                             </a>
                                         @endforeach
-                                    </small>
+                                    </span>
                                     <!-- remove style -->
                                     <div class="bx-space" style="padding-bottom: .6rem"></div>
                                     <!-- end item -->
