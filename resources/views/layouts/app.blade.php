@@ -200,6 +200,10 @@
 
             @foreach (\App\Models\Tag::blocks() as $tag)
 
+                @if (!$tag->files->count())
+                    @continue
+                @endif
+
                 <div class="card" data-name="card">
                     <div class="card-body">
                         <div class="card-title">

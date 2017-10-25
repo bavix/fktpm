@@ -3,7 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Models\File;
-use function Bavix\AdvancedHtmlDom\strGetHtml;
+use Bavix\Helpers\Arr;
 use Bavix\Helpers\Dir;
 use Bavix\Helpers\PregMatch;
 use Bavix\Helpers\Str;
@@ -31,7 +31,18 @@ class DownloaderCommand extends Command
     /**
      * @var string
      */
-    protected $tag;
+    protected $key;
+
+    protected $tags = [
+        '6й-семестр' => ['Семестр №6'],
+        '5й-семестр' => ['Семестр №5'],
+        '4й-семестр' => ['Семестр №4'],
+        '3й-семестр' => ['Семестр №3'],
+        '2й-семестр' => ['Семестр №2'],
+        '1й-семестр' => ['Семестр №1'],
+        'Архив'      => ['Архив'],
+        'Книги'      => ['Книги', 'Учебники']
+    ];
 
     protected function download($from, $name, $type)
     {
@@ -43,12 +54,13 @@ class DownloaderCommand extends Command
         if ($file)
         {
             $this->warn('File found: ' . $name . '.' . $type);
+
             return;
         }
 
         $random = Str::random();
-        $path = PathBuilder::sharedInstance()
-            ->hash($random) . '/' . $random . '.' . $type;
+        $path   = PathBuilder::sharedInstance()
+                ->hash($random) . '/' . $random . '.' . $type;
 
         $to = \Storage::disk('admin')->path(
             $path
@@ -63,8 +75,11 @@ class DownloaderCommand extends Command
             $file = new File();
 
             $file->title = $name;
-            $file->file = $path;
-            $file->tags = [$this->tag];
+            $file->file  = $path;
+            $file->tags  = Arr::merge(
+                $this->tags[$this->key],
+                keywords($name)
+            );
 
             $file->save();
 
@@ -84,10 +99,10 @@ class DownloaderCommand extends Command
         {
             $heading = $panel->find('.panel-heading .col-md-12');
 
-            $this->tag = PregMatch::first('~\n([\s\wа-яё()-]+) \<span~iu', $heading->innertext)
-                ->matches[1];
+            $this->key = PregMatch::first('~\n([\s\wа-яё()-]+) \<span~iu', $heading->innertext)
+                             ->matches[1];
 
-            $this->info('found block: ' . $this->tag);
+            $this->info('found block: ' . $this->key);
 
             $links = $panel->find('.panel-body a');
 
