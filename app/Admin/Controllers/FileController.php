@@ -73,7 +73,7 @@ class FileController extends AdminController
                 $tags->options(
                     $form->model()
                         ->find($id)
-                        ->tags
+                        ->tagsToMany
                         ->pluck('name')
                         ->all()
                 );

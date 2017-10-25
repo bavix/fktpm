@@ -44,6 +44,17 @@ class DownloaderCommand extends Command
         'Книги'      => ['Книги', 'Учебники']
     ];
 
+    protected $filter = [
+        'по', 'Численные', 'методы',
+        'Базы', 'Данных',
+        'Дискретное', 'сетевое', 'программирование',
+        'локальных', 'сетей',
+        'ВМ', 'НН', 'АА', 'АВ',
+        'глава', 'семестр',
+        'год', '2012', '2013',
+        'литература'
+    ];
+
     protected function download($from, $name, $type)
     {
         $file = File::query()
@@ -76,9 +87,17 @@ class DownloaderCommand extends Command
 
             $file->title = $name;
             $file->file  = $path;
+            $file->hash  = basename($from);
+
+            $keywords = explode(', ', keywords($name));
+
+            $keywords = Arr::filter($keywords, function ($str) {
+                return mb_strlen($str) > 1 && !Arr::in($this->filter, $str);
+            });
+
             $file->tags  = Arr::merge(
                 $this->tags[$this->key],
-                keywords($name)
+                $keywords
             );
 
             $file->save();

@@ -24,7 +24,7 @@ class Logo extends Field
 
         $image = $this->form->model()->image;
 
-        $this->variables['_logo'] = $image ? $image->thumbs() : null;
+        $this->variables['_logo'] = $image->src ?? null;
 
         return parent::render();
     }

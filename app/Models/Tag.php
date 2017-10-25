@@ -35,7 +35,8 @@ class Tag extends \Spatie\Tags\Tag
 
     public function files()
     {
-        return $this->morphedByMany(File::class, 'taggable');
+        return $this->morphedByMany(File::class, 'taggable')
+            ->orderBy('id');
     }
 
     public static function blocks()

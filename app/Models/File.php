@@ -37,7 +37,7 @@ class File extends Model
 
     use HasTags
     {
-        tags as protected tagsToMany;
+        tags as public tagsToMany;
     }
 
     /**
