@@ -11,7 +11,19 @@ use Bavix\Helpers\Stream;
 use Bavix\SDK\PathBuilder;
 use Illuminate\Console\Command;
 
-class DownloaderCommand extends Command
+/**
+ * Class FileParserCommand
+ *
+ * @package App\Console\Commands
+ *
+ *          // automatic show blocks
+ *          UPDATE `tags` SET `is_block`=1 WHERE id in (select tag_id from (
+select tag_id, count(distinct taggable_id) cnt
+from taggables
+group by tag_id) t where t.cnt > 1)
+ */
+
+class FileParserCommand extends Command
 {
 
     /**
@@ -19,14 +31,14 @@ class DownloaderCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'fktpm:import';
+    protected $signature = 'fktpm:files';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'fktpm-files importer';
+    protected $description = 'fktpm files importer';
 
     /**
      * @var string
@@ -34,12 +46,14 @@ class DownloaderCommand extends Command
     protected $key;
 
     protected $tags = [
-        '6й-семестр' => ['Семестр №6'],
-        '5й-семестр' => ['Семестр №5'],
-        '4й-семестр' => ['Семестр №4'],
-        '3й-семестр' => ['Семестр №3'],
-        '2й-семестр' => ['Семестр №2'],
-        '1й-семестр' => ['Семестр №1'],
+        '8й-семестр' => ['Семестр №8', 'Курс 4'],
+        '7й-семестр' => ['Семестр №7', 'Курс 4'],
+        '6й-семестр' => ['Семестр №6', 'Курс 3'],
+        '5й-семестр' => ['Семестр №5', 'Курс 3'],
+        '4й-семестр' => ['Семестр №4', 'Курс 2'],
+        '3й-семестр' => ['Семестр №3', 'Курс 2'],
+        '2й-семестр' => ['Семестр №2', 'Курс 1'],
+        '1й-семестр' => ['Семестр №1', 'Курс 1'],
         'Архив'      => ['Архив'],
         'Книги'      => ['Книги', 'Учебники']
     ];
