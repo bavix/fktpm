@@ -195,6 +195,10 @@ return [
 
         // config
         Encore\Admin\Config\ConfigServiceProvider::class,
+
+        // morphy
+        vladkolodka\phpMorphy\MorphyServiceProvider::class,
+
     ],
 
     /*
@@ -251,6 +255,8 @@ return [
         'DiffFormatter'   => Laravelrus\LocalizedCarbon\DiffFactoryFacade::class,
 
         'Breadcrumbs' => DaveJamesMiller\Breadcrumbs\Facade::class,
+
+        'Morphy'    => vladkolodka\phpMorphy\Facade\Morphy::class,
     ],
 
 ];

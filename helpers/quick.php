@@ -23,10 +23,11 @@ if (!function_exists('keywords'))
 {
     /**
      * @param string|\Illuminate\Database\Eloquent\Model $content
+     * @param bool $toArray
      *
-     * @return string
+     * @return string|array
      */
-    function keywords($content = null)
+    function keywords($content = null, $toArray = false)
     {
         if (is_object($content) && \method_exists($content, 'tagged'))
         {
@@ -49,6 +50,11 @@ if (!function_exists('keywords'))
         }
 
         $data = array_unique($mixed);
+
+        if ($toArray)
+        {
+            return $data;
+        }
 
         return implode(', ', $data);
     }

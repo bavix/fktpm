@@ -31,14 +31,13 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\File withAllTags($tags, $type = null)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\File withAnyTags($tags, $type = null)
  * @mixin \Eloquent
+ * @property-write mixed $file
+ * @property-write mixed $tag
  */
 class File extends Model
 {
 
-    use HasTags
-    {
-        tags as public tagsToMany;
-    }
+    use HasTags;
 
     /**
      * @var string
@@ -71,12 +70,6 @@ class File extends Model
     public function posts()
     {
         return $this->morphedByMany(Post::class, 'filegable');
-    }
-
-    public function tags(): MorphToMany
-    {
-        return $this->tagsToMany()
-            ->where('is_block', 0);
     }
 
 }
