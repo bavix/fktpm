@@ -90,7 +90,7 @@ abstract class AdminController extends Controller
         return Admin::content(function (Content $content) use ($id) {
             $content->header($this->title);
 
-            $content->body($this->form()->edit($id));
+            $content->body($this->form($id)->edit($id));
         });
     }
 
@@ -119,8 +119,10 @@ abstract class AdminController extends Controller
     /**
      * Make a form builder.
      *
+     * @param int $id
+     *
      * @return Form
      */
-    abstract protected function form();
+    abstract protected function form($id = null);
 
 }

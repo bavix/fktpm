@@ -19,8 +19,6 @@ class PostController extends AdminController
     public $title    = 'Посты';
     public $model    = Post::class;
 
-    public $mainPage = false;
-
     /**
      * Make a grid builder.
      *
@@ -31,6 +29,7 @@ class PostController extends AdminController
         $self = $this;
 
         return Admin::grid($this->model, function (Grid $grid) use ($self) {
+
             $grid->model()->orderBy('id', 'DESC');
 
             $grid->id('ID')->sortable();
@@ -38,21 +37,11 @@ class PostController extends AdminController
             $grid->column('title', 'Название')->sortable();
             $grid->column('description', 'Описание');
 
-            if ($self->category)
-            {
-                $grid->column('category.title', 'Категория')->sortable();
-            }
+            $grid->column('category.title', 'Категория')->sortable();
 
             $grid->column('active', 'Видимость')
                 ->display(Closure::fromCallable('onOff'))
                 ->sortable();
-
-            if ($self->mainPage)
-            {
-                $grid->column('main_page', 'Главная страница')
-                    ->display(Closure::fromCallable('onOff'))
-                    ->sortable();
-            }
 
             $grid->column('created_at', 'Дата создания')->sortable();
             $grid->column('updated_at', 'Дата обновления')->sortable();
@@ -78,9 +67,11 @@ class PostController extends AdminController
     /**
      * Make a form builder.
      *
+     * @param int $id
+     *
      * @return Form
      */
-    protected function form()
+    protected function form($id = null)
     {
 
         return Admin::form($this->model, function (Form $form) {
@@ -130,11 +121,6 @@ class PostController extends AdminController
                 $form->documents('readable', '')->options([
                     'column' => 'files'
                 ]);
-
-                if ($this->mainPage)
-                {
-                    $form->switch('main_page', 'Главная Страница');
-                }
 
                 $form->switch('active', 'Видимость');
 

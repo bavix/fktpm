@@ -26,6 +26,7 @@ Encore\Admin\Form::forget([
     'multipleFile',
     'select',
     'multipleSelect',
+    'tags',
 ]);
 
 // extends
@@ -39,3 +40,4 @@ Encore\Admin\Form::forget([
 // select
 \Encore\Admin\Form::extend('select', \App\Admin\Extensions\Select::class);
 \Encore\Admin\Form::extend('multipleSelect', \App\Admin\Extensions\MultipleSelect::class);
+\Encore\Admin\Form::extend('tags', \App\Admin\Extensions\Tags::class);

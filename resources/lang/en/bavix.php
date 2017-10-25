@@ -12,5 +12,11 @@ return [
             'title'       => 'Be right back',
             'description' => 'Updating...',
         ]
+    ],
+    'page' => [
+        'empty' => 'Nothing is found in the section ":Name"!',
+    ],
+    'controllers' => [
+        'posts' => 'Posts'
     ]
 ];

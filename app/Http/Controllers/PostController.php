@@ -17,7 +17,7 @@ class PostController extends Controller
     protected $withModel   = ['image', 'category'];
     protected $isCategory  = true;
     protected $route       = 'post';
-    protected $title       = 'blocks.posts';
+    protected $title       = 'bavix.controllers.posts';
     protected $description = 'blocks.listPosts';
 
     protected $mainPage = false;
@@ -132,7 +132,7 @@ class PostController extends Controller
                 'items'       => $paginate,
                 'title'       => $this->title,
                 'description' => __($this->description),
-                'message'     => __('blocks.empty', [
+                'message'     => __('bavix.page.empty', [
                     'name' => __($this->title)
                 ]),
                 'searchBar'   => true,

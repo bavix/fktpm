@@ -3,16 +3,16 @@
 namespace App\Admin\Controllers;
 
 use Bavix\Helpers\Closure;
-use App\Models\Counter;
+use App\Models\Tag;
 use Encore\Admin\Facades\Admin;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 
-class CounterController extends AdminController
+class TagController extends AdminController
 {
 
-    public $title = 'Счётчики';
-    public $model = Counter::class;
+    public $title = 'Теги';
+    public $model = Tag::class;
 
     /**
      * Make a grid builder.
@@ -26,11 +26,10 @@ class CounterController extends AdminController
 
             $grid->id('ID')->sortable();
 
-            $grid->column('title', 'Название')->sortable();
-
-            $grid->column('active', 'Видимость')
-                ->display(Closure::fromCallable('onOff'))
-                ->sortable();
+            $grid->column('name', 'Тег')->sortable();
+            $grid->column('is_block', 'Блок')->display(function ($bool) {
+                return $bool ? 'yes' : 'no';
+            });
 
             $grid->column('created_at', 'Дата создания')->sortable();
             $grid->column('updated_at', 'Дата обновления')->sortable();
@@ -54,11 +53,9 @@ class CounterController extends AdminController
 
             $form->display('id', 'ID');
 
-            $form->text('title', 'Заголовок');
+            $form->text('name', 'Тег');
 
-            $form->textarea('code', 'Код счётчика')->rows(6);
-
-            $form->switch('active', 'Видимость');
+            $form->switch('is_block', 'Блок');
 
             $form->ignore(['created_at', 'updated_at']);
 

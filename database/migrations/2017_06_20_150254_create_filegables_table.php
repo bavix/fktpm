@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePostsImagesTable extends Migration
+class CreateFilegablesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,11 @@ class CreatePostsImagesTable extends Migration
      */
     public function up()
     {
-        Schema::create('posts_images', function (Blueprint $table) {
+        Schema::create('filegables', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('post_id');
-            $table->integer('image_id');
+            $table->string('filegable_type');
+            $table->integer('filegable_id');
+            $table->integer('file_id');
         });
     }
 
@@ -27,6 +28,6 @@ class CreatePostsImagesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('posts_images');
+        Schema::dropIfExists('filegables');
     }
 }

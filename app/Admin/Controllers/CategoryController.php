@@ -35,9 +35,11 @@ class CategoryController extends AdminController
     /**
      * Make a form builder.
      *
+     * @param int $id
+     *
      * @return Form
      */
-    protected function form()
+    protected function form($id = null)
     {
 
         return Admin::form(Category::class, function (Form $form) {

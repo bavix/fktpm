@@ -21,8 +21,14 @@ Route::group([
     // links
     $router->resource('/links', \App\Admin\Controllers\LinkController::class);
 
+    // links
+    $router->resource('/files', \App\Admin\Controllers\FileController::class);
+
     // categories
     $router->resource('/categories', \App\Admin\Controllers\CategoryController::class);
+
+    // categories
+    $router->resource('/tags', \App\Admin\Controllers\TagController::class);
 
     // posts
     $router->resource('/posts', \App\Admin\Controllers\PostController::class);
