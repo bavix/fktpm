@@ -2,6 +2,8 @@
 
 namespace App\Console\Commands;
 
+use function Bavix\AdvancedHtmlDom\strGetHtml;
+use Bavix\Helpers\PregMatch;
 use Illuminate\Console\Command;
 
 class DownloaderCommand extends Command
@@ -23,13 +25,35 @@ class DownloaderCommand extends Command
 
     public function handle()
     {
-        $dom = \bavix\AdvancedHtmlDom\fileGetHtml('https://fktpm.ru');
+        $site = 'https://fktpm.ru/';
+
+        $dom = \bavix\AdvancedHtmlDom\fileGetHtml($site);
 
         $panels = $dom->find('.col-md-4 .panel.lm-table');
 
         foreach ($panels as $panel)
         {
-            var_dump($panel->find('.panel-heading'));die;
+            $heading = $panel->find('.panel-heading .col-md-12');
+
+            $title = PregMatch::first('~\n([\s\wа-яё()-]+) \<span~iu', $heading->innertext)
+                ->matches[1];
+
+            $this->info('found block: ' . $title);
+
+            $links = $panel->find('.panel-body a');
+
+            foreach ($links as $link)
+            {
+                $attributes = $link->attributes();
+
+                $name = $link->text();
+                $href = $attributes['href'];
+
+                $this->warn(
+                    'There is a loading of the file `' . $name . '` from ' . $site . $href
+                );
+            }
+
         }
     }
 
