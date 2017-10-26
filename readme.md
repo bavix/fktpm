@@ -18,16 +18,12 @@ composer upd
 ./artisan db:seed
 
 # elsaticsearch
-./artisan scout:import "App\Models\Album"
-./artisan scout:import "App\Models\Page"
-./artisan scout:import "App\Models\Poll"
 ./artisan scout:import "App\Models\Post"
+./artisan scout:import "App\Models\Tag"
 
 # mysql
-./artisan scout:mysql-index "App\Models\Album"
-./artisan scout:mysql-index "App\Models\Page"
-./artisan scout:mysql-index "App\Models\Poll"
 ./artisan scout:mysql-index "App\Models\Post"
+./artisan scout:mysql-index "App\Models\Tag"
 
 cd public
 npm i
@@ -36,4 +32,12 @@ npm i
 # if test
 ```bash
 ./artisan db:seed --class=TestSeeder
+```
+
+# nginx
+```nginx
+location /stream {
+    alias .../storage/app/share;
+    internal;
+}
 ```
