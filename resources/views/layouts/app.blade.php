@@ -224,7 +224,7 @@
                                 @foreach ($tag->files as $file)
 
                                     <!-- start item -->
-                                    <a class="nav-link" href="{{ $file->src }}">
+                                    <a class="nav-link" href="{{ $file->url() }}">
                                         <span class="badge badge-secondary float-right">
                                             {{ \Bavix\Helpers\Str::fileSize($file->size) }}
                                         </span>

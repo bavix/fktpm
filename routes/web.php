@@ -38,3 +38,13 @@ Route::redirect('/search', '/search/posts');
 
 Route::get('/search/{action}', 'SearchController@index')
     ->name('search');
+
+// file
+Route::get('/file/{id}-{title}.{type}', 'FileController@index')
+    ->name('file');
+
+// seo
+Route::redirect('/teachers', '/professors');
+Route::redirect('/donate', '/helper');
+
+Route::get('/get_file/{hash}', 'FileController@getFile');

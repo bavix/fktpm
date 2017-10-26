@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Helpers\HasTags;
 use Bavix\Helpers\PregMatch;
+use Bavix\Helpers\Str;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
@@ -40,6 +41,15 @@ class File extends Model
     use HasTags;
 
     public $timestamps = false;
+
+    public function url()
+    {
+        return route('file', [
+            $this->id,
+            Str::friendlyUrl($this->title),
+            $this->type
+        ]);
+    }
 
     public function faType()
     {

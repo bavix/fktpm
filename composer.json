@@ -19,7 +19,6 @@
     "ezyang/htmlpurifier": "^4.9",
     "fideloper/proxy": "~3.3",
     "intervention/image": "^2.3",
-    "vladkolodka/phpmorphy": "^0.3.0",
     "laravel-admin-ext/config": "^1.0",
     "laravel-admin-ext/helpers": "^1.0",
     "laravel-admin-ext/log-viewer": "^1.0",
@@ -29,9 +28,11 @@
     "laravel/tinker": "~1.0",
     "laravelrus/localized-carbon": "dev-master",
     "mgp25/instagram-php": "^3.1",
+    "ralouphie/mimey": "^1.0",
     "spatie/laravel-paginateroute": "^2.5",
     "spatie/laravel-sitemap": "^3.2",
     "spatie/laravel-tags": "^2.0",
+    "vladkolodka/phpmorphy": "^0.3.0",
     "yab/laravel-scout-mysql-driver": "^2.0"
   },
   "require-dev": {

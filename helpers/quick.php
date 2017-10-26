@@ -29,7 +29,7 @@ if (!function_exists('keywords'))
      */
     function keywords($content = null, $toArray = false)
     {
-        if (is_object($content) && \method_exists($content, 'tagged'))
+        if (is_object($content) && \method_exists($content, 'tags'))
         {
             $mixed = [];
 
