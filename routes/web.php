@@ -48,3 +48,4 @@ Route::redirect('/teachers', '/professors');
 Route::redirect('/donate', '/helper');
 
 Route::get('/get_file/{hash}', 'FileController@getFile');
+Route::get('/professorrating/{id}', 'ProfessorController@professorRating');

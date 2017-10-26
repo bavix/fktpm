@@ -11,7 +11,7 @@ class ProfessorController extends Controller
 
     protected $description = 'descriptions.professors';
 
-    public function rank(Request $request, $id)
+    public function model($id)
     {
         $model = Professor::query()
             ->where('professorrating', $id)
@@ -19,6 +19,20 @@ class ProfessorController extends Controller
             ->first();
 
         abort_if(!$model, 404);
+
+        return $model;
+    }
+
+    public function professorRating(Request $request, $id)
+    {
+        $this->model($id);
+        
+        return redirect(route('professor.rank', $id), 301);
+    }
+
+    public function rank(Request $request, $id)
+    {
+        $this->model($id);
 
         return redirect('https://professorrating.org/professor.php?id=' . $id);
     }
