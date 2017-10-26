@@ -24,7 +24,6 @@ class Category extends Model
 
     use ModelUrl;
 
-    protected $table = 'categories';
     protected $route = 'post.category';
 
     public $timestamps = false;

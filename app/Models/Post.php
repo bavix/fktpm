@@ -53,7 +53,6 @@ class Post extends Model
     /**
      * @var string
      */
-    protected $table    = 'posts';
     protected $route    = 'post.view';
     protected $routeTag = 'post.tag';
 
@@ -67,16 +66,6 @@ class Post extends Model
         return route($this->routeTag, [
             'tag' => $tag
         ]);
-    }
-
-    /**
-     * Получить имя индекса для модели.
-     *
-     * @return string
-     */
-    public function searchableAs()
-    {
-        return $this->table . '_index';
     }
 
     public function setMultipleTagAttribute($tags)

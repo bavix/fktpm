@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use Laravel\Scout\Searchable;
+
 /**
  * App\Models\Tag
  *
@@ -27,6 +29,8 @@ namespace App\Models;
  */
 class Tag extends \Spatie\Tags\Tag
 {
+
+    use Searchable;
 
     public function posts()
     {

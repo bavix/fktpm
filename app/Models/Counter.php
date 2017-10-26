@@ -23,6 +23,5 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Counter extends Model
 {
-    protected $table      = 'counters';
-    public    $timestamps = false;
+    public $timestamps = false;
 }

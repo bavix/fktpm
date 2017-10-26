@@ -7,9 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * App\Models\Couple
  *
- * @property int $id
- * @property string $name
- * @property int $active
+ * @property int            $id
+ * @property string         $name
+ * @property int            $active
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Couple whereActive($value)
@@ -21,5 +21,5 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Couple extends Model
 {
-    protected $table = 'couples';
+    public $timestamps = false;
 }

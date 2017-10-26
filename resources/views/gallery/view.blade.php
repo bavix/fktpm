@@ -1,4 +1,4 @@
-<div class="col-md-12">
+<div class="col-12">
     <ul class="lightGallery list-unstyled row">
         @foreach($item->images as $_picture)
             <li style="padding-right: 1px; padding-left: 0; padding-bottom: 1px" class="col-4 col-sm-3 col-md-2" data-src="/upload/{{ $_picture->fullHD() }}">

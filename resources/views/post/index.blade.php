@@ -4,7 +4,7 @@
 
     <section class="row">
 
-        <div class="col-md-12">
+        <div class="col-12">
 
             @forelse ($items as $item)
 

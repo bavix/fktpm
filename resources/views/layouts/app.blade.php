@@ -119,19 +119,19 @@
             <div class="collapse navbar-collapse" id="navbars">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="/professors">
+                        <a class="nav-link {{ active('professor') ? 'active' : '' }}" href="{{ route('professor') }}">
                             <i class="fa fa-users text-warning" aria-hidden="true"></i>
                             <span>Преподаватели</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/couples">
+                        <a class="nav-link {{ active('couple') ? 'active' : '' }}" href="{{ route('couple') }}">
                             <i class="fa fa-bookmark text-danger" aria-hidden="true"></i>
                             <span>Предметы</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/helper">
+                        <a class="nav-link {{ active('helper') ? 'active' : '' }}" href="{{ route('helper') }}">
                             <i class="fa fa-question-circle text-info" aria-hidden="true"></i>
                             <span>Помощь проекту</span>
                         </a>
@@ -151,14 +151,14 @@
 
         <div class="col-lg-4 order-lg-2">
 
-            <form id="search" data-name="card" method="GET" action="/search">
-                <div class="input-group">
-                    <input type="text" name="query" class="form-control" placeholder="Поиск..." value="">
-                    <span class="input-group-btn">
-                                <button class="btn btn-info" type="submit">Найти</button>
-                            </span>
-                </div>
-            </form>
+            {{--<form id="search" data-name="card" method="GET" action="{{ route('search', ['files']) }}">--}}
+                {{--<div class="input-group">--}}
+                    {{--<input id="search-files" type="text" name="query" class="form-control" placeholder="Поиск..." value="{{ request()->query('query') }}">--}}
+                    {{--<span class="input-group-btn">--}}
+                        {{--<button class="btn btn-info" type="submit">Найти</button>--}}
+                    {{--</span>--}}
+                {{--</div>--}}
+            {{--</form>--}}
 
             @php($links = \App\Models\Link::query()->where('active', 1)->get())
             @if ($links->count())
@@ -189,7 +189,7 @@
                             </nav>
 
                             <div class="col-12">
-                                <a href="#" class="btn btn-outline-success btn-block">Как добавить материал?</a>
+                                <a href="{{ route('helper') }}" class="btn btn-outline-success btn-block">Как добавить материал?</a>
                             </div>
 
                         </div>
@@ -228,14 +228,14 @@
                                         <span class="badge badge-secondary float-right">
                                             {{ \Bavix\Helpers\Str::fileSize($file->size) }}
                                         </span>
-                                        <i class="fa fa-file-archive-o text-gray-dark" aria-hidden="true"></i>
+                                        <i class="fa {{ $file->faType() }} text-gray-dark" aria-hidden="true"></i>
                                         <span>{{ $file->title }}</span>
                                     </a>
                                     <span class="nav-link">
                                         @foreach($file->tags as $_tag)
                                             @php($badge = $_tag->is_block ? 'success' : 'primary')
                                             <a href="/files/{{ $_tag->slug }}" class="badge badge-{{ $badge }}">
-                                                <i class="fa fa-hashtag" aria-hidden="true"></i>{{ $_tag->name }}
+                                                <i class="fa fa-tag" aria-hidden="true"></i> {{ $_tag->name }}
                                             </a>
                                         @endforeach
                                     </span>
@@ -248,7 +248,7 @@
                             </nav>
 
                             <div class="col-12">
-                                <a href="#" class="btn btn-outline-success btn-block">Как добавить материал?</a>
+                                <a href="{{ route('helper') }}" class="btn btn-outline-success btn-block">Как добавить материал?</a>
                             </div>
 
                         </div>
@@ -259,21 +259,20 @@
 
         </div>
 
-        <div class="col-lg-8  order-lg-1">
+        <div class="col-lg-8 order-lg-1">
 
-            <div class="row" data-notify>
-                <div class="col-12">
-                    <div class="alert alert-info">
-                        Используйте <code>#ФКТиПМ</code> в <a href="https://instagram.com/"
-                                                              target="_blank">instagram</a>!
-                        И ваш пост будет, автоматически, добавлен в ленту событий, в течение трех часов.
-                    </div>
-                </div>
-            </div>
+            {{--<div class="row" data-notify>--}}
+                {{--<div class="col-12">--}}
+                    {{--<div class="alert alert-info">--}}
+                        {{--Используйте <code>#ФКТиПМ</code> в <a href="https://instagram.com/"--}}
+                                                              {{--target="_blank">instagram</a>!--}}
+                        {{--И ваш пост будет, автоматически, добавлен в ленту событий, в течение трех часов.--}}
+                    {{--</div>--}}
+                {{--</div>--}}
+            {{--</div>--}}
 
             @yield('content')
-
-        </div>
+       </div>
 
     </div>
 

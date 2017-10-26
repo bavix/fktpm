@@ -31,19 +31,62 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\File withAllTags($tags, $type = null)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\File withAnyTags($tags, $type = null)
  * @mixin \Eloquent
- * @property-write mixed $file
- * @property-write mixed $tag
+ * @property-write mixed                                                     $file
+ * @property-write mixed                                                     $tag
  */
 class File extends Model
 {
 
     use HasTags;
 
-    /**
-     * @var string
-     */
-    protected $table      = 'files';
-    public    $timestamps = false;
+    public $timestamps = false;
+
+    public function faType()
+    {
+        switch ($this->type)
+        {
+            // archive
+            case 'zip':
+                return 'fa-file-zip-o';
+
+            case 'rar':
+            case 'tar':
+            case 'tgz':
+            case 'gz':
+                return 'fa-archive';
+
+            // docs
+            case 'pdf':
+                return 'fa-file-pdf-o';
+
+            case 'tiff':
+                return 'fa-file-image-o';
+
+            // word
+            case 'doc':
+            case 'docx':
+            case 'rdf':
+                return 'fa-file-word-o';
+
+            // excel
+            case 'xlsx':
+            case 'xlsm':
+            case 'xlsb':
+            case 'xltx':
+            case 'xltm':
+            case 'xls':
+            case 'xlt':
+            case 'rtf':
+                return 'fa-file-excel-o';
+
+            // text
+            case 'csv':
+                return 'fa-file-text';
+
+            default:
+                return 'fa-file';
+        }
+    }
 
     public function setFileAttribute($path)
     {
