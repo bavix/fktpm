@@ -234,9 +234,11 @@
                                     <span class="nav-link">
                                         @foreach($file->tags as $_tag)
                                             @php($badge = $_tag->is_block ? 'success' : 'primary')
-                                            <a href="/files/{{ $_tag->slug }}" class="badge badge-{{ $badge }}">
+{{--                                            <a href="/files/{{ $_tag->slug }}" class="badge badge-{{ $badge }}">--}}
+                                            <span class="badge badge-{{ $badge }}">
                                                 <i class="fa fa-tag" aria-hidden="true"></i> {{ $_tag->name }}
-                                            </a>
+                                            </span>
+                                            {{--</a>--}}
                                         @endforeach
                                     </span>
                                     <!-- remove style -->
