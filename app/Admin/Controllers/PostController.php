@@ -97,29 +97,17 @@ class PostController extends AdminController
                 $this->tagsBuilder($form);
 
                 $form->image('picture', 'Изображение')
-                    ->name($this->buildCallable('image', 'picture'));
+                    ->name($this->buildCallable())
+                    ->dir(\Storage::disk('admin')->path(''));
 
                 $form->logo('logo', '');
 
                 $form->multipleImage('gallery', 'Галерея')
-                    ->name($this->buildCallable('image', 'gallery'));
+                    ->name($this->buildCallable())
+                    ->dir(\Storage::disk('admin')->path(''));
 
                 $form->lightGallery('pictures', '')->options([
                     'column' => 'images'
-                ]);
-
-                $form->multipleFile('documents', 'Документы')
-                    ->name(function (\Illuminate\Http\UploadedFile $upload) {
-                        $path = PathBuilder::sharedInstance()
-                            ->generate('', Str::random(2), Str::random(4));
-
-                        $original = $upload->getClientOriginalName();
-
-                        return ltrim($path, '/') . '/' . $original;
-                    });
-
-                $form->documents('readable', '')->options([
-                    'column' => 'files'
                 ]);
 
                 $form->switch('active', 'Видимость');

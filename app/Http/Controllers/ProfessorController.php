@@ -26,7 +26,7 @@ class ProfessorController extends Controller
     public function professorRating(Request $request, $id)
     {
         $this->model($id);
-        
+
         return redirect(route('professor.rank', $id), 301);
     }
 

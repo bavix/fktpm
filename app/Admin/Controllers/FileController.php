@@ -59,12 +59,7 @@ class FileController extends AdminController
 
             $form->text('title', 'Название');
             $form->file('file', 'Файл')
-                ->name(function (UploadedFile $file) {
-                    $name = Str::random();
-                    return PathBuilder::sharedInstance()
-                        ->hash($name) . '/' . $name . '.' .
-                        $file->extension();
-                });
+                ->name($this->buildCallable());
 
             $tags = $form->tags('tag', 'Теги');
 

@@ -13,6 +13,7 @@ use Encore\Admin\Facades\Admin;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Layout\Content;
+use Illuminate\Http\UploadedFile;
 
 abstract class AdminController extends Controller
 {
@@ -52,15 +53,13 @@ abstract class AdminController extends Controller
             ->tags();
     }
 
-    protected function buildCallable($type, $config)
+    protected function buildCallable()
     {
-        return function (\Illuminate\Http\UploadedFile $uploadedFile) use ($type, $config) {
-            $ext = $uploadedFile->getClientOriginalExtension();
-
-            $path = PathBuilder::sharedInstance()
-                    ->generate('', $config, Str::random()) . '.' . $ext;
-
-            return ltrim($path, '/');
+        return function (UploadedFile $file) {
+            $name = Str::random();
+            return PathBuilder::sharedInstance()
+                    ->hash($name) . '/' . $name . '.' .
+                $file->extension();
         };
     }
 
