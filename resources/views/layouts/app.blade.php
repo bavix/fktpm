@@ -298,7 +298,7 @@
 <script src="/js/app.js"></script>
 
 @foreach (\App\Models\Counter::query()->where('active', 1)->get() as $counter)
-    {{{ $counter->code }}}
+    {!! $counter->code !!}
 @endforeach
 
 </body>
