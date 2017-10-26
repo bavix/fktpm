@@ -9,6 +9,8 @@ use Illuminate\Http\Request;
 class ProfessorController extends Controller
 {
 
+    protected $description = 'descriptions.professors';
+
     public function rank(Request $request, $id)
     {
         $model = Professor::query()
@@ -28,7 +30,9 @@ class ProfessorController extends Controller
             [
                 'items' => Faculty::with('departments.professors')
                     ->where('active', 1)
-                    ->get()
+                    ->get(),
+                'title'       => 'Преподаватели',
+                'description' => __($this->description)
             ]
         );
     }

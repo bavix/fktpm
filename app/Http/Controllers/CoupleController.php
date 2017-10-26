@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 class CoupleController extends Controller
 {
 
+    protected $description = 'descriptions.couples';
+
     public function index(Request $request)
     {
         return $this->render(
@@ -15,7 +17,9 @@ class CoupleController extends Controller
             [
                 'items' => Couple::query()
                     ->where('active', 1)
-                    ->get()
+                    ->get(),
+                'title'       => 'Предметы',
+                'description' => __($this->description)
             ]
         );
     }

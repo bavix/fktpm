@@ -92,8 +92,8 @@
         <meta name="keywords" content="{{ keywords($item) }}"/>
     @elseif (!empty($title))
         <meta name="keywords" content="{{ keywords($title) }}"/>
-@endif
-<!-- /seo -->
+    @endif
+    <!-- /seo -->
 
 </head>
 <body>
@@ -137,6 +137,18 @@
                         </a>
                     </li>
                 </ul>
+                <ul class="navbar-nav my-2 my-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://old.fktpm.ru" title="Старая версия сайта">
+                            <i class="fa fa-server text-primary" aria-hidden="true"></i>
+                            <span>Старая версия сайта</span>
+                        </a>
+                    </li>
+                </ul>
+                {{--<form class="form-inline my-2 my-lg-0">--}}
+                    {{--<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">--}}
+                    {{--<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>--}}
+                {{--</form>--}}
             </div>
 
         </div>

@@ -18,7 +18,7 @@ class PostController extends Controller
     protected $isCategory  = true;
     protected $route       = 'post';
     protected $title       = 'bavix.controllers.posts';
-    protected $description = 'blocks.listPosts';
+    protected $description = 'descriptions.posts';
 
     protected $mainPage = false;
     protected $draft    = false;
