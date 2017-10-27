@@ -18,12 +18,8 @@
     <title>{{ $fullTitle }}</title>
 
     <!-- Styles -->
-    <link href="{{ asset2('vendor/lightGallery/css/lightgallery.min.css') }}" rel="stylesheet"/>
-    <link href="{{ asset2('node_modules/bootstrap/dist/css/bootstrap.min.css')  }}" rel="stylesheet"/>
-
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
-          integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-    <link href="/css/app.css" rel="stylesheet"/>
+    <link href="{{ asset2('https://cdn.bavix.ru/bootstrap/next/dist/css/bootstrap.min.css')  }}" rel="stylesheet"/>
+    <link href="{{ asset2('/css/app.css') }}" rel="stylesheet"/>
 
     <link rel="icon" type="image/ico" href="/favicons/favicon.ico"/>
     <link rel="apple-touch-icon" sizes="57x57" href="/favicons/apple-icon-57x57.png"/>
@@ -97,7 +93,6 @@
 
 </head>
 <body>
-
 
 <header>
 
@@ -292,10 +287,13 @@
 
 </div>
 
-<script src="/node_modules/jquery/dist/jquery.min.js"></script>
-<script src="/node_modules/popper.js/dist/umd/popper.min.js"></script>
-<script src="/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-<script src="/js/app.js"></script>
+<link href="{{ asset2('https://cdn.bavix.ru/lightgallery.js/latest/dist/css/lightgallery.min.css') }}" rel="stylesheet"/>
+<link href="{{ asset2('https://cdn.bavix.ru/font-awesome/latest/css/font-awesome.min.css') }}" rel="stylesheet"/>
+
+<script src="{{ asset2('https://cdn.bavix.ru/jquery/latest/dist/jquery.slim.min.js') }} "></script>
+<script src="{{ asset2('https://cdn.bavix.ru/popper.js/latest/dist/umd/popper.min.js') }}"></script>
+<script src="{{ asset2('https://cdn.bavix.ru/bootstrap/next/dist/js/bootstrap.min.js') }}"></script>
+<script src="{{ asset2('/js/app.js') }}"></script>
 
 @foreach (\App\Models\Counter::query()->where('active', 1)->get() as $counter)
     {!! $counter->code !!}
