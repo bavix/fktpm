@@ -26,7 +26,7 @@
                                 @continue
                             @endif
 
-                            <table class="table table-bordered table-hover">
+                            <table class="table table-hover">
 
                                 <thead>
                                     <tr>

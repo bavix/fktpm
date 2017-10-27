@@ -9,7 +9,7 @@
 
                     <h2 class="card-title">Предметы</h2>
 
-                    <table class="table table-bordered table-hover">
+                    <table class="table table-hover">
 
                         <thead>
                         <tr>
