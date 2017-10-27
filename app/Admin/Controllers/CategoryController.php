@@ -10,7 +10,7 @@ use Encore\Admin\Grid;
 
 class CategoryController extends AdminController
 {
-    
+
     protected $title = 'Категории';
 
     /**
