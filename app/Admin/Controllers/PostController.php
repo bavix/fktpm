@@ -2,14 +2,13 @@
 
 namespace App\Admin\Controllers;
 
+use Bavix\App\Admin\Controllers\AdminController;
 use Bavix\Helpers\Closure;
 use App\Admin\Extensions\BtnPreview;
 use App\Models\Category;
 use App\Models\Post;
-use Bavix\Helpers\Str;
 use Encore\Admin\Facades\Admin;
 use Encore\Admin\Form;
-use Bavix\SDK\PathBuilder;
 use Encore\Admin\Grid;
 
 class PostController extends AdminController
@@ -24,7 +23,7 @@ class PostController extends AdminController
      *
      * @return Grid
      */
-    protected function grid()
+    protected function grid(): Grid
     {
         $self = $this;
 
@@ -71,7 +70,7 @@ class PostController extends AdminController
      *
      * @return Form
      */
-    protected function form($id = null)
+    protected function form($id = null): Form
     {
 
         return Admin::form($this->model, function (Form $form) {
@@ -94,17 +93,13 @@ class PostController extends AdminController
                     );
                 }
 
-                $this->tagsBuilder($form);
-
                 $form->image('picture', 'Изображение')
-                    ->name($this->buildCallable())
-                    ->dir(\Storage::disk('admin')->path(''));
+                    ->name(bx_uploaded_file());
 
                 $form->logo('logo', '');
 
                 $form->multipleImage('gallery', 'Галерея')
-                    ->name($this->buildCallable())
-                    ->dir(\Storage::disk('admin')->path(''));
+                    ->name(bx_uploaded_file());
 
                 $form->lightGallery('pictures', '')->options([
                     'column' => 'images'

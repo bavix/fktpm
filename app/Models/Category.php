@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
+use Bavix\Extensions\ModelURL;
 use Illuminate\Database\Eloquent\Model;
-use App\Helpers\ModelUrl;
 
 /**
  * App\Models\Category
@@ -22,11 +22,10 @@ use App\Helpers\ModelUrl;
 class Category extends Model
 {
 
-    use ModelUrl;
+    use ModelURL;
 
-    protected $route = 'post.category';
-
-    public $timestamps = false;
+    protected $route      = 'post.category';
+    public    $timestamps = false;
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany

@@ -2,7 +2,7 @@
 
 namespace App\Admin\Controllers;
 
-use App\Http\Controllers\Controller;
+use Bavix\App\Http\Controllers\Controller;
 use App\Models\Post;
 use Encore\Admin\Facades\Admin;
 use Encore\Admin\Controllers\Dashboard;

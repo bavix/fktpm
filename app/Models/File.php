@@ -2,11 +2,12 @@
 
 namespace App\Models;
 
-use App\Helpers\HasTags;
+use Bavix\Exceptions\HasTags;
+use Bavix\Exceptions\ModelFile;
+use Bavix\Extensions\ModelURL;
 use Bavix\Helpers\PregMatch;
 use Bavix\Helpers\Str;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 /**
  * App\Models\File
@@ -39,16 +40,19 @@ class File extends Model
 {
 
     use HasTags;
+    use ModelURL;
+    use ModelFile;
 
-    public $timestamps = false;
+    protected $route      = 'file';
+    public    $timestamps = false;
 
-    public function url()
+    public function urlArguments(): array
     {
-        return route('file', [
+        return [
             $this->id,
             Str::friendlyUrl($this->title),
             $this->type
-        ]);
+        ];
     }
 
     public function faType()
@@ -98,27 +102,36 @@ class File extends Model
         }
     }
 
-    public function setFileAttribute($path)
-    {
-//        \var_dump(
-//            $path,
-//            \Storage::disk('admin')->path($path)
-//        );
+//    public function setFileAttribute($path)
+//    {
+////        \var_dump(
+////            $path,
+////            \Storage::disk('admin')->path($path)
+////        );
+//
+//        if (empty($path))
+//        {
+//            return;
+//        }
+//
+//        $this->src  = $path;
+//        $this->type = PregMatch::first('~\.(\w+)$~', $path)->matches[1] ?? null;
+//        $this->size = \Storage::disk('admin')->size($path);
+//    }
 
-        if (empty($path))
-        {
-            return;
-        }
-
-        $this->src  = $path;
-        $this->type = PregMatch::first('~\.(\w+)$~', $path)->matches[1] ?? null;
-        $this->size = \Storage::disk('admin')->size($path);
-    }
-
-    public function setTagAttribute($tags)
-    {
-        $this->syncTags(explode(',', $tags));
-    }
+//    public function setTagAttribute($tags)
+//    {
+//        $tags = explode(',', $tags);
+//
+//        if (!$this->exists)
+//        {
+//            $this->setTagsAttribute($tags);
+//
+//            return;
+//        }
+//
+//        $this->syncTags($tags);
+//    }
 
     public function posts()
     {

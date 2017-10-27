@@ -2,7 +2,7 @@
 
 namespace App\Admin\Controllers;
 
-use Bavix\Helpers\Closure;
+use Bavix\App\Admin\Controllers\AdminController;
 use App\Models\Tag;
 use Encore\Admin\Facades\Admin;
 use Encore\Admin\Form;
@@ -19,7 +19,7 @@ class TagController extends AdminController
      *
      * @return Grid
      */
-    protected function grid()
+    protected function grid(): Grid
     {
         return Admin::grid($this->model, function (Grid $grid) {
             $grid->model()->orderBy('id', 'DESC');
@@ -46,7 +46,7 @@ class TagController extends AdminController
      *
      * @return Form
      */
-    protected function form($id = null)
+    protected function form($id = null): Form
     {
 
         return Admin::form($this->model, function (Form $form) {

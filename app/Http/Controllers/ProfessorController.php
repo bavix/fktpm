@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Faculty;
 use App\Models\Professor;
+use Bavix\App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class ProfessorController extends Controller
