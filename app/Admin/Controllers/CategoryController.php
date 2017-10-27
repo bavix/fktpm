@@ -10,6 +10,8 @@ use Encore\Admin\Grid;
 
 class CategoryController extends AdminController
 {
+    
+    protected $title = 'Категории';
 
     /**
      * Make a grid builder.

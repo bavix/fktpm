@@ -58,7 +58,7 @@ class FileController extends AdminController
 
             $form->text('title', 'Название');
             $form->file('file', 'Файл')
-                ->name($this->buildCallable());
+                ->name(bx_uploaded_file());
 
             $tags = $form->tags('tag', 'Теги');
 
