@@ -92,7 +92,7 @@
     <!-- /seo -->
 
 </head>
-<body>
+<body style="background-image: url('{{ asset2('/image/background.png') }}')">
 
 <header>
 
