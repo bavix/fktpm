@@ -188,12 +188,12 @@ class PostController extends Controller
 
         if (method_exists($model, 'category'))
         {
-            $category = $model->category->title . ' / ';
+            $category = $model->category->title . ' — ';
         }
 
         return view('post.view', [
             'item'        => $model,
-            'title'       => $model->title . ' / ' . $category . __($this->title),
+            'title'       => $model->title . ' — ' . $category . __($this->title),
             'description' => $model->description ?? ''
         ]);
     }
