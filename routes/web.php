@@ -6,8 +6,8 @@ use Illuminate\Support\Facades\Route;
 Route::paginate('/', 'PostController@index')
     ->name('post');
 
-Route::paginate('/posts/search/{query?}', 'PostController@search')
-    ->name('post.search');
+//Route::paginate('/posts/search/{query?}', 'PostController@search')
+//    ->name('post.search');
 
 Route::paginate('/post/tag/{tag}', 'PostController@tag')
     ->name('post.tag');
@@ -34,7 +34,9 @@ Route::get('/helper', 'HelperController@index')
     ->name('helper');
 
 // search
-Route::redirect('/search', '/search/posts');
+Route::redirect('/search', function () {
+    return redirect(\route('search', ['posts']));
+});
 
 Route::get('/search/{action}', 'SearchController@index')
     ->name('search');
@@ -44,8 +46,13 @@ Route::get('/file/{id}-{title}.{type}', 'FileController@index')
     ->name('file');
 
 // seo
-Route::redirect('/teachers', '/professors');
-Route::redirect('/donate', '/helper');
+Route::get('/teachers', function () {
+    return redirect(\route('professor'), 301);
+});
+
+Route::get('/donate', function () {
+    return redirect(\route('helper'), 301);
+});
 
 Route::get('/get_file/{hash}', 'FileController@getFile');
 Route::get('/professorrating/{id}', 'ProfessorController@professorRating');
