@@ -12,7 +12,7 @@
                     class="col-xs-4 col-sm-3 col-md-2"
                     data-token="{{ csrf_token() }}"
                     data-url="{{ route('lg.trash', [], false) }}"
-                    data-src="/upload/{{ $_picture->src }}"
+                    data-src="/upload/{{ $_picture->path }}"
                     data-model="{{ \get_class($_picture->pivot->pivotParent) }}"
                     data-item="{{ $_picture->pivot->pivotParent->id }}"
                     data-image="{{ $_picture->id }}">
@@ -24,7 +24,7 @@
                              height: 100%;
                             background-position: center;
                             background-repeat: no-repeat;
-                             background-image: url('/upload/{{ $_picture->thumbs() }}');
+                             background-image: url('/upload/{{ $_picture->path }}');
                              object-position: center;
                              object-fit: none"></div>
                     </a>

@@ -2,11 +2,12 @@
 
 namespace App\Admin\Controllers;
 
-use Bavix\App\Admin\Controllers\AdminController;
-use Bavix\Helpers\Closure;
 use App\Admin\Extensions\BtnPreview;
 use App\Models\Category;
 use App\Models\Post;
+use Bavix\App\Admin\Actions\PreviewButton;
+use Bavix\App\Admin\Controllers\AdminController;
+use Bavix\Helpers\Closure;
 use Encore\Admin\Facades\Admin;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
@@ -45,17 +46,14 @@ class PostController extends AdminController
             $grid->column('created_at', 'Дата создания')->sortable();
             $grid->column('updated_at', 'Дата обновления')->sortable();
 
-            $grid->actions(function (Grid\Displayers\Actions $actions) use ($self) {
+            $grid->actions(function (Grid\Displayers\Actions $actions) {
+                $uri = \route(
+                    'post.draft',
+                    [$actions->getKey(), 'sandbox']
+                );
 
-                if ($self->category)
-                {
-                    $actions->append(new BtnPreview($actions->getKey(), 'post.draft'));
-                }
-                else
-                {
-                    $actions->append(new BtnPreview($actions->getKey(), 'page.draft'));
-                }
-
+                $button = new PreviewButton($uri);
+                $actions->prepend($button);
             });
 
             $grid->exporter(new \App\Accessor\CsvExporter());
@@ -82,7 +80,7 @@ class PostController extends AdminController
                 $form->text('title', 'Заголовок');
 
                 $form->textarea('description', 'Описание')->rows(3);
-                $form->ckeditor('content', 'Текст');
+                $form->editor('content', 'Текст');
 
                 if ($this->category)
                 {
@@ -93,12 +91,12 @@ class PostController extends AdminController
                     );
                 }
 
-                $form->image('picture', 'Изображение')
+                $form->file('picture', 'Изображение')
                     ->name(bx_uploaded_file());
 
                 $form->logo('logo', '');
 
-                $form->multipleImage('gallery', 'Галерея')
+                $form->multipleFile('gallery', 'Галерея')
                     ->name(bx_uploaded_file());
 
                 $form->lightGallery('pictures', '')->options([

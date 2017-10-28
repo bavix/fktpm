@@ -77,7 +77,7 @@ class Post extends Model
     public function setPictureAttribute($picture, $toModel = true)
     {
         $model      = new Image();
-        $model->src = $picture;
+        $model->path = $picture;
         $model->save();
 
         $this->id or $this->save();

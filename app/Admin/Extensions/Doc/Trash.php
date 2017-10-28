@@ -2,7 +2,7 @@
 
 namespace App\Admin\Extensions\Doc;
 
-use App\Http\Controllers\Controller;
+use Bavix\App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class Trash extends Controller

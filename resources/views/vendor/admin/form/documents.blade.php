@@ -9,8 +9,8 @@
         <ul id="{{ $id }}" class="list-unstyled row">
             @foreach($_documents as $_document)
                 <li>
-                    <a href="/upload/{{ $_document->src }}" download="{{ $_document->title ? : basename($_document->src) }}">
-                        {{ $_document->name ? : basename($_document->src) }}
+                    <a href="/upload/{{ $_document->path }}" download="{{ $_document->title ? : basename($_document->path) }}">
+                        {{ $_document->name ? : basename($_document->path) }}
                     </a>
 
                     <a class="pull-right" href="#"

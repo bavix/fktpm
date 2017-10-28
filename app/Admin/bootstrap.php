@@ -20,24 +20,13 @@
  */
 
 Encore\Admin\Form::forget([
-    'map',
-    'editor',
     'multipleImage',
     'multipleFile',
-    'select',
-    'multipleSelect',
     'tags',
 ]);
 
-// extends
-\Encore\Admin\Form::extend('ckeditor', \App\Admin\Extensions\Form\CKEditor::class);
+\Encore\Admin\Form::extend('multipleFile', \Bavix\App\Admin\Form\Field\MultipleFile::class);
+\Encore\Admin\Form::extend('multipleImage', \Bavix\App\Admin\Form\Field\MultipleImage::class);
 \Encore\Admin\Form::extend('lightGallery', \App\Admin\Extensions\Form\LightGallery::class);
-\Encore\Admin\Form::extend('documents', \App\Admin\Extensions\Form\Documents::class);
 \Encore\Admin\Form::extend('logo', \App\Admin\Extensions\Form\Logo::class);
-\Encore\Admin\Form::extend('multipleFile', \App\Admin\Extensions\MultipleFile::class);
-\Encore\Admin\Form::extend('multipleImage', \App\Admin\Extensions\MultipleImage::class);
-
-// select
-\Encore\Admin\Form::extend('select', \App\Admin\Extensions\Select::class);
-\Encore\Admin\Form::extend('multipleSelect', \App\Admin\Extensions\MultipleSelect::class);
-\Encore\Admin\Form::extend('tags', \App\Admin\Extensions\Tags::class);
+\Encore\Admin\Form::extend('tags', \Bavix\App\Admin\Form\Field\Tags::class);
