@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\File;
+use Bavix\App\Http\Controllers\Controller;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Mimey\MimeTypes;
@@ -34,11 +35,11 @@ class FileController extends Controller
 
         $mimes = new MimeTypes();
 
-        header('X-Accel-Redirect: /stream/' . $model->src . '?' . $model->title . '.' . $model->type);
+        header('X-Accel-Redirect: /file/' . $model->path . '?' . $model->title . '.' . $model->type);
         header('Content-Type: ' . $mimes->getMimeType($model->type));
         header('Content-Disposition: inline;filename="' . $model->title . '.' . $model->type . '"');
 
-        header('Expires: ' . gmdate('D, d M Y H:i:s \G\M\T', Carbon::now()->addMonth()->timestamp));
+        header('Expires: ' . gmdate('D, d M Y H:i:s \G\M\T', Carbon::now()->addYear()->timestamp));
 
         die;
     }

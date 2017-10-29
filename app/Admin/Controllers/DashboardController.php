@@ -2,7 +2,11 @@
 
 namespace App\Admin\Controllers;
 
-use App\Http\Controllers\Controller;
+use App\Models\Category;
+use App\Models\File;
+use App\Models\Link;
+use App\Models\Tag;
+use Bavix\App\Http\Controllers\Controller;
 use App\Models\Post;
 use Encore\Admin\Facades\Admin;
 use Encore\Admin\Controllers\Dashboard;
@@ -21,7 +25,11 @@ class DashboardController extends Controller
             $content->header('Приборная панель');
 
             $content->row(function (Row $row) {
-                $row->column(2, new InfoBox('Посты', 'newspaper-o', 'yellow', '/cp/posts', Post::query()->count()));
+                $row->column(2, new InfoBox('Categories', 'tag', 'aqua', '/cp/posts', Category::query()->count()));
+                $row->column(2, new InfoBox('Posts', 'newspaper-o', 'yellow', '/cp/posts', Post::query()->count()));
+                $row->column(2, new InfoBox('Links', 'link', 'red', '/cp/posts', Link::query()->count()));
+                $row->column(2, new InfoBox('Tags', 'tags', 'gray', '/cp/posts', Tag::query()->count()));
+                $row->column(2, new InfoBox('Files', 'files-o', 'green', '/cp/posts', File::query()->count()));
             });
 
             $content->row(function (Row $row) {

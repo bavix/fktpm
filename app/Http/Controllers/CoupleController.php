@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Couple;
+use Bavix\App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class CoupleController extends Controller
@@ -18,6 +19,7 @@ class CoupleController extends Controller
                 'items' => Couple::query()
                     ->where('active', 1)
                     ->get(),
+
                 'title'       => 'Предметы',
                 'description' => __($this->description)
             ]

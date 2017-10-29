@@ -1,8 +1,8 @@
 <?php
 
 use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\Schema;
+use Bavix\Illuminate\Database\Schema\Blueprint;
+use Bavix\Illuminate\Support\Facades\Schema;
 
 class CreatePostsTable extends Migration
 {
@@ -23,11 +23,7 @@ class CreatePostsTable extends Migration
             $table->integer('category_id');
             $table->boolean('active')->default(0);
 
-            $table->timestamp('created_at')
-                ->default(DB::raw('CURRENT_TIMESTAMP'));
-
-            $table->timestamp('updated_at')
-                ->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
+            $table->timestamps();
         });
     }
 

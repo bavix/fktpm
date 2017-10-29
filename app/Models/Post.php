@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-use App\Helpers\HasTags;
-use App\Helpers\ModelUrl;
+use Bavix\Exceptions\HasTags;
+use Bavix\Extensions\ModelURL;
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Scout\Searchable;
 
@@ -45,7 +45,7 @@ class Post extends Model
 {
 
     use HasTags;
-    use ModelUrl;
+    use ModelURL;
     use Searchable;
 
     public $timestamps = false;
@@ -77,7 +77,7 @@ class Post extends Model
     public function setPictureAttribute($picture, $toModel = true)
     {
         $model      = new Image();
-        $model->src = $picture;
+        $model->path = $picture;
         $model->save();
 
         $this->id or $this->save();
@@ -123,7 +123,7 @@ class Post extends Model
             {
                 $model        = new File();
                 $model->title = \basename($path);
-                $model->src   = $path;
+                $model->path   = $path;
                 $model->save();
 
                 $this->id or $this->save();

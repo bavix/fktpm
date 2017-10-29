@@ -4,7 +4,7 @@ use Bavix\Illuminate\Support\Facades\Schema;
 use Bavix\Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateFilegablesTable extends Migration
+class AlterFilesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,8 @@ class CreateFilegablesTable extends Migration
      */
     public function up()
     {
-        Schema::create('filegables', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('filegable_type');
-            $table->integer('filegable_id');
-            $table->integer('file_id');
+        Schema::table('files', function (Blueprint $table) {
+            $table->renameColumn('src', 'path');
         });
     }
 
@@ -28,6 +25,8 @@ class CreateFilegablesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('filegables');
+        Schema::table('files', function (Blueprint $table) {
+            $table->renameColumn('path', 'src');
+        });
     }
 }

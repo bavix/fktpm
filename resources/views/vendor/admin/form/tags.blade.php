@@ -11,6 +11,7 @@
                 <option value="{{$select}}" selected>{{$select}}</option>
             @endforeach
         </select>
+
         <input type="hidden" name="{{$name}}[]" />
 
         @include('admin::form.help-block')

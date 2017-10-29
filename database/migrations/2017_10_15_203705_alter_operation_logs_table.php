@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
+use Bavix\Illuminate\Support\Facades\Schema;
+use Bavix\Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
 class AlterOperationLogsTable extends Migration
@@ -14,7 +14,7 @@ class AlterOperationLogsTable extends Migration
     public function up()
     {
         Schema::table('admin_operation_log', function (Blueprint $table) {
-            $table->string('input', 16777215)->change();
+            $table->mediumText('input')->change();
         });
     }
 

@@ -2,6 +2,7 @@
 
 namespace App\Admin\Controllers;
 
+use Bavix\App\Admin\Controllers\AdminController;
 use Bavix\Helpers\Closure;
 use App\Models\Counter;
 use Encore\Admin\Facades\Admin;
@@ -19,7 +20,7 @@ class CounterController extends AdminController
      *
      * @return Grid
      */
-    protected function grid()
+    protected function grid(): Grid
     {
         return Admin::grid($this->model, function (Grid $grid) {
             $grid->model()->orderBy('id', 'DESC');
@@ -47,7 +48,7 @@ class CounterController extends AdminController
      *
      * @return Form
      */
-    protected function form($id = null)
+    protected function form($id = null): Form
     {
 
         return Admin::form($this->model, function (Form $form) {

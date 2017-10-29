@@ -2,14 +2,13 @@
 
 namespace App\Admin\Controllers;
 
-use Bavix\Helpers\Closure;
-use App\Admin\Extensions\BtnPreview;
 use App\Models\Category;
 use App\Models\Post;
-use Bavix\Helpers\Str;
+use Bavix\App\Admin\Actions\PreviewButton;
+use Bavix\App\Admin\Controllers\AdminController;
+use Bavix\Helpers\Closure;
 use Encore\Admin\Facades\Admin;
 use Encore\Admin\Form;
-use Bavix\SDK\PathBuilder;
 use Encore\Admin\Grid;
 
 class PostController extends AdminController
@@ -24,7 +23,7 @@ class PostController extends AdminController
      *
      * @return Grid
      */
-    protected function grid()
+    protected function grid(): Grid
     {
         $self = $this;
 
@@ -46,17 +45,14 @@ class PostController extends AdminController
             $grid->column('created_at', 'Дата создания')->sortable();
             $grid->column('updated_at', 'Дата обновления')->sortable();
 
-            $grid->actions(function (Grid\Displayers\Actions $actions) use ($self) {
+            $grid->actions(function (Grid\Displayers\Actions $actions) {
+                $uri = \route(
+                    'post.draft',
+                    [$actions->getKey(), 'sandbox']
+                );
 
-                if ($self->category)
-                {
-                    $actions->append(new BtnPreview($actions->getKey(), 'post.draft'));
-                }
-                else
-                {
-                    $actions->append(new BtnPreview($actions->getKey(), 'page.draft'));
-                }
-
+                $button = new PreviewButton($uri);
+                $actions->prepend($button);
             });
 
             $grid->exporter(new \App\Accessor\CsvExporter());
@@ -71,7 +67,7 @@ class PostController extends AdminController
      *
      * @return Form
      */
-    protected function form($id = null)
+    protected function form($id = null): Form
     {
 
         return Admin::form($this->model, function (Form $form) {
@@ -83,7 +79,7 @@ class PostController extends AdminController
                 $form->text('title', 'Заголовок');
 
                 $form->textarea('description', 'Описание')->rows(3);
-                $form->ckeditor('content', 'Текст');
+                $form->editor('content', 'Текст');
 
                 if ($this->category)
                 {
@@ -94,32 +90,16 @@ class PostController extends AdminController
                     );
                 }
 
-                $this->tagsBuilder($form);
-
-                $form->image('picture', 'Изображение')
-                    ->name($this->buildCallable('image', 'picture'));
+                $form->file('picture', 'Изображение')
+                    ->name(bx_uploaded_file());
 
                 $form->logo('logo', '');
 
-                $form->multipleImage('gallery', 'Галерея')
-                    ->name($this->buildCallable('image', 'gallery'));
+                $form->multipleFile('gallery', 'Галерея')
+                    ->name(bx_uploaded_file());
 
                 $form->lightGallery('pictures', '')->options([
                     'column' => 'images'
-                ]);
-
-                $form->multipleFile('documents', 'Документы')
-                    ->name(function (\Illuminate\Http\UploadedFile $upload) {
-                        $path = PathBuilder::sharedInstance()
-                            ->generate('', Str::random(2), Str::random(4));
-
-                        $original = $upload->getClientOriginalName();
-
-                        return ltrim($path, '/') . '/' . $original;
-                    });
-
-                $form->documents('readable', '')->options([
-                    'column' => 'files'
                 ]);
 
                 $form->switch('active', 'Видимость');

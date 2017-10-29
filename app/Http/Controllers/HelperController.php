@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Bavix\App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class HelperController extends Controller

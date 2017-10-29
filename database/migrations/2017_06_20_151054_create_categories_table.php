@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
+use Bavix\Illuminate\Support\Facades\Schema;
+use Bavix\Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
 class CreateCategoriesTable extends Migration
@@ -18,11 +18,7 @@ class CreateCategoriesTable extends Migration
 
             $table->string('title');
 
-            $table->timestamp('created_at')
-                ->default(DB::raw('CURRENT_TIMESTAMP'));
-
-            $table->timestamp('updated_at')
-                ->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
+            $table->timestamps();
         });
     }
 

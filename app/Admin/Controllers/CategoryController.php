@@ -3,6 +3,7 @@
 namespace App\Admin\Controllers;
 
 use App\Models\Category;
+use Bavix\App\Admin\Controllers\AdminController;
 use Encore\Admin\Facades\Admin;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
@@ -10,12 +11,14 @@ use Encore\Admin\Grid;
 class CategoryController extends AdminController
 {
 
+    protected $title = 'Категории';
+
     /**
      * Make a grid builder.
      *
      * @return Grid
      */
-    protected function grid()
+    protected function grid(): Grid
     {
         return Admin::grid(Category::class, function (Grid $grid) {
             $grid->model()->orderBy('id', 'DESC');
@@ -39,7 +42,7 @@ class CategoryController extends AdminController
      *
      * @return Form
      */
-    protected function form($id = null)
+    protected function form($id = null): Form
     {
 
         return Admin::form(Category::class, function (Form $form) {

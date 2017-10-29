@@ -3,12 +3,11 @@
 namespace App\Admin\Controllers;
 
 use App\Models\File;
+use Bavix\App\Admin\Controllers\AdminController;
 use Bavix\Helpers\Str;
-use Bavix\SDK\PathBuilder;
 use Encore\Admin\Facades\Admin;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
-use Illuminate\Http\UploadedFile;
 
 class FileController extends AdminController
 {
@@ -21,7 +20,7 @@ class FileController extends AdminController
      *
      * @return Grid
      */
-    protected function grid()
+    protected function grid(): Grid
     {
         return Admin::grid($this->model, function (Grid $grid) {
             $grid->model()->orderBy('id', 'DESC');
@@ -51,7 +50,7 @@ class FileController extends AdminController
      *
      * @return Form
      */
-    protected function form($id = null)
+    protected function form($id = null): Form
     {
         return Admin::form($this->model, function (Form $form) use ($id) {
 
@@ -59,12 +58,7 @@ class FileController extends AdminController
 
             $form->text('title', 'Название');
             $form->file('file', 'Файл')
-                ->name(function (UploadedFile $file) {
-                    $name = Str::random();
-                    return PathBuilder::sharedInstance()
-                        ->hash($name) . '/' . $name . '.' .
-                        $file->extension();
-                });
+                ->name(bx_uploaded_file());
 
             $tags = $form->tags('tag', 'Теги');
 

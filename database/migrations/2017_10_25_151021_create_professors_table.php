@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
+use Bavix\Illuminate\Support\Facades\Schema;
+use Bavix\Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
 class CreateProfessorsTable extends Migration
@@ -25,11 +25,7 @@ class CreateProfessorsTable extends Migration
             $table->integer('department_id');
             $table->integer('active')->default(1);
 
-            $table->timestamp('created_at')
-                ->default(DB::raw('CURRENT_TIMESTAMP'));
-
-            $table->timestamp('updated_at')
-                ->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
+            $table->timestamps();
         });
     }
 

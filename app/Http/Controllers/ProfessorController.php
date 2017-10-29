@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Faculty;
 use App\Models\Professor;
+use Bavix\App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class ProfessorController extends Controller
@@ -26,7 +27,7 @@ class ProfessorController extends Controller
     public function professorRating(Request $request, $id)
     {
         $this->model($id);
-        
+
         return redirect(route('professor.rank', $id), 301);
     }
 

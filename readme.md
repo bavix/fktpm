@@ -36,8 +36,8 @@ npm i
 
 # nginx
 ```nginx
-location /stream {
-    alias .../storage/app/share;
+location /file {
+    root .../storage/app/share;
     add_header Content-Disposition 'inline; filename="$args"';
     internal;
 }
