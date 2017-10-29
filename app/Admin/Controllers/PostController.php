@@ -2,7 +2,6 @@
 
 namespace App\Admin\Controllers;
 
-use App\Admin\Extensions\BtnPreview;
 use App\Models\Category;
 use App\Models\Post;
 use Bavix\App\Admin\Actions\PreviewButton;

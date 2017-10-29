@@ -43,6 +43,7 @@ class File extends Model
     use ModelURL;
     use ModelFile;
 
+    protected $storageDisk = 'admin';
     protected $route      = 'file';
     public    $timestamps = false;
 

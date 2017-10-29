@@ -30,7 +30,7 @@
     "spatie/laravel-paginateroute": "^2.5",
     "spatie/laravel-sitemap": "^3.2",
     "vladkolodka/phpmorphy": "^0.3.0",
-    "bavix/laravel-helpers": "dev-master",
+    "bavix/laravel-helpers": "^1.0",
     "yab/laravel-scout-mysql-driver": "^2.0"
   },
   "require-dev": {
