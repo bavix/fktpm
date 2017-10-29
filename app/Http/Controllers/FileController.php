@@ -35,7 +35,7 @@ class FileController extends Controller
 
         $mimes = new MimeTypes();
 
-        header('X-Accel-Redirect: /file/' . $model->path . '?' . $model->title . '.' . $model->type);
+        header('X-Accel-Redirect: /stream/' . $model->path . '?' . $model->title . '.' . $model->type);
         header('Content-Type: ' . $mimes->getMimeType($model->type));
         header('Content-Disposition: inline;filename="' . $model->title . '.' . $model->type . '"');
 
