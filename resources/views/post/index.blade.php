@@ -10,11 +10,11 @@
 
                 <article class="card">
 
-                    @if (method_exists($item, 'image') && $item->image_id)
-                        <a class="card-img-top text-center" href="{{ $item->url() }}" title="{{ $item->title }}">
-                            <img class="img-fluid" src="/upload/{{ $item->image->preview() }}" title="{{ $item->title }}">
-                        </a>
-                    @endif
+                    {{--@if (method_exists($item, 'image') && $item->image_id)--}}
+                        {{--<a class="card-img-top text-center" href="{{ $item->url() }}" title="{{ $item->title }}">--}}
+                            {{--<img class="img-fluid" src="/upload/{{ $item->image->preview() }}" title="{{ $item->title }}">--}}
+                        {{--</a>--}}
+                    {{--@endif--}}
 
                     <div class="card-body">
 
