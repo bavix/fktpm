@@ -103,3 +103,20 @@ if (!function_exists('onOff'))
         return '<span class="label label-default">выкл.</span>';
     }
 }
+
+if (!function_exists('bx_background'))
+{
+    function bx_background()
+    {
+        $now = \Carbon\Carbon::now();
+
+        $background = '/image/background.png';
+
+        if ($now->month === 10 && $now->day === 31)
+        {
+            $background = '/image/halloween/' . \Bavix\Helpers\Num::randomInt(1, 9) . '.png';
+        }
+
+        return asset2($background);
+    }
+}
