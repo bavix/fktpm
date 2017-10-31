@@ -4,6 +4,12 @@
     <section class="row">
         <div class="col-12">
 
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="card-title">Преподаватели</h2>
+                </div>
+            </div>
+
             @foreach($items as $item)
 
                 @php($departments = $item->departments)
