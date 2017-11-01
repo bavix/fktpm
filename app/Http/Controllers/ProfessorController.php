@@ -46,7 +46,7 @@ class ProfessorController extends Controller
                 'items' => Faculty::with('departments.professors')
                     ->where('active', 1)
                     ->get(),
-                'title'       => 'Преподаватели',
+                'title'       => 'Факультеты, Кафедры, Преподаватели',
                 'description' => __($this->description)
             ]
         );
