@@ -94,7 +94,7 @@ class PostController extends Controller
 
             $query->where('category_id', $id);
 
-            $this->title = $category->title . ' — ' . $this->title;
+            $this->title = $category->title . ' â€” ' . $this->title;
         }
 
         if ($this->mainPage)
@@ -187,12 +187,12 @@ class PostController extends Controller
 
         if (method_exists($model, 'category'))
         {
-            $category = $model->category->title . ' — ';
+            $category = $model->category->title . ' â€” ';
         }
 
         return view('post.view', [
             'item'        => $model,
-            'title'       => $model->title . ' — ' . $category . __($this->title),
+            'title'       => $model->title . ' â€” ' . $category . __($this->title),
             'description' => $model->description ?? ''
         ]);
     }
