@@ -37,7 +37,7 @@ class FileController extends Controller
 
         if ($url !== $request->url())
         {
-            return \redirect($url);
+            return \redirect($url, 301);
         }
 
         $mimes = new MimeTypes();
