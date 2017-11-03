@@ -33,6 +33,13 @@ class FileController extends Controller
         $model = File::query()->find($id);
         abort_if(!$model, 404);
 
+        $url = $model->url();
+
+        if ($url !== $request->url())
+        {
+            return \redirect($url);
+        }
+
         $mimes = new MimeTypes();
 
         header('X-Accel-Redirect: /stream/' . $model->path . '?' . $model->title . '.' . $model->type);
