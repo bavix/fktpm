@@ -25,11 +25,11 @@ class DashboardController extends Controller
             $content->header('Приборная панель');
 
             $content->row(function (Row $row) {
-                $row->column(2, new InfoBox('Categories', 'tag', 'aqua', '/cp/posts', Category::query()->count()));
+                $row->column(2, new InfoBox('Categories', 'tag', 'aqua', '/cp/categories', Category::query()->count()));
                 $row->column(2, new InfoBox('Posts', 'newspaper-o', 'yellow', '/cp/posts', Post::query()->count()));
-                $row->column(2, new InfoBox('Links', 'link', 'red', '/cp/posts', Link::query()->count()));
-                $row->column(2, new InfoBox('Tags', 'tags', 'gray', '/cp/posts', Tag::query()->count()));
-                $row->column(2, new InfoBox('Files', 'files-o', 'green', '/cp/posts', File::query()->count()));
+                $row->column(2, new InfoBox('Links', 'link', 'red', '/cp/links', Link::query()->count()));
+                $row->column(2, new InfoBox('Tags', 'tags', 'gray', '/cp/tags', Tag::query()->count()));
+                $row->column(2, new InfoBox('Files', 'files-o', 'green', '/cp/files', File::query()->count()));
             });
 
             $content->row(function (Row $row) {
