@@ -22,7 +22,8 @@ class FileController extends Controller
 
         abort_if(!$model, 404);
 
-        return redirect($model->url(), 301);
+        header('location: ' . $model->url(), true, 301);
+        die;
     }
 
     public function index(Request $request, $id)
