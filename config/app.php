@@ -257,6 +257,8 @@ return [
         'Breadcrumbs' => DaveJamesMiller\Breadcrumbs\Facade::class,
 
         'Morphy'    => vladkolodka\phpMorphy\Facade\Morphy::class,
+
+        'HTMLMin' => HTMLMin\HTMLMin\Facades\HTMLMin::class,
     ],
 
 ];
