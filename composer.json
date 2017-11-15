@@ -13,6 +13,7 @@
     "php": ">=7.0",
     "bavix/advanced-html-dom": "^1.0",
     "bavix/laravel-helpers": "^1.0",
+    "bavix/laravel-middleware-ifindex": "^1.0",
     "davejamesmiller/laravel-breadcrumbs": "^3.0",
     "doctrine/dbal": "^2.5",
     "ezyang/htmlpurifier": "^4.9",
