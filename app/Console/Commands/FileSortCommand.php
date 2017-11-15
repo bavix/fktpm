@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Models\Download;
+use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 
@@ -32,9 +33,13 @@ class FileSortCommand extends Command
     {
         DB::update('UPDATE files set sort = null');
 
+        $carbon = Carbon::now()
+            ->subMonth();
+
         $downloads = Download::with('file')
             ->select('file_id', DB::raw('sum(1) res'))
             ->groupBy('file_id')
+            ->where('created_at', '>', $carbon->toDateTimeString())
             ->orderBy('res');
 
         foreach ($downloads->get() as $key => $download)
