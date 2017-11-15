@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html lang="{{ config('app.locale') }}" prefix="og: http://ogp.me/ns#">
 <head>
+    @if (config('debugbar.enabled'))
+        @php($debugBar = Debugbar::getJavascriptRenderer())
+        {!! $debugBar->renderHead() !!}
+    @endif
+
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
 
@@ -298,6 +303,10 @@
 @foreach (\App\Models\Counter::query()->where('active', 1)->get() as $counter)
     {!! $counter->code !!}
 @endforeach
+
+@if (!empty($debugBar))
+    {!! $debugBar->render() !!}
+@endif
 
 </body>
 </html>
