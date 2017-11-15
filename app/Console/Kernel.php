@@ -15,6 +15,10 @@ class Kernel extends ConsoleKernel
         $schedule->command('bx:sitemap')
             ->timezone('Europe/Moscow')
             ->daily();
+
+        $schedule->command('bx:file-sort')
+            ->timezone('Europe/Moscow')
+            ->hourly();
     }
 
     /**
