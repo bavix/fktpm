@@ -40,6 +40,7 @@ class FileSortCommand extends Command
             ->select('file_id', DB::raw('sum(1) res'))
             ->groupBy('file_id')
             ->where('created_at', '>', $carbon->toDateTimeString())
+            ->where('parameters', 'not like', '%bot%')
             ->orderBy('res');
 
         foreach ($downloads->get() as $key => $download)
