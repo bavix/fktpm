@@ -83,8 +83,8 @@ class PostController extends Controller
         if ($this->tag)
         {
             $slug = $this->tag;
-            $query->whereHas('tagged', function (\Illuminate\Database\Eloquent\Builder $query) use ($slug) {
-                $query->where('tag_slug', $slug);
+            $query->whereHas('tags', function (\Illuminate\Database\Eloquent\Builder $query) use ($slug) {
+                $query->where('slug->ru', $slug);
             });
         }
 
