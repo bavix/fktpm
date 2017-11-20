@@ -27,9 +27,8 @@ class TagController extends AdminController
             $grid->id('ID')->sortable();
 
             $grid->column('name', 'Тег')->sortable();
-            $grid->column('is_block', 'Блок')->display(function ($bool) {
-                return $bool ? 'yes' : 'no';
-            });
+            $grid->column('is_block', 'Блок')
+                ->switch();
 
             $grid->column('created_at', 'Дата создания')->sortable();
             $grid->column('updated_at', 'Дата обновления')->sortable();

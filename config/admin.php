@@ -37,6 +37,11 @@ return [
     'title'         => 'Admin',
 
     /*
+     * Use `https`.
+     */
+    'secure' => config('redirect.https'),
+
+    /*
      * Laravel-admin auth setting.
      */
     'auth'          => [

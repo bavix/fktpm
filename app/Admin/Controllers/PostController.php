@@ -29,17 +29,20 @@ class PostController extends AdminController
 
         return Admin::grid($this->model, function (Grid $grid) use ($self) {
 
-            $grid->model()->orderBy('id', 'DESC');
+            $grid->model()->with('category')->orderBy('id', 'DESC');
 
             $grid->id('ID')->sortable();
 
-            $grid->column('title', 'Название')->sortable();
+            $grid->column('title', 'Название')
+                ->editable()
+                ->sortable();
+
             $grid->column('description', 'Описание');
 
             $grid->column('category.title', 'Категория')->sortable();
 
             $grid->column('active', 'Видимость')
-                ->display(Closure::fromCallable('onOff'))
+                ->switch()
                 ->sortable();
 
             $grid->column('created_at', 'Дата создания')->sortable();

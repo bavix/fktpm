@@ -25,7 +25,9 @@ class CategoryController extends AdminController
 
             $grid->id('ID')->sortable();
 
-            $grid->column('title', 'Название')->sortable();
+            $grid->column('title', 'Название')
+                ->editable()
+                ->sortable();
 
             $grid->column('created_at', 'Дата создания')->sortable();
             $grid->column('updated_at', 'Дата обновления')->sortable();

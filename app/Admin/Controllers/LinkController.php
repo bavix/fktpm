@@ -27,10 +27,12 @@ class LinkController extends AdminController
 
             $grid->id('ID')->sortable();
 
-            $grid->column('title', 'Название')->sortable();
+            $grid->column('title', 'Название')
+                ->editable()
+                ->sortable();
 
             $grid->column('active', 'Видимость')
-                ->display(Closure::fromCallable('onOff'))
+                ->switch()
                 ->sortable();
 
             $grid->column('created_at', 'Дата создания')->sortable();

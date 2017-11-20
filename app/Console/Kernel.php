@@ -19,6 +19,10 @@ class Kernel extends ConsoleKernel
         $schedule->command('bx:file-sort')
             ->timezone('Europe/Moscow')
             ->hourly();
+
+        $schedule->command('bx:tag-block')
+            ->timezone('Europe/Moscow')
+            ->hourly();
     }
 
     /**

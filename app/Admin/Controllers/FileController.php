@@ -27,8 +27,13 @@ class FileController extends AdminController
 
             $grid->id('ID')->sortable();
 
-            $grid->column('title', 'Название')->sortable();
-            $grid->column('type', 'Тип')->sortable();
+            $grid->column('title', 'Название')
+                ->editable()
+                ->sortable();
+
+            $grid->column('type', 'Тип')
+                ->sortable();
+
             $grid->column('size', 'Размер')
                 ->display(function ($size) {
                     return Str::fileSize($size);
