@@ -2,6 +2,8 @@
 
 @section('content')
 
+    @include('post.notify')
+
     <section class="row">
 
         <div class="col-12">
@@ -28,14 +30,14 @@
                             </div>
                         @endif
 
-                        @if(method_exists($item, 'tagged'))
+                        @if(method_exists($item, 'tags'))
                             @php($tags = $item->tags)
                             @if (count($tags))
                                 <div class="card-text">
                                     <small class="text-muted">
                                         @foreach ($tags as $tag)
                                             <a class="bx-tag" href="{{ $item->routeTag($tag->slug) }}"
-                                               title="{{ $tag->name }}">{{ $tag->name }}</a>
+                                               title="{{ $tag->name }}">#{{ $tag->name }}</a>
                                         @endforeach
                                     </small>
                                 </div>

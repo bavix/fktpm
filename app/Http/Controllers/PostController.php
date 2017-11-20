@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Console\Commands\InstagramCommand;
 use App\Models\Category;
 use App\Models\Post;
 use Bavix\App\Http\Controllers\Controller;

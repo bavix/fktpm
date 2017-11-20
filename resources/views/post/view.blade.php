@@ -1,6 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
+
+    @include('post.notify')
+
     <article class="row">
         <div class="col-12">
             <div class="card">
