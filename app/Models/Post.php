@@ -40,6 +40,7 @@ use Laravel\Scout\Searchable;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Post withAllTags($tags, $type = null)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Post withAnyTags($tags, $type = null)
  * @mixin \Eloquent
+ * @property-write mixed $tag
  */
 class Post extends Model
 {

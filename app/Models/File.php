@@ -35,6 +35,10 @@ use Illuminate\Database\Eloquent\Model;
  * @mixin \Eloquent
  * @property-write mixed                                                     $file
  * @property-write mixed                                                     $tag
+ * @property string $path
+ * @property int|null $sort
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\File wherePath($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\File whereSort($value)
  */
 class File extends Model
 {
