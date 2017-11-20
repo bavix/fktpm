@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Bavix\App\Models\MultipleImageTrait;
 use Bavix\Exceptions\HasTags;
 use Bavix\Extensions\ModelURL;
 use Illuminate\Database\Eloquent\Model;
@@ -48,6 +49,7 @@ class Post extends Model
     use HasTags;
     use ModelURL;
     use Searchable;
+    use MultipleImageTrait;
 
     public $timestamps = false;
 
@@ -75,36 +77,6 @@ class Post extends Model
         $this->syncTags($tags);
     }
 
-    public function setPictureAttribute($picture, $toModel = true)
-    {
-        $model      = new Image();
-        $model->path = $picture;
-        $model->save();
-
-        $this->id or $this->save();
-
-        if (!$toModel)
-        {
-            $this->images()->save($model);
-
-            return;
-        }
-
-        $this->image_id = $model->id;
-        $this->save();
-    }
-
-    public function setGalleryAttribute($pictures)
-    {
-        if (is_array($pictures))
-        {
-            foreach ($pictures as $picture)
-            {
-                $this->setPictureAttribute($picture, false);
-            }
-        }
-    }
-
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
@@ -113,24 +85,9 @@ class Post extends Model
         return $this->belongsTo(Category::class);
     }
 
-    /**
-     * @param $files
-     */
-    public function setDocumentsAttribute($files)
+    public function getModelImage(): string
     {
-        if (is_array($files))
-        {
-            foreach ($files as $path)
-            {
-                $model        = new File();
-                $model->title = \basename($path);
-                $model->path   = $path;
-                $model->save();
-
-                $this->id or $this->save();
-                $this->files()->save($model);
-            }
-        }
+        return Image::class;
     }
 
     public function image()
@@ -143,8 +100,4 @@ class Post extends Model
         return $this->morphToMany(Image::class, 'imaggable');
     }
 
-    public function files()
-    {
-        return $this->morphToMany(File::class, 'filegable');
-    }
 }

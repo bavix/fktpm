@@ -93,12 +93,14 @@ class PostController extends AdminController
                     );
                 }
 
-                $form->file('picture', 'Изображение')
+                $form->image('picture', 'Изображение')
+                    ->disk('public')
                     ->name(bx_uploaded_file());
 
                 $form->logo('logo', '');
 
-                $form->multipleFile('gallery', 'Галерея')
+                $form->multipleImage('gallery', 'Галерея')
+                    ->disk('public')
                     ->name(bx_uploaded_file());
 
                 $form->lightGallery('pictures', '')->options([

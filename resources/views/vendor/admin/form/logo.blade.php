@@ -8,7 +8,7 @@
 
             @include('admin::form.error')
 
-            <img id="{{ $id }}" class="img-thumbnail" src="/upload/{{ $_logo }}">
+            <img id="{{ $id }}" class="img-thumbnail" src="/storage/{{ $_logo }}">
 
             @include('admin::form.help-block')
 

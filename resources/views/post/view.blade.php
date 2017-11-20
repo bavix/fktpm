@@ -9,11 +9,11 @@
 
                     <h1 class="card-title">{{ $item->title }}</h1>
 
-                    {{--@if(!empty($item->image))--}}
-                        {{--<p class="text-center">--}}
-                            {{--<img src="/upload/{{ $item->image->preview() }}" style="max-width:100%" />--}}
-                        {{--</p>--}}
-                    {{--@endif--}}
+                    @if(!empty($item->image))
+                        <p class="text-center">
+                            <img src="/storage/{{ $item->image->md() }}" style="max-width:100%" />
+                        </p>
+                    @endif
 
                     @if (isset($item->content))
                         {!! $item->content !!}
