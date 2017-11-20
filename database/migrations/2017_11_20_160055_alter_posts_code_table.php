@@ -14,7 +14,7 @@ class AlterPostsCodeTable extends Migration
     public function up()
     {
         Schema::table('posts', function (Blueprint $table) {
-            $table->integer('instagram_code')->nullable()->after('active');
+            $table->string('instagram_code')->nullable()->after('active');
             $table->unique('instagram_code');
         });
     }
