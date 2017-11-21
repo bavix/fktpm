@@ -118,9 +118,11 @@ class PostController extends Controller
         {
             $query->orderBy($column, $direction);
         }
-        
+
+        $pageQuery = $request->route()->parameter('pageQuery');
+
         $query->with($this->withModel);
-        $paginate = Cache::remember(JSON::encode($query->toBase()), 120, function () use ($query) {
+        $paginate = Cache::remember(JSON::encode($query->toBase()) . $pageQuery, 120, function () use ($query) {
             return $query->paginate(config('limits.paginate', 10));
         });
 
