@@ -277,6 +277,9 @@
 
 </div>
 
+<script src="{{ asset2('https://cdnjs.cloudflare.com/ajax/libs/vanilla-lazyload/10.3.5/lazyload.min.js') }}"></script>
+<script src="{{ asset2('/js/lazy.js') }}"></script>
+
 @if (active('post.view'))
     <link href="{{ asset2('https://cdn.bavix.ru/lightgallery/latest/dist/css/lightgallery.min.css') }}" rel="stylesheet"/>
 

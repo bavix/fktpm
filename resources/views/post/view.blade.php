@@ -14,7 +14,7 @@
 
                     @if(!empty($item->image))
                         <p class="text-center">
-                            <img src="/storage/{{ $item->image->md() }}" style="max-width:100%" />
+                            <img data-src="/storage/{{ $item->image->md() }}" style="max-width:100%" />
                         </p>
                     @endif
 

@@ -14,7 +14,7 @@
 
                     @if (method_exists($item, 'image') && $item->image_id)
                         <a class="card-img-top text-center" href="{{ $item->url() }}" title="{{ $item->title }}">
-                            <img class="img-fluid" src="/storage/{{ $item->image->md() }}" title="{{ $item->title }}">
+                            <img class="img-fluid" data-src="/storage/{{ $item->image->md() }}" title="{{ $item->title }}">
                         </a>
                     @endif
 
