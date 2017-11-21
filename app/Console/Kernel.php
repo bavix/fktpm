@@ -14,19 +14,19 @@ class Kernel extends ConsoleKernel
     {
         $schedule->command('bx:sitemap')
             ->timezone('Europe/Moscow')
-            ->daily();
+            ->dailyAt('01:00');
 
         $schedule->command('bx:file-sort')
             ->timezone('Europe/Moscow')
-            ->hourlyAt(10);
+            ->dailyAt('02:00');
 
         $schedule->command('bx:tag-block')
             ->timezone('Europe/Moscow')
-            ->hourlyAt(20);
+            ->dailyAt('03:00');
 
         $schedule->command('bx:instagram')
             ->timezone('Europe/Moscow')
-            ->hourlyAt(30);
+            ->dailyAt('04:00');
     }
 
     /**
