@@ -59,7 +59,11 @@ class ImageOptimizeCommand extends WorkerCommand
 
             $model->$size();
             OptimizerChainFactory::create()
-                ->optimize($model->thumbnailPath($size));
+                ->optimize(
+                    $model->storage()->path(
+                        $model->thumbnailPath($size)
+                    )
+                );
         }
     }
 

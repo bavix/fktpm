@@ -42,7 +42,7 @@ class Image extends Model
     /**
      * @return \Illuminate\Filesystem\FilesystemAdapter
      */
-    protected function storage()
+    public function storage()
     {
         return Storage::disk('public');
     }
