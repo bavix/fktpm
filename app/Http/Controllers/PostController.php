@@ -16,7 +16,7 @@ class PostController extends Controller
 {
 
     protected $model       = Post::class;
-    protected $withModel   = ['image', 'category'];
+    protected $withModel   = ['image', 'category', 'tags'];
     protected $isCategory  = true;
     protected $route       = 'post';
     protected $title       = 'bavix.controllers.posts';
