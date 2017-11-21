@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Support\Facades\Cache;
 use Laravel\Scout\Searchable;
 
 /**
@@ -45,10 +46,12 @@ class Tag extends \Spatie\Tags\Tag
 
     public static function blocks()
     {
-        return static::with('files.tags')
-            ->orderBy('order_column', 'desc')
-            ->where('is_block', 1)
-            ->get();
+        return Cache::remember(__METHOD__, 120, function () {
+            return static::with('files.tags')
+                ->orderBy('order_column', 'desc')
+                ->where('is_block', 1)
+                ->get();
+        });
     }
 
 }

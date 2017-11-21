@@ -6,9 +6,11 @@ use App\Console\Commands\InstagramCommand;
 use App\Models\Category;
 use App\Models\Post;
 use Bavix\App\Http\Controllers\Controller;
+use Bavix\Helpers\JSON;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 
 class PostController extends Controller
 {
@@ -105,7 +107,7 @@ class PostController extends Controller
 
         $sort = $request->query('sort');
 
-        if (!is_array($sort))
+        if (!\is_array($sort))
         {
             $sort = [
                 config('sort.column', 'id') => config('sort.direction', 'desc')
@@ -116,9 +118,11 @@ class PostController extends Controller
         {
             $query->orderBy($column, $direction);
         }
-
-        $paginate = $query->paginate(config('limits.paginate', 10));
-        $paginate->load($this->withModel);
+        
+        $query->with($this->withModel);
+        $paginate = Cache::remember(JSON::encode($query->toBase()), 120, function () use ($query) {
+            return $query->paginate(config('limits.paginate', 10));
+        });
 
         $empty = $paginate->isEmpty();
 
