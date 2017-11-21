@@ -9,10 +9,6 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
 
-    <meta http-equiv="x-dns-prefetch-control" content="on"/>
-    <link rel="dns-prefetch" href="https://graph.instagram.com"/>
-    <link rel="dns-prefetch" href="https://www.instagram.com"/>
-
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
     @php($fullTitle = config('app.name'))
@@ -281,15 +277,17 @@
 
 </div>
 
-<link href="{{ asset2('https://cdn.bavix.ru/lightgallery/latest/dist/css/lightgallery.min.css') }}" rel="stylesheet"/>
+@if (active('post.view'))
+    <link href="{{ asset2('https://cdn.bavix.ru/lightgallery/latest/dist/css/lightgallery.min.css') }}" rel="stylesheet"/>
+
+    <script src="{{ asset2('https://cdn.bavix.ru/jquery/latest/dist/jquery.min.js') }} "></script>
+    <script src="{{ asset2('https://cdn.bavix.ru/popper.js/latest/dist/umd/popper.min.js') }}"></script>
+    <script src="{{ asset2('https://cdn.bavix.ru/bootstrap/next/dist/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset2('https://cdn.bavix.ru/lightgallery/latest/dist/js/lightgallery.min.js') }}"></script>
+    <script src="{{ asset2('/js/app.js') }}"></script>
+@endif
+
 <link href="{{ asset2('https://cdn.bavix.ru/font-awesome/latest/css/font-awesome.min.css') }}" rel="stylesheet"/>
-
-<script src="{{ asset2('https://cdn.bavix.ru/jquery/latest/dist/jquery.min.js') }} "></script>
-<script src="{{ asset2('https://cdn.bavix.ru/popper.js/latest/dist/umd/popper.min.js') }}"></script>
-<script src="{{ asset2('https://cdn.bavix.ru/bootstrap/next/dist/js/bootstrap.min.js') }}"></script>
-<script src="{{ asset2('https://cdn.bavix.ru/lightgallery/latest/dist/js/lightgallery.min.js') }}"></script>
-<script src="{{ asset2('/js/app.js') }}"></script>
-
 
 @foreach (\App\Models\Counter::query()->where('active', 1)->get() as $counter)
     {!! $counter->code !!}
