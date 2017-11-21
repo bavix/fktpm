@@ -18,6 +18,9 @@
 
     <title>{{ $fullTitle }}</title>
 
+    <!-- Styles -->
+    <link href="{{ asset2('https://cdn.bavix.ru/bootstrap/next/dist/css/bootstrap.min.css')  }}" rel="stylesheet"/>
+
     <link rel="icon" type="image/ico" href="/favicons/favicon.ico"/>
     <link rel="apple-touch-icon" sizes="57x57" href="/favicons/apple-icon-57x57.png"/>
     <link rel="apple-touch-icon" sizes="60x60" href="/favicons/apple-icon-60x60.png"/>
@@ -273,8 +276,6 @@
 
 </div>
 
-<!-- Styles -->
-<link href="{{ asset2('https://cdn.bavix.ru/bootstrap/next/dist/css/bootstrap.min.css')  }}" rel="stylesheet"/>
 <link href="{{ asset2('/css/app.css') }}" rel="stylesheet"/>
 
 @if (active('post.view'))
