@@ -47,7 +47,7 @@ class Image extends Model
         return Storage::disk('public');
     }
 
-    protected function thumbnailPath($type)
+    public function thumbnailPath($type)
     {
         return preg_replace(
             '~^(image/)~',
