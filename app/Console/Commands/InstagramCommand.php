@@ -42,6 +42,8 @@ class InstagramCommand extends Command
      */
     protected $category;
 
+    protected $tags = ['фктипм', 'фктипмкубгу'];
+
     /**
      * @return string
      */
@@ -189,21 +191,29 @@ class InstagramCommand extends Command
             config('instagram.username'),
             config('instagram.password')
         );
-
-        $items = $instagram->hashtag->getFeed('фктипм')->getItems();
-
-        foreach ($items as $item)
+        
+        foreach ($this->tags as $tag)
         {
-            $this->info('Item #' . $item->id . '; code=' . $item->getCode());
+            $items = $instagram->hashtag->getFeed($tag)->getItems();
 
-            if ($this->store($item))
+            $this->warn('Tag #' . $tag);
+
+            foreach ($items as $item)
             {
-                continue;
-            }
+                $this->info('Item #' . $item->id . '; code=' . $item->getCode());
+
+                if ($this->store($item))
+                {
+                    continue;
+                }
 
 //            $this->warn('broken');
 //            break;
+            }
+
+            sleep(120);
         }
+
     }
 
 }
