@@ -10,7 +10,9 @@
 
                 <div class="card-body">
 
-                    <h1 class="card-title">{{ $item->title }}</h1>
+                    @if (!$item->instagram_code)
+                        <h1 class="card-title">{{ $item->title }}</h1>
+                    @endif
 
                     @if(!empty($item->image))
                         <p class="text-center">

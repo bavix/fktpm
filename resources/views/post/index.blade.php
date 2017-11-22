@@ -44,11 +44,13 @@
                             @endif
                         @endif
 
-                        <h3 class="card-title">
-                            <a href="{{ $item->url() }}" title="{{ $item->title }}">
-                                {{ $item->title }}
-                            </a>
-                        </h3>
+                        @if (!$item->instagram_code)
+                            <h3 class="card-title">
+                                <a href="{{ $item->url() }}" title="{{ $item->title }}">
+                                    {{ $item->title }}
+                                </a>
+                            </h3>
+                        @endif
 
                         @if (isset($item->description))
                             <p class="card-text">{{ $item->description }}</p>
