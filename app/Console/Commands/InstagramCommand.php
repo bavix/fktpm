@@ -201,8 +201,8 @@ class InstagramCommand extends Command
                 continue;
             }
 
-            $this->warn('broken');
-            break;
+//            $this->warn('broken');
+//            break;
         }
     }
 
