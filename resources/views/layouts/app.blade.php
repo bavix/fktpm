@@ -190,7 +190,7 @@
                             <nav class="nav flex-column">
                                 @foreach ($links as $link)
                                     <a class="nav-link" href="{{ $link->url }}" title="{{ $link->title }}" rel="nofollow" target="_blank">
-                                        <i class="fa fa-link text-gray-dark" aria-hidden="true"></i>
+                                        <i class="fa fa-link bx-fa-style" aria-hidden="true"></i>
                                         <span>{{ $link->title }}</span>
                                     </a>
                                 @endforeach
@@ -236,7 +236,7 @@
                                         <span class="badge badge-secondary float-right">
                                             {{ \Bavix\Helpers\Str::fileSize($file->size) }}
                                         </span>
-                                        <i class="fa {{ $file->faType() }} text-gray-dark" aria-hidden="true"></i>
+                                        <i class="fa {{ $file->faType() }} bx-fa-style" aria-hidden="true"></i>
                                         <span>{{ $file->title }}</span>
                                     </a>
                                     <span class="nav-link">
@@ -276,6 +276,42 @@
     </div>
 
 </div>
+
+<footer class="footer-distributed">
+
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col-12">
+
+                <p class="footer-social float-right">
+                    <a href="https://ln4.ru/fbook" title="Facebook"><i class="fa fa-facebook"></i></a>
+                    <a href="https://ln4.ru/twitt" title="Twitter"><i class="fa fa-twitter"></i></a>
+                    <a href="https://ln4.ru/vkcom" title="VK"><i class="fa fa-vk"></i></a>
+                    <a href="https://ln4.ru/githb" title="GitHub"><i class="fa fa-github"></i></a>
+                </p>
+
+                <p class="footer-links">
+                    <a href="{{ route('post') }}">Посты</a>
+                    ·
+                    <a href="{{ route('professor') }}">Преподаватели</a>
+                    ·
+                    <a href="{{ route('couple') }}">Предметы</a>
+                    ·
+                    <a href="{{ route('helper') }}">Помощь проекту</a>
+                </p>
+
+                <p class="footer-company">
+                    <a href="https://bavix.ru/" title="bavix - разработка и техническая поддержка">bavix</a> © 2013 - {{ date('Y') }}
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+
+</footer>
 
 <link href="{{ asset2('https://cdn.bavix.ru/font-awesome/latest/css/font-awesome.min.css') }}" rel="stylesheet"/>
 <script src="{{ asset2('https://cdnjs.cloudflare.com/ajax/libs/vanilla-lazyload/10.3.5/lazyload.min.js') }}"></script>
