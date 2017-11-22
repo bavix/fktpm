@@ -133,14 +133,14 @@
                         </a>
                     </li>
                 </ul>
-                <ul class="navbar-nav my-2 my-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link" href="https://old.fktpm.ru" title="Старая версия сайта">
-                            <i class="fa fa-server text-primary" aria-hidden="true"></i>
-                            <span>Старая версия сайта</span>
-                        </a>
-                    </li>
-                </ul>
+                {{--<ul class="navbar-nav my-2 my-lg-0">--}}
+                    {{--<li class="nav-item">--}}
+                        {{--<a class="nav-link" href="https://old.fktpm.ru" title="Старая версия сайта">--}}
+                            {{--<i class="fa fa-server text-primary" aria-hidden="true"></i>--}}
+                            {{--<span>Старая версия сайта</span>--}}
+                        {{--</a>--}}
+                    {{--</li>--}}
+                {{--</ul>--}}
                 {{--<form class="form-inline my-2 my-lg-0">--}}
                     {{--<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">--}}
                     {{--<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>--}}
@@ -157,121 +157,127 @@
 
     <div class="row">
 
-        <div class="col-lg-4 order-lg-2">
+        <div class="col-xxl-7 col-lg-4 order-lg-2">
 
-            {{--<form id="search" data-name="card" method="GET" action="{{ route('search', ['files']) }}">--}}
+            <div class="row grid">
+
+                {{--<form id="search" data-name="card" method="GET" action="{{ route('search', ['files']) }}">--}}
                 {{--<div class="input-group">--}}
-                    {{--<input id="search-files" type="text" name="query" class="form-control" placeholder="Поиск..." value="{{ request()->query('query') }}">--}}
-                    {{--<span class="input-group-btn">--}}
-                        {{--<button class="btn btn-info" type="submit">Найти</button>--}}
-                    {{--</span>--}}
+                {{--<input id="search-files" type="text" name="query" class="form-control" placeholder="Поиск..." value="{{ request()->query('query') }}">--}}
+                {{--<span class="input-group-btn">--}}
+                {{--<button class="btn btn-info" type="submit">Найти</button>--}}
+                {{--</span>--}}
                 {{--</div>--}}
-            {{--</form>--}}
+                {{--</form>--}}
 
-            @php($links = \App\Models\Link::query()->where('active', 1)->get())
-            @if ($links->count())
+                @php($links = \App\Models\Link::query()->where('active', 1)->get())
+                @if ($links->count())
+                    <div class="col-xxl-6 col-lg-12 grid-item">
+                        <div class="card" data-name="card">
+                            <div class="card-body">
 
-                <div class="card" data-name="card">
-                    <div class="card-body">
-
-                        <span class="badge badge-pill badge-primary float-right">
-                            {{ $links->count() }}
-                        </span>
-
-                        <div class="card-title">
-                            <h4>
-                                <i class="fa fa-comments-o text-danger" aria-hidden="true"></i>
-                                <span>Социальные сети</span>
-                            </h4>
-                        </div>
-
-                        <div class="card-text row">
-
-                            <nav class="nav flex-column">
-                                @foreach ($links as $link)
-                                    <a class="nav-link" href="{{ $link->url }}" title="{{ $link->title }}" rel="nofollow" target="_blank">
-                                        <i class="fa fa-link bx-fa-style" aria-hidden="true"></i>
-                                        <span>{{ $link->title }}</span>
-                                    </a>
-                                @endforeach
-                            </nav>
-
-                            <div class="col-12">
-                                <a href="{{ route('helper') }}" class="btn btn-outline-success btn-block">Как добавить материал?</a>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-
-            @endif
-
-            @foreach (\App\Models\Tag::blocks() as $tag)
-
-                @if (!$tag->files->count())
-                    @continue
-                @endif
-
-                <div class="card" data-name="card">
-                    <div class="card-body">
-                        <div class="card-title">
                             <span class="badge badge-pill badge-primary float-right">
-                                {{ $tag->files->count() }}
+                                {{ $links->count() }}
                             </span>
 
-                            <h4>
-                                <i class="fa fa-book text-danger" aria-hidden="true"></i>
-                                <span>{{ $tag->name }}</span>
-                            </h4>
-                        </div>
+                                <div class="card-title">
+                                    <h4>
+                                        <i class="fa fa-comments-o text-danger" aria-hidden="true"></i>
+                                        <span>Социальные сети</span>
+                                    </h4>
+                                </div>
 
-                        <div class="card-text row">
+                                <div class="card-text row">
 
-                            <nav class="nav flex-column">
-
-                                @foreach ($tag->files as $file)
-
-                                    <!-- start item -->
-                                    <a class="nav-link" href="{{ $file->url() }}">
-                                        <span class="badge badge-secondary float-right">
-                                            {{ \Bavix\Helpers\Str::fileSize($file->size) }}
-                                        </span>
-                                        <i class="fa {{ $file->faType() }} bx-fa-style" aria-hidden="true"></i>
-                                        <span>{{ $file->title }}</span>
-                                    </a>
-                                    <span class="nav-link">
-                                        @foreach($file->tags as $_tag)
-                                            @php($badge = $_tag->is_block ? 'success' : 'primary')
-{{--                                            <a href="/files/{{ $_tag->slug }}" class="badge badge-{{ $badge }}">--}}
-                                            <span class="badge badge-{{ $badge }}">
-                                                <i class="fa fa-tag" aria-hidden="true"></i> {{ $_tag->name }}
-                                            </span>
-                                            {{--</a>--}}
+                                    <nav class="nav flex-column">
+                                        @foreach ($links as $link)
+                                            <a class="nav-link" href="{{ $link->url }}" title="{{ $link->title }}" rel="nofollow" target="_blank">
+                                                <i class="fa fa-link bx-fa-style" aria-hidden="true"></i>
+                                                <span>{{ $link->title }}</span>
+                                            </a>
                                         @endforeach
-                                    </span>
-                                    <!-- remove style -->
-                                    <div class="bx-space" style="padding-bottom: .6rem"></div>
-                                    <!-- end item -->
+                                    </nav>
 
-                                @endforeach
+                                    <div class="col-12">
+                                        <a href="{{ route('helper') }}" class="btn btn-outline-success btn-block">Как добавить материал?</a>
+                                    </div>
 
-                            </nav>
-
-                            <div class="col-12">
-                                <a href="{{ route('helper') }}" class="btn btn-outline-success btn-block">Как добавить материал?</a>
+                                </div>
                             </div>
-
                         </div>
                     </div>
-                </div>
+                @endif
 
-            @endforeach
+                @foreach (\App\Models\Tag::blocks() as $tag)
+
+                    @if (!$tag->files->count())
+                        @continue
+                    @endif
+
+                    <div class="col-xxl-6 col-lg-12 grid-item">
+                        <div class="card" data-name="card">
+                            <div class="card-body">
+                                <div class="card-title">
+                                <span class="badge badge-pill badge-primary float-right">
+                                    {{ $tag->files->count() }}
+                                </span>
+
+                                    <h4>
+                                        <i class="fa fa-book text-danger" aria-hidden="true"></i>
+                                        <span>{{ $tag->name }}</span>
+                                    </h4>
+                                </div>
+
+                                <div class="card-text row">
+
+                                    <nav class="nav flex-column">
+
+                                    @foreach ($tag->files as $file)
+
+                                        <!-- start item -->
+                                            <a class="nav-link" href="{{ $file->url() }}">
+                                            <span class="badge badge-secondary float-right">
+                                                {{ \Bavix\Helpers\Str::fileSize($file->size) }}
+                                            </span>
+                                                <i class="fa {{ $file->faType() }} bx-fa-style" aria-hidden="true"></i>
+                                                <span>{{ $file->title }}</span>
+                                            </a>
+                                            <span class="nav-link">
+                                            @foreach($file->tags as $_tag)
+                                                    @php($badge = $_tag->is_block ? 'success' : 'primary')
+                                                    {{--                                            <a href="/files/{{ $_tag->slug }}" class="badge badge-{{ $badge }}">--}}
+                                                    <span class="badge badge-{{ $badge }}">
+                                                    <i class="fa fa-tag" aria-hidden="true"></i> {{ $_tag->name }}
+                                                </span>
+                                                    {{--</a>--}}
+                                                @endforeach
+                                        </span>
+                                            <!-- remove style -->
+                                            <div class="bx-space" style="padding-bottom: .6rem"></div>
+                                            <!-- end item -->
+
+                                        @endforeach
+
+                                    </nav>
+
+                                    <div class="col-12">
+                                        <a href="{{ route('helper') }}" class="btn btn-outline-success btn-block">Как добавить материал?</a>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                @endforeach
+
+            </div>
 
         </div>
 
-        <div class="col-lg-8 order-lg-1">
+        <div class="col-xxl-5 col-lg-8 order-lg-1">
             @yield('content')
-       </div>
+        </div>
 
     </div>
 
@@ -320,12 +326,14 @@
 <script src="{{ asset2('https://cdn.bavix.ru/jquery/latest/dist/jquery.min.js') }} "></script>
 <script src="{{ asset2('https://cdn.bavix.ru/popper.js/latest/dist/umd/popper.min.js') }}"></script>
 <script src="{{ asset2('https://cdn.bavix.ru/bootstrap/next/dist/js/bootstrap.min.js') }}"></script>
+<script src="{{ asset2('/node_modules/masonry-layout/dist/masonry.pkgd.min.js') }}"></script>
 
 @if (active('post.view'))
     <link href="{{ asset2('https://cdn.bavix.ru/lightgallery/latest/dist/css/lightgallery.min.css') }}" rel="stylesheet"/>
     <script src="{{ asset2('https://cdn.bavix.ru/lightgallery/latest/dist/js/lightgallery.min.js') }}"></script>
-    <script src="{{ asset2('/js/app.js') }}"></script>
 @endif
+
+<script src="{{ asset2('/js/app.js') }}"></script>
 
 @foreach (\App\Models\Counter::query()->where('active', 1)->get() as $counter)
     {!! $counter->code !!}
