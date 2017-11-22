@@ -23,5 +23,27 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Link extends Model
 {
+
     public $timestamps = false;
+
+    protected function parse()
+    {
+        return \parse_url($this->url);
+    }
+
+    /**
+     * @return null|string
+     */
+    public function host()
+    {
+        return $this->parse()['host'] ?? null;
+    }
+
+    public static function active()
+    {
+        return static::query()
+            ->where('active', 1)
+            ->get();
+    }
+
 }

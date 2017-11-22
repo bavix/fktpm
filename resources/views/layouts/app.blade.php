@@ -170,7 +170,7 @@
                 {{--</div>--}}
                 {{--</form>--}}
 
-                @php($links = \App\Models\Link::query()->where('active', 1)->get())
+                @php($links = \App\Models\Link::active())
                 @if ($links->count())
                     <div class="col-xxl-6 col-lg-12 grid-item">
                         <div class="card" data-name="card">
@@ -183,7 +183,7 @@
                                 <div class="card-title">
                                     <h4>
                                         <i class="fa fa-comments-o text-danger" aria-hidden="true"></i>
-                                        <span>Социальные сети</span>
+                                        <span>Полезные ресурсы</span>
                                     </h4>
                                 </div>
 
@@ -192,7 +192,11 @@
                                     <nav class="nav flex-column">
                                         @foreach ($links as $link)
                                             <a class="nav-link" href="{{ $link->url }}" title="{{ $link->title }}" rel="nofollow" target="_blank">
-                                                <i class="fa fa-link bx-fa-style" aria-hidden="true"></i>
+                                                @if ($link->host() === 'vk.com')
+                                                    <i class="fa fa-vk bx-fa-style" aria-hidden="true"></i>
+                                                @else
+                                                    <i class="fa fa-link bx-fa-style" aria-hidden="true"></i>
+                                                @endif
                                                 <span>{{ $link->title }}</span>
                                             </a>
                                         @endforeach
@@ -209,10 +213,6 @@
                 @endif
 
                 @foreach (\App\Models\Tag::blocks() as $tag)
-
-                    @if (!$tag->files->count())
-                        @continue
-                    @endif
 
                     <div class="col-xxl-6 col-lg-12 grid-item">
                         <div class="card" data-name="card">
