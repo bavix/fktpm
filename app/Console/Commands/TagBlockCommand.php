@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Models\File;
 use Illuminate\Console\Command;
 
 /**
@@ -43,10 +44,10 @@ class TagBlockCommand extends Command
         \DB::update(
             'UPDATE `tags` SET `is_block`=? WHERE id in (select tag_id from (' .
             'select tag_id, count(distinct taggable_id) cnt ' .
-            'from taggables ' .
+            'from taggables where taggable_type = ? ' .
             'group by tag_id ' .
             ') t where t.cnt > ?)',
-            [1, 4]
+            [1, File::class, 4]
         );
     }
 
