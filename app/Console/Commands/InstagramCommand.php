@@ -42,7 +42,7 @@ class InstagramCommand extends Command
      */
     protected $category;
 
-    protected $tags = ['фктипм', 'фктипмкубгу'];
+    protected $tags = ['фктипм', 'фктипмкубгу', 'кубгуфпм'];
 
     /**
      * @return string
@@ -191,7 +191,7 @@ class InstagramCommand extends Command
             config('instagram.username'),
             config('instagram.password')
         );
-        
+
         foreach ($this->tags as $tag)
         {
             $items = $instagram->hashtag->getFeed($tag)->getItems();
