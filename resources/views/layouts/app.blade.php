@@ -170,7 +170,7 @@
                 {{--</div>--}}
                 {{--</form>--}}
 
-                @php($links = \App\Models\Link::active())
+                @php($links = \App\Models\Link::getActive())
                 @if ($links->count())
                     <div class="col-xxl-6 col-lg-12 grid-item">
                         <div class="card" data-name="card">

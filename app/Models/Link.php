@@ -39,7 +39,7 @@ class Link extends Model
         return $this->parse()['host'] ?? null;
     }
 
-    public static function active()
+    public static function getActive()
     {
         return static::query()
             ->where('active', 1)
