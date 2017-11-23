@@ -36,7 +36,7 @@
     "ralouphie/mimey": "^1.0",
     "spatie/image-optimizer": "^1.0",
     "spatie/laravel-paginateroute": "^2.5",
-    "spatie/laravel-sitemap": "^3.2",
+    "roumen/sitemap": "^2.7",
     "vladkolodka/phpmorphy": "^0.3.0",
     "yab/laravel-scout-mysql-driver": "^2.0"
   },
