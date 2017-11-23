@@ -45,6 +45,9 @@ Route::get('/search/{action}', 'SearchController@index')
 Route::get('/file/{id}-{title}.{type}', 'FileController@index')
     ->name('file');
 
+Route::get('/file/tag/{tag}', 'FileController@tag')
+    ->name('file.tag');
+
 // seo
 Route::get('/teachers', function () {
     return redirect(\route('professor'), 301);

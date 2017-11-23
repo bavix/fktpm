@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Download;
 use App\Models\File;
+use App\Models\Tag;
 use Bavix\App\Http\Controllers\Controller;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -25,6 +26,25 @@ class FileController extends Controller
 
         header('location: ' . $model->url(), true, 301);
         die;
+    }
+
+    public function tag(Request $request, $slug)
+    {
+        $tag = Tag::query()
+            ->where('slug->ru', $slug)
+            ->firstOrFail();
+
+        $query = File::with('tags');
+
+        $query->whereHas('tags', function (\Illuminate\Database\Eloquent\Builder $query) use ($slug) {
+            $query->where('slug->ru', $slug);
+        });
+
+        return $this->render('file.tag', [
+            'items' => $query->get(),
+            'title'       => 'Поиск по тегу: ' . $tag->name,
+            'description' => __('descriptions.file.tag', ['name' => $tag->name])
+        ]);
     }
 
     public function index(Request $request, $id)

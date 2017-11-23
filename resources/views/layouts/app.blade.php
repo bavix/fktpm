@@ -231,33 +231,11 @@
                                 <div class="card-text row">
 
                                     <nav class="nav flex-column">
-
-                                    @foreach ($tag->files as $file)
-
-                                        <!-- start item -->
-                                            <a class="nav-link" href="{{ $file->url() }}">
-                                            <span class="badge badge-secondary float-right">
-                                                {{ \Bavix\Helpers\Str::fileSize($file->size) }}
-                                            </span>
-                                                <i class="fa {{ $file->faType() }} bx-fa-style" aria-hidden="true"></i>
-                                                <span>{{ $file->title }}</span>
-                                            </a>
-                                            <span class="nav-link">
-                                            @foreach($file->tags as $_tag)
-                                                    @php($badge = $_tag->is_block ? 'success' : 'primary')
-                                                    {{--                                            <a href="/files/{{ $_tag->slug }}" class="badge badge-{{ $badge }}">--}}
-                                                    <span class="badge badge-{{ $badge }}">
-                                                    <i class="fa fa-tag" aria-hidden="true"></i> {{ $_tag->name }}
-                                                </span>
-                                                    {{--</a>--}}
-                                                @endforeach
-                                        </span>
-                                            <!-- remove style -->
-                                            <div class="bx-space" style="padding-bottom: .6rem"></div>
-                                            <!-- end item -->
-
+                                        @foreach ($tag->files as $file)
+                                            @include('file.item', [
+                                                'file' => $file
+                                            ])
                                         @endforeach
-
                                     </nav>
 
                                     <div class="col-12">
