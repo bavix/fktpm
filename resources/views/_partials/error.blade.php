@@ -50,7 +50,7 @@
                 type: 'HEAD',
                 url: '/',
                 complete: function(xhr) {
-                    if (xhr.status !== 503) {
+                    if (xhr.status === 200) {
                         location.reload();
                     }
                 }

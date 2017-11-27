@@ -112,9 +112,26 @@ if (!function_exists('bx_background'))
 
         $background = '/image/background.png';
 
+        // halloween
         if ($now->month === 10 && $now->day === 31)
         {
             $background = '/image/halloween/' . \Bavix\Helpers\Num::randomInt(1, 9) . '.png';
+        }
+
+        // new year
+        if ($now->month === 12 && $now->day > 15)
+        {
+            $background = '/image/ny.jpg';
+
+            if ($now->day > 20)
+            {
+                $background = '/image/ny2.jpg';
+            }
+        }
+
+        if ($now->month === 1)
+        {
+            $background = '/image/memphis-colorful.png';
         }
 
         return asset2($background);
