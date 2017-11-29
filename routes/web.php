@@ -30,7 +30,7 @@ Route::get('/professors/rank/{id}', 'ProfessorController@rank')
 Route::get('/couples', 'CoupleController@index')
     ->name('couple');
 
-Route::get('/helper', 'HelperController@index')
+Route::get('/help', 'HelperController@index')
     ->name('helper');
 
 // search
@@ -49,6 +49,10 @@ Route::get('/file/tag/{tag}', 'FileController@tag')
     ->name('file.tag');
 
 // seo
+Route::get('/helper', function () {
+    return redirect(\route('helper'), 301);
+});
+
 Route::get('/teachers', function () {
     return redirect(\route('professor'), 301);
 });
