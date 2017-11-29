@@ -34,10 +34,6 @@ Route::get('/help', 'HelperController@index')
     ->name('helper');
 
 // search
-Route::redirect('/search', function () {
-    return redirect(\route('search', ['posts']));
-});
-
 Route::get('/search/{action}', 'SearchController@index')
     ->name('search');
 
@@ -49,17 +45,10 @@ Route::get('/file/tag/{tag}', 'FileController@tag')
     ->name('file.tag');
 
 // seo
-Route::get('/helper', function () {
-    return redirect(\route('helper'), 301);
-});
-
-Route::get('/teachers', function () {
-    return redirect(\route('professor'), 301);
-});
-
-Route::get('/donate', function () {
-    return redirect(\route('helper'), 301);
-});
+Route::get('/helper', 'SeoController@helper');
+Route::get('/donate', 'SeoController@helper');
+Route::get('/search', 'SeoController@search');
+Route::get('/teachers', 'SeoController@teacher');
 
 Route::get('/get_file/{hash}', 'FileController@getFile');
 Route::get('/professorrating/{id}', 'ProfessorController@professorRating');
