@@ -1,13 +1,18 @@
 @if (count($breadcrumbs))
 
-    <ol class="breadcrumb ">
+    <ol class="breadcrumb" itemscope itemtype="http://schema.org/BreadcrumbList">
         @foreach ($breadcrumbs as $breadcrumb)
 
-            @if ($breadcrumb->url && !$loop->last)
-                <li class="breadcrumb-item"><a href="{{ $breadcrumb->url }}">{{ $breadcrumb->title }}</a></li>
-            @else
-                <li class="breadcrumb-item active">{{ $breadcrumb->title }}</li>
-            @endif
+            <li itemprop="itemListElement" itemscope
+                itemtype="http://schema.org/ListItem"
+                class="breadcrumb-item">
+
+                <a itemscope itemtype="http://schema.org/Thing"
+                   itemprop="item" href="{{ $breadcrumb->url }}">
+                    <span itemprop="name">{{ $breadcrumb->title }}</span>
+                </a>
+                <meta itemprop="position" content="{{ $loop->iteration }}" />
+            </li>
 
         @endforeach
     </ol>

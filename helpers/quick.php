@@ -84,23 +84,8 @@ if (!function_exists('diffForHumans'))
 {
     function diffForHumans($date)
     {
-        $carbon = \Laravelrus\LocalizedCarbon\LocalizedCarbon::createFromFormat('Y-m-d H:i:s', $date);
-        $local  = \Laravelrus\LocalizedCarbon\LocalizedCarbon::instance($carbon);
-
-        return $local->diffForHumans();
-    }
-}
-
-if (!function_exists('onOff'))
-{
-    function onOff($value)
-    {
-        if ($value)
-        {
-            return '<span class="label label-primary">вкл.</span>';
-        }
-
-        return '<span class="label label-default">выкл.</span>';
+        return \Laravelrus\LocalizedCarbon\LocalizedCarbon::createFromFormat('Y-m-d H:i:s', $date)
+            ->diffForHumans();
     }
 }
 

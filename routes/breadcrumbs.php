@@ -46,7 +46,22 @@ Breadcrumbs::register('post.draft', function ($breadcrumbs, $item) {
     ]));
 });
 
-// contact
-Breadcrumbs::register('contact', function ($breadcrumbs) {
-    $breadcrumbs->push(__('breadcrumbs.contact'), route('contact'));
+// professors
+Breadcrumbs::register('professor', function ($breadcrumbs) {
+    $breadcrumbs->push(__('breadcrumbs.professor'), route('professor'));
+});
+
+// couples
+Breadcrumbs::register('couple', function ($breadcrumbs) {
+    $breadcrumbs->push(__('breadcrumbs.couple'), route('couple'));
+});
+
+// helper
+Breadcrumbs::register('helper', function ($breadcrumbs) {
+    $breadcrumbs->push(__('breadcrumbs.helper'), route('helper'));
+});
+
+// file
+Breadcrumbs::register('file.tag', function ($breadcrumbs) {
+    $breadcrumbs->push(__('breadcrumbs.tag'), request()->fullUrl());
 });

@@ -254,6 +254,7 @@
         </div>
 
         <div class="col-xxl-5 col-lg-8 order-lg-1">
+            @include('_partials.breadcrumbs')
             @yield('content')
         </div>
 
@@ -269,21 +270,21 @@
 
             <div class="col-12">
 
-                <p class="footer-social float-right">
-                    <a href="https://ln4.ru/fbook" title="Facebook"><i class="fa fa-facebook"></i></a>
-                    <a href="https://ln4.ru/twitt" title="Twitter"><i class="fa fa-twitter"></i></a>
-                    <a href="https://ln4.ru/vkcom" title="VK"><i class="fa fa-vk"></i></a>
-                    <a href="https://ln4.ru/githb" title="GitHub"><i class="fa fa-github"></i></a>
+                <p class="footer-social float-right" itemscope itemtype="http://schema.org/Organization">
+                    <a itemprop="sameAs" target="_blank" href="https://www.facebook.com/rez1dent3" title="Facebook"><i class="fa fa-facebook"></i></a>
+                    <a itemprop="sameAs" target="_blank" href="https://twitter.com/rez1dent3" title="Twitter"><i class="fa fa-twitter"></i></a>
+                    <a itemprop="sameAs" target="_blank" href="https://vk.com/rez1dent3" title="VK"><i class="fa fa-vk"></i></a>
+                    <a itemprop="sameAs" target="_blank" href="https://github.com/rez1dent3" title="GitHub"><i class="fa fa-github"></i></a>
                 </p>
 
                 <p class="footer-links">
-                    <a href="{{ route('post') }}">Посты</a>
+                    <a href="{{ route('post') }}" title="Посты">Посты</a>
                     ·
-                    <a href="{{ route('professor') }}">Преподаватели</a>
+                    <a href="{{ route('professor') }}" title="Преподаватели">Преподаватели</a>
                     ·
-                    <a href="{{ route('couple') }}">Предметы</a>
+                    <a href="{{ route('couple') }}" title="Предметы">Предметы</a>
                     ·
-                    <a href="{{ route('helper') }}">Помощь проекту</a>
+                    <a href="{{ route('helper') }}" title="Помощь проекту">Помощь проекту</a>
                 </p>
 
                 <p class="footer-company">
@@ -320,6 +321,15 @@
 @if (!empty($debugBar))
     {!! $debugBar->render() !!}
 @endif
+
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Organization",
+  "url": "{{ route('post') }}",
+  "logo": "https://fktpm.ru/favicons/android-icon-192x192.png"
+}
+</script>
 
 </body>
 </html>
