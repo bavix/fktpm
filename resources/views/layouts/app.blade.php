@@ -272,6 +272,7 @@
 
                 <p class="footer-social float-right" itemscope itemtype="http://schema.org/Organization">
                     <a itemprop="sameAs" target="_blank" href="https://www.facebook.com/rez1dent3" title="Facebook"><i class="fa fa-facebook"></i></a>
+                    <a itemprop="sameAs" target="_blank" href="https://www.instagram.com/m.babichev" title="Instagram"><i class="fa fa-instagram"></i></a>
                     <a itemprop="sameAs" target="_blank" href="https://twitter.com/rez1dent3" title="Twitter"><i class="fa fa-twitter"></i></a>
                     <a itemprop="sameAs" target="_blank" href="https://vk.com/rez1dent3" title="VK"><i class="fa fa-vk"></i></a>
                     <a itemprop="sameAs" target="_blank" href="https://github.com/rez1dent3" title="GitHub"><i class="fa fa-github"></i></a>
