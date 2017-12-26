@@ -212,6 +212,29 @@
                     </div>
                 @endif
 
+                @php($ads = sape()->return_links())
+
+                @if (!empty($ads))
+
+                    <div class="col-xxl-6 col-lg-12 grid-item">
+                        <div class="card" data-name="card">
+                            <div class="card-body">
+                                <div class="card-title">
+                                    <h4>
+                                        <i class="fa fa-link text-danger" aria-hidden="true"></i>
+                                        <span>Реклама</span>
+                                    </h4>
+                                </div>
+
+                                <div class="card-text row">
+                                    {!! $ads !!}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                @endif
+
                 @foreach (\App\Models\Tag::blocks() as $tag)
 
                     <div class="col-xxl-6 col-lg-12 grid-item">

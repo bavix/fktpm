@@ -54,7 +54,8 @@
       "database/factories"
     ],
     "files": [
-      "helpers/quick.php"
+      "helpers/quick.php",
+      "helpers/sape.php"
     ],
     "psr-4": {
       "App\\": "app/"
