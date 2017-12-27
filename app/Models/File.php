@@ -66,7 +66,7 @@ class File extends Model
         {
             // archive
             case 'zip':
-                return 'fa-file-zip-o';
+                return 'fa-file-archive';
 
             case 'rar':
             case 'tar':
@@ -76,16 +76,16 @@ class File extends Model
 
             // docs
             case 'pdf':
-                return 'fa-file-pdf-o';
+                return 'fa-file-pdf';
 
             case 'tiff':
-                return 'fa-file-image-o';
+                return 'fa-file-image';
 
             // word
             case 'doc':
             case 'docx':
             case 'rdf':
-                return 'fa-file-word-o';
+                return 'fa-file-word';
 
             // excel
             case 'xlsx':

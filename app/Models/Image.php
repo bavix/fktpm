@@ -58,27 +58,31 @@ class Image extends Model
 
     protected function thumbnail($type)
     {
-        $thumbnail = $this->thumbnailPath($type);
-        $imagePath = $this->storage()->path($thumbnail);
+        try {
+            $thumbnail = $this->thumbnailPath($type);
+            $imagePath = $this->storage()->path($thumbnail);
 
-        if (!File::exists(\Storage::path($imagePath)))
-        {
-            /**
-             * @var $image \Intervention\Image\Image
-             */
-            $image = \Intervention\Image\Facades\Image::make(
-                $this->storage()->path($this->path)
-            );
+            if (!File::exists(\Storage::path($imagePath)))
+            {
+                /**
+                 * @var $image \Intervention\Image\Image
+                 */
+                $image = \Intervention\Image\Facades\Image::make(
+                    $this->storage()->path($this->path)
+                );
 
-            $image->resize($this->sizes[$type], null, function (Constraint $constraint) {
-                $constraint->aspectRatio();
-            });
+                $image->resize($this->sizes[$type], null, function (Constraint $constraint) {
+                    $constraint->aspectRatio();
+                });
 
-            Dir::make(\dirname($imagePath));
-            $image->save($imagePath);
+                Dir::make(\dirname($imagePath));
+                $image->save($imagePath);
+            }
+
+            return $thumbnail;
+        } catch (\Throwable $exception) {
+            return $this->path;
         }
-
-        return $thumbnail;
     }
 
     public function lg()

@@ -13,7 +13,7 @@
                     <div class="card-title">
                         <span class="badge badge-pill badge-primary float-right">{{ $items->count() }}</span>
                         <h4>
-                            <i class="fa fa-tag text-danger" aria-hidden="true"></i>
+                            <i class="fal fa-tag text-danger" aria-hidden="true"></i>
                             <span>{{ $title }}</span>
                         </h4>
                     </div>
@@ -22,9 +22,32 @@
 
                         <nav class="nav flex-column">
                             @forelse ($items as $item)
-                                @include('file.item', [
-                                    'file' => $item
-                                ])
+
+                                <!-- start item -->
+                                <a class="nav-link" href="{{ $item->url() }}">
+                                    <span class="badge badge-secondary float-right">
+                                        {{ \Bavix\Helpers\Str::fileSize($item->size) }}
+                                    </span>
+                                    <i class="fal {{ $item->faType() }} bx-fa-style" aria-hidden="true"></i>
+                                    <span>{{ $item->title }}</span>
+                                </a>
+                                
+                                <span class="nav-link">
+                                    @foreach($item->tags as $_tag)
+                                        @php($badge = $_tag->is_block ? 'success' : 'primary')
+                                        <a href="{{ route('file.tag', [$_tag->slug]) }}" class="badge badge-{{ $badge }}">
+                                            <i class="fal fa-tag" aria-hidden="true"></i> {{ $_tag->name }}
+                                        </a>
+                                    @endforeach
+                                </span>
+                                
+                                <!-- remove style -->
+                                <div class="bx-space" style="padding-bottom: .6rem"></div>
+                                <!-- end item -->
+                                
+                                {{--@include('file.item', [--}}
+                                    {{--'file' => $item--}}
+                                {{--])--}}
                             @empty
                                 @include('post.empty')
                             @endforelse

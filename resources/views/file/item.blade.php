@@ -3,7 +3,7 @@
     <span class="badge badge-secondary float-right">
         {{ \Bavix\Helpers\Str::fileSize($file->size) }}
     </span>
-    <i class="fa {{ $file->faType() }} bx-fa-style" aria-hidden="true"></i>
+    <i class="fal {{ $file->faType() }} bx-fa-style" aria-hidden="true"></i>
     <span>{{ $file->title }}</span>
 </a>
 
@@ -11,7 +11,7 @@
     @foreach($file->tags as $_tag)
         @php($badge = $_tag->is_block ? 'success' : 'primary')
         <a href="{{ route('file.tag', [$_tag->slug]) }}" class="badge badge-{{ $badge }}">
-            <i class="fa fa-tag" aria-hidden="true"></i> {{ $_tag->name }}
+            <i class="fal fa-tag" aria-hidden="true"></i> {{ $_tag->name }}
         </a>
     @endforeach
 </span>

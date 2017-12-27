@@ -19,7 +19,7 @@
     <title>{{ $fullTitle }}</title>
 
     <!-- Styles -->
-    <link href="{{ asset2('https://cdn.bavix.ru/bootstrap/next/dist/css/bootstrap.min.css')  }}" rel="stylesheet"/>
+{{--    <link href="{{ asset2('https://cdn.bavix.ru/bootstrap/next/dist/css/bootstrap.min.css')  }}" rel="stylesheet"/>--}}
     <link href="{{ asset2('/css/app.css') }}" rel="stylesheet"/>
 
     <link rel="icon" type="image/ico" href="/favicons/favicon.ico"/>
@@ -116,19 +116,19 @@
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
                         <a class="nav-link {{ active('professor') ? 'active' : '' }}" href="{{ route('professor') }}">
-                            <i class="fa fa-users text-warning" aria-hidden="true"></i>
+                            <i class="fal fa-users text-warning" aria-hidden="true"></i>
                             <span>Преподаватели</span>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link {{ active('couple') ? 'active' : '' }}" href="{{ route('couple') }}">
-                            <i class="fa fa-bookmark text-danger" aria-hidden="true"></i>
+                            <i class="fal fa-bookmark text-danger" aria-hidden="true"></i>
                             <span>Предметы</span>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link {{ active('helper') ? 'active' : '' }}" href="{{ route('helper') }}">
-                            <i class="fa fa-question-circle text-info" aria-hidden="true"></i>
+                            <i class="fal fa-question-circle text-info" aria-hidden="true"></i>
                             <span>Помощь проекту</span>
                         </a>
                     </li>
@@ -136,7 +136,7 @@
                 {{--<ul class="navbar-nav my-2 my-lg-0">--}}
                     {{--<li class="nav-item">--}}
                         {{--<a class="nav-link" href="https://old.fktpm.ru" title="Старая версия сайта">--}}
-                            {{--<i class="fa fa-server text-primary" aria-hidden="true"></i>--}}
+                            {{--<i class="fal fa-server text-primary" aria-hidden="true"></i>--}}
                             {{--<span>Старая версия сайта</span>--}}
                         {{--</a>--}}
                     {{--</li>--}}
@@ -189,7 +189,7 @@
 
                                 <div class="card-title">
                                     <h4>
-                                        <i class="fa fa-comments-o text-danger" aria-hidden="true"></i>
+                                        <i class="fal fa-comments-o text-danger" aria-hidden="true"></i>
                                         <span>Полезные ресурсы</span>
                                     </h4>
                                 </div>
@@ -200,9 +200,9 @@
                                         @foreach ($links as $link)
                                             <a class="nav-link" href="{{ $link->url }}" title="{{ $link->title }}" rel="nofollow" target="_blank">
                                                 @if ($link->host() === 'vk.com')
-                                                    <i class="fa fa-vk bx-fa-style" aria-hidden="true"></i>
+                                                    <i class="fab fa-vk bx-fa-style" aria-hidden="true"></i>
                                                 @else
-                                                    <i class="fa fa-link bx-fa-style" aria-hidden="true"></i>
+                                                    <i class="fal fa-link bx-fa-style" aria-hidden="true"></i>
                                                 @endif
                                                 <span>{{ $link->title }}</span>
                                             </a>
@@ -228,7 +228,7 @@
                             <div class="card-body">
                                 <div class="card-title">
                                     <h4>
-                                        <i class="fa fa-link text-danger" aria-hidden="true"></i>
+                                        <i class="fal fa-link text-danger" aria-hidden="true"></i>
                                         <span>Реклама</span>
                                     </h4>
                                 </div>
@@ -253,7 +253,7 @@
                                 </span>
 
                                     <h4>
-                                        <i class="fa fa-book text-danger" aria-hidden="true"></i>
+                                        <i class="fal fa-book text-danger" aria-hidden="true"></i>
                                         <span>{{ $tag->name }}</span>
                                     </h4>
                                 </div>
@@ -261,10 +261,34 @@
                                 <div class="card-text row">
 
                                     <nav class="nav flex-column">
-                                        @foreach ($tag->files as $file)
-                                            @include('file.item', [
-                                                'file' => $file
-                                            ])
+                                        @foreach ($tag->files as $item)
+
+                                            <!-- start item -->
+                                            <a class="nav-link" href="{{ $item->url() }}">
+                                                <span class="badge badge-secondary float-right">
+                                                    {{ \Bavix\Helpers\Str::fileSize($item->size) }}
+                                                </span>
+                                                <i class="fal {{ $item->faType() }} bx-fa-style" aria-hidden="true"></i>
+                                                <span>{{ $item->title }}</span>
+                                            </a>
+
+                                            <span class="nav-link">
+                                                @foreach($item->tags as $_tag)
+                                                    @php($badge = $_tag->is_block ? 'success' : 'primary')
+                                                    <a href="{{ route('file.tag', [$_tag->slug]) }}" class="badge badge-{{ $badge }}">
+                                                        <i class="fal fa-tag" aria-hidden="true"></i> {{ $_tag->name }}
+                                                    </a>
+                                                @endforeach
+                                            </span>
+
+                                            <!-- remove style -->
+                                            <div class="bx-space" style="padding-bottom: .6rem"></div>
+                                            <!-- end item -->
+
+                                            {{--@include('file.item', [--}}
+                                                {{--'file' => $file--}}
+                                            {{--])--}}
+
                                         @endforeach
                                     </nav>
 
@@ -296,11 +320,11 @@
             <div class="col-12">
 
                 <p class="footer-social float-right" itemscope itemtype="http://schema.org/Organization">
-                    <a itemprop="sameAs" target="_blank" href="https://www.facebook.com/rez1dent3" title="Facebook"><i class="fa fa-facebook"></i></a>
-                    <a itemprop="sameAs" target="_blank" href="https://www.instagram.com/m.babichev" title="Instagram"><i class="fa fa-instagram"></i></a>
-                    <a itemprop="sameAs" target="_blank" href="https://twitter.com/rez1dent3" title="Twitter"><i class="fa fa-twitter"></i></a>
-                    <a itemprop="sameAs" target="_blank" href="https://vk.com/rez1dent3" title="VK"><i class="fa fa-vk"></i></a>
-                    <a itemprop="sameAs" target="_blank" href="https://github.com/rez1dent3" title="GitHub"><i class="fa fa-github"></i></a>
+                    <a itemprop="sameAs" target="_blank" href="https://www.facebook.com/rez1dent3" title="Facebook"><i class="fab fa-facebook"></i></a>
+                    <a itemprop="sameAs" target="_blank" href="https://www.instagram.com/m.babichev" title="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a itemprop="sameAs" target="_blank" href="https://twitter.com/rez1dent3" title="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a itemprop="sameAs" target="_blank" href="https://vk.com/rez1dent3" title="VK"><i class="fab fa-vk"></i></a>
+                    <a itemprop="sameAs" target="_blank" href="https://github.com/rez1dent3" title="GitHub"><i class="fab fa-github"></i></a>
                 </p>
 
                 <p class="footer-links">
@@ -324,19 +348,19 @@
 
 </footer>
 
-<link href="{{ asset2('https://cdn.bavix.ru/font-awesome/latest/css/font-awesome.min.css') }}" rel="stylesheet"/>
-<script src="{{ asset2('https://cdnjs.cloudflare.com/ajax/libs/vanilla-lazyload/10.3.5/lazyload.min.js') }}"></script>
-<script src="{{ asset2('/js/lazy.js') }}"></script>
+{{--<link href="{{ asset2('https://cdn.bavix.ru/font-awesome/latest/css/font-awesome.min.css') }}" rel="stylesheet"/>--}}
+{{--<script src="{{ asset2('https://cdnjs.cloudflare.com/ajax/libs/vanilla-lazyload/10.3.5/lazyload.min.js') }}"></script>--}}
+{{--<script src="{{ asset2('/js/lazy.js') }}"></script>--}}
 
-<script src="{{ asset2('https://cdn.bavix.ru/jquery/latest/dist/jquery.min.js') }} "></script>
-<script src="{{ asset2('https://cdn.bavix.ru/popper.js/latest/dist/umd/popper.min.js') }}"></script>
-<script src="{{ asset2('https://cdn.bavix.ru/bootstrap/next/dist/js/bootstrap.min.js') }}"></script>
-<script src="{{ asset2('/node_modules/masonry-layout/dist/masonry.pkgd.min.js') }}"></script>
+{{--<script src="{{ asset2('https://cdn.bavix.ru/jquery/latest/dist/jquery.min.js') }} "></script>--}}
+{{--<script src="{{ asset2('https://cdn.bavix.ru/popper.js/latest/dist/umd/popper.min.js') }}"></script>--}}
+{{--<script src="{{ asset2('https://cdn.bavix.ru/bootstrap/next/dist/js/bootstrap.min.js') }}"></script>--}}
+{{--<script src="{{ asset2('/node_modules/masonry-layout/dist/masonry.pkgd.min.js') }}"></script>--}}
 
-@if (active('post.view'))
-    <link href="{{ asset2('https://cdn.bavix.ru/lightgallery/latest/dist/css/lightgallery.min.css') }}" rel="stylesheet"/>
-    <script src="{{ asset2('https://cdn.bavix.ru/lightgallery/latest/dist/js/lightgallery.min.js') }}"></script>
-@endif
+{{--@if (active('post.view'))--}}
+{{--    <link href="{{ asset2('https://cdn.bavix.ru/lightgallery/latest/dist/css/lightgallery.min.css') }}" rel="stylesheet"/>--}}
+{{--    <script src="{{ asset2('https://cdn.bavix.ru/lightgallery/latest/dist/js/lightgallery.min.js') }}"></script>--}}
+{{--@endif--}}
 
 <script src="{{ asset2('/js/app.js') }}"></script>
 

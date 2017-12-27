@@ -41,7 +41,7 @@ if (!function_exists('keywords'))
         else
         {
             $trim  = trim($content);
-            $data  = preg_replace('~[^а-яё\w\\/]+~ui', ',', $trim);
+            $data  = preg_replace('~[^а-яё\w/]+~ui', ',', $trim);
             $mixed = explode(',', $data);
 
             $mixed = \Bavix\Helpers\Arr::filter($mixed, function ($str) {
@@ -64,16 +64,19 @@ if (!function_exists('asset2'))
 {
     function asset2($path, $secure = null)
     {
-        $root = dirname(__DIR__) . '/public/';
-
-        if (0 !== strpos($path, 'http'))
+        if (env('APP_DEBUG'))
         {
-            if (file_exists($root . $path))
-            {
-                $path .= '?' . filemtime($root . $path);
-            }
+            $root = dirname(__DIR__) . '/public/';
 
-            return '/' . ltrim($path, '/');
+            if (0 !== strpos($path, 'http'))
+            {
+                if (file_exists($root . $path))
+                {
+                    $path .= '?' . filemtime($root . $path);
+                }
+
+                return '/' . ltrim($path, '/');
+            }
         }
 
         return asset($path, $secure);
