@@ -157,7 +157,8 @@
 
     <div class="row">
 
-        <div class="col-xxl-7 col-lg-4 order-lg-2">
+        {{--<div class="col-xxl-7 col-lg-4 order-lg-2">--}}
+        <div class="col-xxl-7 col-lg-4">
 
             <div class="row grid">
 
@@ -276,7 +277,8 @@
 
         </div>
 
-        <div class="col-xxl-5 col-lg-8 order-lg-1">
+        {{--<div class="col-xxl-5 col-lg-8 order-lg-1">--}}
+        <div class="col-xxl-5 col-lg-8">
             @include('_partials.breadcrumbs')
             @yield('content')
         </div>
