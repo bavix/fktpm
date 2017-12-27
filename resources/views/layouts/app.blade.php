@@ -189,7 +189,7 @@
 
                                 <div class="card-title">
                                     <h4>
-                                        <i class="fal fa-comments-o text-danger" aria-hidden="true"></i>
+                                        <i class="fal fa-comments text-danger" aria-hidden="true"></i>
                                         <span>Полезные ресурсы</span>
                                     </h4>
                                 </div>
