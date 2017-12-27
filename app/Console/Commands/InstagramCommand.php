@@ -14,6 +14,7 @@ use Bavix\SDK\PathBuilder;
 use Illuminate\Console\Command;
 use Illuminate\Http\File;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Cache;
 use InstagramAPI\Instagram;
 use InstagramAPI\Response\Model\CarouselMedia;
 use InstagramAPI\Response\Model\Image_Versions2;
@@ -213,6 +214,8 @@ class InstagramCommand extends Command
 
             sleep(120);
         }
+
+        Cache::flush();
 
     }
 

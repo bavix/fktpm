@@ -122,7 +122,7 @@ class PostController extends Controller
         $pageQuery = $request->route()->parameter('pageQuery');
 
         $query->with($this->withModel);
-        $paginate = Cache::remember(JSON::encode($query->toBase()) . $pageQuery, 120, function () use ($query) {
+        $paginate = Cache::rememberForever(JSON::encode($query->toBase()) . $pageQuery, function () use ($query) {
             return $query->paginate(config('limits.paginate', 10));
         });
 

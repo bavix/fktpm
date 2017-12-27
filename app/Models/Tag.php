@@ -46,7 +46,7 @@ class Tag extends \Spatie\Tags\Tag
 
     public static function blocks()
     {
-        return Cache::remember(__METHOD__, 120, function () {
+        return Cache::rememberForever(__METHOD__, function () {
             return static::with('files.tags')
                 ->orderBy('order_column', 'desc')
                 ->where('is_block', 1)
