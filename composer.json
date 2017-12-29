@@ -38,7 +38,7 @@
     "roumen/sitemap": "^2.7",
     "spatie/image-optimizer": "^1.0",
     "spatie/laravel-paginateroute": "^2.5",
-    "vladkolodka/phpmorphy": "^0.3.0",
+    "spatie/laravel-partialcache": "^1.2",
     "yab/laravel-scout-mysql-driver": "^2.0"
   },
   "require-dev": {

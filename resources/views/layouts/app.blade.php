@@ -242,71 +242,7 @@
 
                 @endif
 
-                @foreach (\App\Models\Tag::blocks() as $tag)
-
-                    <div class="col-xxl-6 col-lg-12 grid-item">
-                        <div class="card" data-name="card">
-                            <div class="card-body">
-                                <div class="card-title">
-                                <span class="badge badge-pill badge-primary float-right">
-                                    {{ $tag->files->count() }}
-                                </span>
-
-                                    <h4>
-                                        <i class="fal fa-book text-danger" aria-hidden="true"></i>
-                                        <span>{{ $tag->name }}</span>
-                                    </h4>
-                                </div>
-
-                                <div class="card-text row">
-
-                                    <nav class="nav flex-column">
-                                        @foreach ($tag->files as $item)
-
-                                            <!-- start item -->
-                                            <a class="nav-link" href="{{ $item->url() }}">
-                                                <span class="badge badge-secondary float-right">
-                                                    {{ \Bavix\Helpers\Str::fileSize($item->size) }}
-                                                </span>
-                                                <i class="fal {{ $item->faType() }} bx-fa-style" aria-hidden="true"></i>
-                                                <span>{{ $item->title }}</span>
-                                            </a>
-
-                                            <span class="nav-link">
-                                                @foreach($item->tags as $_tag)
-                                                    @if ($_tag->is_block)
-                                                        <a href="{{ route('file.tag', [$_tag->slug]) }}" class="badge badge-success">
-                                                            <i class="fal fa-tags" aria-hidden="true"></i> {{ $_tag->name }}
-                                                        </a>
-                                                    @else
-                                                        <a href="{{ route('file.tag', [$_tag->slug]) }}" class="badge badge-primary">
-                                                            <i class="fal fa-tag" aria-hidden="true"></i> {{ $_tag->name }}
-                                                        </a>
-                                                    @endif
-                                                @endforeach
-                                            </span>
-
-                                            <!-- remove style -->
-                                            <div class="bx-space" style="padding-bottom: .6rem"></div>
-                                            <!-- end item -->
-
-                                            {{--@include('file.item', [--}}
-                                                {{--'file' => $file--}}
-                                            {{--])--}}
-
-                                        @endforeach
-                                    </nav>
-
-                                    <div class="col-12">
-                                        <a href="{{ route('helper') }}" class="btn btn-outline-success btn-block">Как добавить материал?</a>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                @endforeach
+                @cache('layouts.blocks', [])
 
             </div>
 

@@ -198,8 +198,8 @@ return [
         // config
         Encore\Admin\Config\ConfigServiceProvider::class,
 
-        // morphy
-        vladkolodka\phpMorphy\MorphyServiceProvider::class,
+
+        Spatie\PartialCache\PartialCacheServiceProvider::class,
 
     ],
 
@@ -258,9 +258,9 @@ return [
 
         'Breadcrumbs' => DaveJamesMiller\Breadcrumbs\Facade::class,
 
-        'Morphy'    => vladkolodka\phpMorphy\Facade\Morphy::class,
-
         'HTMLMin' => HTMLMin\HTMLMin\Facades\HTMLMin::class,
+
+        'PartialCache' => Spatie\PartialCache\PartialCacheFacade::class,
     ],
 
 ];
