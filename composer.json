@@ -33,10 +33,11 @@
     "laravel/tinker": "~1.0",
     "laravelrus/localized-carbon": "dev-master",
     "mgp25/instagram-php": "^3.1",
+    "predis/predis": "^1.1",
     "ralouphie/mimey": "^1.0",
+    "roumen/sitemap": "^2.7",
     "spatie/image-optimizer": "^1.0",
     "spatie/laravel-paginateroute": "^2.5",
-    "roumen/sitemap": "^2.7",
     "vladkolodka/phpmorphy": "^0.3.0",
     "yab/laravel-scout-mysql-driver": "^2.0"
   },

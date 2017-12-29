@@ -3,17 +3,13 @@
 namespace App\Console\Commands;
 
 use App\Models\Category;
-use App\Models\Image;
 use App\Models\Post;
 use Bavix\Helpers\Arr;
 use Bavix\Helpers\Dir;
-use Bavix\Helpers\JSON;
 use Bavix\Helpers\PregMatch;
 use Bavix\Helpers\Str;
 use Bavix\SDK\PathBuilder;
 use Illuminate\Console\Command;
-use Illuminate\Http\File;
-use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Cache;
 use InstagramAPI\Instagram;
 use InstagramAPI\Response\Model\CarouselMedia;
@@ -44,6 +40,10 @@ class InstagramCommand extends Command
     protected $category;
 
     protected $tags = ['фктипм', 'фктипмкубгу', 'кубгуфпм'];
+
+    protected $blocked = [
+        'applehelp_accessories'
+    ];
 
     /**
      * @return string
@@ -119,6 +119,9 @@ class InstagramCommand extends Command
 
         if ($model)
         {
+            $model->active = !Arr::in($this->blocked, $item->getUser()->getUsername());
+            $model->save();
+
             // if post exists then skip
             return false;
         }
@@ -164,7 +167,7 @@ class InstagramCommand extends Command
         $post->title          = Str::shorten('Пост ' . $item->pk . ' от ' . $item->user->getFullName(), 150);
         $post->description    = Str::shorten($content, 590);
         $post->content        = '<p>' . $content . '</p>';
-        $post->active         = 1;
+        $post->active         = !Arr::in($this->blocked, $item->getUser()->getUsername());
         $post->category_id    = $this->category()->id;
         $post->instagram_code = $item->getCode();
 
@@ -197,16 +200,18 @@ class InstagramCommand extends Command
         {
             $items = $instagram->hashtag->getFeed($tag)->getItems();
 
-            $this->warn('Tag #' . $tag);
+            $this->error('Tag #' . $tag);
 
             foreach ($items as $item)
             {
-                $this->info('Item #' . $item->id . '; code=' . $item->getCode());
-
                 if ($this->store($item))
                 {
+                    $this->info('Item #' . $item->id . '; code=' . $item->getCode());
+
                     continue;
                 }
+
+                $this->warn('Item #' . $item->id . '; code=' . $item->getCode());
 
 //            $this->warn('broken');
 //            break;
@@ -215,7 +220,7 @@ class InstagramCommand extends Command
             sleep(120);
         }
 
-        Cache::flush();
+        Cache::clear();
 
     }
 
