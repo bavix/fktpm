@@ -9,10 +9,15 @@
 
 <span class="nav-link">
     @foreach($file->tags as $_tag)
-        @php($badge = $_tag->is_block ? 'success' : 'primary')
-        <a href="{{ route('file.tag', [$_tag->slug]) }}" class="badge badge-{{ $badge }}">
-            <i class="fal fa-tag" aria-hidden="true"></i> {{ $_tag->name }}
-        </a>
+        @if ($_tag->is_block)
+            <a href="{{ route('file.tag', [$_tag->slug]) }}" class="badge badge-success">
+                <i class="fal fa-tags" aria-hidden="true"></i> {{ $_tag->name }}
+            </a>
+        @else
+            <a href="{{ route('file.tag', [$_tag->slug]) }}" class="badge badge-primary">
+                <i class="fal fa-tag" aria-hidden="true"></i> {{ $_tag->name }}
+            </a>
+        @endif
     @endforeach
 </span>
 
