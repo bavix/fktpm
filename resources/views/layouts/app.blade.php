@@ -159,6 +159,12 @@
 
         {{--<div class="col-xxl-5 col-lg-8 order-lg-1">--}}
         <div class="col-xxl-5 col-lg-8">
+
+            <!--www.people-group.net-->
+            <script type="text/javascript">(function() { var pgs = document.createElement('script'); pgs.type = 'text/javascript'; pgs.async = true; pgs.src = ("https:" == document.location.protocol ? "https" : "http") + '://ads.people-group.net/325599/1/1/'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(pgs, s); })();</script>
+            <a href="https://www.people-group.su/?r=325599" rel="nofollow">куда можно вложить деньги</a>
+            <!--www.people-group.net-->
+
             @include('_partials.breadcrumbs')
             @yield('content')
         </div>
