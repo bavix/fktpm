@@ -12,7 +12,16 @@ function sape(): SAPE_client
 
     if (!$client)
     {
-        $client = new SAPE_client();
+        $options = null;
+
+        if (env('SAPE_FORCE_SHOW_CODE'))
+        {
+            $options = [
+                'force_show_code' => true
+            ];
+        }
+
+        $client = new SAPE_client($options);
     }
 
     return $client;

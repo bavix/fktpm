@@ -229,7 +229,7 @@
                 @if (!empty($ads))
 
                     <div class="col-xxl-6 col-lg-12 grid-item">
-                        <div class="card" style="background-color: #fffff0" data-name="card">
+                        <div class="card" style="background-color: #f7f7b8;" data-name="card">
                             <div class="card-body">
                                 <div class="card-title">
                                     <h4>

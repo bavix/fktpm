@@ -258,8 +258,6 @@ return [
 
         'Breadcrumbs' => DaveJamesMiller\Breadcrumbs\Facade::class,
 
-        'HTMLMin' => HTMLMin\HTMLMin\Facades\HTMLMin::class,
-
         'PartialCache' => Spatie\PartialCache\PartialCacheFacade::class,
     ],
 
