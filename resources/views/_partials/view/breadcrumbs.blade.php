@@ -1,6 +1,6 @@
 @if (count($breadcrumbs))
 
-    <ol class="breadcrumb" itemscope itemtype="http://schema.org/BreadcrumbList">
+    <ol class="breadcrumb" itemscope itemtype="http://schema.org/BreadcrumbList" style="margin-top: 1rem;">
         @foreach ($breadcrumbs as $breadcrumb)
 
             <li itemprop="itemListElement" itemscope
