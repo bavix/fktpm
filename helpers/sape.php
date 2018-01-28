@@ -12,13 +12,11 @@ function sape(): SAPE_client
 
     if (!$client)
     {
-        $options = null;
+        $options = ['charset' => 'utf-8'];
 
         if (env('SAPE_FORCE_SHOW_CODE'))
         {
-            $options = [
-                'force_show_code' => true
-            ];
+            $options['force_show_code'] = true;
         }
 
         $client = new SAPE_client($options);
