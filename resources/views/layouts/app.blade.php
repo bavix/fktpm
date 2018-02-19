@@ -160,9 +160,16 @@
         {{--<div class="col-xxl-5 col-lg-8 order-lg-1">--}}
         <div class="col-xxl-5 col-lg-8">
 
-            <!-- www.people-group.net -->
-            <script async src="//ads.people-group.net/325599/1/2/1/" onload="InitAipg_32559900010002(this)"></script>
-            <!-- www.people-group.net -->
+            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+            <!-- fktpm -->
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-6538258592702189"
+                 data-ad-slot="5840642326"
+                 data-ad-format="auto"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
 
             @include('_partials.breadcrumbs')
             @yield('content')
