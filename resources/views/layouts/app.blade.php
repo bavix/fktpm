@@ -167,7 +167,7 @@
                  data-ad-client="ca-pub-6538258592702189"
                  data-ad-slot="5840642326"
                  data-ad-format="auto"></ins>
-            <script>
+            <script defer async>
                 (adsbygoogle = window.adsbygoogle || []).push({});
             </script>
 
