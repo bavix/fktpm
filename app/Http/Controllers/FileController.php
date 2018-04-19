@@ -20,6 +20,7 @@ class FileController extends Controller
          */
         $model = File::query()
             ->where('hash', $hash)
+            ->where('active', 1)
             ->first();
 
         abort_if(!$model, 404);
@@ -34,7 +35,7 @@ class FileController extends Controller
             ->where('slug->ru', $slug)
             ->firstOrFail();
 
-        $query = File::with('tags');
+        $query = File::with('tags')->where('active', 1);
 
         $query->whereHas('tags', function (\Illuminate\Database\Eloquent\Builder $query) use ($slug) {
             $query->where('slug->ru', $slug);
@@ -52,7 +53,7 @@ class FileController extends Controller
         /**
          * @var File $model
          */
-        $model = File::query()->find($id);
+        $model = File::query()->where('active', 1)->find($id);
         abort_if(!$model, 404);
 
         $url = $model->url();
