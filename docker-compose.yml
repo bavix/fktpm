@@ -1,0 +1,68 @@
+version: '3.6'
+services:
+
+  memcached:
+    image: memcached
+    networks:
+      static:
+        ipv4_address: 172.16.236.2
+
+  redis:
+    image: redis
+    networks:
+      static:
+        ipv4_address: 172.16.236.3
+
+  nginx:
+    build:
+      context: ./environment/nginx
+    depends_on:
+      - php
+    volumes:
+      - ./:/var/www/html
+    networks:
+      static:
+        ipv4_address: 172.16.236.4
+
+  php:
+    depends_on:
+      - mysql
+    build:
+      context: ./environment/php
+    volumes:
+      - ./:/var/www/html
+    networks:
+      static:
+        ipv4_address: 172.16.236.5
+        aliases:
+          - php
+
+  mysql:
+    image: mysql:5.7
+    volumes:
+      - ./environment/mysql/sql:/docker-entrypoint-initdb.d
+      - dbdata:/var/lib/mysql
+    environment:
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_USER: ${DB_USERNAME}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_ROOT_PASSWORD: root
+    networks:
+      static:
+        ipv4_address: 172.16.236.6
+
+  gearman:
+    image: kendu/gearman
+    networks:
+      static:
+        ipv4_address: 172.16.236.7
+
+volumes:
+  dbdata:
+
+networks:
+  static:
+    ipam:
+      config:
+      -
+        subnet: 172.16.236.0/24

@@ -44,14 +44,14 @@ class Tag extends \Spatie\Tags\Tag
             ->orderBy('sort', 'desc');
     }
 
+    /**
+     * @return $this
+     */
     public static function blocks()
     {
-        return Cache::rememberForever(__METHOD__, function () {
-            return static::with('files.tags')
-                ->orderBy('order_column', 'desc')
-                ->where('is_block', 1)
-                ->get();
-        });
+        return static::with('files.tags')
+            ->orderBy('order_column', 'desc')
+            ->where('is_block', 1);
     }
 
 }

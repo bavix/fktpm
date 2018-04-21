@@ -165,7 +165,7 @@ CKEDITOR.replace( '<em>textarea_id</em>', {
 					} );
 
 					// Default automatic content transformations do not yet take care of
-					// align attributes on blocks, so we need to add our own transformation rules.
+					// align attributes on storage, so we need to add our own transformation rules.
 					function alignToAttribute( element ) {
 						if ( element.styles[ 'text-align' ] ) {
 							element.attributes.align = element.styles[ 'text-align' ];

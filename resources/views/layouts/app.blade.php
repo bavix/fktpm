@@ -133,18 +133,6 @@
                         </a>
                     </li>
                 </ul>
-                {{--<ul class="navbar-nav my-2 my-lg-0">--}}
-                    {{--<li class="nav-item">--}}
-                        {{--<a class="nav-link" href="https://old.fktpm.ru" title="Старая версия сайта">--}}
-                            {{--<i class="fal fa-server text-primary" aria-hidden="true"></i>--}}
-                            {{--<span>Старая версия сайта</span>--}}
-                        {{--</a>--}}
-                    {{--</li>--}}
-                {{--</ul>--}}
-                {{--<form class="form-inline my-2 my-lg-0">--}}
-                    {{--<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">--}}
-                    {{--<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>--}}
-                {{--</form>--}}
             </div>
 
         </div>
@@ -157,7 +145,6 @@
 
     <div class="row">
 
-        {{--<div class="col-xxl-5 col-lg-8 order-lg-1">--}}
         <div class="col-xxl-5 col-lg-8">
 
             <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
@@ -175,19 +162,9 @@
             @yield('content')
         </div>
 
-        {{--<div class="col-xxl-7 col-lg-4 order-lg-2">--}}
-        <div class="col-xxl-7 col-lg-4">
+        <div id="vue-files" class="col-xxl-7 col-lg-4">
 
             <div class="row grid">
-
-                {{--<form id="search" data-name="card" method="GET" action="{{ route('search', ['files']) }}">--}}
-                {{--<div class="input-group">--}}
-                {{--<input id="search-files" type="text" name="query" class="form-control" placeholder="Поиск..." value="{{ request()->query('query') }}">--}}
-                {{--<span class="input-group-btn">--}}
-                {{--<button class="btn btn-info" type="submit">Найти</button>--}}
-                {{--</span>--}}
-                {{--</div>--}}
-                {{--</form>--}}
 
                 @php($links = \App\Models\Link::getActive())
                 @if ($links->count())
@@ -232,8 +209,9 @@
                 @endif
 
                 @php($ads = sape()->return_links())
+                @php($noHtml = \strip_tags($ads))
 
-                @if (!empty($ads))
+                @if (!empty($noHtml))
 
                     <div class="col-xxl-6 col-lg-12 grid-item">
                         <div class="card" style="background-color: #f7f7b8;" data-name="card">
@@ -254,7 +232,44 @@
 
                 @endif
 
-                @cache('layouts.blocks', [])
+                <div v-for="block in blocks" class="col-xxl-6 col-lg-12 grid-item">
+                    <div class="card" data-name="card">
+                        <div class="card-body">
+                            <div class="card-title">
+                                <span v-text="block.count" class="badge badge-pill badge-primary float-right"></span>
+
+                                <h4>
+                                    <i class="fal fa-book text-danger" aria-hidden="true"></i>
+                                    <span v-text="block.title"></span>
+                                </h4>
+                            </div>
+
+                            <div class="card-text row">
+                                <nav class="nav flex-column">
+                                    <div v-for="file in block.files">
+
+                                        <a class="nav-link" :href="file.url">
+                                            <span class="badge badge-secondary float-right" v-text="file.size"></span>
+                                            <i class="fal bx-fa-style" :class="file.class" aria-hidden="true"></i>
+                                            <span v-text="file.title"></span>
+                                        </a>
+
+                                        <span class="nav-link">
+                                            <a v-for="tag in file.tags" :href="tag.url"
+                                               class="badge" style="margin-left: .15rem;"
+                                               :class="[tag.exists ? 'badge-success' : 'badge-primary']">
+                                                <i class="fal" :class="[tag.exists ? 'fa-tags' : 'fa-tag']"
+                                                   aria-hidden="true"></i> @{{ tag.title }}
+                                            </a>
+                                        </span>
+
+                                        <div class="bx-space" style="padding-bottom: .6rem"></div>
+                                    </div>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
             </div>
 
@@ -301,21 +316,10 @@
 
 </footer>
 
-{{--<link href="{{ asset2('https://cdn.bavix.ru/font-awesome/latest/css/font-awesome.min.css') }}" rel="stylesheet"/>--}}
-{{--<script src="{{ asset2('https://cdnjs.cloudflare.com/ajax/libs/vanilla-lazyload/10.3.5/lazyload.min.js') }}"></script>--}}
-{{--<script src="{{ asset2('/js/lazy.js') }}"></script>--}}
-
-{{--<script src="{{ asset2('https://cdn.bavix.ru/jquery/latest/dist/jquery.min.js') }} "></script>--}}
-{{--<script src="{{ asset2('https://cdn.bavix.ru/popper.js/latest/dist/umd/popper.min.js') }}"></script>--}}
-{{--<script src="{{ asset2('https://cdn.bavix.ru/bootstrap/next/dist/js/bootstrap.min.js') }}"></script>--}}
-{{--<script src="{{ asset2('/node_modules/masonry-layout/dist/masonry.pkgd.min.js') }}"></script>--}}
-
-{{--@if (active('post.view'))--}}
-{{--    <link href="{{ asset2('https://cdn.bavix.ru/lightgallery/latest/dist/css/lightgallery.min.css') }}" rel="stylesheet"/>--}}
-{{--    <script src="{{ asset2('https://cdn.bavix.ru/lightgallery/latest/dist/js/lightgallery.min.js') }}"></script>--}}
-{{--@endif--}}
-
-<script src="{{ asset2('/js/app.js') }}"></script>
+<script defer src="{{ asset2('/js/masonry.pkgd.min.js') }}"></script>
+<script defer src="{{ asset2('/js/app.js') }}"></script>
+<script src="{{ asset2('/js/vue.js') }}"></script>
+<script src="{{ asset2('/js/api.es6') }}"></script>
 
 @foreach (\App\Models\Counter::query()->where('active', 1)->get() as $counter)
     {!! $counter->code !!}

@@ -2345,7 +2345,7 @@
 
 	// And now we've got two problems - original problem and RegExp.
 	// Some softeners:
-	// * FF tends to copy all blocks up to the copybin container.
+	// * FF tends to copy all storage up to the copybin container.
 	// * IE tends to copy only the copybin, without its container.
 	// * We use spans on IE and blockless editors, but divs in other cases.
 	var pasteReplaceRegex = new RegExp(
