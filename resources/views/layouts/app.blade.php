@@ -319,7 +319,7 @@
 <script defer src="{{ asset2('/js/masonry.pkgd.min.js') }}"></script>
 <script defer src="{{ asset2('/js/app.js') }}"></script>
 <script src="{{ asset2('/js/vue.js') }}"></script>
-<script src="{{ asset2('/js/api.es6') }}"></script>
+<script src="{{ asset2('/js/api.js') }}"></script>
 
 @foreach (\App\Models\Counter::query()->where('active', 1)->get() as $counter)
     {!! $counter->code !!}
