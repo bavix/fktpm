@@ -12,7 +12,7 @@ class APIController extends Controller
 
     public function blocks(Request $request)
     {
-        return BlockResource::collection(Tag::blocks()->paginate());
+        return BlockResource::collection(Tag::blocks()->paginate(100));
     }
 
 }
