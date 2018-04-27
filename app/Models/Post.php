@@ -42,6 +42,8 @@ use Laravel\Scout\Searchable;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Post withAnyTags($tags, $type = null)
  * @mixin \Eloquent
  * @property-write mixed $tag
+ * @property string|null $instagram_code
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Post whereInstagramCode($value)
  */
 class Post extends Model
 {

@@ -68,11 +68,11 @@ class SitemapCommand extends Command
         $map->add(route('helper'), null, .9, 'monthly');
 
         /**
-         * files
-         *
          * @var $tags Tag[]
          */
-        $tags = Tag::blocks();
+        $tags = Tag::blocks()
+            ->get()
+            ->all();
 
         foreach ($tags as $tag)
         {

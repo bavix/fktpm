@@ -39,6 +39,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property int|null $sort
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\File wherePath($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\File whereSort($value)
+ * @property int $active
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\File whereActive($value)
  */
 class File extends Model
 {
