@@ -209,9 +209,9 @@
                 @endif
 
                 @php($ads = sape()->return_links())
-                @php($noHtml = \strip_tags($ads))
+                @php($noHtml = \trim(\strip_tags($ads)))
 
-                @if (\trim($noHtml) !== 'Реклама')
+                @if (!empty($noHtml))
 
                     <div class="col-xxl-6 col-lg-12 grid-item">
                         <div class="card" style="background-color: #f7f7b8;" data-name="card">
