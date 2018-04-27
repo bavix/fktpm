@@ -41,6 +41,7 @@ class Tag extends \Spatie\Tags\Tag
     public function files()
     {
         return $this->morphedByMany(File::class, 'taggable')
+            ->where('active', 1)
             ->orderBy('sort', 'desc');
     }
 
