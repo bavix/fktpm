@@ -36,7 +36,11 @@
 
             </div>
             
-            <div id="disqus_thread"></div>
+            <div class="card">
+                <div class="card-body">
+                    <div id="disqus_thread"></div>
+                </div>
+            </div>
 <script>
 
 /**
