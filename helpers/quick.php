@@ -14,7 +14,7 @@ if (!function_exists('active'))
     {
         $object = request()->route();
 
-        return $object && in_array($object->action['as'], (array)$route, true);
+        return $object && !empty($object->action['as']) && in_array($object->action['as'], (array)$route, true);
     }
 
 }
