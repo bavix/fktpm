@@ -2,7 +2,7 @@
 
 @section('content')
 
-    @include('post.notify')
+{{--    @include('post.notify')--}}
 
     <article class="row">
         <div class="col-12">
