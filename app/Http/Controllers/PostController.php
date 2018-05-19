@@ -68,6 +68,7 @@ class PostController extends Controller
      */
     public function index(Request $request, $id = null)
     {
+        \Debugbar::startMeasure('render','Time for rendering');
 
         $name        = $request->route()->getName();
         $model       = $this->model;
@@ -136,6 +137,8 @@ class PostController extends Controller
         abort_if($paginate->lastPage() !== $paginate->currentPage() &&
             $empty, 404);
 
+        \Debugbar::stopMeasure('render');
+
         return \Response::view('post.index', [
             'hasError'    => $empty,
             'items'       => $paginate,
@@ -147,7 +150,7 @@ class PostController extends Controller
             'searchBar'   => true,
             'selfRoute'   => $this->route,
             'query'       => $this->query
-        ])->setStatusCode($empty ? 404 : 200);
+        ], $empty ? 404 : 200);
     }
 
     public function draft(Request $request, $id)
