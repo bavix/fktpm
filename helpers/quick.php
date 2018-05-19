@@ -64,20 +64,20 @@ if (!function_exists('asset2'))
 {
     function asset2($path, $secure = null)
     {
-        if (env('APP_DEBUG'))
-        {
-            $root = dirname(__DIR__) . '/public/';
-
-            if (0 !== strpos($path, 'http'))
-            {
-                if (file_exists($root . $path))
-                {
-                    $path .= '?' . filemtime($root . $path);
-                }
-
-                return '/' . ltrim($path, '/');
-            }
-        }
+//        if (env('APP_DEBUG'))
+//        {
+//            $root = dirname(__DIR__) . '/public/';
+//
+//            if (0 !== strpos($path, 'http'))
+//            {
+//                if (file_exists($root . $path))
+//                {
+//                    $path .= '?' . filemtime($root . $path);
+//                }
+//
+//                return '/' . ltrim($path, '/');
+//            }
+//        }
 
         return asset($path, $secure);
     }

@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Console\Commands\InstagramCommand;
 use App\Models\Category;
 use App\Models\Post;
 use Bavix\App\Http\Controllers\Controller;
 use Bavix\Helpers\JSON;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -121,10 +121,11 @@ class PostController extends Controller
         }
 
         $query->with($this->withModel);
-        
+
+        $pageQuery = $request->route()->parameter('pageQuery');
+        $key = JSON::encode($query->toBase()) . $pageQuery;
         if (config('post.cache')) {
-            $pageQuery = $request->route()->parameter('pageQuery');
-            $paginate = Cache::rememberForever(JSON::encode($query->toBase()) . $pageQuery, function () use ($query) {
+            $paginate = Cache::rememberForever($key . '-paginate', function () use ($query) {
                 return $query->paginate(config('limits.paginate', 10));
             });
         } else {
@@ -137,22 +138,33 @@ class PostController extends Controller
         abort_if($paginate->lastPage() !== $paginate->currentPage() &&
             $empty, 404);
 
-        $response = \Response::view('post.index', [
-            'hasError'    => $empty,
-            'items'       => $paginate,
-            'title'       => $this->title,
-            'description' => __($this->description),
-            'message'     => __('bavix.page.empty', [
-                'name' => __($this->title)
-            ]),
-            'searchBar'   => true,
-            'selfRoute'   => $this->route,
-            'query'       => $this->query
-        ], $empty ? 404 : 200);
+        $route = $this->route;
+        $query = $this->query;
+        $title = $this->title;
+        $description = $this->description;
+
+        $response = Cache::remember(
+            $key . '-response',
+            Carbon::now()->addHour(),
+            function () use ($empty, $paginate, $route, $query, $description, $title) {
+                return view('post.index', [
+                    'hasError'    => $empty,
+                    'items'       => $paginate,
+                    'title'       => $title,
+                    'description' => __($description),
+                    'message'     => __('bavix.page.empty', [
+                        'name' => __($title)
+                    ]),
+                    'searchBar'   => true,
+                    'selfRoute'   => $route,
+                    'query'       => $query
+                ])->render();
+            }
+        );
 
         \Debugbar::stopMeasure('render');
 
-        return $response;
+        return response($response, $empty ? 404 : 200);
     }
 
     public function draft(Request $request, $id)
