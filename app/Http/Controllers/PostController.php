@@ -119,12 +119,17 @@ class PostController extends Controller
             $query->orderBy($column, $direction);
         }
 
-        $pageQuery = $request->route()->parameter('pageQuery');
-
         $query->with($this->withModel);
-        $paginate = Cache::rememberForever(JSON::encode($query->toBase()) . $pageQuery, function () use ($query) {
-            return $query->paginate(config('limits.paginate', 10));
-        });
+        
+        if (config('post.cache')) {
+            $pageQuery = $request->route()->parameter('pageQuery');
+            $paginate = Cache::rememberForever(JSON::encode($query->toBase()) . $pageQuery, function () use ($query) {
+                return $query->paginate(config('limits.paginate', 10));
+            });
+        } else {
+            $paginate = $query->paginate(config('limits.paginate', 10));
+        }
+
 
         $empty = $paginate->isEmpty();
 
