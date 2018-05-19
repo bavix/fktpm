@@ -14,9 +14,9 @@ return [
      |
      */
 
-    'enabled' => env(
+    'enabled' => $_COOKIE['__DEBUGBAR_ENABLED__'] ?? env(
         'APP_DEBUG',
-        env('DEBUGBAR_ENABLED', $_COOKIE['__DEBUGBAR_ENABLED__'] ?? null)
+        env('DEBUGBAR_ENABLED', null)
     ),
 
     'except' => [
