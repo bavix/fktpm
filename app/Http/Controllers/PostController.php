@@ -136,23 +136,18 @@ class PostController extends Controller
         abort_if($paginate->lastPage() !== $paginate->currentPage() &&
             $empty, 404);
 
-        $view = view(
-            'post.index',
-            [
-                'hasError'    => $empty,
-                'items'       => $paginate,
-                'title'       => $this->title,
-                'description' => __($this->description),
-                'message'     => __('bavix.page.empty', [
-                    'name' => __($this->title)
-                ]),
-                'searchBar'   => true,
-                'selfRoute'   => $this->route,
-                'query'       => $this->query
-            ]
-        );
-
-        return response($view, $empty ? 404 : 200);
+        return \Response::view('post.index', [
+            'hasError'    => $empty,
+            'items'       => $paginate,
+            'title'       => $this->title,
+            'description' => __($this->description),
+            'message'     => __('bavix.page.empty', [
+                'name' => __($this->title)
+            ]),
+            'searchBar'   => true,
+            'selfRoute'   => $this->route,
+            'query'       => $this->query
+        ])->setStatusCode($empty ? 404 : 200);
     }
 
     public function draft(Request $request, $id)
