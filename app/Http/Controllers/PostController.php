@@ -137,9 +137,7 @@ class PostController extends Controller
         abort_if($paginate->lastPage() !== $paginate->currentPage() &&
             $empty, 404);
 
-        \Debugbar::stopMeasure('render');
-
-        return \Response::view('post.index', [
+        $response = \Response::view('post.index', [
             'hasError'    => $empty,
             'items'       => $paginate,
             'title'       => $this->title,
@@ -151,6 +149,10 @@ class PostController extends Controller
             'selfRoute'   => $this->route,
             'query'       => $this->query
         ], $empty ? 404 : 200);
+
+        \Debugbar::stopMeasure('render');
+
+        return $response;
     }
 
     public function draft(Request $request, $id)
