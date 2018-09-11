@@ -1,6 +1,6 @@
 <?php
 
-use Bavix\Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
 class CreateTagTables extends Migration
