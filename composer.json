@@ -10,26 +10,22 @@
   "license": "MIT",
   "type": "project",
   "require": {
-    "php": ">=7.0",
+    "php": ">=7.1",
     "barryvdh/laravel-debugbar": "^3.1",
     "bavix/advanced-html-dom": "^1.0",
     "bavix/gearman": "^1.0",
     "bavix/laravel-helpers": "^1.0",
-    "bavix/laravel-middleware-ifindex": "^1.0",
-    "bavix/laravel-middleware-protocol": "^1.0",
     "bavix/laravel-worker-command": "^1.0",
     "davejamesmiller/laravel-breadcrumbs": "^3.0",
     "doctrine/dbal": "^2.5",
     "ezyang/htmlpurifier": "^4.9",
-    "fideloper/proxy": "~3.3",
     "intervention/image": "^2.3",
     "laravel-admin-ext/config": "^1.0",
     "laravel-admin-ext/helpers": "^1.0",
     "laravel-admin-ext/log-viewer": "^1.0",
     "laravel-admin-ext/media-manager": "^1.0",
     "laravel-admin-ext/scheduling": "^1.0",
-    "laravel/framework": "5.5.*",
-    "laravel/tinker": "~1.0",
+    "laravel/framework": "5.6.*",
     "laravelrus/localized-carbon": "dev-master",
     "mgp25/instagram-php": "^3.1",
     "predis/predis": "^1.1",
@@ -80,8 +76,7 @@
       "@php artisan key:generate"
     ],
     "post-update-cmd": [
-      "Illuminate\\Foundation\\ComposerScripts::postUpdate",
-      "php artisan optimize"
+      "Illuminate\\Foundation\\ComposerScripts::postUpdate"
     ],
     "post-autoload-dump": [
       "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",

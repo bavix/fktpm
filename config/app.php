@@ -178,29 +178,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
-        // admin service
-        App\Providers\AdminServiceProvider::class,
-
-        // image
-        Intervention\Image\ImageServiceProvider::class,
-
-        // paginate
-        Spatie\PaginateRoute\PaginateRouteServiceProvider::class,
-
-        Laravelrus\LocalizedCarbon\LocalizedCarbonServiceProvider::class,
-
         DaveJamesMiller\Breadcrumbs\ServiceProvider::class,
-
-        // scout
-        Laravel\Scout\ScoutServiceProvider::class,
-        Yab\MySQLScout\Providers\MySQLScoutServiceProvider::class,
-
-        // config
-        Encore\Admin\Config\ConfigServiceProvider::class,
-
-
-        Spatie\PartialCache\PartialCacheServiceProvider::class,
-
     ],
 
     /*
@@ -250,15 +228,10 @@ return [
         'Validator'     => Illuminate\Support\Facades\Validator::class,
         'View'          => Illuminate\Support\Facades\View::class,
 
-        'Image'         => Intervention\Image\Facades\Image::class,
-        'PaginateRoute' => Spatie\PaginateRoute\PaginateRouteFacade::class,
-
         'LocalizedCarbon' => Laravelrus\LocalizedCarbon\LocalizedCarbon::class,
         'DiffFormatter'   => Laravelrus\LocalizedCarbon\DiffFactoryFacade::class,
 
         'Breadcrumbs' => DaveJamesMiller\Breadcrumbs\Facade::class,
-
-        'PartialCache' => Spatie\PartialCache\PartialCacheFacade::class,
     ],
 
 ];
