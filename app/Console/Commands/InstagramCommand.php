@@ -11,6 +11,7 @@ use Bavix\Helpers\Str;
 use Bavix\SDK\PathBuilder;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Log;
 use InstagramAPI\Instagram;
 use InstagramAPI\Response\Model\CarouselMedia;
 use InstagramAPI\Response\Model\Image_Versions2;
@@ -191,10 +192,15 @@ class InstagramCommand extends Command
             config('instagram.config')
         );
 
-        $instagram->login(
-            config('instagram.username'),
-            config('instagram.password')
-        );
+        try {
+            $instagram->login(
+                config('instagram.username'),
+                config('instagram.password')
+            );
+        } catch (\Throwable $throwable) {
+            Log::error($throwable->getMessage(), $throwable->getTrace());
+            return;
+        }
 
         foreach ($this->tags as $tag)
         {
