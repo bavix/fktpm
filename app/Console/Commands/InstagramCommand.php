@@ -186,11 +186,7 @@ class InstagramCommand extends Command
      */
     public function handle()
     {
-        $instagram = new Instagram(
-            false,
-            false,
-            config('instagram.config')
-        );
+        $instagram = new Instagram(false, false);
 
         try {
             $instagram->login(
