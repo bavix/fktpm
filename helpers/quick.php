@@ -122,6 +122,6 @@ if (!function_exists('bx_background'))
             $background = '/image/memphis-colorful.png';
         }
 
-        return asset2($background);
+        return $background;
     }
 }
