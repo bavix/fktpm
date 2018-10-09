@@ -200,7 +200,8 @@ class InstagramCommand extends Command
 
         foreach ($this->tags as $tag)
         {
-            $items = $instagram->hashtag->getFeed($tag)->getItems();
+            $uuid = \InstagramAPI\Signatures::generateUUID();
+            $items = $instagram->hashtag->getFeed($tag, $uuid)->getItems();
 
             $this->error('Tag #' . $tag);
 
