@@ -26,7 +26,7 @@ class Kernel extends ConsoleKernel
 
         $schedule->command('bx:instagram')
             ->timezone('Europe/Moscow')
-            ->cron('20 * * * *');
+            ->cron('30 * * * *');
     }
 
     /**
