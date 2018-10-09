@@ -65,7 +65,7 @@ class InstagramCommand extends Command
      */
     public function storeImage(Image_Versions2 $image)
     {
-        $candidates = $image->candidates;
+        $candidates = $image->getCandidates();
 
         usort($candidates, function (ImageCandidate $obj1, ImageCandidate $obj2) {
             return $obj2->getWidth() <=> $obj1->getWidth();
