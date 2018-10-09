@@ -68,19 +68,19 @@ class InstagramCommand extends Command
         $candidates = $image->candidates;
 
         usort($candidates, function (ImageCandidate $obj1, ImageCandidate $obj2) {
-            return $obj2->width <=> $obj1->width;
+            return $obj2->getWidth() <=> $obj1->getWidth();
         });
 
         /**
          * @var ImageCandidate $candidate
          */
-        $candidate = current($candidates);
+        $candidate = \current($candidates);
         $path      = $this->path();
 
         $storage = \Storage::disk('public');
 
         Dir::make(\dirname($storage->path($path)));
-        $storage->put($path, \fopen($candidate->url, 'rb'));
+        $storage->put($path, \fopen($candidate->getUrl(), 'rb'));
 
         return $path;
     }
@@ -98,7 +98,7 @@ class InstagramCommand extends Command
 
             if (!$this->category)
             {
-                $this->category        = new Category();
+                $this->category = new Category();
                 $this->category->title = 'Instagram';
                 $this->category->save();
             }
@@ -128,11 +128,11 @@ class InstagramCommand extends Command
         }
 
         // get images
-        if ($item->image_versions2)
+        if ($item->getImageVersions2())
         {
             // image_versions2
             $images = [
-                $this->storeImage($item->image_versions2)
+                $this->storeImage($item->getImageVersions2())
             ];
         }
         else
@@ -143,15 +143,15 @@ class InstagramCommand extends Command
             /**
              * @var $carouselMedia CarouselMedia
              */
-            foreach ($item->carousel_media as $carouselMedia)
+            foreach ($item->getCarouselMedia() as $carouselMedia)
             {
-                $images[] = $this->storeImage($carouselMedia->image_versions2);
+                $images[] = $this->storeImage($carouselMedia->getImageVersions2());
             }
         }
 
         // get caption
         $content = '';
-        $caption = $item->caption;
+        $caption = $item->getCaption();
 
         if ($caption)
         {
@@ -165,7 +165,7 @@ class InstagramCommand extends Command
         $image = Arr::shift($images);
 
         $post                 = new Post();
-        $post->title          = Str::shorten('Пост ' . $item->pk . ' от ' . $item->user->getFullName(), 150);
+        $post->title          = Str::shorten('Пост ' . $item->getPk() . ' от ' . $item->getUser()->getFullName(), 150);
         $post->description    = Str::shorten($content, 590);
         $post->content        = '<p>' . $content . '</p>';
         $post->active         = !Arr::in($this->blocked, $item->getUser()->getUsername());
@@ -209,12 +209,12 @@ class InstagramCommand extends Command
             {
                 if ($this->store($item))
                 {
-                    $this->info('Item #' . $item->id . '; code=' . $item->getCode());
+                    $this->info('Item #' . $item->getId() . '; code=' . $item->getCode());
 
                     continue;
                 }
 
-                $this->warn('Item #' . $item->id . '; code=' . $item->getCode());
+                $this->warn('Item #' . $item->getId() . '; code=' . $item->getCode());
 
 //            $this->warn('broken');
 //            break;
