@@ -49,7 +49,20 @@ class InstagramCommand extends Command
     ];
 
     protected $blocked = [
-        'applehelp_accessories'
+        'applehelp_accessories',
+        'elenashop_krasnodar',
+        'nail_brow_lash',
+        'krasnodar_resnichki',
+        'lash_and_brow_krasnodar',
+        'beauty_lashes23',
+        'alisaiks_krasnodar',
+        'titova_resnizy',
+        'art_beauty_krd',
+        'massage_zet',
+        'massage_mix',
+        'massage_krd__',
+        'slim_massage_krd',
+        'massage_stroinoetelo_krasnodar',
     ];
 
     /**
