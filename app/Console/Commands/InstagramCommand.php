@@ -69,6 +69,11 @@ class InstagramCommand extends Command
         'defile_krd',
         'dream_discount',
         'fifiona.ru',
+        'snuslips_krd',
+        'moly_krd',
+        'malina_show_room',
+        'sliffki_krd',
+        'pudraroom_krd',
     ];
 
     /**
