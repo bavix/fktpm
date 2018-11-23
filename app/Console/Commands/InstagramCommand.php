@@ -63,6 +63,8 @@ class InstagramCommand extends Command
         'massage_krd__',
         'slim_massage_krd',
         'massage_stroinoetelo_krasnodar',
+        'dr_baselmelhem',
+        'orlov_ortho',
     ];
 
     /**
