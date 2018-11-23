@@ -70,6 +70,7 @@ class InstagramCommand extends Command
         'dream_discount',
         'fifiona.ru',
         'fifiona_salon',
+        'sofia_fifiona.ru',
         'snuslips_krd',
         'moly_krd',
         'malina_show_room',
