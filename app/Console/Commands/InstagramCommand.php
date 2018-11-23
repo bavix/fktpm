@@ -45,7 +45,7 @@ class InstagramCommand extends Command
         'фктипмкубгу', 
         'кубгуфпм', 
         'кубгу',
-        'kubsu'
+        'kubsu',
     ];
 
     protected $blocked = [
