@@ -82,6 +82,7 @@ class InstagramCommand extends Command
         'panorama_nails',
         'nail7_krd',
         'nogti_shellac_krasnodar',
+        'dr._amira_',
     ];
 
     /**
