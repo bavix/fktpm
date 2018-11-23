@@ -220,7 +220,7 @@ class InstagramCommand extends Command
 //            break;
             }
 
-            sleep(120);
+            // sleep(120);
         }
 
         Cache::clear();
