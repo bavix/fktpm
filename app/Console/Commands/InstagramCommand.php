@@ -74,6 +74,9 @@ class InstagramCommand extends Command
         'malina_show_room',
         'sliffki_krd',
         'pudraroom_krd',
+        'zion_nailstudio',
+        'na_klavishah',
+        'pop_nails_krasnodar',
     ];
 
     /**
