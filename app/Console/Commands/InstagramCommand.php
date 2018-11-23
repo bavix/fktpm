@@ -40,7 +40,13 @@ class InstagramCommand extends Command
      */
     protected $category;
 
-    protected $tags = ['фктипм', 'фктипмкубгу', 'кубгуфпм'];
+    protected $tags = [
+        'фктипм', 
+        'фктипмкубгу', 
+        'кубгуфпм', 
+        'кубгу',
+        'kubsu'
+    ];
 
     protected $blocked = [
         'applehelp_accessories'
