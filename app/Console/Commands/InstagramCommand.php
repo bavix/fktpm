@@ -77,6 +77,11 @@ class InstagramCommand extends Command
         'zion_nailstudio',
         'na_klavishah',
         'pop_nails_krasnodar',
+        'mulenko_nails',
+        'nails_panorama_krd',
+        'panorama_nails',
+        'nail7_krd',
+        'nogti_shellac_krasnodar',
     ];
 
     /**
