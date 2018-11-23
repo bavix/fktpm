@@ -65,6 +65,10 @@ class InstagramCommand extends Command
         'massage_stroinoetelo_krasnodar',
         'dr_baselmelhem',
         'orlov_ortho',
+        'atelier_dream',
+        'defile_krd',
+        'dream_discount',
+        'fifiona.ru',
     ];
 
     /**
