@@ -151,6 +151,16 @@ class InstagramCommand extends Command
         'muhtasem_',
         '925_925_',
         'djuan925',
+        'ksenia_krd',
+        'platon_shop_krd',
+        'dot_fashion_store',
+        'inside_krd',
+        'one_love_krd23',
+        'starlookdesign',
+        'shop_lale_krd',
+        'podium_showroom_',
+        'vox_alisalanskaja',
+        'karamel__krd',
     ];
 
     /**
