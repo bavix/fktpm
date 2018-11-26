@@ -161,6 +161,8 @@ class InstagramCommand extends Command
         'podium_showroom_',
         'vox_alisalanskaja',
         'karamel__krd',
+        'etnomir',
+        'vector23.ru_kdr',
     ];
 
     /**
