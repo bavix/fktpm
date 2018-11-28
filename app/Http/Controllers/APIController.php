@@ -12,7 +12,11 @@ class APIController extends Controller
 
     public function blocks(Request $request)
     {
-        return BlockResource::collection(Tag::blocks()->paginate(100));
+        $currentPage = $request->input('page') ?: 1;
+        
+        return BlockResource::collection(Cache::remember('tags_block_' . $currentPage, 60, function() { 
+            return Tag::blocks()->paginate(100); 
+        }));
     }
 
 }
