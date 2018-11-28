@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Cache;
 use App\Http\Resources\BlockResource;
 use App\Models\Tag;
 use Bavix\App\Http\Controllers\Controller;
