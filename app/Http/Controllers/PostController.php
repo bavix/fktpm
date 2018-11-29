@@ -81,15 +81,15 @@ class PostController extends Controller
             $model::search($this->query) :
             $model::query();
 
-        $query->where('active', 1);
+        if ($this->tag) {
+            $tag = \App\Models\Tag::query()
+               ->where('slug->ru', $this->tag)
+               ->firstOrFail();
 
-        if ($this->tag)
-        {
-            $slug = $this->tag;
-            $query->whereHas('tags', function (\Illuminate\Database\Eloquent\Builder $query) use ($slug) {
-                $query->where('slug->ru', $slug);
-            });
+           $query = $tag->posts();
         }
+
+        $query->where('active', 1);
 
         if ($this->isCategory && $name === $this->route . '.category' && is_numeric($id))
         {
