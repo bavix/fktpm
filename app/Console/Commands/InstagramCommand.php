@@ -237,12 +237,17 @@ class InstagramCommand extends Command
             ->where('instagram_code', $item->getCode())
             ->first();
 
+        $active = !Arr::in($this->blocked, $item->getUser()->getUsername());
         if ($model)
         {
-            $model->active = !Arr::in($this->blocked, $item->getUser()->getUsername());
+            $model->active = $active;
             $model->save();
 
             // if post exists then skip
+            return false;
+        }
+        
+        if (!$active) {
             return false;
         }
 
@@ -287,7 +292,7 @@ class InstagramCommand extends Command
         $post->title          = Str::shorten('Пост ' . $item->getPk() . ' от ' . $item->getUser()->getFullName(), 150);
         $post->description    = Str::shorten($content, 590);
         $post->content        = '<p>' . $content . '</p>';
-        $post->active         = !Arr::in($this->blocked, $item->getUser()->getUsername());
+        $post->active         = true;
         $post->category_id    = $this->category()->id;
         $post->instagram_code = $item->getCode();
 
