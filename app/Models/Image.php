@@ -31,7 +31,6 @@ class Image extends Model
     protected $sizes = [
         'sm' => 200,
         'md' => 700,
-        'lg' => 1200,
     ];
 
     public function posts()
@@ -83,11 +82,6 @@ class Image extends Model
         } catch (\Throwable $exception) {
             return $this->path;
         }
-    }
-
-    public function lg()
-    {
-        return $this->thumbnail(__FUNCTION__);
     }
 
     public function md()
