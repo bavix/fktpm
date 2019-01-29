@@ -132,6 +132,12 @@
                             <span>Помощь проекту</span>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('post.tag', ['veresk-art-krd']) }}">
+                            <i class="fal fa-layer-group text-info" aria-hidden="true"></i>
+                            <span>Вереск</span>
+                        </a>
+                    </li>
                 </ul>
             </div>
 
