@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-use Bavix\Exceptions\HasTags;
-use Bavix\Exceptions\ModelFile;
+use Bavix\Extensions\HasTags;
+use Bavix\Extensions\ModelFile;
 use Bavix\Extensions\ModelURL;
 use Bavix\Helpers\PregMatch;
 use Bavix\Helpers\Str;
