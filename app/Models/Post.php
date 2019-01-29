@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Bavix\App\Models\MultipleImageTrait;
-use Bavix\Exceptions\HasTags;
+use Bavix\Extensions\HasTags;
 use Bavix\Extensions\ModelURL;
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Scout\Searchable;
