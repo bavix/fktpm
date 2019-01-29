@@ -46,6 +46,7 @@ class InstagramCommand extends Command
         'кубгуфпм', 
         'кубгу',
         'kubsu',
+        'veresk_art_krd',
     ];
 
     protected $blocked = [
