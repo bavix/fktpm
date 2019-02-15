@@ -150,7 +150,7 @@ class PostController extends Controller
                 return view('post.index', [
                     'hasError'    => $empty,
                     'items'       => $paginate,
-                    'title'       => $title,
+                    'title'       => ($this->tag ? 'Поиск по тегу: ' . $this->tag . ' — ' : '') . $title,
                     'description' => __($description),
                     'message'     => __('bavix.page.empty', [
                         'name' => __($title)
