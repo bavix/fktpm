@@ -19,8 +19,8 @@
     <title>{{ $fullTitle }}</title>
 
     <!-- Styles -->
-{{--    <link href="{{ asset2('https://cdn.bavix.ru/bootstrap/next/dist/css/bootstrap.min.css')  }}" rel="stylesheet"/>--}}
-    <link href="{{ asset2('/css/app.css') }}" rel="stylesheet"/>
+{{--    <link href="{{ asset('https://cdn.bavix.ru/bootstrap/next/dist/css/bootstrap.min.css')  }}" rel="stylesheet"/>--}}
+    <link href="{{ asset('/css/app.css') }}" rel="stylesheet"/>
 
     <link rel="icon" type="image/ico" href="/favicons/favicon.ico"/>
     <link rel="apple-touch-icon" sizes="57x57" href="/favicons/apple-icon-57x57.png"/>
@@ -322,10 +322,10 @@
 
 </footer>
 
-<script defer src="{{ asset2('/js/masonry.pkgd.min.js') }}"></script>
-<script defer src="{{ asset2('/js/app.js') }}"></script>
-<script src="{{ asset2('/js/vue.js') }}"></script>
-<script src="{{ asset2('/js/api.js') }}"></script>
+<script defer src="{{ asset('/js/masonry.pkgd.min.js') }}"></script>
+<script defer src="{{ asset('/js/app.js') }}"></script>
+<script src="{{ asset('/js/vue.js') }}"></script>
+<script src="{{ asset('/js/api.js') }}"></script>
 
 @foreach (\App\Models\Counter::query()->where('active', 1)->get() as $counter)
     {!! $counter->code !!}

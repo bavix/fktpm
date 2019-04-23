@@ -20,7 +20,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property int                                                             $size
  * @property string                                                          $created_at
  * @property string                                                          $updated_at
- * @property-write mixed                                                     $tags
+ * @property-read mixed                                                     $tags
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Tag[] $tagsToMany
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\File whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\File whereHash($value)
@@ -108,37 +108,6 @@ class File extends Model
                 return 'fa-file';
         }
     }
-
-//    public function setFileAttribute($path)
-//    {
-////        \var_dump(
-////            $path,
-////            \Storage::disk('admin')->path($path)
-////        );
-//
-//        if (empty($path))
-//        {
-//            return;
-//        }
-//
-//        $this->src  = $path;
-//        $this->type = PregMatch::first('~\.(\w+)$~', $path)->matches[1] ?? null;
-//        $this->size = \Storage::disk('admin')->size($path);
-//    }
-
-//    public function setTagAttribute($tags)
-//    {
-//        $tags = explode(',', $tags);
-//
-//        if (!$this->exists)
-//        {
-//            $this->setTagsAttribute($tags);
-//
-//            return;
-//        }
-//
-//        $this->syncTags($tags);
-//    }
 
     public function posts()
     {

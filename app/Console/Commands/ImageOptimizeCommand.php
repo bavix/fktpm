@@ -28,7 +28,11 @@ class ImageOptimizeCommand extends WorkerCommand
 
     public function __construct()
     {
-        parent::__construct();
+        try {
+            parent::__construct();
+        } catch (\Throwable $throwable) {
+            // todo
+        }
 
         $this->map = [
             self::PROP_OPTIMIZE_IMAGE => [$this, 'optimize']

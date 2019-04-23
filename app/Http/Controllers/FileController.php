@@ -21,9 +21,7 @@ class FileController extends Controller
         $model = File::query()
             ->where('hash', $hash)
             ->where('active', 1)
-            ->first();
-
-        abort_if(!$model, 404);
+            ->firstOrFail();
 
         header('location: ' . $model->url(), true, 301);
         die;
@@ -31,15 +29,16 @@ class FileController extends Controller
 
     public function tag(Request $request, $slug)
     {
+        /**
+         * @var Tag $tag
+         */
         $tag = Tag::query()
             ->where('slug->ru', $slug)
             ->firstOrFail();
 
-        $query = File::with('tags')->where('active', 1);
-
-        $query->whereHas('tags', function (\Illuminate\Database\Eloquent\Builder $query) use ($slug) {
-            $query->where('slug->ru', $slug);
-        });
+        $query = $tag->files()
+            ->with('tags')
+            ->where('active', 1);
 
         return $this->render('file.tag', [
             'items' => $query->get(),
@@ -53,8 +52,9 @@ class FileController extends Controller
         /**
          * @var File $model
          */
-        $model = File::query()->where('active', 1)->find($id);
-        abort_if(!$model, 404);
+        $model = File::query()
+            ->where('active', 1)
+            ->findOrFail($id);
 
         $url = $model->url();
 

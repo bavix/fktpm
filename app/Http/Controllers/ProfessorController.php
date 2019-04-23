@@ -17,9 +17,7 @@ class ProfessorController extends Controller
         $model = Professor::query()
             ->where('professorrating', $id)
             ->where('active', 1)
-            ->first();
-
-        abort_if(!$model, 404);
+            ->firstOrFail();
 
         return $model;
     }
@@ -40,16 +38,13 @@ class ProfessorController extends Controller
 
     public function index(Request $request)
     {
-        return $this->render(
-            'professor.view',
-            [
-                'items' => Faculty::with('departments.professors')
-                    ->where('active', 1)
-                    ->get(),
-                'title'       => 'Факультеты, Кафедры, Преподаватели',
-                'description' => __($this->description)
-            ]
-        );
+        return $this->render('professor.view', [
+            'items' => Faculty::with('departments.professors')
+                ->where('active', 1)
+                ->get(),
+            'title'       => 'Факультеты, Кафедры, Преподаватели',
+            'description' => __($this->description)
+        ]);
     }
 
 }

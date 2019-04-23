@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Post;
+use App\Models\Tag;
 use Bavix\App\Http\Controllers\Controller;
 use Bavix\Helpers\JSON;
 use Carbon\Carbon;
@@ -82,7 +83,10 @@ class PostController extends Controller
             $model::query();
 
         if ($this->tag) {
-            $tag = \App\Models\Tag::query()
+            /**
+             * @var $tag Tag
+             */
+            $tag = Tag::query()
                ->where('slug->ru', $this->tag)
                ->firstOrFail();
 
@@ -93,8 +97,8 @@ class PostController extends Controller
 
         if ($this->isCategory && $name === $this->route . '.category' && is_numeric($id))
         {
-            $category = Category::query()->find($id);
-            \abort_if($category === null, 404);
+            $category = Category::query()
+                ->findOrFail($id);
 
             $query->where('category_id', $id);
 
@@ -194,9 +198,7 @@ class PostController extends Controller
             $model->where('active', 1);
         }
 
-        $model = \is_object($id) ? $id : $model->find($id);
-
-        \abort_if(!$model, 404);
+        $model = \is_object($id) ? $id : $model->findOrFail($id);
 
         // if main page, disable *.view
         \abort_if(

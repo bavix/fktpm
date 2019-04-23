@@ -6,10 +6,8 @@ use App\Models\Category;
 use App\Models\File;
 use App\Models\Post;
 use App\Models\Tag;
-use Bavix\Helpers\Arr;
 use Illuminate\Console\Command;
-use Spatie\Crawler\Url;
-use Spatie\Sitemap\SitemapGenerator;
+use Laravelium\Sitemap\Sitemap;
 
 class SitemapCommand extends Command
 {
@@ -57,7 +55,7 @@ class SitemapCommand extends Command
         app()->setLocale('ru');
 
         /**
-         * @var $map \Roumen\Sitemap\Sitemap
+         * @var $map Sitemap
          */
         $map = app()->make('sitemap');
 
@@ -70,36 +68,32 @@ class SitemapCommand extends Command
         /**
          * @var $tags Tag[]
          */
-        $tags = Tag::blocks()
-            ->get()
-            ->all();
+        $tags = Tag::blocks();
 
-        foreach ($tags as $tag)
-        {
-            /**
-             * @var $file File
-             * @var $_tag Tag
-             */
-            foreach ($tag->files as $file)
-            {
-                $map->add($file->url(), null, .9, 'yearly');
+        $tags->chunk(1000, function ($tags) use ($map, $self) {
+            foreach ($tags as $tag) {
+                /**
+                 * @var $file File
+                 * @var $_tag Tag
+                 */
+                foreach ($tag->files as $file) {
+                    $map->add($file->url(), null, .9, 'yearly');
 
-                foreach ($file->tags as $_tag)
-                {
-                    $route = route('file.tag', [$_tag->slug]);
+                    foreach ($file->tags as $_tag) {
+                        $route = route('file.tag', [$_tag->slug]);
 
-                    if (isset($this->urls[$route]))
-                    {
-                        continue;
+                        if (isset($self->urls[$route])) {
+                            continue;
+                        }
+
+                        $self->urls[$route] = true;
+
+                        // add file tags
+                        $map->add($route, null, .6 + ($tag->is_block / 10), 'daily');
                     }
-
-                    $this->urls[$route] = true;
-
-                    // add file tags
-                    $map->add($route, null, .6 + ($tag->is_block / 10), 'daily');
                 }
             }
-        }
+        });
 
         // posts
         $posts = Post::query()

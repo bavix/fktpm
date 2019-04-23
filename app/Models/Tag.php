@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Support\Facades\Cache;
 use Laravel\Scout\Searchable;
 
@@ -38,7 +39,10 @@ class Tag extends \Spatie\Tags\Tag
         return $this->morphedByMany(Post::class, 'taggable');
     }
 
-    public function files()
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\MorphToMany
+     */
+    public function files(): MorphToMany
     {
         return $this->morphedByMany(File::class, 'taggable')
             ->where('active', 1)

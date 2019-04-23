@@ -9,24 +9,34 @@ class SeoController extends Controller
 
     /**
      * @param string $url
+     * @return void
      */
-    public function redirect($url)
+    public function redirect($url): void
     {
         header('location: ' . $url, true, 301);
         die;
     }
 
-    public function search()
+    /**
+     * @return void
+     */
+    public function search(): void
     {
         $this->redirect(\route('search', ['posts']));
     }
 
-    public function helper()
+    /**
+     * @return void
+     */
+    public function helper(): void
     {
         $this->redirect(\route('helper'));
     }
 
-    public function teacher()
+    /**
+     * @return void
+     */
+    public function teacher(): void
     {
         $this->redirect(\route('professor'));
     }

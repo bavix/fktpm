@@ -35,7 +35,7 @@
                 </div>
 
             </div>
-            
+
             <div class="card">
                 <div class="card-body">
                     <div id="disqus_thread"></div>
