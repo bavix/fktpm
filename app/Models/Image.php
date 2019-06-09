@@ -30,7 +30,7 @@ class Image extends Model
 
     protected $sizes = [
         'sm' => 200,
-        'md' => 700,
+        //'md' => 700,
     ];
 
     public function posts()
