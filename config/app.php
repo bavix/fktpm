@@ -177,8 +177,6 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-
-        DaveJamesMiller\Breadcrumbs\ServiceProvider::class,
     ],
 
     /*
@@ -230,8 +228,6 @@ return [
 
         'LocalizedCarbon' => Laravelrus\LocalizedCarbon\LocalizedCarbon::class,
         'DiffFormatter'   => Laravelrus\LocalizedCarbon\DiffFactoryFacade::class,
-
-        'Breadcrumbs' => DaveJamesMiller\Breadcrumbs\Facade::class,
     ],
 
 ];

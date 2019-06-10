@@ -44,7 +44,7 @@ class ImageOptimizeCommand extends WorkerCommand
         /**
          * @var $model Image
          */
-        $model = \unserialize($job->workload(), []);
+        $model = \unserialize($job->workload(), (array)null);
 
         $ref = new \ReflectionClass(Image::class);
         $prop = $ref->getProperty('sizes');

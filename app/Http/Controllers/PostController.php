@@ -69,8 +69,6 @@ class PostController extends Controller
      */
     public function index(Request $request, $id = null)
     {
-        \Debugbar::startMeasure('render','Time for rendering');
-
         $name        = $request->route()->getName();
         $model       = $this->model;
         $this->title = __($this->title);
@@ -165,8 +163,6 @@ class PostController extends Controller
                 ])->render();
             }
         );
-
-        \Debugbar::stopMeasure('render');
 
         return response($response, $empty ? 404 : 200);
     }

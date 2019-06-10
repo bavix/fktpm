@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Models\Download;
+use App\Models\File;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
@@ -31,7 +32,8 @@ class FileSortCommand extends Command
      */
     public function handle()
     {
-        DB::update('UPDATE files set sort = null');
+        File::query()
+            ->update(['sort' => DB::raw('null')]);
 
         $carbon = Carbon::now()
             ->subMonth();
