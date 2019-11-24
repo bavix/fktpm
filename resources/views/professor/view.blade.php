@@ -49,11 +49,11 @@
                                             <td>{{ $loop->iteration }}</td>
                                             <td>
                                                 @if ($professor->professorrating)
-                                                    <a href="{{ route('professor.rank', [$professor->professorrating]) }}" target="_blank" title="Рейтинг {{ $professor->fullName() }}">
-                                                        {{ $professor->fullName() }}
+                                                    <a href="{{ route('professor.rank', [$professor->professorrating]) }}" target="_blank" title="Рейтинг {{ $professor->fullName }}">
+                                                        {{ $professor->fullName }}
                                                     </a>
                                                 @else
-                                                    {{ $professor->fullName() }}
+                                                    {{ $professor->fullName }}
                                                 @endif
                                             </td>
                                         </tr>
@@ -71,11 +71,6 @@
                 </div>
 
             @endforeach
-
-            @if (isset($item))
-                @unset($item)
-            @endif
-
         </div>
     </section>
 @endsection

@@ -1,7 +1,7 @@
 <!-- start item -->
 <a class="nav-link" href="{{ $file->url() }}">
     <span class="badge badge-secondary float-right">
-        {{ \Bavix\Helpers\Str::fileSize($file->size) }}
+        {{ app(\App\Services\HumanService::class)->fileSize($file->size) }}
     </span>
     <i class="fal {{ $file->faType() }} bx-fa-style" aria-hidden="true"></i>
     <span>{{ $file->title }}</span>

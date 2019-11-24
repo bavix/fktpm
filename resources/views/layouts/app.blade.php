@@ -19,7 +19,6 @@
     <title>{{ $fullTitle }}</title>
 
     <!-- Styles -->
-{{--    <link href="{{ asset('https://cdn.bavix.ru/bootstrap/next/dist/css/bootstrap.min.css')  }}" rel="stylesheet"/>--}}
     <link href="{{ asset('/css/app.css') }}" rel="stylesheet"/>
 
     <link rel="icon" type="image/ico" href="/favicons/favicon.ico"/>
@@ -86,14 +85,14 @@
     @endif
 
     @if(!empty($item))
-        <meta name="keywords" content="{{ keywords($item) }}"/>
+        <meta name="keywords" content="{{ app(\App\Services\SeoService::class)->keywords($item) }}"/>
     @elseif (!empty($title))
-        <meta name="keywords" content="{{ keywords($title) }}"/>
+        <meta name="keywords" content="{{ app(\App\Services\SeoService::class)->keywords($title) }}"/>
     @endif
     <!-- /seo -->
 
 </head>
-<body style="background-image: url('{{ bx_background() }}')">
+<body style="background-image: url('{{ asset('image/background.png') }}')">
 
 <header>
 
@@ -115,25 +114,25 @@
             <div class="collapse navbar-collapse" id="navbars">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a class="nav-link {{ active('professor') ? 'active' : '' }}" href="{{ route('professor') }}">
+                        <a class="nav-link {{ request()->is('professor*') ? 'active' : '' }}" href="{{ route('professor') }}">
                             <i class="fal fa-users text-warning" aria-hidden="true"></i>
                             <span>Преподаватели</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {{ active('couple') ? 'active' : '' }}" href="{{ route('couple') }}">
+                        <a class="nav-link {{ request()->is('couple*') ? 'active' : '' }}" href="{{ route('couple') }}">
                             <i class="fal fa-bookmark text-danger" aria-hidden="true"></i>
                             <span>Предметы</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {{ active('helper') ? 'active' : '' }}" href="{{ route('helper') }}">
+                        <a class="nav-link {{ request()->is('help*') ? 'active' : '' }}" href="{{ route('helper') }}">
                             <i class="fal fa-question-circle text-info" aria-hidden="true"></i>
                             <span>Помощь проекту</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('post.tag', ['veresk-art-krd']) }}">
+                        <a class="nav-link {{ request()->is('*veresk-art-krd') ? 'active' : '' }}" href="{{ route('post.tag', ['tag' => 'veresk-art-krd']) }}">
                             <i class="fal fa-layer-group text-info" aria-hidden="true"></i>
                             <span>Вереск</span>
                         </a>
@@ -164,7 +163,7 @@
                 (adsbygoogle = window.adsbygoogle || []).push({});
             </script>
 
-            @include('_partials.breadcrumbs')
+            {{ Breadcrumbs::render(request()->route()->getName(), $item ?? null) }}
             @yield('content')
         </div>
 
@@ -172,7 +171,7 @@
 
             <div class="row grid">
 
-                @php($links = \App\Models\Link::getActive())
+                @php($links = app(\App\Services\LinkService::class)->fetchAll())
                 @if ($links->count())
                     <div class="col-xxl-6 col-lg-12 grid-item">
                         <div class="card" data-name="card">
@@ -194,7 +193,7 @@
                                     <nav class="nav flex-column">
                                         @foreach ($links as $link)
                                             <a class="nav-link" href="{{ $link->url }}" title="{{ $link->title }}" rel="nofollow" target="_blank">
-                                                @if ($link->host() === 'vk.com')
+                                                @if (preg_match('~vk\.com~', $link->url))
                                                     <i class="fab fa-vk bx-fa-style" aria-hidden="true"></i>
                                                 @else
                                                     <i class="fal fa-link bx-fa-style" aria-hidden="true"></i>

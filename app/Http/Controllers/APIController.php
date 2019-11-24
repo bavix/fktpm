@@ -2,22 +2,27 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Cache;
 use App\Http\Resources\BlockResource;
 use App\Models\Tag;
-use Bavix\App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use Illuminate\Routing\Controller as BaseController;
 
-class APIController extends Controller
+class APIController extends BaseController
 {
 
-    public function blocks(Request $request)
+    /**
+     * @param Request $request
+     * @return AnonymousResourceCollection
+     */
+    public function blocks(Request $request): AnonymousResourceCollection
     {
-        $currentPage = $request->input('page', 1);
-        
-        return BlockResource::collection(Cache::remember('tags_block_' . $currentPage, 60, function() { 
-            return Tag::blocks()->paginate(100); 
-        }));
+        $paginate = Tag::with('files.tags')
+            ->orderBy('order_column', 'desc')
+            ->where('is_block', 1)
+            ->paginate(100);
+
+        return BlockResource::collection($paginate);
     }
 
 }

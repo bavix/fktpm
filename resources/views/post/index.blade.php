@@ -2,8 +2,6 @@
 
 @section('content')
 
-{{--    @include('post.notify')--}}
-
     <section class="row">
 
         <div class="col-12">
@@ -13,8 +11,8 @@
                 <article class="card">
 
                     @if (method_exists($item, 'image') && $item->image_id)
-                        <a class="card-img-top text-center" href="{{ $item->url() }}" title="{{ $item->title }}">
-                            <img class="img-fluid" data-src="/storage/{{ $item->image->md() }}" title="{{ $item->title }}">
+                        <a class="card-img-top text-center" href="{{ app(\App\Services\RouteService::class)->post($item) }}" title="{{ $item->title }}">
+                            <img class="img-fluid" data-src="/storage/{{ app(\App\Services\ImageService::class)->xs($item->image) }}" title="{{ $item->title }}">
                         </a>
                     @endif
 
@@ -24,7 +22,7 @@
                             <div class="card-text">
                                 <small class="text-muted">
                                     Категория:
-                                    <a href="{{ $item->category->url() }}"
+                                    <a href="{{ app(\App\Services\RouteService::class)->postCategory($item->category) }}"
                                        title="{{ $item->category->title }}" >{{ $item->category->title }}</a>
                                 </small>
                             </div>
@@ -36,7 +34,7 @@
                                 <div class="card-text">
                                     <small class="text-muted">
                                         @foreach ($tags as $tag)
-                                            <a class="bx-tag" href="{{ $item->routeTag($tag->slug) }}"
+                                            <a class="bx-tag" href="{{ app(\App\Services\RouteService::class)->postTag($tag) }}"
                                                title="{{ $tag->name }}">#{{ $tag->name }}</a>
                                         @endforeach
                                     </small>
@@ -46,7 +44,7 @@
 
                         @if (!$item->instagram_code)
                             <h3 class="card-title">
-                                <a href="{{ $item->url() }}" title="{{ $item->title }}">
+                                <a href="{{ app(\App\Services\RouteService::class)->post($item) }}" title="{{ $item->title }}">
                                     {{ $item->title }}
                                 </a>
                             </h3>
@@ -59,11 +57,11 @@
                         <div class="card-text">
                             <small class="text-muted">
                                 Добавлено
-                                <time datetime="{{ $item->created_at }}">{{ \diffForHumans($item->created_at) }}</time>
+                                <time datetime="{{ $item->created_at }}">{{ app(\App\Services\HumanService::class)->diffFor($item->created_at) }}</time>
                             </small>
                         </div>
 
-                        <a href="{{ $item->url() }}" title="{{ $item->title }}" class="btn-link">Подробнее »</a>
+                        <a href="{{ app(\App\Services\RouteService::class)->post($item) }}" title="{{ $item->title }}" class="btn-link">Подробнее »</a>
 
                     </div>
 
@@ -72,10 +70,6 @@
             @empty
                 @include('post.empty')
             @endforelse
-
-            @if (isset($item))
-                @unset($item)
-            @endif
 
         </div>
 

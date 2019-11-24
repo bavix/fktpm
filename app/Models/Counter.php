@@ -7,12 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * App\Models\Counter
  *
- * @property int    $id
+ * @property int $id
  * @property string $title
  * @property string $code
- * @property int    $active
- * @property string $created_at
- * @property string $updated_at
+ * @property bool $active
+ * @property \Illuminate\Support\Carbon $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Counter newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Counter newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Counter query()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Counter whereActive($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Counter whereCode($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Counter whereCreatedAt($value)
@@ -23,5 +26,5 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Counter extends Model
 {
-    public $timestamps = false;
+
 }

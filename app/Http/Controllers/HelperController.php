@@ -2,19 +2,27 @@
 
 namespace App\Http\Controllers;
 
-use Bavix\App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controller as BaseController;
+use Illuminate\View\View;
 
-class HelperController extends Controller
+class HelperController extends BaseController
 {
 
+    /**
+     * @var string
+     */
     protected $description = 'descriptions.helper';
 
-    public function index(Request $request)
+    /**
+     * @param Request $request
+     * @return View
+     */
+    public function index(Request $request): View
     {
-        return $this->render('helper.view', [
-            'title'       => 'Помощь проекту',
-            'description' => __($this->description)
+        return view('helper.view', [
+            'title' => 'Помощь проекту',
+            'description' => trans($this->description)
         ]);
     }
 

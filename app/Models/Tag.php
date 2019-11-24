@@ -3,21 +3,28 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
-use Illuminate\Support\Facades\Cache;
-use Laravel\Scout\Searchable;
 
 /**
  * App\Models\Tag
  *
- * @property int                 $id
- * @property array               $name
- * @property array               $slug
- * @property string|null         $type
- * @property int|null            $order_column
- * @property int                 $is_block
- * @property \Carbon\Carbon|null $created_at
- * @property \Carbon\Carbon|null $updated_at
+ * @property int $id
+ * @property array $name
+ * @property array $slug
+ * @property string|null $type
+ * @property int|null $order_column
+ * @property bool $is_block
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\File[] $files
+ * @property-read int|null $files_count
+ * @property-read mixed $translations
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Post[] $posts
+ * @property-read int|null $posts_count
+ * @method static \Illuminate\Database\Eloquent\Builder|\Spatie\Tags\Tag containing($name, $locale = null)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Tag newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Tag newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\Spatie\Tags\Tag ordered($direction = 'asc')
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Tag query()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Tag whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Tag whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Tag whereIsBlock($value)
@@ -32,31 +39,22 @@ use Laravel\Scout\Searchable;
 class Tag extends \Spatie\Tags\Tag
 {
 
-    use Searchable;
-
-    public function posts()
+    /**
+     * @return MorphToMany
+     */
+    public function posts(): MorphToMany
     {
-        return $this->morphedByMany(Post::class, 'taggable');
+        return $this->morphedByMany(Post::class, 'taggable')
+            ->orderBy('id', 'desc');
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\MorphToMany
+     * @return MorphToMany
      */
     public function files(): MorphToMany
     {
         return $this->morphedByMany(File::class, 'taggable')
-            ->where('active', 1)
             ->orderBy('sort', 'desc');
-    }
-
-    /**
-     * @return $this
-     */
-    public static function blocks()
-    {
-        return static::with('files.tags')
-            ->orderBy('order_column', 'desc')
-            ->where('is_block', 1);
     }
 
 }

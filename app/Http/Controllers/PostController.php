@@ -4,218 +4,117 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Post;
-use App\Models\Tag;
-use Bavix\App\Http\Controllers\Controller;
-use Bavix\Helpers\JSON;
-use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Model;
+use App\Services\TagService;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Cache;
+use Illuminate\Routing\Controller as BaseController;
+use Illuminate\View\View;
 
-class PostController extends Controller
+class PostController extends BaseController
 {
 
-    protected $model       = Post::class;
-    protected $withModel   = ['image', 'category', 'tags'];
-    protected $isCategory  = true;
-    protected $route       = 'post';
-    protected $title       = 'bavix.controllers.posts';
+    /**
+     * @var string
+     */
+    protected $title = 'bavix.controllers.posts';
+
+    /**
+     * @var string
+     */
     protected $description = 'descriptions.posts';
 
-    protected $mainPage = false;
-    protected $draft    = false;
-    protected $tag      = false;
+    /**
+     * @param Request $request
+     * @param Collection $tags
+     * @return \Illuminate\Http\Response
+     */
+    public function tag(Request $request, Collection $tags)
+    {
+        $tag = $tags->first(); // get first tag
 
-    protected $query;
+        $postIds = app(TagService::class)
+            ->getIdsBy(Post::class, $tags);
+
+        abort_if(!count($postIds), 404);
+
+        $paginate = Post::with(['image', 'category', 'tags'])
+            ->whereIn('id', $postIds)
+            ->where('active', 1)
+            ->orderBy('id', 'desc')
+            ->paginate();
+
+        abort_if($paginate->isEmpty(), 404);
+
+        return view('post.index', [
+            'items' => $paginate,
+            'title' => 'Поиск по тегу: ' . $tag->name . ' — ' . $this->title,
+            'description' => trans($this->description),
+        ]);
+    }
 
     /**
      * @param Request $request
-     * @param string  $query
-     *
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\Response|\Illuminate\Routing\Redirector
+     * @param Category $category
+     * @return View
      */
-    public function search(Request $request, $query = null)
+    public function category(Request $request, Category $category): View
     {
-        if ($query === null)
-        {
-            $query = (string)$request->query('query');
+        $paginate = $category->posts()
+            ->with(['image', 'category', 'tags'])
+            ->where('active', 1)
+            ->orderBy('id', 'desc')
+            ->paginate();
 
-            abort_if($query === null, 400);
+        abort_if($paginate->isEmpty(), 404);
 
-            return redirect(route($request->route()->getName(), [
-                'query' => urlencode($request->query('query'))
-            ]));
-        }
-
-        $this->query = urldecode($query);
-
-        return $this->index($request);
-    }
-
-    public function tag(Request $request, $tag)
-    {
-        $this->tag = $tag;
-        return $this->index($request);
+        return view('post.index', [
+            'items' => $paginate,
+            'title' => $category->title . ' — ' . $this->title,
+            'description' => trans($this->description),
+        ]);
     }
 
     /**
      * Show the application dashboard.
      *
      * @param Request $request
-     * @param int     $id
-     *
-     * @return \Illuminate\Http\Response
+     * @return View
      */
-    public function index(Request $request, $id = null)
+    public function index(Request $request): View
     {
-        $name        = $request->route()->getName();
-        $model       = $this->model;
-        $this->title = __($this->title);
+        $paginate = Post::with(['image', 'category', 'tags'])
+            ->where('active', 1)
+            ->orderBy('id', 'desc')
+            ->paginate();
 
-        /**
-         * @var \Illuminate\Database\Eloquent\Builder $query
-         */
-        $query = $this->query ?
-            $model::search($this->query) :
-            $model::query();
+        abort_if($paginate->isEmpty(), 404);
 
-        if ($this->tag) {
-            /**
-             * @var $tag Tag
-             */
-            $tag = Tag::query()
-               ->where('slug->ru', $this->tag)
-               ->firstOrFail();
-
-           $query = $tag->posts();
-        }
-
-        $query->where('active', 1);
-
-        if ($this->isCategory && $name === $this->route . '.category' && is_numeric($id))
-        {
-            $category = Category::query()
-                ->findOrFail($id);
-
-            $query->where('category_id', $id);
-
-            $this->title = $category->title . ' — ' . $this->title;
-        }
-
-        if ($this->mainPage)
-        {
-            $query->where('main_page', 0);
-        }
-
-        $sort = $request->query('sort');
-
-        if (!\is_array($sort))
-        {
-            $sort = [
-                config('sort.column', 'id') => config('sort.direction', 'desc')
-            ];
-        }
-
-        foreach ($sort as $column => $direction)
-        {
-            $query->orderBy($column, $direction);
-        }
-
-        $query->with($this->withModel);
-
-        $pageQuery = $request->route()->parameter('pageQuery');
-        $key = JSON::encode($query->toBase()) . $pageQuery;
-        if (config('post.cache')) {
-            $paginate = Cache::rememberForever($key . '-paginate', function () use ($query) {
-                return $query->paginate(config('limits.paginate', 10));
-            });
-        } else {
-            $paginate = $query->paginate(config('limits.paginate', 10));
-        }
-
-
-        $empty = $paginate->isEmpty();
-
-        abort_if($paginate->lastPage() !== $paginate->currentPage() &&
-            $empty, 404);
-
-        $route = $this->route;
-        $query = $this->query;
-        $title = $this->title;
-        $description = $this->description;
-
-        $response = Cache::remember(
-            $key . '-response',
-            Carbon::now()->addHour(),
-            function () use ($empty, $paginate, $route, $query, $description, $title) {
-                return view('post.index', [
-                    'hasError'    => $empty,
-                    'items'       => $paginate,
-                    'title'       => ($this->tag ? 'Поиск по тегу: ' . $this->tag . ' — ' : '') . $title,
-                    'description' => __($description),
-                    'message'     => __('bavix.page.empty', [
-                        'name' => __($title)
-                    ]),
-                    'searchBar'   => true,
-                    'selfRoute'   => $route,
-                    'query'       => $query
-                ])->render();
-            }
-        );
-
-        return response($response, $empty ? 404 : 200);
-    }
-
-    public function draft(Request $request, $id)
-    {
-        abort_if(!Auth::guard('admin')->user(), 404);
-
-        $this->draft = true;
-
-        return $this->view($request, $id);
+        return view('post.index', [
+            'items' => $paginate,
+            'title' => $this->title,
+            'description' => trans($this->description),
+        ]);
     }
 
     /**
      * Show the application dashboard.
      *
-     * @param Request   $request
-     * @param int|Model $id
+     * @param Request $request
+     * @param Post $post
      *
-     * @return \Illuminate\Http\Response
+     * @return View
      */
-    public function view(Request $request, $id)
+    public function view(Request $request, Post $post): View
     {
-        $modelName = $this->model;
-        $model     = $modelName::query();
-
-        if (!$this->draft)
-        {
-            $model->where('active', 1);
-        }
-
-        $model = \is_object($id) ? $id : $model->findOrFail($id);
-
-        // if main page, disable *.view
-        \abort_if(
-            !$this->draft &&
-            $this->mainPage &&
-            $model->main_page &&
-            $request->route()->getName() !== 'home',
-            404
-        );
-
         $category = '';
-
-        if (method_exists($model, 'category'))
-        {
-            $category = $model->category->title . ' — ';
+        if (method_exists($post, 'category')) {
+            $category = $post->category->title . ' — ';
         }
 
         return view('post.view', [
-            'item'        => $model,
-            'title'       => $model->title . ' — ' . $category . __($this->title),
-            'description' => $model->description ?? ''
+            'item' => $post,
+            'title' => $post->title . ' — ' . $category . trans($this->title),
+            'description' => $post->description ?? ''
         ]);
     }
 

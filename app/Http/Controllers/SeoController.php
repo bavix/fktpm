@@ -2,43 +2,26 @@
 
 namespace App\Http\Controllers;
 
-use Bavix\App\Http\Controllers\Controller;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Routing\Controller as BaseController;
 
-class SeoController extends Controller
+class SeoController extends BaseController
 {
 
     /**
-     * @param string $url
-     * @return void
+     * @return RedirectResponse
      */
-    public function redirect($url): void
+    public function helper(): RedirectResponse
     {
-        header('location: ' . $url, true, 301);
-        die;
+        return redirect(route('helper'), 301);
     }
 
     /**
-     * @return void
+     * @return RedirectResponse
      */
-    public function search(): void
+    public function teacher(): RedirectResponse
     {
-        $this->redirect(\route('search', ['posts']));
-    }
-
-    /**
-     * @return void
-     */
-    public function helper(): void
-    {
-        $this->redirect(\route('helper'));
-    }
-
-    /**
-     * @return void
-     */
-    public function teacher(): void
-    {
-        $this->redirect(\route('professor'));
+        return redirect(route('professor'), 301);
     }
 
 }

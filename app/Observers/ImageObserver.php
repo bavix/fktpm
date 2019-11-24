@@ -2,9 +2,7 @@
 
 namespace App\Observers;
 
-use App\Console\Commands\ImageOptimizeCommand;
 use App\Models\Image;
-use Bavix\Extra\Gearman;
 
 class ImageObserver
 {
@@ -16,10 +14,7 @@ class ImageObserver
      */
     public function created(Image $image)
     {
-        Gearman::client()->doLowBackground(
-            ImageOptimizeCommand::PROP_OPTIMIZE_IMAGE,
-            \serialize($image)
-        );
+
     }
 
 }

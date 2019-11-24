@@ -20,18 +20,14 @@
 
                         <tbody>
 
-                        @foreach($items as $item)
+                            @foreach($items as $item)
 
-                            <tr>
-                                <td>{{ $loop->iteration }}</td>
-                                <td>{{ $item->name }}</td>
-                            </tr>
+                                <tr>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $item->name }}</td>
+                                </tr>
 
-                        @endforeach
-
-                        @if (isset($item))
-                            @unset($item)
-                        @endif
+                            @endforeach
 
                         </tbody>
 

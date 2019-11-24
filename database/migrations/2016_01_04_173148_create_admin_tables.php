@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Migrations\Migration;
-use Bavix\Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Schema\Blueprint;
 
 class CreateAdminTables extends Migration
 {

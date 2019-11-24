@@ -10,7 +10,6 @@ use Bavix\Helpers\PregMatch;
 use Bavix\Helpers\Str;
 use Bavix\SDK\PathBuilder;
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
 use InstagramAPI\Instagram;
 use InstagramAPI\Response\Model\CarouselMedia;
@@ -41,9 +40,9 @@ class InstagramCommand extends Command
     protected $category;
 
     protected $tags = [
-        'фктипм', 
-        'фктипмкубгу', 
-        'кубгуфпм', 
+        'фктипм',
+        'фктипмкубгу',
+        'кубгуфпм',
         'кубгу',
         'kubsu',
         'veresk_art_krd',
@@ -172,8 +171,8 @@ class InstagramCommand extends Command
     protected function path()
     {
         $builder = PathBuilder::sharedInstance();
-        $name    = Str::random();
-        $hash    = $builder->hash($name);
+        $name = Str::random();
+        $hash = $builder->hash($name);
 
         return 'image/' . $hash . '/' . $name . '.jpg';
     }
@@ -195,7 +194,7 @@ class InstagramCommand extends Command
          * @var ImageCandidate $candidate
          */
         $candidate = \current($candidates);
-        $path      = $this->path();
+        $path = $this->path();
 
         $storage = \Storage::disk('public');
 
@@ -210,14 +209,12 @@ class InstagramCommand extends Command
      */
     protected function category()
     {
-        if (!$this->category)
-        {
+        if (!$this->category) {
             $this->category = Category::query()
                 ->where('title', 'Instagram')
                 ->first();
 
-            if (!$this->category)
-            {
+            if (!$this->category) {
                 $this->category = new Category();
                 $this->category->title = 'Instagram';
                 $this->category->save();
@@ -238,38 +235,33 @@ class InstagramCommand extends Command
             ->where('instagram_code', $item->getCode())
             ->first();
 
-        $active = !Arr::in($this->blocked, $item->getUser()->getUsername());
-        if ($model)
-        {
+        $active = !in_array($item->getUser()->getUsername(), $this->blocked, true);
+        if ($model) {
             $model->active = $active;
             $model->save();
 
             // if post exists then skip
             return false;
         }
-        
+
         if (!$active) {
             return false;
         }
 
         // get images
-        if ($item->getImageVersions2())
-        {
+        if ($item->getImageVersions2()) {
             // image_versions2
             $images = [
                 $this->storeImage($item->getImageVersions2())
             ];
-        }
-        else
-        {
+        } else {
             // carousel_media
             $images = [];
 
             /**
              * @var $carouselMedia CarouselMedia
              */
-            foreach ($item->getCarouselMedia() as $carouselMedia)
-            {
+            foreach ($item->getCarouselMedia() as $carouselMedia) {
                 $images[] = $this->storeImage($carouselMedia->getImageVersions2());
             }
         }
@@ -278,8 +270,7 @@ class InstagramCommand extends Command
         $content = '';
         $caption = $item->getCaption();
 
-        if ($caption)
-        {
+        if ($caption) {
             $content = $caption->getText();
         }
 
@@ -287,14 +278,14 @@ class InstagramCommand extends Command
         $preg = PregMatch::all('~#([\wа-яё]+)~iu', $content);
         $tags = $preg->matches[1] ?? [];
 
-        $image = Arr::shift($images);
+        $image = array_shift($images);
 
-        $post                 = new Post();
-        $post->title          = Str::shorten('Пост ' . $item->getPk() . ' от ' . $item->getUser()->getFullName(), 150);
-        $post->description    = Str::shorten($content, 590);
-        $post->content        = '<p>' . $content . '</p>';
-        $post->active         = true;
-        $post->category_id    = $this->category()->id;
+        $post = new Post();
+        $post->title = Str::shorten('Пост ' . $item->getPk() . ' от ' . $item->getUser()->getFullName(), 150);
+        $post->description = Str::shorten($content, 590);
+        $post->content = '<p>' . $content . '</p>';
+        $post->active = true;
+        $post->category_id = $this->category()->id;
         $post->instagram_code = $item->getCode();
 
         $post->setTagsAttribute($tags);
@@ -323,17 +314,14 @@ class InstagramCommand extends Command
             return;
         }
 
-        foreach ($this->tags as $tag)
-        {
+        foreach ($this->tags as $tag) {
             $uuid = \InstagramAPI\Signatures::generateUUID();
             $items = $instagram->hashtag->getFeed($tag, $uuid)->getItems();
 
             $this->error('Tag #' . $tag);
 
-            foreach ($items as $item)
-            {
-                if ($this->store($item))
-                {
+            foreach ($items as $item) {
+                if ($this->store($item)) {
                     $this->info('Item #' . $item->getId() . '; code=' . $item->getCode());
 
                     continue;
@@ -347,8 +335,6 @@ class InstagramCommand extends Command
 
             // sleep(120);
         }
-
-        Cache::clear();
 
     }
 

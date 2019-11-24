@@ -3,28 +3,31 @@
 namespace App\Http\Controllers;
 
 use App\Models\Couple;
-use Bavix\App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
+use Illuminate\Routing\Controller as BaseController;
+use Illuminate\View\View;
 
-class CoupleController extends Controller
+class CoupleController extends BaseController
 {
 
+    /**
+     * @var string
+     */
     protected $description = 'descriptions.couples';
 
     /**
      * @param Request $request
-     * @return Response
+     * @return View
      */
-    public function index(Request $request): Response
+    public function index(Request $request): View
     {
-        return $this->render('couple.view', [
+        return view('couple.view', [
             'items' => Couple::query()
                 ->where('active', 1)
                 ->get(),
 
-            'title'       => 'Предметы',
-            'description' => __($this->description)
+            'title' => 'Предметы',
+            'description' => trans($this->description)
         ]);
     }
 

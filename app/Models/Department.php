@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * App\Models\Department
@@ -11,10 +13,14 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $name
  * @property int $faculty_id
  * @property int $active
- * @property string $created_at
- * @property string $updated_at
+ * @property \Illuminate\Support\Carbon $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\Faculty $faculty
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Professor[] $professors
+ * @property-read int|null $professors_count
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Department newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Department newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Department query()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Department whereActive($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Department whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Department whereFacultyId($value)
@@ -26,14 +32,18 @@ use Illuminate\Database\Eloquent\Model;
 class Department extends Model
 {
 
-    public $timestamps = false;
-
-    public function faculty()
+    /**
+     * @return BelongsTo
+     */
+    public function faculty(): BelongsTo
     {
         return $this->belongsTo(Faculty::class);
     }
 
-    public function professors()
+    /**
+     * @return HasMany
+     */
+    public function professors(): HasMany
     {
         return $this->hasMany(Professor::class);
     }

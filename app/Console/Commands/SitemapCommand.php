@@ -103,16 +103,13 @@ class SitemapCommand extends Command
             /**
              * @var $posts Post[]
              */
-            foreach ($posts as $post)
-            {
+            foreach ($posts as $post) {
                 $map->add($post->url(), null, .9, 'weekly');
 
-                foreach ($post->tags as $_tag)
-                {
+                foreach ($post->tags as $_tag) {
                     $route = $post->routeTag($_tag->slug);
 
-                    if (isset($self->urls[$route]))
-                    {
+                    if (isset($self->urls[$route])) {
                         continue;
                     }
 
@@ -125,8 +122,7 @@ class SitemapCommand extends Command
         });
 
         // categories
-        foreach (Category::all() as $category)
-        {
+        foreach (Category::all() as $category) {
             $map->add($category->url(), null, .8, 'daily');
         }
 
