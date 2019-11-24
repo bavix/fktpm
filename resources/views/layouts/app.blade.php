@@ -43,18 +43,14 @@
 
     @php($canonicalUrl = request()->url())
 
-    @if (isset($item) && method_exists($item, 'url'))
-        @php($canonicalUrl = $item->url())
-    @endif
-
-<!-- seo -->
+    <!-- seo -->
     @if (isset($item, $item->updated_at))
         <meta http-equiv="last-modified" content="{{ $item->updated_at }}"/>
     @endif
     <link rel="canonical" href="{{ $canonicalUrl }}"/>
     @if (isset($items) && $items instanceof Illuminate\Pagination\LengthAwarePaginator)
         @php($currentRoute = request()->route())
-        @php($reqAttr = $currentRoute->parameters())
+        @php($reqAttr = $currentRoute->originalParameters())
 
         @php($reqAttr['pageQuery'] = 'page/' . ($items->currentPage() - 1))
         @if ($items->currentPage() > 1)
