@@ -19,7 +19,8 @@
     <title>{{ $fullTitle }}</title>
 
     <!-- Styles -->
-    <link href="{{ asset('/css/app.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet"/>
+{{--    <link href="{{ mix('css/awakening.css') }}" rel="stylesheet"/>--}}
 
     <link rel="icon" type="image/ico" href="/favicons/favicon.ico"/>
     <link rel="apple-touch-icon" sizes="57x57" href="/favicons/apple-icon-57x57.png"/>
@@ -321,6 +322,7 @@
 <script defer src="{{ asset('/js/app.js') }}"></script>
 <script src="{{ asset('/js/vue.js') }}"></script>
 <script src="{{ asset('/js/api.js') }}"></script>
+{{--<script async src="{{ mix('js/awakening.js') }}"></script>--}}
 
 @foreach (\App\Models\Counter::query()->where('active', 1)->get() as $counter)
     {!! $counter->code !!}
