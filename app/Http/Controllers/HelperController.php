@@ -21,7 +21,7 @@ class HelperController extends BaseController
     public function index(Request $request): View
     {
         return view('helper.view', [
-            'title' => 'Помощь проекту',
+            'title' => trans('Помощь проекту'),
             'description' => trans($this->description)
         ]);
     }

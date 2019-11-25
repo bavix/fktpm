@@ -36,8 +36,8 @@ class FileController extends BaseController
 
         return view('file.tag', [
             'items' => $query->get(),
-            'title' => 'Поиск по тегу: ' . $tag->name,
-            'description' => __('descriptions.file.tag', ['name' => $tag->name])
+            'title' => trans('Поиск по тегу: :tag', ['tag' => $tag->name]),
+            'description' => trans('descriptions.file.tag', ['name' => $tag->name])
         ]);
     }
 

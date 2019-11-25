@@ -16,7 +16,7 @@ class PostController extends BaseController
     /**
      * @var string
      */
-    protected $title = 'bavix.controllers.posts';
+    protected $title = 'Посты из инстаграмма #fktpm';
 
     /**
      * @var string
@@ -47,7 +47,10 @@ class PostController extends BaseController
 
         return view('post.index', [
             'items' => $paginate,
-            'title' => 'Поиск по тегу: ' . $tag->name . ' — ' . $this->title,
+            'title' => trans('Поиск по тегу: :tag  — :title', [
+                'tag' => $tag->name,
+                'title' => $this->title
+            ]),
             'description' => trans($this->description),
         ]);
     }
@@ -69,7 +72,10 @@ class PostController extends BaseController
 
         return view('post.index', [
             'items' => $paginate,
-            'title' => $category->title . ' — ' . $this->title,
+            'title' => trans(':category — :title', [
+                'category' => $category->title,
+                'title' => $this->title,
+            ]),
             'description' => trans($this->description),
         ]);
     }
@@ -91,7 +97,7 @@ class PostController extends BaseController
 
         return view('post.index', [
             'items' => $paginate,
-            'title' => $this->title,
+            'title' => trans(':title', ['title' => $this->title]),
             'description' => trans($this->description),
         ]);
     }
@@ -113,8 +119,11 @@ class PostController extends BaseController
 
         return view('post.view', [
             'item' => $post,
-            'title' => $post->title . ' — ' . $category . trans($this->title),
-            'description' => $post->description ?? ''
+            'title' => trans(':post — :title', [
+                'post' => $post->title,
+                'title' => $category . $this->title,
+            ]),
+            'description' => trans($post->description ?? ''),
         ]);
     }
 

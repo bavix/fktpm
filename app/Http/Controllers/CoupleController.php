@@ -26,7 +26,7 @@ class CoupleController extends BaseController
                 ->where('active', 1)
                 ->get(),
 
-            'title' => 'Предметы',
+            'title' => trans('Предметы'),
             'description' => trans($this->description)
         ]);
     }
