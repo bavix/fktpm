@@ -176,6 +176,9 @@ return [
         App\Providers\NovaServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+
+        // elasticsearch
+        \Matchish\ScoutElasticSearch\ElasticSearchServiceProvider::class
     ],
 
     /*

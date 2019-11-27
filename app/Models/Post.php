@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
+use Laravel\Scout\Searchable;
 use Spatie\Tags\HasTags;
 
 /**
@@ -48,6 +49,7 @@ use Spatie\Tags\HasTags;
 class Post extends Model
 {
 
+    use Searchable;
     use HasTags;
 
     /**
