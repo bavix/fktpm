@@ -2,8 +2,18 @@
 
 namespace App\Providers;
 
+use App\Nova\Metrics\DownloadsPerDay;
+use App\Nova\Metrics\NewCategories;
+use App\Nova\Metrics\NewCouples;
+use App\Nova\Metrics\NewDepartments;
+use App\Nova\Metrics\NewFaculties;
+use App\Nova\Metrics\NewFiles;
+use App\Nova\Metrics\NewImages;
+use App\Nova\Metrics\NewLinks;
+use App\Nova\Metrics\NewPosts;
+use App\Nova\Metrics\NewProfessors;
+use App\Nova\Metrics\NewTags;
 use Laravel\Nova\Nova;
-use Laravel\Nova\Cards\Help;
 use Illuminate\Support\Facades\Gate;
 use Laravel\Nova\NovaApplicationServiceProvider;
 
@@ -56,7 +66,17 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
     protected function cards()
     {
         return [
-            new Help,
+            (new DownloadsPerDay()),
+            (new NewCategories()),
+            (new NewCouples()),
+            (new NewFaculties()),
+            (new NewDepartments()),
+            (new NewProfessors()),
+            (new NewImages()),
+            (new NewPosts()),
+            (new NewTags()),
+            (new NewLinks()),
+            (new NewFiles()),
         ];
     }
 
@@ -67,7 +87,9 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
      */
     protected function dashboards()
     {
-        return [];
+        return [
+
+        ];
     }
 
     /**
@@ -89,4 +111,5 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
     {
         //
     }
+
 }
