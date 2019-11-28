@@ -33,11 +33,11 @@
                                 <span class="nav-link">
                                     @foreach($item->tags as $_tag)
                                         @if ($_tag->is_block)
-                                            <a href="{{ route('file.tag', [$_tag->slug]) }}" class="badge badge-success">
+                                            <a href="{{ app(\App\Services\RouteService::class)->fileTag($_tag) }}" class="badge badge-success">
                                                 <i class="fal fa-tags" aria-hidden="true"></i> {{ $_tag->name }}
                                             </a>
                                         @else
-                                            <a href="{{ route('file.tag', [$_tag->slug]) }}" class="badge badge-primary">
+                                            <a href="{{ app(\App\Services\RouteService::class)->fileTag($_tag) }}" class="badge badge-primary">
                                                 <i class="fal fa-tag" aria-hidden="true"></i> {{ $_tag->name }}
                                             </a>
                                         @endif

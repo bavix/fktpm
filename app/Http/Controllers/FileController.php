@@ -28,7 +28,7 @@ class FileController extends BaseController
     {
         $tag = $tags->first();
         $ids = app(TagService::class)
-            ->getIdsBy(File::class, $tags);
+            ->getIdsByClass(File::class, $tags);
 
         $query = File::with('tags')
             ->where('active', 1)

@@ -21,6 +21,15 @@ class RouteService
     }
 
     /**
+     * @param Tag $tag
+     * @return string
+     */
+    public function fileTag(Tag $tag): string
+    {
+        return route('file.tag', [$tag->slug]);
+    }
+
+    /**
      * @param Post $post
      * @return string
      */

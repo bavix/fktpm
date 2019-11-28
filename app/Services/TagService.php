@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Facades\DB;
 
 class TagService
@@ -13,18 +14,28 @@ class TagService
      * @param Collection $tags
      * @return array
      */
-    public function getIdsBy(string $class, Collection $tags): array
+    public function getIdsByClass(string $class, Collection $tags): array
     {
-        return DB::query()
-            ->select(['taggable_id as id'])
-            ->from('taggables')
+        return $this->getIdsBy($class)
             ->whereIn('tag_id', $tags->pluck('id')->toArray())
-            ->where('taggable_type', $class)
             ->limit(10000)
             ->get()
             ->unique('id')
             ->pluck('id')
             ->toArray();
+    }
+
+    /**
+     * @param string $class
+     * @return Builder
+     */
+    public function getIdsBy(string $class): Builder
+    {
+        return DB::query()
+            ->select(['taggable_id as id'])
+            ->distinct()
+            ->from('taggables')
+            ->where('taggable_type', $class);
     }
 
 }

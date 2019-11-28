@@ -33,7 +33,7 @@ class PostController extends BaseController
         $tag = $tags->first(); // get first tag
 
         $postIds = app(TagService::class)
-            ->getIdsBy(Post::class, $tags);
+            ->getIdsByClass(Post::class, $tags);
 
         abort_if(!count($postIds), 404);
 
