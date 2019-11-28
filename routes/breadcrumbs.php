@@ -18,28 +18,23 @@ Breadcrumbs::register('post.tag', static function ($breadcrumbs) {
 Breadcrumbs::register('post.category', static function ($breadcrumbs, $item = null) {
     $breadcrumbs->parent('post');
 
-    $categoryId = request()->route()->parameter('id');
-    if ($item instanceof \App\Models\Post) {
-        $categoryId = $item->category_id;
-        $item = null;
-    }
-
-    if (!$item) {
+    if (!($item instanceof \App\Models\Category)) {
+        $categoryId = request()->route()->parameter('id', $item->category_id);
         $item = \App\Models\Category::query()
             ->findOrFail($categoryId);
     }
 
     $breadcrumbs->push($item->title, route('post.category', [
-        'id' => $item->id,
-        'title' => Str::slug($item->title)
+        'category' => $item,
+        'title' => $item->title
     ]));
 });
 
 Breadcrumbs::register('post.view', static function ($breadcrumbs, $item) {
     $breadcrumbs->parent('post.category', $item->category);
     $breadcrumbs->push($item->title, route('post.view', [
-        'id' => $item->id,
-        'title' => Str::slug($item->title)
+        'post' => $item,
+        'title' => $item->title,
     ]));
 });
 

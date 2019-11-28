@@ -19,8 +19,7 @@
     <title>{{ $fullTitle }}</title>
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet"/>
-{{--    <link href="{{ mix('css/awakening.css') }}" rel="stylesheet"/>--}}
+    <link href="{{ mix('css/awakening.css') }}" rel="stylesheet"/>
 
     <link rel="icon" type="image/ico" href="/favicons/favicon.ico"/>
     <link rel="apple-touch-icon" sizes="57x57" href="/favicons/apple-icon-57x57.png"/>
