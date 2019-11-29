@@ -44,11 +44,27 @@ use Spatie\Tags\HasTags;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Post withAnyTags($tags, $type = null)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Post withAnyTagsOfAnyType($tags)
  * @mixin \Eloquent
+ * @property string|null $user_name
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Post whereUserName($value)
  */
 class Post extends Model
 {
 
     use HasTags;
+
+    /**
+     * @var array 
+     */
+    protected $fillable = [
+        'title',
+        'description',
+        'content',
+        'image_id',
+        'category_id',
+        'active',
+        'user_name',
+        'instagram_code',
+    ];
 
     /**
      * @return string
