@@ -5,8 +5,8 @@ namespace App\Services;
 use App\Models\Category;
 use App\Models\File;
 use App\Models\Post;
-use App\Models\Tag;
 use Illuminate\Support\Str;
+use Spatie\Tags\Tag;
 
 class RouteService
 {
@@ -26,7 +26,7 @@ class RouteService
      */
     public function fileTag(Tag $tag): string
     {
-        return route('file.tag', [$tag->slug]);
+        return route('file.tag', ['tag' => $tag]);
     }
 
     /**

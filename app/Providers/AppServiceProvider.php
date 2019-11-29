@@ -13,6 +13,7 @@ use App\Services\FileService;
 use App\Services\HumanService;
 use App\Services\ImageService;
 use App\Services\LinkService;
+use App\Services\PostService;
 use App\Services\RouteService;
 use App\Services\SeoService;
 use App\Services\TagService;
@@ -44,6 +45,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
+        $this->app->singleton(PostService::class);
         $this->app->singleton(HumanService::class);
         $this->app->singleton(FileService::class);
         $this->app->singleton(RouteService::class);

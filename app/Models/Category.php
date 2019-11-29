@@ -27,6 +27,11 @@ class Category extends Model
 {
 
     /**
+     * @var array
+     */
+    protected $fillable = ['title'];
+
+    /**
      * @return HasMany
      */
     public function posts(): HasMany

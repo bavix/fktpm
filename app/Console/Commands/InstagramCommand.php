@@ -4,11 +4,7 @@ namespace App\Console\Commands;
 
 use App\Models\Category;
 use App\Models\Post;
-use Bavix\Helpers\Arr;
-use Bavix\Helpers\Dir;
-use Bavix\Helpers\PregMatch;
-use Bavix\Helpers\Str;
-use Bavix\SDK\PathBuilder;
+use App\Services\PostService;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;
 use InstagramAPI\Instagram;
@@ -16,9 +12,12 @@ use InstagramAPI\Response\Model\CarouselMedia;
 use InstagramAPI\Response\Model\Image_Versions2;
 use InstagramAPI\Response\Model\ImageCandidate;
 use InstagramAPI\Response\Model\Item;
+use InstagramAPI\Signatures;
 
 class InstagramCommand extends Command
 {
+
+    protected const CATEGORY_INSTAGRAM = 'Instagram';
 
     /**
      * The name and signature of the console command.
@@ -32,149 +31,60 @@ class InstagramCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Instagram Importer';
+    protected $description = 'Instagram import';
 
     /***
      * @var Category
      */
     protected $category;
 
-    protected $tags = [
-        'фктипм',
-        'фктипмкубгу',
-        'кубгуфпм',
-        'кубгу',
-        'kubsu',
-        'veresk_art_krd',
-    ];
-
-    protected $blocked = [
-        'applehelp_accessories',
-        'elenashop_krasnodar',
-        'nail_brow_lash',
-        'krasnodar_resnichki',
-        'lash_and_brow_krasnodar',
-        'beauty_lashes23',
-        'alisaiks_krasnodar',
-        'titova_resnizy',
-        'art_beauty_krd',
-        'massage_zet',
-        'massage_mix',
-        'massage_krd__',
-        'slim_massage_krd',
-        'massage_stroinoetelo_krasnodar',
-        'dr_baselmelhem',
-        'orlov_ortho',
-        'atelier_dream',
-        'defile_krd',
-        'dream_discount',
-        'fifiona.ru',
-        'fifiona_salon',
-        'sofia_fifiona.ru',
-        'snuslips_krd',
-        'moly_krd',
-        'malina_show_room',
-        'sliffki_krd',
-        'pudraroom_krd',
-        'zion_nailstudio',
-        'na_klavishah',
-        'pop_nails_krasnodar',
-        'mulenko_nails',
-        'nails_panorama_krd',
-        'panorama_nails',
-        'nail7_krd',
-        'nogti_shellac_krasnodar',
-        'dr._amira_',
-        'nails_by_Darya ',
-        'brow_male_krd',
-        'nail_brow_lash',
-        'whiteskin__',
-        'resnichka_viktoria_krd',
-        'fashion_centre',
-        'fotoshar_kzn',
-        'sharynovogodnie',
-        'bogatovi.ru',
-        'wow_shayrma',
-        'love_shop_krd',
-        'atelier_dream',
-        'manydressru',
-        'kati_nailskrd',
-        'kati_nailspb',
-        'aleykatya',
-        'resnichki_krd_innach',
-        'irinam_nails_23',
-        'bobrow23',
-        'hair_control_krd',
-        'ybbrows',
-        'oksy28101984',
-        'esteticmyway',
-        'nastyapyanykh',
-        'profmassaj',
-        'massage_dayanova',
-        'flamingooo_spa',
-        'slim.bar',
-        'massag.t',
-        'slim_studio_krd',
-        'b.o.accessories ',
-        'fetisov_sergey_krd',
-        'workoutkuban',
-        'zaryadka_krd',
-        'turagentstvo',
-        'sugaring_krasnodar_buduar',
-        'sugar_ushakova',
-        'sugaring_master_krasnodar',
-        'sugarlav',
-        'lady_krd',
-        'nasta_skarlet',
-        'sugaring_krasnodar1',
-        'shugaring_krasnodare',
-        'olgasugaring_krd',
-        'shugashuga_krasnodar',
-        'na_klavishah',
-        'nogotohci_krasnodar',
-        'vlada_voskresenskaya',
-        'nail_krasnodar_shellac',
-        'laque_nail_lounge_',
-        'krasnodar_manikur',
-        'nogotki_krasnodar_',
-        'veranails_krd',
-        'candy_nails_krd',
-        'larisa_chikrizova',
-        'go_shopping_krd',
-        'elynchew',
-        'gutenberg_krr',
-        'djuan925',
-        'luxeaccesorie',
-        'doradojewellery',
-        'serebro925_khv',
-        '925_925_',
-        'muhtasem_',
-        '925_925_',
-        'djuan925',
-        'ksenia_krd',
-        'platon_shop_krd',
-        'dot_fashion_store',
-        'inside_krd',
-        'one_love_krd23',
-        'starlookdesign',
-        'shop_lale_krd',
-        'podium_showroom_',
-        'vox_alisalanskaja',
-        'karamel__krd',
-        'etnomir',
-        'vector23.ru_kdr',
-    ];
+    /**
+     * @var array
+     */
+    protected $tags;
 
     /**
-     * @return string
+     * @var array
      */
-    protected function path()
-    {
-        $builder = PathBuilder::sharedInstance();
-        $name = Str::random();
-        $hash = $builder->hash($name);
+    protected $blocked;
 
-        return 'image/' . $hash . '/' . $name . '.jpg';
+    /**
+     * Execute the console command.
+     *
+     * @return void
+     */
+    public function handle(): void
+    {
+        $service = new Instagram(false, false);
+
+        try {
+            $service->login(
+                config('instagram.username'),
+                config('instagram.password')
+            );
+        } catch (\Throwable $throwable) {
+            Log::error($throwable->getMessage(), $throwable->getTrace());
+            return;
+        }
+
+        /**
+         * @var string $tag
+         */
+        foreach ($this->getTags() as $tag) {
+            $items = $service->hashtag
+                ->getFeed($tag, Signatures::generateUUID())
+                ->getItems();
+
+            $this->error('Tag #' . $tag);
+            foreach ($items as $item) {
+                if ($this->putPost($item)) {
+                    $this->info('Item #' . $item->getId() . '; code=' . $item->getCode());
+                    continue;
+                }
+
+                $this->warn('Item #' . $item->getId() . '; code=' . $item->getCode());
+            }
+        }
     }
 
     /**
@@ -186,7 +96,7 @@ class InstagramCommand extends Command
     {
         $candidates = $image->getCandidates();
 
-        usort($candidates, function (ImageCandidate $obj1, ImageCandidate $obj2) {
+        usort($candidates, static function (ImageCandidate $obj1, ImageCandidate $obj2) {
             return $obj2->getWidth() <=> $obj1->getWidth();
         });
 
@@ -196,7 +106,7 @@ class InstagramCommand extends Command
         $candidate = \current($candidates);
         $path = $this->path();
 
-        $storage = \Storage::disk('public');
+        $storage = Storage::disk('public');
 
         Dir::make(\dirname($storage->path($path)));
         $storage->put($path, \fopen($candidate->getUrl(), 'rb'));
@@ -205,34 +115,13 @@ class InstagramCommand extends Command
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Model
-     */
-    protected function category()
-    {
-        if (!$this->category) {
-            $this->category = Category::query()
-                ->where('title', 'Instagram')
-                ->first();
-
-            if (!$this->category) {
-                $this->category = new Category();
-                $this->category->title = 'Instagram';
-                $this->category->save();
-            }
-        }
-
-        return $this->category;
-    }
-
-    /**
      * @param Item $item
      *
      * @return bool
      */
-    public function store(Item $item)
+    public function putPost(Item $item): bool
     {
-        $model = Post::query()
-            ->where('instagram_code', $item->getCode())
+        $model = Post::whereInstagramCode($item->getCode())
             ->first();
 
         $active = !in_array($item->getUser()->getUsername(), $this->blocked, true);
@@ -296,46 +185,200 @@ class InstagramCommand extends Command
     }
 
     /**
-     * Execute the console command.
-     *
-     * @return mixed
+     * @param Image_Versions2 $image
+     * @return string
      */
-    public function handle()
+    protected function getImageUrl(Image_Versions2 $image): string
     {
-        $instagram = new Instagram(false, false);
+        /**
+         * @var ImageCandidate[] $candidates
+         */
+        $candidates = $image->getCandidates();
+        usort($candidates, static function (ImageCandidate $obj1, ImageCandidate $obj2) {
+            return $obj2->getWidth() <=> $obj1->getWidth();
+        });
 
-        try {
-            $instagram->login(
-                config('instagram.username'),
-                config('instagram.password')
-            );
-        } catch (\Throwable $throwable) {
-            Log::error($throwable->getMessage(), $throwable->getTrace());
-            return;
+        return \current($candidates)->getUrl();
+    }
+
+    /**
+     * @param Item $item
+     * @return array
+     */
+    protected function getGallery(Item $item): array
+    {
+        if ($item->getImageVersions2()) {
+            // image_versions2
+            return [
+                $this->getImageUrl($item->getImageVersions2())
+            ];
         }
 
-        foreach ($this->tags as $tag) {
-            $uuid = \InstagramAPI\Signatures::generateUUID();
-            $items = $instagram->hashtag->getFeed($tag, $uuid)->getItems();
-
-            $this->error('Tag #' . $tag);
-
-            foreach ($items as $item) {
-                if ($this->store($item)) {
-                    $this->info('Item #' . $item->getId() . '; code=' . $item->getCode());
-
-                    continue;
-                }
-
-                $this->warn('Item #' . $item->getId() . '; code=' . $item->getCode());
-
-//            $this->warn('broken');
-//            break;
-            }
-
-            // sleep(120);
+        $images = [];
+        foreach ($item->getCarouselMedia() as $carouselMedia) {
+            $images[] = $this->getImageUrl($carouselMedia->getImageVersions2());
         }
 
+        return $images;
+    }
+
+    /**
+     * @return Category
+     */
+    protected function getCategory(): Category
+    {
+        if (!$this->category) {
+            $this->category = app(PostService::class)
+                ->getCategory(self::CATEGORY_INSTAGRAM);
+        }
+
+        return $this->category;
+    }
+
+    /**
+     * @return array
+     */
+    protected function getTags(): array
+    {
+        if (!$this->tags) {
+            $this->tags = [
+                'фктипм',
+                'фктипмкубгу',
+                'кубгуфпм',
+                'кубгу',
+                'kubsu',
+                'veresk_art_krd',
+            ];
+        }
+
+        return $this->tags;
+    }
+
+    /**
+     * @return array
+     */
+    protected function getBlocked(): array
+    {
+        if (!$this->blocked) {
+            $this->blocked = [
+                'applehelp_accessories',
+                'elenashop_krasnodar',
+                'nail_brow_lash',
+                'krasnodar_resnichki',
+                'lash_and_brow_krasnodar',
+                'beauty_lashes23',
+                'alisaiks_krasnodar',
+                'titova_resnizy',
+                'art_beauty_krd',
+                'massage_zet',
+                'massage_mix',
+                'massage_krd__',
+                'slim_massage_krd',
+                'massage_stroinoetelo_krasnodar',
+                'dr_baselmelhem',
+                'orlov_ortho',
+                'atelier_dream',
+                'defile_krd',
+                'dream_discount',
+                'fifiona.ru',
+                'fifiona_salon',
+                'sofia_fifiona.ru',
+                'snuslips_krd',
+                'moly_krd',
+                'malina_show_room',
+                'sliffki_krd',
+                'pudraroom_krd',
+                'zion_nailstudio',
+                'na_klavishah',
+                'pop_nails_krasnodar',
+                'mulenko_nails',
+                'nails_panorama_krd',
+                'panorama_nails',
+                'nail7_krd',
+                'nogti_shellac_krasnodar',
+                'dr._amira_',
+                'nails_by_Darya ',
+                'brow_male_krd',
+                'nail_brow_lash',
+                'whiteskin__',
+                'resnichka_viktoria_krd',
+                'fashion_centre',
+                'fotoshar_kzn',
+                'sharynovogodnie',
+                'bogatovi.ru',
+                'wow_shayrma',
+                'love_shop_krd',
+                'atelier_dream',
+                'manydressru',
+                'kati_nailskrd',
+                'kati_nailspb',
+                'aleykatya',
+                'resnichki_krd_innach',
+                'irinam_nails_23',
+                'bobrow23',
+                'hair_control_krd',
+                'ybbrows',
+                'oksy28101984',
+                'esteticmyway',
+                'nastyapyanykh',
+                'profmassaj',
+                'massage_dayanova',
+                'flamingooo_spa',
+                'slim.bar',
+                'massag.t',
+                'slim_studio_krd',
+                'b.o.accessories ',
+                'fetisov_sergey_krd',
+                'workoutkuban',
+                'zaryadka_krd',
+                'turagentstvo',
+                'sugaring_krasnodar_buduar',
+                'sugar_ushakova',
+                'sugaring_master_krasnodar',
+                'sugarlav',
+                'lady_krd',
+                'nasta_skarlet',
+                'sugaring_krasnodar1',
+                'shugaring_krasnodare',
+                'olgasugaring_krd',
+                'shugashuga_krasnodar',
+                'na_klavishah',
+                'nogotohci_krasnodar',
+                'vlada_voskresenskaya',
+                'nail_krasnodar_shellac',
+                'laque_nail_lounge_',
+                'krasnodar_manikur',
+                'nogotki_krasnodar_',
+                'veranails_krd',
+                'candy_nails_krd',
+                'larisa_chikrizova',
+                'go_shopping_krd',
+                'elynchew',
+                'gutenberg_krr',
+                'djuan925',
+                'luxeaccesorie',
+                'doradojewellery',
+                'serebro925_khv',
+                '925_925_',
+                'muhtasem_',
+                '925_925_',
+                'djuan925',
+                'ksenia_krd',
+                'platon_shop_krd',
+                'dot_fashion_store',
+                'inside_krd',
+                'one_love_krd23',
+                'starlookdesign',
+                'shop_lale_krd',
+                'podium_showroom_',
+                'vox_alisalanskaja',
+                'karamel__krd',
+                'etnomir',
+                'vector23.ru_kdr',
+            ];
+        }
+
+        return $this->blocked;
     }
 
 }

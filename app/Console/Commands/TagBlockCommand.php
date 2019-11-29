@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use App\Models\File;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Class TagBlockCommand
@@ -40,8 +41,8 @@ class TagBlockCommand extends Command
      */
     public function handle()
     {
-        \DB::update('UPDATE tags SET is_block=?', [0]);
-        \DB::update(
+        DB::update('UPDATE tags SET is_block=?', [0]);
+        DB::update(
             'UPDATE tags SET is_block=? WHERE id in (select tag_id from (' .
             'select tag_id, count(distinct taggable_id) cnt ' .
             'from taggables where taggable_type = ? ' .
