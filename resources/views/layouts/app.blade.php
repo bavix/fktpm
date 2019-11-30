@@ -317,11 +317,9 @@
 
 </footer>
 
-<script defer src="{{ asset('/js/masonry.pkgd.min.js') }}"></script>
-<script defer src="{{ asset('/js/app.js') }}"></script>
-<script src="{{ asset('/js/vue.js') }}"></script>
-<script src="{{ asset('/js/api.js') }}"></script>
-{{--<script async src="{{ mix('js/awakening.js') }}"></script>--}}
+<script async src="{{ mix('js/manifest.js') }}"></script>
+<script async src="{{ mix('js/vendor.js') }}"></script>
+<script async src="{{ mix('js/awakening.js') }}"></script>
 
 @foreach (\App\Models\Counter::query()->where('active', 1)->get() as $counter)
     {!! $counter->code !!}

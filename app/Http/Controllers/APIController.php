@@ -14,15 +14,16 @@ class APIController extends BaseController
     /**
      * @param Request $request
      * @return AnonymousResourceCollection
+     * @deprecated
      */
     public function blocks(Request $request): AnonymousResourceCollection
     {
-        $paginate = Tag::with('files.tags')
+        $tags = Tag::with('files.tags')
             ->orderBy('order_column', 'desc')
             ->where('is_block', 1)
-            ->paginate(100);
+            ->get();
 
-        return BlockResource::collection($paginate);
+        return BlockResource::collection($tags);
     }
 
 }
