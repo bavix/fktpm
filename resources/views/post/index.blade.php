@@ -12,7 +12,7 @@
 
                     @if (method_exists($item, 'image') && $item->image_id)
                         <a class="card-img-top text-center" href="{{ app(\App\Services\RouteService::class)->post($item) }}" title="{{ $item->title }}">
-                            <img class="img-fluid" data-src="/storage/{{ app(\App\Services\ImageService::class)->xs($item->image) }}" title="{{ $item->title }}">
+                            <img class="img-fluid" data-src="{{ app(\App\Services\ImageService::class)->xl($item->image) }}" title="{{ $item->title }}">
                         </a>
                     @endif
 

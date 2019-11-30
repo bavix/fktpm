@@ -4,11 +4,9 @@ namespace App\Providers;
 
 use App\Models\Category;
 use App\Models\File;
-use App\Models\Image;
 use App\Models\Post;
 use App\Models\Professor;
 use App\Models\Tag;
-use App\Observers\ImageObserver;
 use App\Services\FileService;
 use App\Services\HumanService;
 use App\Services\ImageService;
@@ -30,7 +28,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        Image::observe(ImageObserver::class);
         $this->professorBind();
         $this->categoryBind();
         $this->fileBind();

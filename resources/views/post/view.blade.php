@@ -14,7 +14,7 @@
 
                     @if(!empty($item->image))
                         <p class="text-center">
-                            <img data-src="/storage/{{ app(\App\Services\ImageService::class)->xs($item->image) }}" style="max-width:100%" />
+                            <img data-src="{{ app(\App\Services\ImageService::class)->xl($item->image) }}" style="max-width:100%" />
                         </p>
                     @endif
 
