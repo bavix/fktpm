@@ -26,7 +26,7 @@ class RouteService
      */
     public function fileTag(Tag $tag): string
     {
-        return route('file.tag', ['tag' => $tag]);
+        return route('file.tag', [$tag->slug]);
     }
 
     /**
