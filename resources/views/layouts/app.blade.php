@@ -260,7 +260,7 @@
                                                class="badge" style="margin-left: .15rem;"
                                                :class="[tag.exists ? 'badge-success' : 'badge-primary']">
                                                 <i class="fal" :class="[tag.exists ? 'fa-tags' : 'fa-tag']"
-                                                   aria-hidden="true"></i> @{{ tag.title }}
+                                                   aria-hidden="true"></i> <span v-text="tag.title"></span>
                                             </a>
                                         </span>
 
