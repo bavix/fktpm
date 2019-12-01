@@ -24,6 +24,10 @@ class Kernel extends ConsoleKernel
             ->timezone('Europe/Moscow')
             ->dailyAt('03:00');
 
+        $schedule->command('bx:cleanup')
+            ->timezone('Europe/Moscow')
+            ->dailyAt('04:00');
+
         $schedule->command('bx:instagram')
             ->timezone('Europe/Moscow')
             ->cron('6 * * * *');
