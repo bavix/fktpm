@@ -32,30 +32,25 @@ class FileSortCommand extends Command
      */
     public function handle()
     {
-        File::query()
-            ->update(['sort' => DB::raw('null')]);
+        File::query()->update(['sort' => DB::raw('null')]);
 
-        $carbon = Carbon::now()
-            ->subMonth();
-
+        $month = Carbon::now()->subMonth();
         $downloads = Download::with('file')
             ->select('file_id', DB::raw('sum(1) res'))
             ->groupBy('file_id')
-            ->where('created_at', '>', $carbon->toDateTimeString())
+            ->where('created_at', '>', $month->toDateTimeString())
             ->where('parameters', 'not like', '%bot%')
             ->orderBy('res');
 
-        foreach ($downloads->get() as $key => $download)
-        {
-            $file = $download->file;
-
-            if (!$file)
-            {
+        /**
+         * @var Download $download
+         */
+        foreach ($downloads->get() as $key => $download) {
+            if (!$download->file) {
                 continue;
             }
 
-            $file->sort = $key + 1;
-            $file->save();
+            $download->file->update(['sort' => $key + 1]);
         }
     }
 

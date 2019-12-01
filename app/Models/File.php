@@ -2,114 +2,67 @@
 
 namespace App\Models;
 
-use Bavix\Extensions\HasTags;
-use Bavix\Extensions\ModelFile;
-use Bavix\Extensions\ModelURL;
-use Bavix\Helpers\PregMatch;
-use Bavix\Helpers\Str;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
+use Spatie\Tags\HasTags;
 
 /**
  * App\Models\File
  *
- * @property int                                                             $id
- * @property string                                                          $title
- * @property string                                                          $src
- * @property string|null                                                     $type
- * @property string|null                                                     $hash
- * @property int                                                             $size
- * @property string                                                          $created_at
- * @property string                                                          $updated_at
- * @property-read mixed                                                     $tags
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Tag[] $tagsToMany
+ * @property int $id
+ * @property string $title
+ * @property string $path
+ * @property string|null $type
+ * @property string|null $hash
+ * @property int $size
+ * @property int $active
+ * @property int|null $sort
+ * @property \Illuminate\Support\Carbon $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Post[] $posts
+ * @property-read int|null $posts_count
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\File newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\File newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\File query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\File whereActive($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\File whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\File whereHash($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\File whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\File wherePath($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\File whereSize($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\File whereSrc($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\File whereSort($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\File whereTitle($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\File whereType($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\File whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\File withAllTags($tags, $type = null)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\File withAnyTags($tags, $type = null)
  * @mixin \Eloquent
- * @property-write mixed                                                     $file
- * @property-write mixed                                                     $tag
- * @property string $path
- * @property int|null $sort
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\File wherePath($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\File whereSort($value)
- * @property int $active
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\File whereActive($value)
+ * @property \Illuminate\Database\Eloquent\Collection|\Spatie\Tags\Tag[] $tags
+ * @property-read int|null $tags_count
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\File withAllTags($tags, $type = null)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\File withAllTagsOfAnyType($tags)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\File withAnyTags($tags, $type = null)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\File withAnyTagsOfAnyType($tags)
  */
 class File extends Model
 {
 
     use HasTags;
-    use ModelURL;
-    use ModelFile;
 
-    protected $storageDisk = 'admin';
-    protected $route      = 'file';
-    public    $timestamps = false;
+    /**
+     * @var array
+     */
+    protected $fillable = [
+        'title',
+        'path',
+        'type',
+        'size',
+        'active',
+        'sort',
+    ];
 
-    public function urlArguments(): array
-    {
-        return [
-            $this->id,
-            Str::friendlyUrl($this->title),
-            $this->type
-        ];
-    }
-
-    public function faType()
-    {
-        switch ($this->type)
-        {
-            // archive
-            case 'zip':
-                return 'fa-file-archive';
-
-            case 'rar':
-            case 'tar':
-            case 'tgz':
-            case 'gz':
-                return 'fa-archive';
-
-            // docs
-            case 'pdf':
-                return 'fa-file-pdf';
-
-            case 'tiff':
-                return 'fa-file-image';
-
-            // word
-            case 'doc':
-            case 'docx':
-            case 'rdf':
-                return 'fa-file-word';
-
-            // excel
-            case 'xlsx':
-            case 'xlsm':
-            case 'xlsb':
-            case 'xltx':
-            case 'xltm':
-            case 'xls':
-            case 'xlt':
-            case 'rtf':
-                return 'fa-file-excel-o';
-
-            // text
-            case 'csv':
-                return 'fa-file-text';
-
-            default:
-                return 'fa-file';
-        }
-    }
-
-    public function posts()
+    /**
+     * @return MorphToMany
+     */
+    public function posts(): MorphToMany
     {
         return $this->morphedByMany(Post::class, 'filegable');
     }

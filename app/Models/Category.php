@@ -2,17 +2,21 @@
 
 namespace App\Models;
 
-use Bavix\Extensions\ModelURL;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * App\Models\Category
  *
- * @property int                                                              $id
- * @property string                                                           $title
- * @property string                                                           $created_at
- * @property string                                                           $updated_at
+ * @property int $id
+ * @property string $title
+ * @property \Illuminate\Support\Carbon $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Post[] $posts
+ * @property-read int|null $posts_count
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Category newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Category newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Category query()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Category whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Category whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Category whereTitle($value)
@@ -22,15 +26,15 @@ use Illuminate\Database\Eloquent\Model;
 class Category extends Model
 {
 
-    use ModelURL;
-
-    protected $route      = 'post.category';
-    public    $timestamps = false;
+    /**
+     * @var array
+     */
+    protected $fillable = ['title'];
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany
      */
-    public function posts()
+    public function posts(): HasMany
     {
         return $this->hasMany(Post::class);
     }

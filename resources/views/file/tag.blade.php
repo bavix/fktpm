@@ -2,8 +2,6 @@
 
 @section('content')
 
-    @include('post.notify')
-
     <section class="row">
 
         <div class="col-12">
@@ -24,22 +22,22 @@
                             @forelse ($items as $item)
 
                                 <!-- start item -->
-                                <a class="nav-link" href="{{ $item->url() }}">
+                                <a class="nav-link" href="{{ app(\App\Services\RouteService::class)->file($item) }}">
                                     <span class="badge badge-secondary float-right">
-                                        {{ \Bavix\Helpers\Str::fileSize($item->size) }}
+                                        {{ app(\App\Services\HumanService::class)->fileSize($item->size) }}
                                     </span>
-                                    <i class="fal {{ $item->faType() }} bx-fa-style" aria-hidden="true"></i>
+                                    <i class="fal {{ app(\App\Services\FileService::class)->icon($item) }} bx-fa-style" aria-hidden="true"></i>
                                     <span>{{ $item->title }}</span>
                                 </a>
                                 
                                 <span class="nav-link">
                                     @foreach($item->tags as $_tag)
                                         @if ($_tag->is_block)
-                                            <a href="{{ route('file.tag', [$_tag->slug]) }}" class="badge badge-success">
+                                            <a href="{{ app(\App\Services\RouteService::class)->fileTag($_tag) }}" class="badge badge-success">
                                                 <i class="fal fa-tags" aria-hidden="true"></i> {{ $_tag->name }}
                                             </a>
                                         @else
-                                            <a href="{{ route('file.tag', [$_tag->slug]) }}" class="badge badge-primary">
+                                            <a href="{{ app(\App\Services\RouteService::class)->fileTag($_tag) }}" class="badge badge-primary">
                                                 <i class="fal fa-tag" aria-hidden="true"></i> {{ $_tag->name }}
                                             </a>
                                         @endif
@@ -49,18 +47,10 @@
                                 <!-- remove style -->
                                 <div class="bx-space" style="padding-bottom: .6rem"></div>
                                 <!-- end item -->
-                                
-                                {{--@include('file.item', [--}}
-                                    {{--'file' => $item--}}
-                                {{--])--}}
                             @empty
                                 @include('post.empty')
                             @endforelse
                         </nav>
-
-                        @if (isset($item))
-                            @unset($item)
-                        @endif
 
                     </div>
                 </div>

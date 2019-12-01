@@ -7,12 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * App\Models\Link
  *
- * @property int    $id
+ * @property int $id
  * @property string $title
  * @property string $url
- * @property int    $active
- * @property string $created_at
- * @property string $updated_at
+ * @property bool $active
+ * @property \Illuminate\Support\Carbon $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Link newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Link newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Link query()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Link whereActive($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Link whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Link whereId($value)
@@ -23,27 +26,5 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Link extends Model
 {
-
-    public $timestamps = false;
-
-    protected function parse()
-    {
-        return \parse_url($this->url);
-    }
-
-    /**
-     * @return null|string
-     */
-    public function host()
-    {
-        return $this->parse()['host'] ?? null;
-    }
-
-    public static function getActive()
-    {
-        return static::query()
-            ->where('active', 1)
-            ->get();
-    }
 
 }

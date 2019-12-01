@@ -1,4 +1,4 @@
-const { mix } = require('laravel-mix');
+const mix = require('laravel-mix');
 
 /*
  |--------------------------------------------------------------------------
@@ -11,5 +11,22 @@ const { mix } = require('laravel-mix');
  |
  */
 
-mix.js('resources/assets/js/app.js', 'public/js')
-   .sass('resources/assets/sass/app.scss', 'public/css');
+mix.js('resources/js/awakening.js', 'public/js');
+mix.sass('resources/sass/awakening.scss', 'public/css')
+  .extract(['vue', 'axios', 'lodash', 'masonry-layout', 'vanilla-lazyload']);
+
+mix.options({extractVueStyles: true});
+
+mix.webpackConfig(webpack => {
+  return {
+    resolve: {
+      alias: {
+        'vue$': 'vue/dist/vue.esm.js',
+      }
+    }
+  };
+});
+
+if (mix.inProduction()) {
+  mix.version();
+}

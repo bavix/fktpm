@@ -1,0 +1,179 @@
+@import "~@fortawesome/fontawesome-pro/scss/fontawesome";
+@import "~@fortawesome/fontawesome-pro/scss/light";
+@import "~@fortawesome/fontawesome-pro/scss/brands";
+@import "~bootstrap";
+@import "pagination";
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #fafafa;
+
+  .bg-faded {
+    background-color: white;
+  }
+
+  .navbar {
+    border-bottom: 3px solid rgb(0, 170, 255);
+    margin-bottom: 1.3rem;
+
+    .navbar-brand:before {
+      content: '#';
+      color: #3897f0;
+    }
+
+    .navbar-nav {
+      .nav-item {
+        .nav-link {
+          &.active {
+            color: #007bff;
+          }
+        }
+      }
+    }
+
+    @media (max-width: 991px) {
+      .container {
+        padding-right: 0;
+        padding-left: 0;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .container {
+        position: initial;
+        margin-left: 0;
+      }
+    }
+  }
+
+  #search {
+    margin-bottom: 0;
+  }
+
+  .card {
+    margin-bottom: 1rem;
+
+    .btn-block {
+      margin-top: .5rem;
+      white-space: inherit;
+      transition: background-color .4s ease-out;
+    }
+
+    .nav.flex-column {
+      width: 100%;
+
+      .nav-link {
+        padding-left: 1rem;
+        padding-right: 1rem;
+        padding-top: .05rem;
+        padding-bottom: .1rem;
+      }
+    }
+  }
+
+  .container {
+
+    blockquote, iframe, .instagram-media {
+      max-width: 100% !important;
+    }
+
+    article {
+      blockquote {
+        border-left: 2px solid #28a745;
+        padding-left: 1rem;
+      }
+
+      ol {
+        margin-left: 1rem;
+        margin-right: 1rem;
+      }
+    }
+  }
+}
+
+.badge {
+  font-weight: 500;
+
+  &.badge-primary {
+    border: 2px solid #007bff;
+    background: transparent;
+    color: #060606;
+  }
+
+  &.badge-success {
+    border: 2px solid #28A845;
+    background: transparent;
+    color: #000;
+  }
+}
+
+.bx-fa-style {
+  color: rgba(19, 132, 255, .55);
+}
+
+.footer-distributed {
+  background-color: #292c2f;
+  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.12);
+  box-sizing: border-box;
+  width: 100%;
+  text-align: left;
+  font: normal 16px sans-serif;
+  padding: 45px 50px;
+  margin-top: 80px;
+
+  .footer-social a {
+    display: inline-block;
+    width: 35px;
+    height: 35px;
+    background-color: #33383b;
+    border-radius: 2px;
+    font-size: 20px;
+    color: #ffffff;
+    text-align: center;
+    line-height: 35px;
+    margin-left: 3px;
+  }
+
+  .footer-links a {
+    font-size: 18px;
+    font-weight: bold;
+    color: #ffffff;
+    margin: 0 0 10px;
+    padding: 0;
+  }
+
+  .footer-company, .footer-company a {
+    color: #8f9296;
+    font-size: 14px;
+    margin: 0;
+  }
+}
+
+@media (min-width: 1600px) {
+  .col-xxl {
+    -ms-flex-preferred-size: 0;
+    -ms-flex-positive: 1;
+    flex-basis: 0;
+    flex-grow: 1;
+    max-width: 100%;
+  }
+
+  .container {
+    max-width: 1520px;
+  }
+}
+
+@for $i from 1 to 12 {
+  @media (min-width: 1600px) {
+    .col-xxl-#{$i} {
+      -ms-flex: 0 0 percentage($i / 12);
+      flex: 0 0 percentage($i / 12);
+      max-width: percentage($i / 12);
+    }
+  }
+}
+

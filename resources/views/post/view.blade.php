@@ -2,8 +2,6 @@
 
 @section('content')
 
-{{--    @include('post.notify')--}}
-
     <article class="row">
         <div class="col-12">
             <div class="card">
@@ -16,7 +14,7 @@
 
                     @if(!empty($item->image))
                         <p class="text-center">
-                            <img data-src="/storage/{{ $item->image->md() }}" style="max-width:100%" />
+                            <img data-src="{{ app(\App\Services\ImageService::class)->xl($item->image) }}" style="max-width:100%" />
                         </p>
                     @endif
 
@@ -29,7 +27,7 @@
                     @include("gallery.view")
 
                     <span class="float-left badge badge-primary">
-                        Обновлено: <time datetime="{{ $item->updated_at }}">{{ \diffForHumans($item->updated_at) }}</time>
+                        Обновлено: <time datetime="{{ $item->updated_at }}">{{ app(\App\Services\HumanService::class)->diffFor($item->updated_at) }}</time>
                     </span>
 
                 </div>
@@ -41,6 +39,7 @@
                     <div id="disqus_thread"></div>
                 </div>
             </div>
+
 <script>
 
 /**

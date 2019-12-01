@@ -19,8 +19,7 @@
     <title>{{ $fullTitle }}</title>
 
     <!-- Styles -->
-{{--    <link href="{{ asset('https://cdn.bavix.ru/bootstrap/next/dist/css/bootstrap.min.css')  }}" rel="stylesheet"/>--}}
-    <link href="{{ asset('/css/app.css') }}" rel="stylesheet"/>
+    <link href="{{ mix('css/awakening.css') }}" rel="stylesheet"/>
 
     <link rel="icon" type="image/ico" href="/favicons/favicon.ico"/>
     <link rel="apple-touch-icon" sizes="57x57" href="/favicons/apple-icon-57x57.png"/>
@@ -44,18 +43,14 @@
 
     @php($canonicalUrl = request()->url())
 
-    @if (isset($item) && method_exists($item, 'url'))
-        @php($canonicalUrl = $item->url())
-    @endif
-
-<!-- seo -->
+    <!-- seo -->
     @if (isset($item, $item->updated_at))
         <meta http-equiv="last-modified" content="{{ $item->updated_at }}"/>
     @endif
     <link rel="canonical" href="{{ $canonicalUrl }}"/>
     @if (isset($items) && $items instanceof Illuminate\Pagination\LengthAwarePaginator)
         @php($currentRoute = request()->route())
-        @php($reqAttr = $currentRoute->parameters())
+        @php($reqAttr = $currentRoute->originalParameters())
 
         @php($reqAttr['pageQuery'] = 'page/' . ($items->currentPage() - 1))
         @if ($items->currentPage() > 1)
@@ -86,14 +81,14 @@
     @endif
 
     @if(!empty($item))
-        <meta name="keywords" content="{{ keywords($item) }}"/>
+        <meta name="keywords" content="{{ app(\App\Services\SeoService::class)->keywords($item) }}"/>
     @elseif (!empty($title))
-        <meta name="keywords" content="{{ keywords($title) }}"/>
+        <meta name="keywords" content="{{ app(\App\Services\SeoService::class)->keywords($title) }}"/>
     @endif
     <!-- /seo -->
 
 </head>
-<body style="background-image: url('{{ bx_background() }}')">
+<body style="background-image: url('{{ asset('image/background.png') }}')">
 
 <header>
 
@@ -115,25 +110,25 @@
             <div class="collapse navbar-collapse" id="navbars">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a class="nav-link {{ active('professor') ? 'active' : '' }}" href="{{ route('professor') }}">
+                        <a class="nav-link {{ request()->is('professor*') ? 'active' : '' }}" href="{{ route('professor') }}">
                             <i class="fal fa-users text-warning" aria-hidden="true"></i>
                             <span>Преподаватели</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {{ active('couple') ? 'active' : '' }}" href="{{ route('couple') }}">
+                        <a class="nav-link {{ request()->is('couple*') ? 'active' : '' }}" href="{{ route('couple') }}">
                             <i class="fal fa-bookmark text-danger" aria-hidden="true"></i>
                             <span>Предметы</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {{ active('helper') ? 'active' : '' }}" href="{{ route('helper') }}">
+                        <a class="nav-link {{ request()->is('help*') ? 'active' : '' }}" href="{{ route('helper') }}">
                             <i class="fal fa-question-circle text-info" aria-hidden="true"></i>
                             <span>Помощь проекту</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('post.tag', ['veresk-art-krd']) }}">
+                        <a class="nav-link {{ request()->is('*veresk-art-krd') ? 'active' : '' }}" href="{{ route('post.tag', ['tag' => 'veresk-art-krd']) }}">
                             <i class="fal fa-layer-group text-info" aria-hidden="true"></i>
                             <span>Вереск</span>
                         </a>
@@ -164,7 +159,7 @@
                 (adsbygoogle = window.adsbygoogle || []).push({});
             </script>
 
-            @include('_partials.breadcrumbs')
+            {{ Breadcrumbs::render(request()->route()->getName(), $item ?? null) }}
             @yield('content')
         </div>
 
@@ -172,7 +167,7 @@
 
             <div class="row grid">
 
-                @php($links = \App\Models\Link::getActive())
+                @php($links = app(\App\Services\LinkService::class)->fetchAll())
                 @if ($links->count())
                     <div class="col-xxl-6 col-lg-12 grid-item">
                         <div class="card" data-name="card">
@@ -194,7 +189,7 @@
                                     <nav class="nav flex-column">
                                         @foreach ($links as $link)
                                             <a class="nav-link" href="{{ $link->url }}" title="{{ $link->title }}" rel="nofollow" target="_blank">
-                                                @if ($link->host() === 'vk.com')
+                                                @if (preg_match('~vk\.com~', $link->url))
                                                     <i class="fab fa-vk bx-fa-style" aria-hidden="true"></i>
                                                 @else
                                                     <i class="fal fa-link bx-fa-style" aria-hidden="true"></i>
@@ -265,7 +260,7 @@
                                                class="badge" style="margin-left: .15rem;"
                                                :class="[tag.exists ? 'badge-success' : 'badge-primary']">
                                                 <i class="fal" :class="[tag.exists ? 'fa-tags' : 'fa-tag']"
-                                                   aria-hidden="true"></i> @{{ tag.title }}
+                                                   aria-hidden="true"></i> <span v-text="tag.title"></span>
                                             </a>
                                         </span>
 
@@ -322,10 +317,9 @@
 
 </footer>
 
-<script defer src="{{ asset('/js/masonry.pkgd.min.js') }}"></script>
-<script defer src="{{ asset('/js/app.js') }}"></script>
-<script src="{{ asset('/js/vue.js') }}"></script>
-<script src="{{ asset('/js/api.js') }}"></script>
+<script async src="{{ mix('js/manifest.js') }}"></script>
+<script async src="{{ mix('js/vendor.js') }}"></script>
+<script async src="{{ mix('js/awakening.js') }}"></script>
 
 @foreach (\App\Models\Counter::query()->where('active', 1)->get() as $counter)
     {!! $counter->code !!}

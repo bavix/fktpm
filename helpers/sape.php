@@ -1,6 +1,6 @@
 <?php
 
-if (!defined('_SAPE_USER')){
+if (!defined('_SAPE_USER')) {
     define('_SAPE_USER', 'afe4ffefe1832be3847f82a6a2363822');
 }
 
@@ -10,12 +10,10 @@ function sape(): SAPE_client
 {
     static $client;
 
-    if (!$client)
-    {
+    if (!$client) {
         $options = ['charset' => 'utf-8'];
 
-        if (env('SAPE_FORCE_SHOW_CODE'))
-        {
+        if (env('SAPE_FORCE_SHOW_CODE')) {
             $options['force_show_code'] = true;
         }
 
