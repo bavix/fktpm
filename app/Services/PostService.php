@@ -57,7 +57,7 @@ class PostService
         foreach ($urls as $url) {
             $path = app(ImageService::class)->putImage($url);
             if ($path) {
-                $models[] = Image::create(['url' => $path]);
+                $models[] = Image::create(['path' => $path]);
             }
         }
 

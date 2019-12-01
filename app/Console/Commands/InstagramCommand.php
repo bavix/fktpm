@@ -109,6 +109,7 @@ class InstagramCommand extends Command
             ->byInstagramCode($item->getCode());
 
         if ($model) {
+            $model->update(['user_name' => $userName]);
             return false;
         }
 

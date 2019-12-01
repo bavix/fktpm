@@ -27,6 +27,11 @@ class Image extends Model
 {
 
     /**
+     * @var array
+     */
+    protected $fillable = ['path'];
+
+    /**
      * @return MorphToMany
      */
     public function posts(): MorphToMany
