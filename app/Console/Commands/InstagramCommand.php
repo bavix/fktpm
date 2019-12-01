@@ -100,13 +100,14 @@ class InstagramCommand extends Command
      */
     public function putPost(Item $item): bool
     {
-        $userName = $item->getUser()->getUsername();
-        if (in_array($userName, $this->getBlacklist(), true)) {
-            return false;
-        }
-
         $model = app(PostService::class)
             ->byInstagramCode($item->getCode());
+
+        $userName = $item->getUser()->getUsername();
+        if (in_array($userName, $this->getBlacklist(), true)) {
+            $model->update(['active' => false]);
+            return false;
+        }
 
         if ($model) {
             $model->update(['user_name' => $userName]);
