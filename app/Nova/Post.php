@@ -2,6 +2,7 @@
 
 namespace App\Nova;
 
+use App\Nova\Actions\AccountToBlacklist;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\Code;
@@ -70,6 +71,9 @@ class Post extends Resource
                 ->required()
                 ->rules('max:255'),
 
+            Text::make('User Name')
+                ->rules('max:255'),
+
             DateTime::make('Created At')
                 ->hideFromIndex()
                 ->hideWhenCreating()
@@ -124,7 +128,7 @@ class Post extends Resource
      */
     public function actions(Request $request)
     {
-        return [];
+        return [new AccountToBlacklist()];
     }
 
 }
