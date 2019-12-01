@@ -120,6 +120,10 @@ class InstagramCommand extends Command
         $modelImages = app(PostService::class)
             ->upload($images);
 
+        if (empty($modelImages)) {
+            return false;
+        }
+
         $caption = $this->getCaption($item);
         $post = Post::create([
             'title' => Str::limit(
