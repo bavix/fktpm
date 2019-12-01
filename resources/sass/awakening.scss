@@ -176,8 +176,3 @@ body {
     }
   }
 }
-
-[data-src]:not(.loaded) {
-  filter: blur(3rem);
-  height: 500px;
-}
