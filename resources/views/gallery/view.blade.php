@@ -3,7 +3,7 @@
         @foreach($item->images as $_picture)
             <li style="padding-right: 1px; padding-left: 0; padding-bottom: 1px" class="col-4 col-sm-3 col-md-2" data-src="{{ app(\App\Services\ImageService::class)->xs($_picture) }}">
                 <a href="#">
-                    <img class="img-responsive" data-src="{{ app(\App\Services\ImageService::class)->xl($_picture) }}"
+                    <img class="img-responsive" src="{{ app(\App\Services\ImageService::class)->placeholder() }}" data-src="{{ app(\App\Services\ImageService::class)->xl($_picture) }}"
                         style="object-position: center; object-fit: none"
                          title="Изображение #{{ $_picture->id }}"
                          alt="Изображение #{{ $_picture->id }}"

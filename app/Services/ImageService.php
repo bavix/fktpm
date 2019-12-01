@@ -43,6 +43,14 @@ class ImageService
     }
 
     /**
+     * @return string
+     */
+    public function placeholder(): string
+    {
+        return '/favicons/android-icon-192x192.png';
+    }
+
+    /**
      * @param string $url
      * @return null|string
      */

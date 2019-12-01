@@ -14,7 +14,9 @@
 
                     @if(!empty($item->image))
                         <p class="text-center">
-                            <img data-src="{{ app(\App\Services\ImageService::class)->xl($item->image) }}" style="max-width:100%" />
+                            <img alt="{{ $item->title }}"
+                                 src="{{ app(\App\Services\ImageService::class)->placeholder() }}"
+                                 data-src="{{ app(\App\Services\ImageService::class)->xl($item->image) }}" style="max-width:100%" />
                         </p>
                     @endif
 
