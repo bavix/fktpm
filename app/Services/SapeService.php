@@ -19,6 +19,7 @@ class SapeService
             return;
         }
 
+        include_once dirname(__DIR__, 2) . '/helpers/consts.php';
         if (file_exists(dirname(__DIR__) . '/public/' . env('SAPE_KEY') . '/sape.php')) {
             include_once dirname(__DIR__) . '/public/' . env('SAPE_KEY') . '/sape.php';
         }
