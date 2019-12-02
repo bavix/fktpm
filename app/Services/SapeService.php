@@ -11,6 +11,11 @@ class SapeService
     protected $client;
 
     /**
+     * @var bool
+     */
+    protected $loaded;
+
+    /**
      * SapeService constructor.
      */
     public function __construct()
@@ -18,6 +23,7 @@ class SapeService
         include_once dirname(__DIR__, 2) . '/helpers/consts.php';
         if (file_exists(dirname(__DIR__) . '/public/' . _SAPE_USER . '/sape.php')) {
             include_once dirname(__DIR__) . '/public/' . _SAPE_USER . '/sape.php';
+            $this->loaded = true;
         }
     }
 
@@ -26,7 +32,7 @@ class SapeService
      */
     public function client()
     {
-        if (!$this->client && class_exists(\SAPE_client::class)) {
+        if ($this->loaded && !$this->client) {
             $options = ['charset' => 'utf-8'];
 
             if (config('sape.force')) {
