@@ -65,9 +65,6 @@
     "classmap": [
       "database/seeds",
       "database/factories"
-    ],
-    "files": [
-      "helpers/sape.php"
     ]
   },
   "autoload-dev": {

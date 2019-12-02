@@ -13,6 +13,7 @@ use App\Services\ImageService;
 use App\Services\LinkService;
 use App\Services\PostService;
 use App\Services\RouteService;
+use App\Services\SapeService;
 use App\Services\SeoService;
 use App\Services\TagService;
 use Illuminate\Support\Facades\Route;
@@ -50,6 +51,10 @@ class AppServiceProvider extends ServiceProvider
         $this->app->singleton(LinkService::class);
         $this->app->singleton(TagService::class);
         $this->app->singleton(SeoService::class);
+
+        if (!$this->app->runningInConsole()) {
+            $this->app->singleton(SapeService::class);
+        }
     }
 
     /**

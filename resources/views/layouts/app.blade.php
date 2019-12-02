@@ -209,8 +209,11 @@
                     </div>
                 @endif
 
-                @php($ads = sape()->return_links())
-                @php($noHtml = \trim(\strip_tags($ads)))
+                @php($sape = app(\App\Services\SapeService::class)->client())
+                @if ($sape)
+                    @php($ads = $sape->return_links())
+                    @php($noHtml = \trim(\strip_tags($ads)))
+                @endif
 
                 @if (!empty($noHtml))
 
