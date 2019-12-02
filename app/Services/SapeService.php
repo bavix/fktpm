@@ -15,13 +15,9 @@ class SapeService
      */
     public function __construct()
     {
-        if (class_exists(\SAPE_client::class, false)) {
-            return;
-        }
-
         include_once dirname(__DIR__, 2) . '/helpers/consts.php';
-        if (file_exists(dirname(__DIR__) . '/public/' . env('SAPE_KEY') . '/sape.php')) {
-            include_once dirname(__DIR__) . '/public/' . env('SAPE_KEY') . '/sape.php';
+        if (file_exists(dirname(__DIR__) . '/public/' . _SAPE_USER . '/sape.php')) {
+            include_once dirname(__DIR__) . '/public/' . _SAPE_USER . '/sape.php';
         }
     }
 
@@ -30,10 +26,10 @@ class SapeService
      */
     public function client()
     {
-        if (!$this->client && class_exists(\SAPE_client::class, false)) {
+        if (!$this->client && class_exists(\SAPE_client::class)) {
             $options = ['charset' => 'utf-8'];
 
-            if (env('SAPE_FORCE_SHOW_CODE')) {
+            if (config('sape.force')) {
                 $options['force_show_code'] = true;
             }
 
