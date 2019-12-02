@@ -105,12 +105,16 @@ class InstagramCommand extends Command
 
         $userName = $item->getUser()->getUsername();
         if (in_array($userName, $this->getBlacklist(), true)) {
-            $model && $model->update(['active' => false]);
+            if ($model && $model->active) {
+                $model->update(['active' => false]);
+            }
             return false;
         }
 
         if ($model) {
-            $model->update(['user_name' => $userName]);
+            if (!$model->user_name) {
+                $model->update(['user_name' => $userName]);
+            }
             return false;
         }
 
