@@ -2,10 +2,6 @@
 
 namespace App\Services;
 
-if (!defined('_SAPE_USER')) {
-    define('_SAPE_USER', env('SAPE_KEY', 'SAPE'));
-}
-
 class SapeService
 {
 
@@ -23,8 +19,8 @@ class SapeService
             return;
         }
 
-        if (file_exists(dirname(__DIR__) . '/public/' . _SAPE_USER . '/sape.php')) {
-            include_once dirname(__DIR__) . '/public/' . _SAPE_USER . '/sape.php';
+        if (file_exists(dirname(__DIR__) . '/public/' . env('SAPE_KEY') . '/sape.php')) {
+            include_once dirname(__DIR__) . '/public/' . env('SAPE_KEY') . '/sape.php';
         }
     }
 
