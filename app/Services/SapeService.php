@@ -21,8 +21,8 @@ class SapeService
     public function __construct()
     {
         include_once dirname(__DIR__, 2) . '/helpers/consts.php';
-        if (file_exists(dirname(__DIR__) . '/public/' . _SAPE_USER . '/sape.php')) {
-            include_once dirname(__DIR__) . '/public/' . _SAPE_USER . '/sape.php';
+        if (file_exists(dirname(__DIR__, 2) . '/public/' . _SAPE_USER . '/sape.php')) {
+            include_once dirname(__DIR__, 2) . '/public/' . _SAPE_USER . '/sape.php';
             $this->loaded = true;
         }
     }
