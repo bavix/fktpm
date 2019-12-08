@@ -64,7 +64,8 @@ class FileController extends BaseController
             ->file($file);
 
         if ($url !== $request->url()) {
-            return redirect($url, 301);
+            header(sprintf('Location: %s', $url));
+            die;
         }
 
         app(FileService::class)
