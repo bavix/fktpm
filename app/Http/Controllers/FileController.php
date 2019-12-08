@@ -64,7 +64,7 @@ class FileController extends BaseController
             ->file($file);
 
         if ($url !== $request->url()) {
-            header(sprintf('Location: %s', $url));
+            header(sprintf('Location: %s', $url), true, 301);
             die;
         }
 
