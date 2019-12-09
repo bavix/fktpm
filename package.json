@@ -11,6 +11,7 @@
   },
   "devDependencies": {
     "@fortawesome/fontawesome-pro": "^5.11.2",
+    "autoprefixer": "^9.7.3",
     "axios": "^0.19.0",
     "bootstrap": "^4.4.1",
     "cross-env": "^6.0.3",
@@ -23,5 +24,10 @@
     "vanilla-lazyload": "^12.4.0",
     "vue": "^2.6.10",
     "vue-template-compiler": "^2.6.10"
-  }
+  },
+  "browserslist": [
+    "last 3 version",
+    "ios >= 11",
+    ">= 1%"
+  ]
 }
