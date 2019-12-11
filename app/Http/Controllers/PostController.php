@@ -26,9 +26,9 @@ class PostController extends BaseController
     /**
      * @param Request $request
      * @param Collection $tags
-     * @return \Illuminate\Http\Response
+     * @return View
      */
-    public function tag(Request $request, Collection $tags)
+    public function tag(Request $request, Collection $tags): View
     {
         $tag = $tags->first(); // get first tag
 
@@ -49,6 +49,30 @@ class PostController extends BaseController
             'items' => $paginate,
             'title' => trans('Поиск по тегу: :tag  — :title', [
                 'tag' => $tag->name,
+                'title' => $this->title
+            ]),
+            'description' => trans($this->description),
+        ]);
+    }
+
+    /**
+     * @param Request $request
+     * @param string $username
+     * @return View
+     */
+    public function username(Request $request, string $username): View
+    {
+        $paginate = Post::with(['image', 'category', 'tags'])
+            ->where('user_name', $username)
+            ->orderBy('id', 'desc')
+            ->paginate();
+
+        abort_if($paginate->isEmpty(), 404);
+
+        return view('post.index', [
+            'items' => $paginate,
+            'title' => trans('Фильтрация по пользователю: :username  — :title', [
+                'username' => $username,
                 'title' => $this->title
             ]),
             'description' => trans($this->description),

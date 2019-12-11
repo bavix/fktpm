@@ -97,6 +97,15 @@ class SitemapCommand extends Command
                 .9,
                 'weekly'
             );
+
+            if ($post->user_name) {
+                $map->add(
+                    app(RouteService::class)->postUser($post),
+                    null,
+                    .6,
+                    'weekly'
+                );
+            }
         }
 
         /**

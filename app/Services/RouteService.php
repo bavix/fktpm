@@ -48,6 +48,15 @@ class RouteService
     }
 
     /**
+     * @param Post $post
+     * @return string
+     */
+    public function postUser(Post $post): string
+    {
+        return route('post.username', [$post->user_name]);
+    }
+
+    /**
      * @param Tag $tag
      * @return string
      */

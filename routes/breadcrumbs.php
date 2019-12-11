@@ -15,6 +15,13 @@ Breadcrumbs::register('post.tag', static function ($breadcrumbs) {
     ));
 });
 
+Breadcrumbs::register('post.username', static function ($breadcrumbs, $post) {
+    $breadcrumbs->parent('post');
+    $breadcrumbs->push($post->user_name, route('post.username', [
+        'username' => $post->user_name,
+    ]));
+});
+
 Breadcrumbs::register('post.category', static function ($breadcrumbs, $item = null) {
     $breadcrumbs->parent('post');
 
@@ -26,7 +33,7 @@ Breadcrumbs::register('post.category', static function ($breadcrumbs, $item = nu
 
     $breadcrumbs->push($item->title, route('post.category', [
         'category' => $item,
-        'title' => $item->title
+        'title' => $item->title,
     ]));
 });
 

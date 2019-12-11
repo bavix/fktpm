@@ -12,6 +12,9 @@ Route::get('/post/category/{category}-{title}', 'PostController@category')
 Route::get('/post/{post}-{title}.html', 'PostController@view')
     ->name('post.view');
 
+Route::get('/post/user/{username}', 'PostController@username')
+    ->name('post.username');
+
 Route::get('/post/tag/{tag}', 'PostController@tag')
     ->name('post.tag');
 

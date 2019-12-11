@@ -31,6 +31,16 @@
                             </div>
                         @endif
 
+                        @if(!empty($item->user_name))
+                            <div class="card-text">
+                                <small class="text-muted">
+                                    Профиль:
+                                    <a href="{{ app(\App\Services\RouteService::class)->postUser($item) }}"
+                                        title="{{ $item->user_name }}" >{{ '@' . $item->user_name }}</a>
+                                </small>
+                            </div>
+                        @endif
+
                         @if(method_exists($item, 'tags'))
                             @php($tags = $item->tags)
                             @if (count($tags))
