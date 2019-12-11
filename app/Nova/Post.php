@@ -37,6 +37,7 @@ class Post extends Resource
         'title',
         'description',
         'content',
+        'user_name',
     ];
 
     /**
