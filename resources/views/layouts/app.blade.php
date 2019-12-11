@@ -128,7 +128,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {{ request()->is('*veresk-art-krd') ? 'active' : '' }}" href="{{ route('post.tag', ['tag' => 'veresk-art-krd']) }}">
+                        <a class="nav-link {{ request()->is('*veresk-art-krd', '*veresk_art_krd')  ? 'active' : '' }}" href="{{ route('post.username', ['username' => 'veresk_art_krd']) }}">
                             <i class="fal fa-layer-group text-info" aria-hidden="true"></i>
                             <span>Вереск</span>
                         </a>
