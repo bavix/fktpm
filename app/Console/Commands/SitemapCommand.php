@@ -29,6 +29,11 @@ class SitemapCommand extends Command
     protected $description = 'Create and generate sitemaps with ease';
 
     /**
+     * @var string[]
+     */
+    protected $userRoutes = [];
+
+    /**
      * Execute the console command.
      *
      * @return string
@@ -98,7 +103,8 @@ class SitemapCommand extends Command
                 'weekly'
             );
 
-            if ($post->user_name) {
+            if ($post->user_name && empty($this->userRoutes[$post->user_name])) {
+                $this->userRoutes[$post->user_name] = true; // mark
                 $map->add(
                     app(RouteService::class)->postUser($post),
                     null,
