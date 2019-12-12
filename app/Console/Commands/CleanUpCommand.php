@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use App\Models\Image;
 use App\Models\Post;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class CleanUpCommand extends Command
@@ -22,13 +23,37 @@ class CleanUpCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Cleaning old images and files';
+    protected $description = 'Cleaning old images, files and tags';
 
     /**
      * Execute the console command.
      * @throws \Exception
      */
     public function handle(): void
+    {
+        $this->posts();
+        $this->tags();
+    }
+
+    /**
+     * @return void
+     */
+    protected function tags(): void
+    {
+        $query = DB::query()->from('tags')->whereNotIn(
+            'id',
+            DB::query()
+                ->select('tag_id')
+                ->from('taggables')
+        );
+
+        $query->delete();
+    }
+
+    /**
+     * @throws \Exception
+     */
+    protected function posts(): void
     {
         /**
          * @var Post[] $posts
