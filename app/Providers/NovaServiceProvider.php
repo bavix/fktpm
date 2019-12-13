@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Nova\Metrics\DownloadsPerDay;
+use App\Nova\Metrics\ImagesPerDay;
 use App\Nova\Metrics\NewCategories;
 use App\Nova\Metrics\NewCouples;
 use App\Nova\Metrics\NewDepartments;
@@ -13,6 +14,8 @@ use App\Nova\Metrics\NewLinks;
 use App\Nova\Metrics\NewPosts;
 use App\Nova\Metrics\NewProfessors;
 use App\Nova\Metrics\NewTags;
+use App\Nova\Metrics\PostsPerDay;
+use App\Nova\Metrics\TagsPerDay;
 use Laravel\Nova\Nova;
 use Illuminate\Support\Facades\Gate;
 use Laravel\Nova\NovaApplicationServiceProvider;
@@ -67,16 +70,19 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
     {
         return [
             (new DownloadsPerDay()),
-            (new NewCategories()),
-            (new NewCouples()),
-            (new NewFaculties()),
-            (new NewDepartments()),
-            (new NewProfessors()),
+//            (new NewCategories()),
+//            (new NewCouples()),
+//            (new NewFaculties()),
+//            (new NewDepartments()),
+//            (new NewProfessors()),
+            (new ImagesPerDay()),
             (new NewImages()),
+            (new PostsPerDay()),
             (new NewPosts()),
+            (new TagsPerDay()),
             (new NewTags()),
-            (new NewLinks()),
-            (new NewFiles()),
+//            (new NewLinks()),
+//            (new NewFiles()),
         ];
     }
 
