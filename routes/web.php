@@ -44,3 +44,5 @@ Route::get('/teachers', 'SeoController@teacher');
 
 Route::get('/get_file/{hash}', 'FileController@getFile');
 Route::get('/professorrating/{professor}', 'ProfessorController@professorRating');
+
+Route::get('/test', 'APIController@hello');

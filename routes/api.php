@@ -18,3 +18,7 @@ use Illuminate\Http\Request;
 //});
 
 Route::get('v1/file/blocks', 'APIController@blocks');
+
+Route::resource('/posts', 'APIController');
+Route::resource('/images', 'APIController');
+Route::resource('/categories', 'APIController');
