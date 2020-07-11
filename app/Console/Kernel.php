@@ -12,6 +12,10 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
+        $schedule->command('prof:bulk')
+            ->timezone('Europe/Moscow')
+            ->cron('6 * * * *');
+
         $schedule->command('bx:sitemap')
             ->timezone('Europe/Moscow')
             ->dailyAt('01:00');
@@ -27,10 +31,6 @@ class Kernel extends ConsoleKernel
         $schedule->command('bx:cleanup')
             ->timezone('Europe/Moscow')
             ->dailyAt('04:00');
-
-        $schedule->command('bx:instagram')
-            ->timezone('Europe/Moscow')
-            ->cron('6 * * * *');
     }
 
     /**
