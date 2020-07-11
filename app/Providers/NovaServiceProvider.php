@@ -2,7 +2,6 @@
 
 namespace App\Providers;
 
-use App\Nova\Metrics\DownloadsPerDay;
 use App\Nova\Metrics\ImagesPerDay;
 use App\Nova\Metrics\NewCategories;
 use App\Nova\Metrics\NewCouples;
@@ -69,7 +68,6 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
     protected function cards()
     {
         return [
-            (new DownloadsPerDay()),
 //            (new NewCategories()),
 //            (new NewCouples()),
 //            (new NewFaculties()),

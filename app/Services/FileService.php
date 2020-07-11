@@ -15,13 +15,15 @@ class FileService
     public function download(File $file): bool
     {
         $model = new Download();
-        $model->file_id = $file->getKey();
+        $model->fileId = $file->getKey();
         $model->ip = request()->ip();
         $model->parameters = json_encode([
             'userAgent' => request()->headers->get('User-Agent'),
             'language' => request()->getPreferredLanguage(),
             'referer' => request()->headers->get('referer')
         ], JSON_THROW_ON_ERROR);
+        $model->date = time();
+        $model->createdAt = time();
 
         return $model->save();
     }
