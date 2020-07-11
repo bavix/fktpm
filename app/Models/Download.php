@@ -16,4 +16,15 @@ use Bavix\LaravelClickHouse\Database\Eloquent\Model;
 class Download extends Model
 {
 
+    /**
+     * @var string[]
+     */
+    protected $fillable = [
+        'fileId',
+        'ip',
+        'parameters',
+        'date',
+        'createdAt',
+    ];
+
 }
