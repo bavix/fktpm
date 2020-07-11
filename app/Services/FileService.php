@@ -22,6 +22,7 @@ class FileService
             'language' => request()->getPreferredLanguage(),
             'referer' => request()->headers->get('referer')
         ], JSON_THROW_ON_ERROR);
+        $model->date = time();
         $model->createdAt = time();
 
         return $model->save();

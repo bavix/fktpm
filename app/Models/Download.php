@@ -10,6 +10,7 @@ use Bavix\LaravelClickHouse\Database\Eloquent\Model;
  * @property int $fileId
  * @property string $ip
  * @property mixed $parameters
+ * @property \Illuminate\Support\Carbon $date
  * @property \Illuminate\Support\Carbon $createdAt
  */
 class Download extends Model
