@@ -17,4 +17,5 @@ use Illuminate\Http\Request;
 //    return $request->user();
 //});
 
-Route::get('v1/file/blocks', 'APIController@blocks');
+Route::get('v1/file/blocks', 'APIController@blocks')
+    ->name('api.blocks');
