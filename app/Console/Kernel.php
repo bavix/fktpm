@@ -12,7 +12,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('prof:bulk')
+        $schedule->command('entry:bulk')
             ->timezone('Europe/Moscow')
             ->everyMinute();
 
