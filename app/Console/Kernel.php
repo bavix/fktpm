@@ -14,7 +14,7 @@ class Kernel extends ConsoleKernel
     {
         $schedule->command('prof:bulk')
             ->timezone('Europe/Moscow')
-            ->cron('6 * * * *');
+            ->everyMinute();
 
         $schedule->command('bx:sitemap')
             ->timezone('Europe/Moscow')
