@@ -24,7 +24,6 @@ class FileService
         ], JSON_THROW_ON_ERROR);
         $model->date = time();
         $model->createdAt = time();
-
         return $model->save();
     }
 

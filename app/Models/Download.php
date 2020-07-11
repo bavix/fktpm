@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use Bavix\LaravelClickHouse\Database\Eloquent\Model;
+use Bavix\Prof\Models\Entry;
 
 /**
  * App\Models\Download
@@ -13,7 +13,7 @@ use Bavix\LaravelClickHouse\Database\Eloquent\Model;
  * @property \Illuminate\Support\Carbon $date
  * @property \Illuminate\Support\Carbon $createdAt
  */
-class Download extends Model
+class Download extends Entry
 {
 
     /**

@@ -29,25 +29,20 @@ class ImportCommand extends Command
      */
     public function handle(): void
     {
-        \gc_enabled();
         $query = DB::query()->from('downloads')->orderBy('id');
         $progressBar = $this->output->createProgressBar($query->count());
-        $query->chunk(250, static function ($data) use ($progressBar) {
-            $bulk = [];
-            foreach ($data as $datum) {
-                $bulk[] = [
-                    'fileId' => $datum->file_id,
-                    'ip' => $datum->ip,
-                    'parameters' => $datum->parameters,
-                    'date' => $datum->created_at,
-                    'createdAt' => $datum->created_at,
-                ];
-            }
-
-            $progressBar->advance(count($bulk));
-            Download::insert($bulk);
-            \gc_collect_cycles();
-        });
+        $query->each(static function ($datum) use ($progressBar) {
+            $model = new Download();
+            $model->fill([
+                'fileId' => $datum->file_id,
+                'ip' => $datum->ip,
+                'parameters' => $datum->parameters,
+                'date' => $datum->created_at,
+                'createdAt' => $datum->created_at,
+            ]);
+            $progressBar->advance();
+            $model->save();
+        }, 250);
 
         $progressBar->finish();
     }
