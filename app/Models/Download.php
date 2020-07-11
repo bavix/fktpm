@@ -27,4 +27,12 @@ class Download extends Entry
         'createdAt',
     ];
 
+    /**
+     * @var string[]
+     */
+    protected $casts = [
+        'date' => 'date:Y-m-d',
+        'createdAt' => 'datetime:Y-m-d H:i:s',
+    ];
+
 }
