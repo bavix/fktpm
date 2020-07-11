@@ -14,7 +14,7 @@ export default new Vue({
         });
 
         (async () => {
-            await axios.get('/api/v1/file/blocks').then(({data: res}) => {
+            await axios.get('/api/v1/file/blocks', {withCredentials: true}).then(({data: res}) => {
                 this.blocks = res.data;
             });
 

@@ -5,9 +5,9 @@ namespace App\Http\Resources;
 use App\Services\FileService;
 use App\Services\HumanService;
 use App\Services\RouteService;
-use Illuminate\Http\Resources\Json\Resource;
+use Illuminate\Http\Resources\Json\JsonResource;
 
-class FileResource extends Resource
+class FileResource extends JsonResource
 {
 
     /**
