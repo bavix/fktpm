@@ -29,6 +29,7 @@ class ImportCommand extends Command
      */
     public function handle(): void
     {
+        return; // disabled
         $query = DB::query()->from('downloads')->orderBy('id');
         $progressBar = $this->output->createProgressBar($query->count());
         $query->each(static function ($datum) use ($progressBar) {

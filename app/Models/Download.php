@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use Bavix\Prof\Models\Entry;
+use Bavix\Entry\Models\Entry;
 
 /**
  * App\Models\Download
