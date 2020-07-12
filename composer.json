@@ -19,7 +19,7 @@
     "php": ">=7.3",
     "ext-json": "*",
     "ext-pdo": "*",
-    "bavix/laravel-prof": "^1.0",
+    "bavix/laravel-prof": "^1.1",
     "coderello/laravel-nova-lang": "^1.4",
     "davejamesmiller/laravel-breadcrumbs": "^5.3",
     "doctrine/dbal": "^2.10",
