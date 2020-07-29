@@ -29,11 +29,6 @@ cd public
 npm i
 ```
 
-# if test
-```bash
-./artisan db:seed --class=TestSeeder
-```
-
 # nginx
 ```nginx
 location /stream {
