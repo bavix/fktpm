@@ -2,11 +2,17 @@ import Vue from 'vue'
 import axios from 'axios'
 import Masonry from 'masonry-layout'
 import LazyLoad from 'vanilla-lazyload'
+import cozyHouse from './cozy';
 
 export default new Vue({
     el: '#vue-files',
     data: {
         blocks: [],
+    },
+    methods: {
+        sendEvent(category, name, label, props) {
+            cozyHouse.push(category, name, label, props)
+        }
     },
     mounted() {
         new LazyLoad({

@@ -253,7 +253,7 @@
                                 <nav class="nav flex-column">
                                     <div v-for="file in block.files">
 
-                                        <a class="nav-link" :href="file.url">
+                                        <a class="nav-link" :href="file.url" v-on:click="sendEvent('files', 'download', file.title, file)">
                                             <span class="badge badge-secondary float-right" v-text="file.size"></span>
                                             <i class="fal bx-fa-style" :class="file.class" aria-hidden="true"></i>
                                             <span v-text="file.title"></span>
@@ -261,6 +261,7 @@
 
                                         <span class="nav-link">
                                             <a v-for="tag in file.tags" :href="tag.url"
+                                               v-on:click="sendEvent('tags', 'click', tag.title, tag)"
                                                class="badge" style="margin-left: .15rem;"
                                                :class="[tag.exists ? 'badge-success' : 'badge-primary']">
                                                 <i class="fal" :class="[tag.exists ? 'fa-tags' : 'fa-tag']"

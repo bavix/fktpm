@@ -10,7 +10,8 @@
     "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
   },
   "devDependencies": {
-    "@fortawesome/fontawesome-pro": "^5.13.1",
+    "@bavix/cozy-house-kit": "^1.0.1",
+    "@fortawesome/fontawesome-pro": "^5.14.0",
     "autoprefixer": "^9.8.5",
     "axios": "^0.19.2",
     "bootstrap": "^4.5.0",

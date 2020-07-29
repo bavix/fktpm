@@ -18,10 +18,12 @@ class APIController extends BaseController
      */
     public function blocks(Request $request): AnonymousResourceCollection
     {
-        $tags = Tag::with('files.tags')
-            ->orderBy('order_column', 'desc')
-            ->where('is_block', 1)
-            ->get();
+        $tags = \Cache::remember(__METHOD__, now()->addHour(), function () {
+            return Tag::with('files.tags')
+                ->orderBy('order_column', 'desc')
+                ->where('is_block', 1)
+                ->get();
+        });
 
         return BlockResource::collection($tags);
     }

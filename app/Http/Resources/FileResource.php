@@ -19,6 +19,7 @@ class FileResource extends JsonResource
     public function toArray($request): array
     {
         return [
+            'id' => $this->id,
             'title' => $this->title,
             'url' => app(RouteService::class)->file($this->resource),
             'size' => app(HumanService::class)->fileSize($this->size),
