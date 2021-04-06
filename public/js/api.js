@@ -1,7 +1,7 @@
 let vm = new Vue({
     el: '#vue-files',
     data: {
-        api: '/api/v1/file/blocks',
+        api: '/internal/v1/file/blocks',
         storage: [],
         id: null
     },
