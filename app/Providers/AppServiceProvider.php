@@ -16,6 +16,7 @@ use App\Services\RouteService;
 use App\Services\SapeService;
 use App\Services\SeoService;
 use App\Services\TagService;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 
@@ -43,6 +44,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
+        Paginator::useBootstrap();
+
         $this->app->singleton(PostService::class);
         $this->app->singleton(HumanService::class);
         $this->app->singleton(FileService::class);

@@ -87,7 +87,7 @@
         </div>
 
         <div class="col-md-12">
-            {{ $items->links('pagination::bootstrap-4') }}
+            {{ $items->links() }}
         </div>
 
     </section>

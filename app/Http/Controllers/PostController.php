@@ -42,7 +42,7 @@ class PostController extends BaseController
             ->whereIn('id', $postIds)
             ->where('active', 1)
             ->orderBy('id', 'desc')
-            ->paginate();
+            ->simplePaginate();
 
         abort_if($paginate->isEmpty(), 404);
 
@@ -66,7 +66,7 @@ class PostController extends BaseController
         $paginate = Post::with(['image', 'category', 'tags'])
             ->where('user_name', $username)
             ->orderBy('id', 'desc')
-            ->paginate();
+            ->simplePaginate();
 
         abort_if($paginate->isEmpty(), 404);
 
@@ -91,7 +91,7 @@ class PostController extends BaseController
             ->with(['image', 'category', 'tags'])
             ->where('active', 1)
             ->orderBy('id', 'desc')
-            ->paginate();
+            ->simplePaginate();
 
         abort_if($paginate->isEmpty(), 404);
 
@@ -116,7 +116,7 @@ class PostController extends BaseController
         $paginate = Post::with(['image', 'category', 'tags'])
             ->where('active', 1)
             ->orderBy('id', 'desc')
-            ->paginate();
+            ->simplePaginate();
 
         abort_if($paginate->isEmpty(), 404);
 

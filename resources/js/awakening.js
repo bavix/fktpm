@@ -4,6 +4,21 @@ import Masonry from 'masonry-layout'
 import LazyLoad from 'vanilla-lazyload'
 import cozyHouse from './cozy';
 
+new Vue({
+    el: '#vue-menu',
+    data: {show: false},
+    methods: {
+        menuToggle() {
+            this.show = !this.show
+        }
+    },
+    computed: {
+        showClass() {
+            return {show: this.show}
+        }
+    }
+})
+
 export default new Vue({
     el: '#vue-files',
     data: {
@@ -20,7 +35,7 @@ export default new Vue({
         });
 
         (async () => {
-            await axios.get('/api/v1/file/blocks', {withCredentials: true}).then(({data: res}) => {
+            await axios.get('/internal/v1/file/blocks', {withCredentials: true}).then(({data: res}) => {
                 this.blocks = res.data;
             });
 

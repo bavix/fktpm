@@ -93,7 +93,7 @@
 
 <header>
 
-    <nav class="navbar navbar-expand-md navbar-light bg-faded">
+    <nav id="vue-menu" class="navbar navbar-expand-md navbar-light bg-faded">
 
         <div class="container">
 
@@ -103,12 +103,13 @@
                     data-target="#navbars"
                     aria-controls="navbars"
                     aria-expanded="false"
-                    aria-label="Toggle navigation">
+                    aria-label="Toggle navigation"
+                    @click="menuToggle">
 
                 <span class="navbar-toggler-icon"></span>
             </button>
 
-            <div class="collapse navbar-collapse" id="navbars">
+            <div class="collapse navbar-collapse" :class="showClass" id="navbars">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
                         <a class="nav-link {{ request()->is('professor*') ? 'active' : '' }}" href="{{ route('professor') }}">
