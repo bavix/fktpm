@@ -32,8 +32,6 @@ class FileSortCommand extends Command
      */
     public function handle()
     {
-        File::query()->update(['sort' => DB::raw('null')]);
-
         $month = Carbon::now()->subMonth();
         $downloads = Download::query()
             ->select('fileId', raw('count() res'))

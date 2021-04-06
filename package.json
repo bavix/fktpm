@@ -13,7 +13,7 @@
     "@bavix/cozy-house-kit": "^1.0.3",
     "@fortawesome/fontawesome-pro": "^5.14.0",
     "autoprefixer": "^9.8.5",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "bootstrap": "^4.5.0",
     "cross-env": "^6.0.3",
     "laravel-mix": "^5.0.4",

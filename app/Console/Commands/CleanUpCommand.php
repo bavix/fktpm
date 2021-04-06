@@ -51,7 +51,7 @@ class CleanUpCommand extends Command
             foreach ($post->images as $image) {
                 if ($storage->exists($image->path)) {
                     $storage->delete($image->path);
-                    $ids = $image->id;
+                    $ids[] = $image->id;
                 }
             }
 
