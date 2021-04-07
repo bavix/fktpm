@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 
+Route::get('/internal/v1/file/blocks', 'APIController@blocks')
+    ->name('internal.blocks');
+
 // posts
 Route::get('/', 'PostController@index')
     ->name('post');

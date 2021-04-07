@@ -34,9 +34,14 @@ export default new Vue({
             elements_selector: '[data-src]',
         });
 
+        if (localStorage.getItem('blocks') !== null) {
+            this.blocks = JSON.parse(localStorage.getItem('blocks'))
+        }
+
         (async () => {
             await axios.get('/internal/v1/file/blocks', {withCredentials: true}).then(({data: res}) => {
                 this.blocks = res.data;
+                localStorage.setItem('blocks', JSON.stringify(res.data))
             });
 
             new Masonry(document.querySelector('.grid'), {
