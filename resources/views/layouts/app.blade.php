@@ -150,16 +150,16 @@
 
         <div class="col-xxl-5 col-lg-8">
 
-            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+            <!-- script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script -->
             <!-- fktpm -->
-            <ins class="adsbygoogle"
+            <!-- ins class="adsbygoogle"
                  style="display:block"
                  data-ad-client="ca-pub-6538258592702189"
                  data-ad-slot="5840642326"
                  data-ad-format="auto"></ins>
             <script defer async>
                 (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
+            </script -->
 
             {{ Breadcrumbs::render(request()->route()->getName(), $item ?? null) }}
             @yield('content')
